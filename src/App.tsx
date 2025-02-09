@@ -160,7 +160,6 @@ function Layout({ children }:LayoutProps) {
 
 function App() {
   const navigate = useNavigate();
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   return (
     <Layout>
@@ -176,7 +175,6 @@ function App() {
           element={
             <AuthPage
               onLogin={() => {
-                setIsAuthenticated(true);
                 navigate("/");
               }}
             />
