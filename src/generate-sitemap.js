@@ -1,5 +1,5 @@
-
 import fs from "fs";
+import path from "path";
 import { SitemapStream, streamToPromise } from "sitemap";
 
 // Define your website URL
@@ -9,26 +9,38 @@ const BASE_URL = "https://www.preploom.com";
 const pages = [
   "/",                // Home Page
   "/dsa",             // DSA Section
-  "/webdev", // Web Development Section
-  "/interview",  // Interview Prep Section
+  "/webdev",          // Web Development Section
+  "/interview",       // Interview Prep Section
   "/resume-portfolio-tips",
-  "/feedback",           // Feedback Page
+  "/feedback",        // Feedback Page
   "/contact",         // Contact Page
 ];
 
 (async () => {
-  const sitemap = new SitemapStream({ hostname: BASE_URL });
+  try {
+    const sitemap = new SitemapStream({ hostname: BASE_URL });
 
-  pages.forEach((page) => {
-    sitemap.write({ url: page, changefreq: "weekly", priority: 0.8 });
-  });
+    pages.forEach((page) => {
+      sitemap.write({ url: page, changefreq: "weekly", priority: 0.8 });
+    });
 
-  sitemap.end();
+    sitemap.end();
 
-  const sitemapXML = await streamToPromise(sitemap).then((data) => data.toString());
+    const sitemapXML = await streamToPromise(sitemap).then((data) => data.toString());
 
-  // Save the sitemap.xml file in the "public" folder
-  fs.writeFileSync("./public/sitemap.xml", sitemapXML);
+    // Define the public folder path
+    const publicPath = path.join(process.cwd(), "public");
 
-  console.log("✅ Sitemap generated successfully!");
+    // Ensure the "public" directory exists
+    if (!fs.existsSync(publicPath)) {
+      fs.mkdirSync(publicPath, { recursive: true });
+    }
+
+    // Save the sitemap.xml file in the "public" folder
+    fs.writeFileSync(path.join(publicPath, "sitemap.xml"), sitemapXML);
+
+    console.log("✅ Sitemap generated successfully!");
+  } catch (error) {
+    console.error("❌ Error generating sitemap:", error);
+  }
 })();
