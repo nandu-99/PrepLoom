@@ -103,17 +103,15 @@ export function WebDevPage() {
         setLoading(true);
         const roadmapResponse = await fetch(`${backendURL}/roadmap/${selectedTab}`);
         if (!roadmapResponse.ok) throw new Error("Roadmap not found");
-        const roadmapData: { id: string } = await roadmapResponse.json();
-        const phasesResponse = await fetch(`${backendURL}/phases/${roadmapData.id}`);
-        if (!phasesResponse.ok) throw new Error("Phases not found");
-        const phasesData: { phase: string; description: string; skills: { skill: { name: string } }[], pathId: string }[] = await phasesResponse.json();
+        const roadmapData = await roadmapResponse.json();
+        const phasesData: { phase: string; description: string; skills: { skill: { name: string } }[], pathId: string }[] = roadmapData.phases;
         const formattedPhases: Phase[] = phasesData.map((phase) => ({
           phase: phase.phase,
           description: phase.description,
           skills: phase.skills.map((ps) => ps.skill.name),
           pathId: phase.pathId,
         }));
-
+        setLoading(false);
         setRoadmapData((prev) => ({
           ...prev,
           [selectedTab]: formattedPhases,
