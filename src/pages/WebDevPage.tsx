@@ -1,10 +1,22 @@
-import { useState } from 'react';
-import { Card } from '../components/ui/card';
-import { Button } from '../components/ui/button';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs';
-import { Badge } from '../components/ui/badge';
-import { Route, Blocks, ExternalLink, Library, Search, Layout } from 'lucide-react';
-import { Input } from '../components/ui/input';
+import { useEffect, useState } from "react";
+import { Card } from "../components/ui/card";
+import { Button } from "../components/ui/button";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "../components/ui/tabs";
+import { Badge } from "../components/ui/badge";
+import {
+  Route,
+  Blocks,
+  ExternalLink,
+  Library,
+  Search,
+  Layout,
+} from "lucide-react";
+import { Input } from "../components/ui/input";
 import {
   Select,
   SelectContent,
@@ -12,524 +24,610 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../components/ui/select";
-import HTML5UP from "../assets/html5up.png"
-import COREUIREACT from "../assets/coreuireact.png"
-import NEXTECOMMERCE from "../assets/next-ecommerce.png"
+import { useLocation, useNavigate } from "react-router-dom";
+import { backendURL } from "@/data/data";
+import { ClipLoader } from "react-spinners"; // Import ClipLoader from react-spinners
+
+// Define types (unchanged)
+interface Phase {
+  phase: string;
+  description: string;
+  skills: string[];
+  pathId: string;
+}
+
+interface Roadmap {
+  [key: string]: Phase[];
+}
+
+interface Project {
+  id: string;
+  title: string;
+  description: string;
+  difficulty: string;
+  features: string[];
+  tags: string[];
+  createdAt: string;
+  updatedAt: string;
+}
+
+interface ComponentLibrary {
+  id: string;
+  name: string;
+  description: string;
+  type: string;
+  tags: string[];
+  url: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+interface Template {
+  id: string;
+  name: string;
+  description: string;
+  category: string;
+  tags: string[];
+  image: string;
+  url: string;
+  createdAt: string;
+  updatedAt: string;
+}
 
 export function WebDevPage() {
-  const [searchTerm, setSearchTerm] = useState('');
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [searchTerm, setSearchTerm] = useState<string>("");
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
-  const [difficultyFilter, setDifficultyFilter] = useState<string>('all');
-  const [templateFilter, setTemplateFilter] = useState<string>('all');
+  const [difficultyFilter, setDifficultyFilter] = useState<string>("all");
+  const [templateFilter, setTemplateFilter] = useState<string>("all");
+  const [libraryTypeFilter, setLibraryTypeFilter] = useState<string>("all");
+  const [selectedTab, setSelectedTab] = useState<string>(location.state?.selectedTab || "frontend");
+  const [roadmapData, setRoadmapData] = useState<Roadmap>({});
+  const [componentLibraries, setComponentLibraries] = useState<ComponentLibrary[]>([]);
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [templates, setTemplates] = useState<Template[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+  const [librariesLoading, setLibrariesLoading] = useState<boolean>(true);
+  const [librariesError, setLibrariesError] = useState<string | null>(null);
+  const [projectsLoading, setProjectsLoading] = useState<boolean>(true);
+  const [projectsError, setProjectsError] = useState<string | null>(null);
+  const [templatesLoading, setTemplatesLoading] = useState<boolean>(true);
+  const [templatesError, setTemplatesError] = useState<string | null>(null);
 
-  const roadmap = [
-    {
-      phase: "Fundamentals",
-      skills: ["HTML", "CSS", "JavaScript", "Git", "Command Line"],
-      resources: "https://roadmap.sh/frontend"
-    },
-    {
-      phase: "Frontend Development",
-      skills: ["React", "TypeScript", "Tailwind CSS", "State Management"],
-      resources: "https://roadmap.sh/react"
-    },
-    {
-      phase: "Backend Development",
-      skills: ["Node.js", "Express", "Databases", "API Design"],
-      resources: "https://roadmap.sh/backend"
-    }
-  ];
+  // Fetch roadmap data (unchanged)
+  useEffect(() => {
+    const fetchRoadmapData = async () => {
+      try {
+        setLoading(true);
+        const roadmapResponse = await fetch(`${backendURL}/roadmap/${selectedTab}`);
+        if (!roadmapResponse.ok) throw new Error("Roadmap not found");
+        const roadmapData: { id: string } = await roadmapResponse.json();
+        const phasesResponse = await fetch(`${backendURL}/phases/${roadmapData.id}`);
+        if (!phasesResponse.ok) throw new Error("Phases not found");
+        const phasesData: { phase: string; description: string; skills: { skill: { name: string } }[], pathId: string }[] = await phasesResponse.json();
+        const formattedPhases: Phase[] = phasesData.map((phase) => ({
+          phase: phase.phase,
+          description: phase.description,
+          skills: phase.skills.map((ps) => ps.skill.name),
+          pathId: phase.pathId,
+        }));
 
-  const componentLibraries = [
-    {
-      name: "Shadcn/UI",
-      description: "A collection of beautifully designed components built with Radix UI and Tailwind CSS.",
-      url: "https://ui.shadcn.com",
-      tags: ["React", "Tailwind CSS", "Radix UI"],
-      type: "Utility-first"
-    },
-    {
-      name: "Material-UI (MUI)",
-      description: "A comprehensive library of components that implements Google's Material Design.",
-      url: "https://mui.com",
-      tags: ["React", "Material Design"],
-      type: "Full-featured"
-    },
-    {
-      name: "Chakra UI",
-      description: "A simple, modular and accessible component library that gives you building blocks to build React applications.",
-      url: "https://chakra-ui.com",
-      tags: ["React", "Accessible", "Themeable"],
-      type: "Full-featured"
-    },
-    {
-      name: "Headless UI",
-      description: "Completely unstyled, fully accessible UI components, designed to integrate with Tailwind CSS.",
-      url: "https://headlessui.dev",
-      tags: ["React", "Vue", "Tailwind CSS"],
-      type: "Headless"
-    },
-    {
-      name: "Radix UI",
-      description: "Low-level UI component library with a focus on accessibility, customization and developer experience.",
-      url: "https://www.radix-ui.com",
-      tags: ["React", "Accessible", "Headless"],
-      type: "Headless"
-    },
-    {
-      name: "Ant Design",
-      description: "An enterprise-class UI design language and React UI library with a set of high-quality components.",
-      url: "https://ant.design",
-      tags: ["React", "Enterprise", "Full-featured"],
-      type: "Full-featured"
-    },
-    {
-      name: "Next UI",
-      description: "Beautiful, fast and modern React UI library that works with Next.js and Tailwind CSS.",
-      url: "https://nextui.org",
-      tags: ["React", "Next.js", "Tailwind CSS"],
-      type: "Full-featured"
-    },
-    {
-      name: "Mantine",
-      description: "A fully featured React components library with 100+ customizable components and hooks.",
-      url: "https://mantine.dev",
-      tags: ["React", "Typescript", "Themeable"],
-      type: "Full-featured"
-    },
-    {
-      name: "Daisy UI",
-      description: "Clean and modular components plugin for Tailwind CSS with semantic class names.",
-      url: "https://daisyui.com",
-      tags: ["Tailwind CSS", "Themeable"],
-      type: "Utility-first"
-    },
-    {
-      name: "PrimeReact",
-      description: "Rich set of open source UI components for React with multiple themes and templates.",
-      url: "https://primereact.org",
-      tags: ["React", "Enterprise", "Themeable"],
-      type: "Full-featured"
-    }
-  ];
+        setRoadmapData((prev) => ({
+          ...prev,
+          [selectedTab]: formattedPhases,
+        }));
+        setError(null);
+      } catch (err) {
+        setError("Failed to fetch roadmap data. Please try again later.");
+        console.error("Error fetching roadmap data:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  const projects = [
-    {
-      title: "E-commerce Platform",
-      description: "Build a full-featured online store with shopping cart, payment processing, and inventory management.",
-      tags: ["React", "Node.js", "PostgreSQL", "Redis"],
-      difficulty: "Advanced",
-      features: [
-        "Product catalog with filters",
-        "Shopping cart",
-        "User authentication",
-        "Order management",
-        "Admin dashboard"
-      ]
-    },
-    {
-      title: "Real-time Chat Application",
-      description: "Create a modern chat application with real-time messaging, file sharing, and group conversations.",
-      tags: ["React", "Socket.io", "Node.js", "MongoDB"],
-      difficulty: "Intermediate",
-      features: [
-        "Real-time messaging",
-        "File sharing",
-        "Group chats",
-        "User presence",
-        "Message history"
-      ]
-    },
-    {
-      title: "Project Management Tool",
-      description: "Develop a project management system with task tracking, team collaboration, and reporting features.",
-      tags: ["React", "TypeScript", "Node.js", "PostgreSQL"],
-      difficulty: "Advanced",
-      features: [
-        "Task management",
-        "Team collaboration",
-        "File sharing",
-        "Progress tracking",
-        "Reporting dashboard"
-      ]
-    },
-    {
-      title: "Social Media Dashboard",
-      description: "Build a dashboard to manage and analyze social media accounts across multiple platforms.",
-      tags: ["React", "Redux", "Node.js", "Chart.js"],
-      difficulty: "Intermediate",
-      features: [
-        "Multi-platform integration",
-        "Analytics dashboard",
-        "Content scheduling",
-        "Engagement tracking",
-        "Report generation"
-      ]
-    },
-    {
-      title: "Weather Application",
-      description: "Create a weather app with location-based forecasts, alerts, and interactive maps.",
-      tags: ["HTML", "CSS", "JavaScript", "APIs"],
-      difficulty: "Beginner",
-      features: [
-        "Location-based weather",
-        "5-day forecast",
-        "Weather alerts",
-        "Interactive maps",
-        "Unit conversion"
-      ]
-    }
-  ];
+    fetchRoadmapData();
+  }, [selectedTab]);
 
-  const templates = [
-    {
-      name: "HTML5 UP",
-      description: "Makes spiffy HTML5 site templates",
-      category: "HTML",
-      image: HTML5UP,
-      url: "https://html5up.net/",
-      tags: ["HTML5","CSS3","Minimal","Responsive"]
-    },
-    {
-      name: "CoreUI React",
-      description: "Free React Admin Dashboard Template",
-      category: "React",
-      image: COREUIREACT,
-      url: "https://coreui.io/product/free-react-admin-template/#live-preview",
-      tags: ["Dashboard", "React", "Modern"]
-    },
-    {
-      name: "Evolo",
-      description: "Startup website template with animated sections",
-      category: "Next.js",
-      image: NEXTECOMMERCE,
-      url: "https://github.com/lucaspulliese/next-ecommerce",
-      tags: ["Ecommerce", "NextJs"]
-    }
-  ];
+  // Fetch component libraries from backend (unchanged)
+  useEffect(() => {
+    const fetchComponentLibraries = async () => {
+      try {
+        setLibrariesLoading(true);
+        const response = await fetch(`${backendURL}/component-libraries`);
+        if (!response.ok) throw new Error("Failed to fetch component libraries");
+        const data: ComponentLibrary[] = await response.json();
+        setComponentLibraries(data);
+        setLibrariesError(null);
+      } catch (err) {
+        setLibrariesError("Failed to fetch component libraries. Please try again later.");
+        console.error("Error fetching component libraries:", err);
+      } finally {
+        setLibrariesLoading(false);
+      }
+    };
 
+    fetchComponentLibraries();
+  }, []);
 
-  const [libraryTypeFilter, setLibraryTypeFilter] = useState<string>('all');
+  // Fetch projects from backend (unchanged)
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        setProjectsLoading(true);
+        const response = await fetch(`${backendURL}/projects`);
+        if (!response.ok) throw new Error("Failed to fetch projects");
+        const data: Project[] = await response.json();
+        setProjects(data);
+        setProjectsError(null);
+      } catch (err) {
+        setProjectsError("Failed to fetch projects. Please try again later.");
+        console.error("Error fetching projects:", err);
+      } finally {
+        setProjectsLoading(false);
+      }
+    };
 
-  const allTags = Array.from(new Set(projects.flatMap(project => project.tags)));
+    fetchProjects();
+  }, []);
 
-  const filteredProjects = projects.filter(project => {
-    const matchesSearch = project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         project.description.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesTags = selectedTags.length === 0 || 
-                       selectedTags.every(tag => project.tags.includes(tag));
-    const matchesDifficulty = difficultyFilter === 'all' || 
-                             project.difficulty.toLowerCase() === difficultyFilter.toLowerCase();
-    
+  // Fetch templates from backend (unchanged)
+  useEffect(() => {
+    const fetchTemplates = async () => {
+      try {
+        setTemplatesLoading(true);
+        const response = await fetch(`${backendURL}/templates`);
+        if (!response.ok) throw new Error("Failed to fetch templates");
+        const data: Template[] = await response.json();
+        setTemplates(data);
+        setTemplatesError(null);
+      } catch (err) {
+        setTemplatesError("Failed to fetch templates. Please try again later.");
+        console.error("Error fetching templates:", err);
+      } finally {
+        setTemplatesLoading(false);
+      }
+    };
+
+    fetchTemplates();
+  }, []);
+
+  const allTags: string[] = Array.from(new Set(projects.flatMap((project: Project) => project.tags)));
+  const filteredProjects: Project[] = projects.filter((project: Project) => {
+    const matchesSearch =
+      project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      project.description.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesTags =
+      selectedTags.length === 0 || selectedTags.every((tag) => project.tags.includes(tag));
+    const matchesDifficulty =
+      difficultyFilter === "all" || project.difficulty.toLowerCase() === difficultyFilter.toLowerCase();
+
     return matchesSearch && matchesTags && matchesDifficulty;
   });
 
-  const libraryTypes = Array.from(new Set(componentLibraries.map(lib => lib.type)));
-  const libraryTags = Array.from(new Set(componentLibraries.flatMap(lib => lib.tags)));
+  const libraryTypes: string[] = Array.from(new Set(componentLibraries.map((lib: ComponentLibrary) => lib.type)));
+  const libraryTags: string[] = Array.from(new Set(componentLibraries.flatMap((lib: ComponentLibrary) => lib.tags)));
+  const filteredLibraries: ComponentLibrary[] = componentLibraries.filter((library: ComponentLibrary) => {
+    const matchesSearch =
+      library.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      library.description.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesTags =
+      selectedTags.length === 0 || selectedTags.some((tag) => library.tags.includes(tag));
+    const matchesType = libraryTypeFilter === "all" || library.type === libraryTypeFilter;
 
-  const filteredLibraries = componentLibraries.filter(library => {
-    const matchesSearch = library.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         library.description.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesTags = selectedTags.length === 0 || 
-                       selectedTags.some(tag => library.tags.includes(tag));
-    const matchesType = libraryTypeFilter === 'all' || 
-                       library.type === libraryTypeFilter;
-    
     return matchesSearch && matchesTags && matchesType;
   });
 
+  const templateCategories: string[] = Array.from(new Set(templates.map((template: Template) => template.category)));
+  const templateTags: string[] = Array.from(new Set(templates.flatMap((template: Template) => template.tags)));
+  const filteredTemplates: Template[] = templates.filter((template: Template) => {
+    const matchesSearch =
+      template.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      template.description.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesTags =
+      selectedTags.length === 0 || selectedTags.some((tag) => template.tags.includes(tag));
+    const matchesCategory = templateFilter === "all" || template.category === templateFilter;
 
-  const templateCategories = Array.from(new Set(templates.map(template => template.category)));
-  const templateTags = Array.from(new Set(templates.flatMap(template => template.tags)));
-
-  const filteredTemplates = templates.filter(template => {
-    const matchesSearch = template.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         template.description.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesTags = selectedTags.length === 0 || 
-                       selectedTags.some(tag => template.tags.includes(tag));
-    const matchesCategory = templateFilter === 'all' || 
-                          template.category === templateFilter;
-    
     return matchesSearch && matchesTags && matchesCategory;
   });
 
+  const renderRoadmap = (): JSX.Element => {
+    if (loading) {
+      return (
+        <div className="flex mt-20 h-[70vh] w-[80vw] justify-center z-50">
+          <ClipLoader color="#3498db" size={50} />
+        </div>
+      );
+    }
+
+    if (error) {
+      return <div className="text-center text-red-600">{error}</div>;
+    }
+
+    if (!roadmapData[selectedTab] || roadmapData[selectedTab].length === 0) {
+      return <div className="text-center">No roadmap data available for {selectedTab}.</div>;
+    }
+
+    return (
+      <div className="space-y-6">
+        <div className="grid gap-6">
+          {roadmapData[selectedTab].map((phase: Phase) => (
+            <Card key={phase.phase} className="p-6">
+              <h3 className="text-2xl font-semibold mb-2">{phase.phase}</h3>
+              <p className="text-muted-foreground mb-4">{phase.description}</p>
+              <div className="flex flex-wrap gap-2 mb-4">
+                {phase.skills.map((skill: string) => (
+                  <Badge key={skill} variant="secondary">
+                    {skill}
+                  </Badge>
+                ))}
+              </div>
+              <Button
+                variant="outline"
+                className="mt-2"
+                onClick={() =>
+                  navigate(`/webdev/learning-path/${phase.pathId}`, {
+                    state: { selectedTab },
+                  })
+                }
+              >
+                <span>View Detailed Roadmap</span>
+                <ExternalLink className="w-4 h-4 ml-2" />
+              </Button>
+            </Card>
+          ))}
+        </div>
+      </div>
+    );
+  };
+
+  const renderSidebar = (): JSX.Element => {
+    if (loading || error || Object.keys(roadmapData).length === 0) {
+      return <></>;
+    }
+
+    return (
+      <>
+        {/* Mobile Dropdown */}
+        <div className="md:hidden mb-6">
+          <Select value={selectedTab} onValueChange={setSelectedTab}>
+            <SelectTrigger>
+              <SelectValue placeholder="Select Roadmap" />
+            </SelectTrigger>
+            <SelectContent>
+              {Object.keys(roadmapData).map((tab) => (
+                <SelectItem key={tab} value={tab} className="capitalize">
+                  {tab}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+
+        {/* Desktop Sidebar */}
+        <div className="hidden md:flex md:flex-col w-full h-fit mb-6">
+          {Object.keys(roadmapData).map((tab) => (
+            <Button
+              key={tab}
+              variant={selectedTab === tab ? "default" : "outline"}
+              className="text-lg flex items-center mb-2 capitalize"
+              onClick={() => setSelectedTab(tab)}
+            >
+              {tab}
+            </Button>
+          ))}
+        </div>
+      </>
+    );
+  };
+
   return (
-    <div className="max-w-6xl mx-auto p-6">
-      <h1 className="text-4xl font-bold mb-8">Web Development</h1>
-      
-      <Tabs defaultValue="roadmap">
-        <TabsList className="mb-6">
-          <TabsTrigger value="roadmap">
+    <div className="mx-auto p-4 sm:p-6 w-full max-w-[100vw] overflow-x-hidden relative">
+      <h1 className="text-2xl sm:text-4xl font-bold mb-6 sm:mb-8">Web Development</h1>
+
+      <Tabs defaultValue="roadmap" className="w-full">
+        <TabsList className="mb-6 flex flex-col justify-start sm:flex-row h-auto gap-2 sm:gap-0">
+          <TabsTrigger value="roadmap" className="flex-1 sm:flex-none justify-start">
             <Route className="w-4 h-4 mr-2" />
             Learning Roadmap
           </TabsTrigger>
-          <TabsTrigger value="projects">
+          <TabsTrigger value="projects" className="flex-1 sm:flex-none justify-start">
             <Blocks className="w-4 h-4 mr-2" />
             Project Ideas
           </TabsTrigger>
-          <TabsTrigger value="libraries">
+          <TabsTrigger value="libraries" className="flex-1 sm:flex-none justify-start">
             <Library className="w-4 h-4 mr-2" />
             Component Libraries
           </TabsTrigger>
-          <TabsTrigger value="templates">
+          <TabsTrigger value="templates" className="flex-1 sm:flex-none justify-start">
             <Layout className="w-4 h-4 mr-2" />
             Templates
           </TabsTrigger>
         </TabsList>
 
-        <TabsContent value="roadmap">
-          <div className="grid gap-6">
-            {roadmap.map((phase) => (
-              <Card key={phase.phase} className="p-6">
-                <h2 className="text-2xl font-semibold mb-4">{phase.phase}</h2>
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {phase.skills.map((skill) => (
-                    <Badge key={skill} variant="secondary">{skill}</Badge>
-                  ))}
-                </div>
-                <Button variant="outline" asChild>
-                  <a href={phase.resources} target="_blank" rel="noopener noreferrer">
-                    View Detailed Roadmap
-                    <ExternalLink className="w-4 h-4 ml-2" />
-                  </a>
-                </Button>
-              </Card>
-            ))}
+        <TabsContent value="roadmap" className="w-full">
+          <div className="flex flex-col md:grid md:grid-cols-[200px_1fr] gap-6">
+            {renderSidebar()}
+            <div>{renderRoadmap()}</div>
           </div>
         </TabsContent>
 
-        <TabsContent value="projects">
-          <div className="mb-6 space-y-4">
-            <div className="flex gap-4 items-center">
-              <div className="flex-1">
-                <div className="relative">
-                  <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
-                  <Input
-                    placeholder="Search projects..."
-                    className="pl-8"
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                  />
-                </div>
-              </div>
-              <Select
-                value={difficultyFilter}
-                onValueChange={setDifficultyFilter}
-              >
-                <SelectTrigger className="w-[180px]">
-                  <SelectValue placeholder="Select difficulty" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All Levels</SelectItem>
-                  <SelectItem value="beginner">Beginner</SelectItem>
-                  <SelectItem value="intermediate">Intermediate</SelectItem>
-                  <SelectItem value="advanced">Advanced</SelectItem>
-                </SelectContent>
-              </Select>
+        <TabsContent value="projects" className="w-full">
+          {projectsLoading ? (
+            <div className="fixed inset-0 flex items-center justify-center bg-gray-100 bg-opacity-75 z-50">
+              <ClipLoader color="#3498db" size={50} />
             </div>
-            <div className="flex flex-wrap gap-2">
-              {allTags.map(tag => (
-                <Badge
-                  key={tag}
-                  variant={selectedTags.includes(tag) ? "default" : "outline"}
-                  className="cursor-pointer"
-                  onClick={() => {
-                    setSelectedTags(prev =>
-                      prev.includes(tag)
-                        ? prev.filter(t => t !== tag)
-                        : [...prev, tag]
-                    );
-                  }}
-                >
-                  {tag}
-                </Badge>
-              ))}
-            </div>
-          </div>
-
-          <div className="grid gap-6">
-            {filteredProjects.map((project) => (
-              <Card key={project.title} className="p-6">
-                <div className="flex items-start justify-between mb-4">
-                  <h3 className="text-xl font-semibold">{project.title}</h3>
-                  <Badge className={
-                    project.difficulty === "Advanced" ? "bg-red-100 text-red-800" :
-                    project.difficulty === "Intermediate" ? "bg-yellow-100 text-yellow-800" :
-                    "bg-green-100 text-green-800"
-                  }>{project.difficulty}</Badge>
-                </div>
-                <p className="text-muted-foreground mb-4">{project.description}</p>
-                <div className="mb-4">
-                  <h4 className="font-semibold mb-2">Key Features:</h4>
-                  <ul className="list-disc pl-5 space-y-1">
-                    {project.features.map((feature, index) => (
-                      <li key={index}>{feature}</li>
-                    ))}
-                  </ul>
+          ) : projectsError ? (
+            <div className="text-center text-red-600">{projectsError}</div>
+          ) : (
+            <>
+              <div className="mb-6 space-y-4">
+                <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
+                  <div className="flex-1 w-full">
+                    <div className="relative">
+                      <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
+                      <Input
+                        placeholder="Search projects..."
+                        className="pl-8 w-full"
+                        value={searchTerm}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchTerm(e.target.value)}
+                      />
+                    </div>
+                  </div>
+                  <Select value={difficultyFilter} onValueChange={setDifficultyFilter}>
+                    <SelectTrigger className="w-full sm:w-[180px]">
+                      <SelectValue placeholder="Select difficulty" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="all">All Levels</SelectItem>
+                      <SelectItem value="beginner">Beginner</SelectItem>
+                      <SelectItem value="intermediate">Intermediate</SelectItem>
+                      <SelectItem value="advanced">Advanced</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </div>
                 <div className="flex flex-wrap gap-2">
-                  {project.tags.map((tag) => (
-                    <Badge key={tag} variant="outline">{tag}</Badge>
+                  {allTags.map((tag: string) => (
+                    <Badge
+                      key={tag}
+                      variant={selectedTags.includes(tag) ? "default" : "outline"}
+                      className="cursor-pointer"
+                      onClick={() =>
+                        setSelectedTags((prev: string[]) =>
+                          prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag]
+                        )
+                      }
+                    >
+                      {tag}
+                    </Badge>
                   ))}
                 </div>
-              </Card>
-            ))}
-          </div>
-        </TabsContent>
+              </div>
 
-        <TabsContent value="libraries">
-        <div className="mb-6 space-y-4">
-          <div className="flex gap-4 items-center">
-            <div className="flex-1">
-              <div className="relative">
-                <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
-                <Input
-                  placeholder="Search libraries..."
-                  className="pl-8"
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                />
-              </div>
-            </div>
-            <Select
-              value={libraryTypeFilter}
-              onValueChange={setLibraryTypeFilter}
-            >
-              <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="Select type" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All Types</SelectItem>
-                {libraryTypes.map(type => (
-                  <SelectItem key={type} value={type}>{type}</SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-          <div className="flex flex-wrap gap-2">
-            {libraryTags.map(tag => (
-              <Badge
-                key={tag}
-                variant={selectedTags.includes(tag) ? "default" : "outline"}
-                className="cursor-pointer"
-                onClick={() => {
-                  setSelectedTags(prev =>
-                    prev.includes(tag)
-                      ? prev.filter(t => t !== tag)
-                      : [...prev, tag]
-                  );
-                }}
-              >
-                {tag}
-              </Badge>
-            ))}
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredLibraries.map((library) => (
-            <Card key={library.name} className="p-6">
-              <div className="flex items-start justify-between mb-4">
-                <h3 className="text-xl font-semibold">{library.name}</h3>
-                <Badge>{library.type}</Badge>
-              </div>
-              <p className="text-muted-foreground mb-4">{library.description}</p>
-              <div className="flex flex-wrap gap-2 mb-4">
-                {library.tags.map((tag) => (
-                  <Badge key={tag} variant="outline">{tag}</Badge>
-                ))}
-              </div>
-              <Button variant="outline" asChild className="w-full">
-                <a href={library.url} target="_blank" rel="noopener noreferrer">
-                  View Documentation
-                  <ExternalLink className="w-4 h-4 ml-2" />
-                </a>
-              </Button>
-            </Card>
-          ))}
-        </div>
-        </TabsContent>
-
-        <TabsContent value="templates">
-          <div className="mb-6 space-y-4">
-            <div className="flex gap-4 items-center">
-              <div className="flex-1">
-                <div className="relative">
-                  <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
-                  <Input
-                    placeholder="Search templates..."
-                    className="pl-8"
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                  />
-                </div>
-              </div>
-              <Select
-                value={templateFilter}
-                onValueChange={setTemplateFilter}
-              >
-                <SelectTrigger className="w-[180px]">
-                  <SelectValue placeholder="Select category" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All Categories</SelectItem>
-                  {templateCategories.map(category => (
-                    <SelectItem key={category} value={category}>{category}</SelectItem>
+              {filteredProjects.length === 0 ? (
+                <div className="text-center">No projects match your filters.</div>
+              ) : (
+                <div className="grid grid-cols-1 gap-6">
+                  {filteredProjects.map((project: Project) => (
+                    <Card key={project.id} className="p-6">
+                      <div className="flex items-start justify-between mb-4">
+                        <h3 className="text-xl font-semibold">{project.title}</h3>
+                        <Badge
+                          className={
+                            project.difficulty === "Advanced"
+                              ? "bg-red-100 text-red-800"
+                              : project.difficulty === "Intermediate"
+                              ? "bg-yellow-100 text-yellow-800"
+                              : "bg-green-100 text-green-800"
+                          }
+                        >
+                          {project.difficulty}
+                        </Badge>
+                      </div>
+                      <p className="text-muted-foreground mb-4">{project.description}</p>
+                      <div className="mb-4">
+                        <h4 className="font-semibold mb-2">Key Features:</h4>
+                        <ul className="list-disc pl-5 space-y-1">
+                          {project.features.map((feature: string, index: number) => (
+                            <li key={index}>{feature}</li>
+                          ))}
+                        </ul>
+                      </div>
+                      <div className="flex flex-wrap gap-2">
+                        {project.tags.map((tag: string) => (
+                          <Badge key={tag} variant="outline">
+                            {tag}
+                          </Badge>
+                        ))}
+                      </div>
+                    </Card>
                   ))}
-                </SelectContent>
-              </Select>
-            </div>
-            <div className="flex flex-wrap gap-2">
-              {templateTags.map(tag => (
-                <Badge
-                  key={tag}
-                  variant={selectedTags.includes(tag) ? "default" : "outline"}
-                  className="cursor-pointer"
-                  onClick={() => {
-                    setSelectedTags(prev =>
-                      prev.includes(tag)
-                        ? prev.filter(t => t !== tag)
-                        : [...prev, tag]
-                    );
-                  }}
-                >
-                  {tag}
-                </Badge>
-              ))}
-            </div>
-          </div>
+                </div>
+              )}
+            </>
+          )}
+        </TabsContent>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredTemplates.map((template) => (
-              <Card key={template.name} className="overflow-hidden">
-                <div className="aspect-video w-full overflow-hidden">
-                  <img 
-                    src={template.image} 
-                    alt={template.name}
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
-                <div className="p-6">
-                  <div className="flex items-start justify-between mb-4">
-                    <h3 className="text-xl font-semibold">{template.name}</h3>
-                    <Badge>{template.category}</Badge>
+        <TabsContent value="libraries" className="w-full">
+          {librariesLoading ? (
+            <div className="fixed inset-0 flex items-center justify-center bg-gray-100 bg-opacity-75 z-50">
+              <ClipLoader color="#3498db" size={50} />
+            </div>
+          ) : librariesError ? (
+            <div className="text-center text-red-600">{librariesError}</div>
+          ) : (
+            <>
+              <div className="mb-6 space-y-4">
+                <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
+                  <div className="flex-1 w-full">
+                    <div className="relative">
+                      <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
+                      <Input
+                        placeholder="Search libraries..."
+                        className="pl-8 w-full"
+                        value={searchTerm}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchTerm(e.target.value)}
+                      />
+                    </div>
                   </div>
-                  <p className="text-muted-foreground mb-4">{template.description}</p>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {template.tags.map((tag) => (
-                      <Badge key={tag} variant="outline">{tag}</Badge>
-                    ))}
-                  </div>
-                  <Button variant="outline" asChild className="w-full">
-                    <a href={template.url} target="_blank" rel="noopener noreferrer">
-                      View Template
-                      <ExternalLink className="w-4 h-4 ml-2" />
-                    </a>
-                  </Button>
+                  <Select value={libraryTypeFilter} onValueChange={setLibraryTypeFilter}>
+                    <SelectTrigger className="w-full sm:w-[180px]">
+                      <SelectValue placeholder="Select type" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="all">All Types</SelectItem>
+                      {libraryTypes.map((type: string) => (
+                        <SelectItem key={type} value={type}>
+                          {type}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                 </div>
-              </Card>
-            ))}
-          </div>
+                <div className="flex flex-wrap gap-2">
+                  {libraryTags.map((tag: string) => (
+                    <Badge
+                      key={tag}
+                      variant={selectedTags.includes(tag) ? "default" : "outline"}
+                      className="cursor-pointer"
+                      onClick={() =>
+                        setSelectedTags((prev: string[]) =>
+                          prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag]
+                        )
+                      }
+                    >
+                      {tag}
+                    </Badge>
+                  ))}
+                </div>
+              </div>
+
+              {filteredLibraries.length === 0 ? (
+                <div className="text-center">No libraries match your filters.</div>
+              ) : (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {filteredLibraries.map((library: ComponentLibrary) => (
+                    <Card key={library.id} className="p-6">
+                      <div className="flex items-start justify-between mb-4">
+                        <h3 className="text-xl font-semibold">{library.name}</h3>
+                        <Badge>{library.type}</Badge>
+                      </div>
+                      <p className="text-muted-foreground mb-4">{library.description}</p>
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        {library.tags.map((tag: string) => (
+                          <Badge key={tag} variant="outline">
+                            {tag}
+                          </Badge>
+                        ))}
+                      </div>
+                      <Button variant="outline" asChild className="w-full">
+                        <a href={library.url} target="_blank" rel="noopener noreferrer">
+                          View Documentation
+                          <ExternalLink className="w-4 h-4 ml-2" />
+                        </a>
+                      </Button>
+                    </Card>
+                  ))}
+                </div>
+              )}
+            </>
+          )}
+        </TabsContent>
+
+        <TabsContent value="templates" className="w-full">
+          {templatesLoading ? (
+            <div className="fixed inset-0 flex items-center justify-center bg-gray-100 bg-opacity-75 z-50">
+              <ClipLoader color="#3498db" size={50} />
+            </div>
+          ) : templatesError ? (
+            <div className="text-center text-red-600">{templatesError}</div>
+          ) : (
+            <>
+              <div className="mb-6 space-y-4">
+                <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
+                  <div className="flex-1 w-full">
+                    <div className="relative">
+                      <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
+                      <Input
+                        placeholder="Search templates..."
+                        className="pl-8 w-full"
+                        value={searchTerm}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchTerm(e.target.value)}
+                      />
+                    </div>
+                  </div>
+                  <Select value={templateFilter} onValueChange={setTemplateFilter}>
+                    <SelectTrigger className="w-full sm:w-[180px]">
+                      <SelectValue placeholder="Select category" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="all">All Categories</SelectItem>
+                      {templateCategories.map((category: string) => (
+                        <SelectItem key={category} value={category}>
+                          {category}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {templateTags.map((tag: string) => (
+                    <Badge
+                      key={tag}
+                      variant={selectedTags.includes(tag) ? "default" : "outline"}
+                      className="cursor-pointer"
+                      onClick={() =>
+                        setSelectedTags((prev: string[]) =>
+                          prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag]
+                        )
+                      }
+                    >
+                      {tag}
+                    </Badge>
+                  ))}
+                </div>
+              </div>
+
+              {filteredTemplates.length === 0 ? (
+                <div className="text-center">No templates match your filters.</div>
+              ) : (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {filteredTemplates.map((template: Template) => (
+                    <Card key={template.id} className="overflow-hidden">
+                      <div className="aspect-video w-full overflow-hidden">
+                        <img
+                          src={template.image}
+                          alt={template.name}
+                          className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                        />
+                      </div>
+                      <div className="p-6">
+                        <div className="flex items-start justify-between mb-4">
+                          <h3 className="text-xl font-semibold">{template.name}</h3>
+                          <Badge>{template.category}</Badge>
+                        </div>
+                        <p className="text-muted-foreground mb-4">{template.description}</p>
+                        <div className="flex flex-wrap gap-2 mb-4">
+                          {template.tags.map((tag: string) => (
+                            <Badge key={tag} variant="outline">
+                              {tag}
+                            </Badge>
+                          ))}
+                        </div>
+                        <Button variant="outline" asChild className="w-full">
+                          <a href={template.url} target="_blank" rel="noopener noreferrer">
+                            View Template
+                            <ExternalLink className="w-4 h-4 ml-2" />
+                          </a>
+                        </Button>
+                      </div>
+                    </Card>
+                  ))}
+                </div>
+              )}
+            </>
+          )}
         </TabsContent>
       </Tabs>
     </div>

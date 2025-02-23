@@ -1,330 +1,229 @@
-import { useState } from "react";
-import { Card } from "@/components/ui/card";
+import { useState, useEffect } from "react";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
+import { ChevronLeft, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Card, CardHeader, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import {
-  ChevronRight,
-  Download,
-  Search,
-  Code,
-  MessageSquare,
-} from "lucide-react";
-import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
+import { Topic } from "@/types/types";
+import { backendURL } from "@/data/data";
 
-type TabType = "interview" | "challenges";
-type TopicKey = "javascript" | "react";
+type Difficulty = "Easy" | "Medium" | "Hard" | 'easy' | 'medium' | 'hard' ;
 
-interface Question {
-  q: string;
-  a: string;
-  tags: string[];
-}
-
-interface Challenge {
-  title: string;
-  difficulty: string;
-  description: string;
-  starterCode: string;
-  solution: string;
-}
-
-interface Topic {
-  title: string;
-  pdfUrl: string;
-  difficulty: string;
-  questionsCount: number;
-  questions: Question[];
-  challenges: Challenge[];
-}
-
-interface Topics {
-  [key: string]: Topic;
-}
-
-export function InterviewPrepPage(): JSX.Element {
-  const [selectedTab, setSelectedTab] = useState<TabType>("interview");
-  const [selectedTopic, setSelectedTopic] = useState<TopicKey | null>(null);
+const InterviewPrepPage = () => {
+  const { categoryPathId, topicPathId } = useParams();
+  const navigate = useNavigate();
+  const location = useLocation();
   const [searchQuery, setSearchQuery] = useState<string>("");
+  const [selectedDifficulty, setSelectedDifficulty] = useState<
+    "all" | Difficulty
+  >("all");
+  const [openQuestions, setOpenQuestions] = useState<string[]>([]);
+  const [topic, setTopic] = useState<Topic | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const selectedCategory = location.state?.selectedCategory || categoryPathId;
+  const [error, setError] = useState<string | null>(null);
 
-  const topics: Topics = {
-    javascript: {
-      title: "JavaScript",
-      pdfUrl: "https://drive.google.com/file/d/1234/view",
-      difficulty: "Intermediate",
-      questionsCount: 50,
-      questions: [
-        {
-          q: "Explain event delegation in JavaScript",
-          a: "Event delegation is a technique where you attach an event listener to a parent element to handle events on its children, even those added dynamically. It's based on event bubbling and can improve performance by reducing the number of event listeners.",
-          tags: ["Events", "DOM", "Performance"],
-        },
-      ],
-      challenges: [
-        {
-          title: "Implement Debounce",
-          difficulty: "Medium",
-          description:
-            "Create a debounce function that delays invoking a function until after wait milliseconds have elapsed since the last time the debounced function was invoked.",
-          starterCode:
-            "function debounce(func: Function, wait: number) {\n  // Your code here\n}",
-          solution:
-            "function debounce(func: Function, wait: number) {\n  let timeout: NodeJS.Timeout;\n  return function executedFunction(...args: any[]) {\n    const later = () => {\n      clearTimeout(timeout);\n      func(...args);\n    };\n    clearTimeout(timeout);\n    timeout = setTimeout(later, wait);\n  };\n}",
-        },
-      ],
-    },
-    react: {
-      title: "React",
-      pdfUrl: "https://drive.google.com/file/d/5678/view",
-      difficulty: "Advanced",
-      questionsCount: 40,
-      questions: [
-        {
-          q: "Explain the Virtual DOM and its benefits",
-          a: "Virtual DOM is a lightweight copy of the actual DOM. React uses it to improve performance by minimizing direct manipulation of the DOM. It compares the virtual DOM with the actual DOM and updates only the necessary parts.",
-          tags: ["Performance", "Core Concepts", "DOM"],
-        },
-      ],
-      challenges: [
-        {
-          title: "Build a Custom Hook",
-          difficulty: "Hard",
-          description:
-            "Create a custom hook useLocalStorage that syncs state with localStorage and handles JSON serialization/deserialization automatically.",
-          starterCode:
-            "function useLocalStorage<T>(key: string, initialValue: T): [T, (value: T | ((val: T) => T)) => void] {\n  // Your code here\n}",
-          solution:
-            "function useLocalStorage<T>(key: string, initialValue: T): [T, (value: T | ((val: T) => T)) => void] {\n  const [storedValue, setStoredValue] = useState<T>(() => {\n    try {\n      const item = window.localStorage.getItem(key);\n      return item ? JSON.parse(item) : initialValue;\n    } catch (error) {\n      return initialValue;\n    }\n  });\n\n  const setValue = (value: T | ((val: T) => T)) => {\n    try {\n      const valueToStore = value instanceof Function ? value(storedValue) : value;\n      setStoredValue(valueToStore);\n      window.localStorage.setItem(key, JSON.stringify(valueToStore));\n    } catch (error) {\n      console.log(error);\n    }\n  };\n\n  return [storedValue, setValue];\n}",
-        },
-      ],
-    },
+  useEffect(() => {
+    const fetchTopic = async () => {
+      try {
+        const response = await fetch(
+          `${backendURL}/categories/${categoryPathId}/topics/${topicPathId}`
+        );
+        if (!response.ok) {
+          throw new Error("Topic not found");
+        }
+        const data = await response.json();
+        setTopic(data.topics[0]);
+        setIsLoading(false);
+      } catch (error) {
+        console.error("Error fetching topic:", error);
+        setError("Failed to load topic due to a network error.");
+        setIsLoading(false);
+      }
+    };
+
+    if (categoryPathId && topicPathId) {
+      fetchTopic();
+    }
+  }, [categoryPathId, topicPathId]);
+
+  if (error) {
+  return (
+    <Card className="max-w-lg mx-auto mt-8 p-6">
+      <CardContent className="text-center">
+        <h2 className="text-2xl font-semibold mb-4">Error</h2>
+        <p className="text-muted-foreground mb-6">{error}</p>
+        <Button onClick={() => window.location.reload()}>
+          Try Again
+        </Button>
+      </CardContent>
+    </Card>
+  );
+}
+
+  if (isLoading) {
+    return (
+      <div className="text-center mt-8">
+        Loading...
+      </div>
+    );
+  }
+
+  if (!topic) {
+    return (
+      <Card className="max-w-lg mx-auto mt-8 p-6">
+        <CardContent className="text-center">
+          <h2 className="text-2xl font-semibold mb-4">Topic Not Found</h2>
+          <p className="text-muted-foreground mb-6">
+            The requested topic could not be found.
+          </p>
+          <Button
+            onClick={() =>
+              navigate("/interview", { state: { selectedCategory } })
+            }
+          >
+            <ChevronLeft className="w-4 h-4 mr-2" />
+            Return to Topics
+          </Button>
+        </CardContent>
+      </Card>
+    );
+  }
+
+  const filteredQuestions = topic.questions.filter((question) => {
+    const matchesSearch = question.question
+      .toLowerCase()
+      .includes(searchQuery.toLowerCase());
+    const matchesDifficulty =
+      selectedDifficulty === "all" ||
+      question.difficulty.toLowerCase() === selectedDifficulty.toLowerCase();
+    return matchesSearch && matchesDifficulty;
+  });
+
+  const getDifficultyColor = (difficulty: Difficulty): string => {
+    const colors: Record<Difficulty, string> = {
+      Easy: "bg-green-100 text-green-800",
+      Medium: "bg-yellow-100 text-yellow-800",
+      Hard: "bg-red-100 text-red-800",
+      easy: "bg-green-100 text-green-800",
+      medium: "bg-yellow-100 text-yellow-800",
+      hard: "bg-red-100 text-red-800",
+    };
+    return colors[difficulty] || "bg-gray-100 text-gray-800";
   };
 
-  const handleDownloadPDF = (topic: TopicKey): void => {
-    alert(`Downloading ${topics[topic].title} materials...`);
-  };
-
-  const getFilteredQuestions = (): Question[] => {
-    if (!selectedTopic || !topics[selectedTopic]?.questions) return [];
-
-    return topics[selectedTopic].questions.filter((question) => {
-      const searchString = searchQuery.toLowerCase();
-      return (
-        question.q.toLowerCase().includes(searchString) ||
-        question.a.toLowerCase().includes(searchString) ||
-        question.tags.some((tag) => tag.toLowerCase().includes(searchString))
+  const toggleAllQuestions = () => {
+    if (openQuestions.length === filteredQuestions.length) {
+      setOpenQuestions([]);
+    } else {
+      setOpenQuestions(
+        filteredQuestions.map((_, index) => `question-${index}`)
       );
-    });
-  };
-
-  const getFilteredChallenges = (): Challenge[] => {
-    if (!selectedTopic || !topics[selectedTopic]?.challenges) return [];
-
-    return topics[selectedTopic].challenges.filter((challenge) => {
-      const searchString = searchQuery.toLowerCase();
-      return (
-        challenge.title.toLowerCase().includes(searchString) ||
-        challenge.description.toLowerCase().includes(searchString) ||
-        challenge.difficulty.toLowerCase().includes(searchString)
-      );
-    });
+    }
   };
 
   return (
-    <div className="max-w-6xl mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-6">Technical Practice Hub</h1>
+    <div className="max-w-5xl mx-auto p-6">
+      <Card className="mb-8">
+        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
+          <div className="flex items-center gap-4">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() =>
+                navigate("/interview", { state: { selectedCategory } })
+              }
+            >
+              <ChevronLeft className="h-4 w-4" />
+            </Button>
+            <h1 className="text-3xl font-bold">{topic.title}</h1>
+          </div>
+        </CardHeader>
 
-      <Tabs
-        defaultValue="interview"
-        className="mb-6"
-        onValueChange={(value: string) => setSelectedTab(value as TabType)}
-      >
-        <TabsList className="grid w-full grid-cols-2 mb-6">
-          <TabsTrigger value="interview">
-            <MessageSquare className="w-4 h-4 mr-2" />
-            Interview Questions
-          </TabsTrigger>
-          <TabsTrigger value="challenges">
-            <Code className="w-4 h-4 mr-2" />
-            Coding Challenges
-          </TabsTrigger>
-        </TabsList>
-
-        <div className="grid md:grid-cols-[300px,1fr] gap-6">
-          <div className="space-y-4">
-            <div className="sticky top-4">
-              {(Object.entries(topics) as [TopicKey, Topic][]).map(
-                ([key, topic]) => (
-                  <Card key={key} className="mb-4 overflow-hidden">
-                    <div className="flex flex-col">
-                      <Button
-                        variant={selectedTopic === key ? "default" : "ghost"}
-                        className="w-full justify-start rounded-none h-auto py-4"
-                        onClick={() => setSelectedTopic(key)}
-                      >
-                        <ChevronRight className="w-4 h-4 mr-2" />
-                        <div className="flex flex-col items-start">
-                          <span className="font-semibold">{topic.title}</span>
-                          <span className="text-xs text-muted-foreground">
-                            {selectedTab === "interview"
-                              ? `${topic.questionsCount} questions`
-                              : `${topic.challenges.length} challenges`}
-                          </span>
-                        </div>
-                      </Button>
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        className="w-full justify-start rounded-none border-t"
-                        onClick={() => handleDownloadPDF(key)}
-                      >
-                        <Download className="w-4 h-4 mr-2" />
-                        Download PDF
-                      </Button>
-                    </div>
-                  </Card>
-                )
-              )}
+        <CardContent className="space-y-4">
+          <div className="flex flex-col sm:flex-row gap-4">
+            <div className="relative flex-1">
+              <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
+              <Input
+                type="text"
+                placeholder="Search questions..."
+                value={searchQuery}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  setSearchQuery(e.target.value)
+                }
+                className="pl-8"
+              />
             </div>
+            <Select
+              value={selectedDifficulty}
+              onValueChange={(value: "all" | Difficulty) =>
+                setSelectedDifficulty(value)
+              }
+            >
+              <SelectTrigger className="w-[180px]">
+                <SelectValue placeholder="Difficulty" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Difficulties</SelectItem>
+                <SelectItem value="Easy">Easy</SelectItem>
+                <SelectItem value="Medium">Medium</SelectItem>
+                <SelectItem value="Hard">Hard</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
-
-          <div className="space-y-4">
-            <TabsContent value="interview">
-              {selectedTopic ? (
-                <div className="space-y-4">
-                  <div className="flex items-center space-x-2">
-                    <Search className="w-4 h-4 text-muted-foreground" />
-                    <Input
-                      placeholder="Search questions..."
-                      value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
-                      className="max-w-lg"
-                    />
-                    <Button
-                      variant={"outline"}
-                      size="sm"
-                      className="justify-start rounded border-t"
-                      onClick={() => handleDownloadPDF(selectedTopic)}
-                    >
-                      <Download className="w-4 h-4 mr-2" />
-                      Download PDF
-                    </Button>
-                  </div>
-
-                  <Card className="p-6">
-                    <Accordion type="single" collapsible className="w-full">
-                      {getFilteredQuestions().map((question, index) => (
-                        <AccordionItem key={index} value={`item-${index}`}>
-                          <AccordionTrigger className="text-left">
-                            <div className="flex flex-col gap-2">
-                              {question.q}
-                              <div className="flex gap-2">
-                                {question.tags.map((tag) => (
-                                  <Badge
-                                    key={tag}
-                                    variant="outline"
-                                    className="text-xs"
-                                  >
-                                    {tag}
-                                  </Badge>
-                                ))}
-                              </div>
-                            </div>
-                          </AccordionTrigger>
-                          <AccordionContent className="text-muted-foreground">
-                            {question.a}
-                          </AccordionContent>
-                        </AccordionItem>
-                      ))}
-                    </Accordion>
-                  </Card>
-                </div>
-              ) : (
-                <Card className="p-8 text-center">
-                  <h3 className="text-lg font-semibold mb-2">Select a Topic</h3>
-                  <p className="text-muted-foreground">
-                    Choose a technology to view interview questions.
-                  </p>
-                </Card>
-              )}
-            </TabsContent>
-
-            <TabsContent value="challenges">
-              {selectedTopic ? (
-                <div className="space-y-4">
-                  <div className="flex items-center space-x-2">
-                    <Search className="w-4 h-4 text-muted-foreground" />
-                    <Input
-                      placeholder="Search challenges..."
-                      value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
-                      className="max-w-sm"
-                    />
-                  </div>
-                  <Card className="p-6">
-                    <Accordion type="single" collapsible className="w-full">
-                      {getFilteredChallenges().map((challenge, index) => (
-                        <AccordionItem key={index} value={`item-${index}`}>
-                          <AccordionTrigger className="text-left">
-                            <div className="flex flex-col gap-2">
-                              {challenge.title}
-                              <Badge
-                                variant="outline"
-                                className="text-xs w-fit"
-                              >
-                                {challenge.difficulty}
-                              </Badge>
-                            </div>
-                          </AccordionTrigger>
-                          <AccordionContent>
-                            <p className="text-muted-foreground">
-                              {challenge.description}
-                            </p>
-                            <pre className="text-sm bg-muted p-4 rounded-md">
-                              <code>{challenge.starterCode}</code>
-                            </pre>
-                            <Accordion
-                              type="single"
-                              collapsible
-                              className="w-full"
-                            >
-                              <AccordionItem value="solution">
-                                <AccordionTrigger>
-                                  View Solution
-                                </AccordionTrigger>
-                                <AccordionContent>
-                                  <pre className="text-sm bg-muted p-4 rounded-md">
-                                    <code>{challenge.solution}</code>
-                                  </pre>
-                                </AccordionContent>
-                              </AccordionItem>
-                            </Accordion>
-                          </AccordionContent>
-                        </AccordionItem>
-                      ))}
-                    </Accordion>
-                  </Card>
-                </div>
-              ) : (
-                <Card className="p-8 text-center">
-                  <h3 className="text-lg font-semibold mb-2">Select a Topic</h3>
-                  <p className="text-muted-foreground">
-                    Choose a technology to view coding challenges.
-                  </p>
-                </Card>
-              )}
-            </TabsContent>
-          </div>
+        </CardContent>
+      </Card>
+      <div className="flex justify-end mb-4">
+        <Button onClick={toggleAllQuestions} variant="outline">
+          {openQuestions.length === filteredQuestions.length
+            ? "Collapse All"
+            : "Expand All"}
+        </Button>
+      </div>
+      {filteredQuestions.length === 0 ? (
+        <div className="text-center text-gray-500 mt-6">
+          No questions found matching your criteria.
         </div>
-      </Tabs>
+      ) : (
+        <Accordion
+          type="multiple"
+          value={openQuestions}
+          onValueChange={setOpenQuestions}
+          className="space-y-4"
+        >
+          {filteredQuestions.map((question, index) => (
+            <AccordionItem key={question.id} value={`question-${index}`}>
+              <AccordionTrigger className="flex justify-between items-center">
+                <div className="flex justify-between w-full mr-5 text-lg font-semibold">
+                  {index + 1}. {question.question}
+                  <Badge className={getDifficultyColor(question.difficulty)}>
+                    {question.difficulty}
+                  </Badge>
+                </div>
+              </AccordionTrigger>
+              <AccordionContent className="p-4">
+                <p className="mb-4">{question.answer}</p>
+              </AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
+      )}
     </div>
   );
-}
+};
 
 export default InterviewPrepPage;

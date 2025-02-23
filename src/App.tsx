@@ -1,5 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { BrowserRouter as Router, Routes, Route, Link, useNavigate, useLocation } from "react-router-dom";
 import { Button } from "./components/ui/button";
 import {
   Sun,
@@ -8,16 +7,24 @@ import {
   Code,
   Users,
   Home,
-  LogIn,
+  Share2,
+  Menu,
+  X,
 } from "lucide-react";
 import { useTheme } from "./components/theme-provider";
 import { Card } from "./components/ui/card";
 import { DSAPage } from "./pages/DSAPage";
 import { WebDevPage } from "./pages/WebDevPage";
-import { InterviewPrepPage } from "./pages/InterviewPrepPage";
+import InterviewPrepPage from "./pages/InterviewPrepPage";
 import { AuthPage } from "./pages/AuthPage";
 import { FeedbackPage } from "./pages/FeedbackPage";
 import { ContactPage } from "./pages/ContactPage";
+import LearningPathPage from "./pages/LearningPathPage";
+import TopicsPage from "./pages/TopicsPage";
+import CodingQuestionsPage from "./pages/CodingQuestionsPage";
+import Quiz from "./pages/QuizPage";
+import { ResumePortfolioTipsPage } from "./pages/ResumePortfolioTipsPage";
+import { useState } from "react";
 
 interface HomePageProps {
   onNavigate: (path: string) => void;
@@ -81,40 +88,83 @@ interface LayoutProps {
   children: React.ReactNode;
 }
 
-function Layout({ children }:LayoutProps) {
+function Layout({ children }: LayoutProps) {
   const { theme, setTheme } = useTheme();
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation(); // Added to track current route
+  const [showSharePopup, setShowSharePopup] = useState(false);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
+  const handleShare = () => {
+    const currentUrl = window.location.href;
+    navigator.clipboard.writeText(currentUrl);
+    setShowSharePopup(true);
+    setTimeout(() => setShowSharePopup(false), 2000);
+  };
+
+  const toggleDrawer = () => {
+    setIsDrawerOpen(!isDrawerOpen);
+  };
+
+  // Function to determine if a route is active
+  const isActive = (path: string) => location.pathname === path;
 
   return (
     <div className="flex flex-col min-h-screen bg-background">
       <header className="border-b">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <div className="flex items-center gap-6">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => navigate("/")}
-            >
+            <Button variant="ghost" size="icon" onClick={() => navigate("/")}>
               <Home className="h-5 w-5" />
             </Button>
-            <nav className="hidden md:flex gap-4">
+
+            {/* Desktop Navigation */}
+            <nav className="hidden lg:flex gap-4">
               <Link to="/webdev">
-                <Button variant="ghost">Web Dev</Button>
+                <Button
+                  variant={isActive("/webdev") ? "default" : "ghost"}
+                  className={isActive("/webdev") ? "bg-primary text-primary-foreground" : ""}
+                >
+                  Web Dev
+                </Button>
               </Link>
               <Link to="/interview">
-                <Button variant="ghost">Interview Prep</Button>
+                <Button
+                  variant={isActive("/interview") ? "default" : "ghost"}
+                  className={isActive("/interview") ? "bg-primary text-primary-foreground" : ""}
+                >
+                  Interview Prep
+                </Button>
               </Link>
               <Link to="/dsa">
-                <Button variant="ghost">DSA</Button>
+                <Button
+                  variant={isActive("/dsa") ? "default" : "ghost"}
+                  className={isActive("/dsa") ? "bg-primary text-primary-foreground" : ""}
+                >
+                  DSA
+                </Button>
+              </Link>
+              <Link to="/resume-portfolio-tips">
+                <Button
+                  variant={isActive("/resume-portfolio-tips") ? "default" : "ghost"}
+                  className={isActive("/resume-portfolio-tips") ? "bg-primary text-primary-foreground" : ""}
+                >
+                  Resume & Portfolio
+                </Button>
               </Link>
               <Link to="/feedback">
-                <Button variant="ghost">
+                <Button
+                  variant={isActive("/feedback") ? "default" : "ghost"}
+                  className={isActive("/feedback") ? "bg-primary text-primary-foreground" : ""}
+                >
                   Feedback
                 </Button>
               </Link>
               <Link to="/contact">
-                <Button variant="ghost">
+                <Button
+                  variant={isActive("/contact") ? "default" : "ghost"}
+                  className={isActive("/contact") ? "bg-primary text-primary-foreground" : ""}
+                >
                   Contact
                 </Button>
               </Link>
@@ -122,36 +172,124 @@ function Layout({ children }:LayoutProps) {
           </div>
 
           <div className="flex items-center gap-4">
+            <Button variant="ghost" size="icon" onClick={handleShare}>
+              <Share2 className="h-5 w-5" />
+            </Button>
             <Button
               variant="ghost"
               size="icon"
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
             >
-              {theme === "dark" ? (
-                <Sun className="h-5 w-5" />
-              ) : (
-                <Moon className="h-5 w-5" />
-              )}
+              {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
             </Button>
-            {isAuthenticated ? (
-              <Button onClick={() => setIsAuthenticated(false)}>
-                Sign Out
-              </Button>
-            ) : (
-              <Button onClick={() => navigate("/auth")}>
-                <LogIn className="h-4 w-4 mr-2" />
-                Sign In
-              </Button>
-            )}
+
+            {/* Hamburger Menu Button */}
+            <Button
+              variant="ghost"
+              size="icon"
+              className="lg:hidden"
+              onClick={toggleDrawer}
+            >
+              <Menu className="h-5 w-5" />
+            </Button>
           </div>
         </div>
       </header>
 
+      {/* Side Drawer */}
+      <div
+        className={`fixed inset-y-0 right-0 w-64 bg-background shadow-lg transform transition-transform duration-300 ease-in-out z-50 lg:hidden ${
+          isDrawerOpen ? "translate-x-0" : "translate-x-full"
+        }`}
+      >
+        <div className="flex justify-end p-4">
+          <Button variant="ghost" size="icon" onClick={toggleDrawer}>
+            <X className="h-5 w-5" />
+          </Button>
+        </div>
+        <nav className="flex flex-col gap-4 p-4">
+          <Link to="/webdev" onClick={toggleDrawer}>
+            <Button
+              variant={isActive("/webdev") ? "default" : "ghost"}
+              className={`w-full justify-start ${
+                isActive("/webdev") ? "bg-primary text-primary-foreground" : ""
+              }`}
+            >
+              Web Dev
+            </Button>
+          </Link>
+          <Link to="/interview" onClick={toggleDrawer}>
+            <Button
+              variant={isActive("/interview") ? "default" : "ghost"}
+              className={`w-full justify-start ${
+                isActive("/interview") ? "bg-primary text-primary-foreground" : ""
+              }`}
+            >
+              Interview Prep
+            </Button>
+          </Link>
+          <Link to="/dsa" onClick={toggleDrawer}>
+            <Button
+              variant={isActive("/dsa") ? "default" : "ghost"}
+              className={`w-full justify-start ${
+                isActive("/dsa") ? "bg-primary text-primary-foreground" : ""
+              }`}
+            >
+              DSA
+            </Button>
+          </Link>
+          <Link to="/resume-portfolio-tips" onClick={toggleDrawer}>
+            <Button
+              variant={isActive("/resume-portfolio-tips") ? "default" : "ghost"}
+              className={`w-full justify-start ${
+                isActive("/resume-portfolio-tips") ? "bg-primary text-primary-foreground" : ""
+              }`}
+            >
+              Resume & Portfolio
+            </Button>
+          </Link>
+          <Link to="/feedback" onClick={toggleDrawer}>
+            <Button
+              variant={isActive("/feedback") ? "default" : "ghost"}
+              className={`w-full justify-start ${
+                isActive("/feedback") ? "bg-primary text-primary-foreground" : ""
+              }`}
+            >
+              Feedback
+            </Button>
+          </Link>
+          <Link to="/contact" onClick={toggleDrawer}>
+            <Button
+              variant={isActive("/contact") ? "default" : "ghost"}
+              className={`w-full justify-start ${
+                isActive("/contact") ? "bg-primary text-primary-foreground" : ""
+              }`}
+            >
+              Contact
+            </Button>
+          </Link>
+        </nav>
+      </div>
+
+      {/* Overlay */}
+      {isDrawerOpen && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
+          onClick={toggleDrawer}
+        />
+      )}
+
       <main className="container mx-auto px-4 py-8">{children}</main>
+
+      {showSharePopup && (
+        <div className="fixed bottom-4 right-4 bg-primary text-primary-foreground p-3 rounded-md shadow-lg transition-opacity">
+          Link copied to clipboard!
+        </div>
+      )}
 
       <footer className="border-t mt-auto">
         <div className="container mx-auto px-4 py-6 text-center text-muted-foreground">
-          © {new Date().getFullYear()} Interview Prep Hub. All rights reserved.
+          © {new Date().getFullYear()} PrepLoom. All rights reserved.
         </div>
       </footer>
     </div>
@@ -167,18 +305,23 @@ function App() {
         <Route path="/" element={<HomePage onNavigate={navigate} />} />
         <Route path="/dsa" element={<DSAPage />} />
         <Route path="/webdev" element={<WebDevPage />} />
-        <Route path="/interview" element={<InterviewPrepPage />} />
-        <Route path="/feedback" element={<FeedbackPage/>}/>
-        <Route path="/contact" element={<ContactPage/>}/>
-        <Route 
-          path="/auth" 
+        <Route path="/webdev/learning-path/:pathId" element={<LearningPathPage />} />
+        <Route path="/interview" element={<TopicsPage />} />
+        <Route path="/questions/:categoryPathId/:topicPathId" element={<InterviewPrepPage />} />
+        <Route path="/coding/:categoryPathId/:topicPathId" element={<CodingQuestionsPage />} />
+        <Route path="/quiz/:categoryPathId/:topicPathId" element={<Quiz />} />
+        <Route path="/resume-portfolio-tips" element={<ResumePortfolioTipsPage />} />
+        <Route path="/feedback" element={<FeedbackPage />} />
+        <Route path="/contact" element={<ContactPage />} />
+        <Route
+          path="/auth"
           element={
             <AuthPage
               onLogin={() => {
                 navigate("/");
               }}
             />
-          } 
+          }
         />
       </Routes>
     </Layout>

@@ -9,7 +9,7 @@ export function ContactPage() {
       <div className="bg-card rounded-lg p-6 mb-8">
         <h2 className="text-2xl font-semibold mb-4">About Me</h2>
         <p className="text-muted-foreground mb-6">
-          Hi! I'm a passionate developer and a quick learner, currently
+          Hi! I'm Vivekananda, a passionate developer and a quick learner, currently
           interning as an SDE at Zuvees and previously a frontend intern at
           Moveinsync. With expertise in frontend (React, JS) and backend
           (Node.js, Express, MySQL), I’ve built projects like a Student
