@@ -208,11 +208,13 @@ const InterviewPrepPage = () => {
           {filteredQuestions.map((question, index) => (
             <AccordionItem key={question.id} value={`question-${index}`}>
               <AccordionTrigger className="flex justify-between items-center">
-                <div className="flex justify-between w-full mr-5 text-lg font-semibold">
+                <div className="flex justify-between w-full mr-5 text-lg font-semibold text-left">
                   {index + 1}. {question.question}
-                  <Badge className={getDifficultyColor(question.difficulty)}>
-                    {question.difficulty}
-                  </Badge>
+                  <div className="max-h-3">
+                    <Badge className={getDifficultyColor(question.difficulty)}>
+                      {question.difficulty}
+                    </Badge>
+                  </div>
                 </div>
               </AccordionTrigger>
               <AccordionContent className="p-4">
