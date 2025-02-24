@@ -353,7 +353,7 @@ export function WebDevPage() {
 
         <TabsContent value="projects" className="w-full">
           {projectsLoading ? (
-            <div className="fixed inset-0 flex items-center justify-center bg-gray-100 bg-opacity-75 z-50">
+            <div className="flex mt-20 h-[70vh] w-[80vw] justify-center z-50">
               <ClipLoader color="#3498db" size={50} />
             </div>
           ) : projectsError ? (
@@ -449,7 +449,7 @@ export function WebDevPage() {
 
         <TabsContent value="libraries" className="w-full">
           {librariesLoading ? (
-            <div className="fixed inset-0 flex items-center justify-center bg-gray-100 bg-opacity-75 z-50">
+            <div className="flex mt-20 h-[70vh] w-[80vw] justify-center z-50">
               <ClipLoader color="#3498db" size={50} />
             </div>
           ) : librariesError ? (
@@ -535,7 +535,7 @@ export function WebDevPage() {
 
         <TabsContent value="templates" className="w-full">
           {templatesLoading ? (
-            <div className="fixed inset-0 flex items-center justify-center bg-gray-100 bg-opacity-75 z-50">
+            <div className="flex mt-20 h-[70vh] w-[80vw] justify-center z-50">
               <ClipLoader color="#3498db" size={50} />
             </div>
           ) : templatesError ? (
