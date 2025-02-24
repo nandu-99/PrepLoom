@@ -1,4 +1,4 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ChevronRight, BookOpen, Link as LinkIcon, Code } from "lucide-react";
@@ -55,7 +55,10 @@ interface Topic {
 export function LearningPathPage() {
   const { pathId } = useParams<{ pathId: string }>();
   const navigate = useNavigate();
+  const location = useLocation();
   const [phaseData, setPhaseData] = useState<PhaseData | null>(null);
+  const selectedCategory = location.state?.selectedTab;
+
   
   useEffect(() => {
     const fetchLessonsData = async () => {
@@ -100,7 +103,9 @@ export function LearningPathPage() {
           </div>
           <Button
             variant="outline"
-            onClick={() => navigate("/webdev")}
+            onClick={() => navigate("/webdev", {
+              state: {selectedCategory}
+            })}
             className="gap-2"
           >
             Back to WebDev

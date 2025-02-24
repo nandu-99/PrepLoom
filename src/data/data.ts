@@ -3,7 +3,7 @@ import HTML5UP from "../assets/html5up.png";
 import COREUIREACT from "../assets/coreuireact.png";
 import NEXTECOMMERCE from "../assets/next-ecommerce.png";
 
-export const backendURL = "https://prep-loom-server.vercel.app"
+export const backendURL = "http://localhost:3000"
 
 export const roadmap:Roadmap = {
   frontend: [

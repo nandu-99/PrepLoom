@@ -26,9 +26,9 @@ import {
 } from "../components/ui/select";
 import { useLocation, useNavigate } from "react-router-dom";
 import { backendURL } from "@/data/data";
-import { ClipLoader } from "react-spinners"; // Import ClipLoader from react-spinners
+import { ClipLoader } from "react-spinners";
 
-// Define types (unchanged)
+// Define types
 interface Phase {
   phase: string;
   description: string;
@@ -82,7 +82,7 @@ export function WebDevPage() {
   const [difficultyFilter, setDifficultyFilter] = useState<string>("all");
   const [templateFilter, setTemplateFilter] = useState<string>("all");
   const [libraryTypeFilter, setLibraryTypeFilter] = useState<string>("all");
-  const [selectedTab, setSelectedTab] = useState<string>(location.state?.selectedTab || "frontend");
+  const [selectedTab, setSelectedTab] = useState<string>(""); // Initially empty, set by effect
   const [roadmapData, setRoadmapData] = useState<Roadmap>({});
   const [componentLibraries, setComponentLibraries] = useState<ComponentLibrary[]>([]);
   const [projects, setProjects] = useState<Project[]>([]);
@@ -95,23 +95,53 @@ export function WebDevPage() {
   const [projectsError, setProjectsError] = useState<string | null>(null);
   const [templatesLoading, setTemplatesLoading] = useState<boolean>(true);
   const [templatesError, setTemplatesError] = useState<string | null>(null);
+  const [availableTabs, setAvailableTabs] = useState<string[]>([]);
+  const [tabsLoading, setTabsLoading] = useState<boolean>(true);
 
-  // Fetch roadmap data (unchanged)
+  // Fetch available tabs and set selectedTab based on location.state
   useEffect(() => {
+    const fetchTabs = async () => {
+      try {
+        setTabsLoading(true);
+        const response = await fetch(`${backendURL}/roadmap/tabs`);
+        if (!response.ok) throw new Error("Failed to fetch tabs");
+        const tabsData: string[] = await response.json();
+        setAvailableTabs(tabsData);
+
+        // Use location.state.selectedTab if it exists and is valid, otherwise fallback
+        const stateTab = location.state?.selectedCategory;
+        const initialTab = stateTab && tabsData.includes(stateTab) ? stateTab : tabsData[0] || "frontend";
+        setSelectedTab(initialTab);
+      } catch (err) {
+        console.error("Error fetching tabs:", err);
+        setAvailableTabs(["frontend"]);
+        setSelectedTab("frontend");
+        setError("Failed to load roadmap tabs. Showing default option.");
+      } finally {
+        setTabsLoading(false);
+      }
+    };
+
+    fetchTabs();
+  }, [location.state]); // Re-run if location.state changes
+
+  // Fetch roadmap data
+  useEffect(() => {
+    if (!selectedTab || tabsLoading) return;
+
     const fetchRoadmapData = async () => {
       try {
         setLoading(true);
         const roadmapResponse = await fetch(`${backendURL}/roadmap/${selectedTab}`);
         if (!roadmapResponse.ok) throw new Error("Roadmap not found");
         const roadmapData = await roadmapResponse.json();
-        const phasesData: { phase: string; description: string; skills: { skill: { name: string } }[], pathId: string }[] = roadmapData.phases;
+        const phasesData: { phase: string; description: string; skills: { skill: { name: string } }[]; pathId: string }[] = roadmapData.phases;
         const formattedPhases: Phase[] = phasesData.map((phase) => ({
           phase: phase.phase,
           description: phase.description,
           skills: phase.skills.map((ps) => ps.skill.name),
           pathId: phase.pathId,
         }));
-        setLoading(false);
         setRoadmapData((prev) => ({
           ...prev,
           [selectedTab]: formattedPhases,
@@ -126,9 +156,9 @@ export function WebDevPage() {
     };
 
     fetchRoadmapData();
-  }, [selectedTab]);
+  }, [selectedTab, tabsLoading]);
 
-  // Fetch component libraries from backend (unchanged)
+  // Fetch component libraries
   useEffect(() => {
     const fetchComponentLibraries = async () => {
       try {
@@ -149,7 +179,7 @@ export function WebDevPage() {
     fetchComponentLibraries();
   }, []);
 
-  // Fetch projects from backend (unchanged)
+  // Fetch projects
   useEffect(() => {
     const fetchProjects = async () => {
       try {
@@ -170,7 +200,7 @@ export function WebDevPage() {
     fetchProjects();
   }, []);
 
-  // Fetch templates from backend (unchanged)
+  // Fetch templates
   useEffect(() => {
     const fetchTemplates = async () => {
       try {
@@ -231,7 +261,7 @@ export function WebDevPage() {
   });
 
   const renderRoadmap = (): JSX.Element => {
-    if (loading) {
+    if (tabsLoading || loading) {
       return (
         <div className="flex mt-20 h-[70vh] w-[80vw] justify-center z-50">
           <ClipLoader color="#3498db" size={50} />
@@ -281,8 +311,12 @@ export function WebDevPage() {
   };
 
   const renderSidebar = (): JSX.Element => {
-    if (loading || error || Object.keys(roadmapData).length === 0) {
-      return <></>;
+    if (tabsLoading || availableTabs.length === 0) {
+      return (
+        <div className="flex justify-center items-center h-[20vh]">
+          <ClipLoader color="#3498db" size={30} />
+        </div>
+      );
     }
 
     return (
@@ -294,7 +328,7 @@ export function WebDevPage() {
               <SelectValue placeholder="Select Roadmap" />
             </SelectTrigger>
             <SelectContent>
-              {Object.keys(roadmapData).map((tab) => (
+              {availableTabs.map((tab) => (
                 <SelectItem key={tab} value={tab} className="capitalize">
                   {tab}
                 </SelectItem>
@@ -305,7 +339,7 @@ export function WebDevPage() {
 
         {/* Desktop Sidebar */}
         <div className="hidden md:flex md:flex-col w-full h-fit mb-6">
-          {Object.keys(roadmapData).map((tab) => (
+          {availableTabs.map((tab) => (
             <Button
               key={tab}
               variant={selectedTab === tab ? "default" : "outline"}
