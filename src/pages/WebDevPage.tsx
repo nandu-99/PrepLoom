@@ -15,6 +15,7 @@ import {
   Library,
   Search,
   Layout,
+  Bookmark,
 } from "lucide-react";
 import { Input } from "../components/ui/input";
 import {
@@ -27,6 +28,7 @@ import {
 import { useLocation, useNavigate } from "react-router-dom";
 import { backendURL } from "@/data/data";
 import { ClipLoader } from "react-spinners";
+import { usefulWebsites } from "@/data/data";
 
 // Define types
 interface Phase {
@@ -72,6 +74,13 @@ interface Template {
   url: string;
   createdAt: string;
   updatedAt: string;
+}
+
+interface UsefulWebsite {
+  name: string;
+  description: string;
+  url: string;
+  image: string;
 }
 
 export function WebDevPage() {
@@ -376,6 +385,10 @@ export function WebDevPage() {
             <Layout className="w-4 h-4 mr-2" />
             Templates
           </TabsTrigger>
+          <TabsTrigger value="websites" className="flex-1 sm:flex-none justify-start">
+            <Bookmark className="w-4 h-4 mr-2" />
+            Useful Websites
+          </TabsTrigger>
         </TabsList>
 
         <TabsContent value="roadmap" className="w-full">
@@ -660,6 +673,32 @@ export function WebDevPage() {
               )}
             </>
           )}
+        </TabsContent>
+
+        <TabsContent value="websites" className="mt-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {usefulWebsites.map((website: UsefulWebsite) => (
+              <Card key={website.name} className="overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                <div className="aspect-video w-full overflow-hidden">
+                  <img
+                    src={website.image}
+                    alt={website.name}
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
+                <div className="p-6">
+                  <h3 className="text-xl font-semibold mb-2">{website.name}</h3>
+                  <p className="text-muted-foreground mb-4">{website.description}</p>
+                  <Button variant="outline" asChild className="w-full">
+                    <a href={website.url} target="_blank" rel="noopener noreferrer">
+                      Visit Website
+                      <ExternalLink className="w-4 h-4 ml-2" />
+                    </a>
+                  </Button>
+                </div>
+              </Card>
+            ))}
+          </div>
         </TabsContent>
       </Tabs>
     </div>

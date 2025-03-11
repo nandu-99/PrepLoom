@@ -670,3 +670,115 @@ export const mainRoadmap: MainRoadmapPhase[] = [
     ],
   },
 ];
+
+interface UsefulWebsite {
+  name: string;
+  description: string;
+  url: string;
+  image: string;
+}
+
+export const usefulWebsites: UsefulWebsite[] = [
+  {
+    name: "Ray.so",
+    description: "Instantly create stunning code screenshots with gradients — share your code easily!",
+    url: "https://ray.so/",
+    image: "https://cdn.shopify.com/s/files/1/0868/4250/7448/files/ray.png?v=1741703569",
+  },
+  {
+    name: "ShadCN Form",
+    description: "Build sleek and functional forms in React effortlessly with pre-made components.",
+    url: "https://www.shadcn-form.com/",
+    image: "https://cdn.shopify.com/s/files/1/0868/4250/7448/files/shadcn-form.png?v=1741703669",
+  },
+  {
+    name: "Lucide",
+    description: "Discover a massive library of clean, modern icons — perfect for any project.",
+    url: "https://lucide.dev/",
+    image: "https://cdn.shopify.com/s/files/1/0868/4250/7448/files/lucide.png?v=1741703586",
+  },
+  {
+    name: "Frontend Mentor",
+    description: "Want to sharpen your frontend skills? Take real-world coding challenges and level up!",
+    url: "https://www.frontendmentor.io/",
+    image: "https://cdn.shopify.com/s/files/1/0868/4250/7448/files/frontend_mentor.png?v=1741703543",
+  },
+  {
+    name: "React Bits",
+    description: "Great animation library for texts with smooth and flexible effects.",
+    url: "https://reactbits.dev/",
+    image: "https://cdn.shopify.com/s/files/1/0868/4250/7448/files/react_bits.png?v=1741703556",
+  },
+  {
+    name: "QuickRef",
+    description: "All the essential coding cheatsheets you need — in one place!",
+    url: "https://quickref.me/",
+    image: "https://cdn.shopify.com/s/files/1/0868/4250/7448/files/quickref.png?v=1741705707",
+  },
+  {
+    name: "GitHub Readme Generator",
+    description: "Create a standout GitHub profile with this easy-to-use generator.",
+    url: "https://rahuldkjain.github.io/gh-profile-readme-generator/",
+    image: "https://cdn.shopify.com/s/files/1/0868/4250/7448/files/readme_generator.png?v=1741705733",
+  },
+  {
+    name: "Coddy",
+    description: "Follow expert-designed learning paths and become a coding pro step-by-step.",
+    url: "https://coddy.tech/",
+    image: "https://cdn.shopify.com/s/files/1/0868/4250/7448/files/coddy.png?v=1741705720",
+  },
+  {
+    name: "HueMint",
+    description: "Let AI pick the perfect color palette for your next design — no more guesswork!",
+    url: "https://huemint.com/",
+    image: "https://cdn.shopify.com/s/files/1/0868/4250/7448/files/HueMint.png?v=1741703526",
+  },
+  {
+    name: "CSS Gradient Text",
+    description: "Instantly generate eye-catching gradient text with live preview and code export.",
+    url: "https://www.cssgradienttext.com/",
+    image: "https://cdn.shopify.com/s/files/1/0868/4250/7448/files/gradient_text.png?v=1741705694",
+  },
+  {
+    name: "Dark Design",
+    description: "Build the perfect dark mode with consistent, well-balanced color schemes.",
+    url: "https://www.dark.design/",
+    image: "https://cdn.shopify.com/s/files/1/0868/4250/7448/files/dark_Design.png?v=1741705807",
+  },
+  {
+    name: "Phase",
+    description: "Create animations with keyframes and export them seamlessly.",
+    url: "https://phase.com/",
+    image: "https://cdn.shopify.com/s/files/1/0868/4250/7448/files/phase.png?v=1741705797",
+  },
+  {
+    name: "Refero",
+    description: "See website designs, get inspired, and take creative inspiration.",
+    url: "https://refero.design/",
+    image: "https://cdn.shopify.com/s/files/1/0868/4250/7448/files/referro.png?v=1741705788",
+  },
+  {
+    name: "Lummi AI",
+    description: "Generate high-quality images for free with AI-powered enhancements.",
+    url: "https://lummi.ai/",
+    image: "https://cdn.shopify.com/s/files/1/0868/4250/7448/files/lummi.png?v=1741705830",
+  },
+  {
+    name: "Public APIs",
+    description: "Unlock free APIs for weather, jokes, news, and more — fuel your next project!",
+    url: "https://publicapis.io/",
+    image: "https://cdn.shopify.com/s/files/1/0868/4250/7448/files/publicapis.png?v=1741705860",
+  },
+  {
+    name: "Uiverse",
+    description: "Copy and paste ready-to-use buttons, cards, and animations — no coding required!",
+    url: "https://uiverse.io/",
+    image: "https://cdn.shopify.com/s/files/1/0868/4250/7448/files/uiverse.png?v=1741705818",
+  },
+  {
+    name: "Ideogram",
+    description: "Generate AI-powered images with text-to-image technology.",
+    url: "https://ideogram.ai/",
+    image: "https://cdn.shopify.com/s/files/1/0868/4250/7448/files/ideogram.png?v=1741706866",
+  }
+];
