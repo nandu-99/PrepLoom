@@ -20,6 +20,7 @@ import {
 } from "@/components/ui/accordion";
 import { Topic } from "@/types/types";
 import { backendURL } from "@/data/data";
+import SkeletonLoader from "@/components/SkeletonLoader";
 
 type Difficulty = "Easy" | "Medium" | "Hard" | 'easy' | 'medium' | 'hard' ;
 
@@ -77,9 +78,7 @@ const InterviewPrepPage = () => {
 
   if (isLoading) {
     return (
-      <div className="text-center mt-8">
-        Loading...
-      </div>
+      <SkeletonLoader variant="interview"/>
     );
   }
 

@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Category } from "@/types/types";
 import { backendURL } from "@/data/data";
+import SkeletonLoader from "@/components/SkeletonLoader";
 
 function TopicsPage() {
   const location = useLocation();
@@ -43,9 +44,7 @@ function TopicsPage() {
   ) || [];
 
   if (isLoading) {
-    return <div className="text-center mt-8">
-    Loading...
-    </div>
+    return <SkeletonLoader variant="topics"/>
   }
 
   if (categories.length === 0) {

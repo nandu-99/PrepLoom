@@ -8,6 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Topic } from '@/types/types';
 import { backendURL } from '@/data/data';
+import SkeletonLoader from '@/components/SkeletonLoader';
 
 type Difficulty = "Easy" | "Medium" | "Hard" | 'easy' | 'medium' | 'hard' ;
 
@@ -36,7 +37,7 @@ const CodingQuestionsPage = () => {
     fetchQuestions();
   }, [categoryPathId, topicPathId]);
   
-  if (loading) return <p className="text-center mt-8">Loading questions...</p>;
+  if (loading) return <SkeletonLoader variant='interview'/>;
   if (error) return <p className="text-center mt-8 text-red-500">{error}</p>;
   if (!topic) {
     return (

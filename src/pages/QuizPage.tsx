@@ -7,6 +7,7 @@ import { Progress } from '@/components/ui/progress';
 import { CardHeader } from '@/components/ui/card';
 import { Topic } from '@/types/types';
 import { backendURL } from '@/data/data';
+import SkeletonLoader from '@/components/SkeletonLoader';
 
 const Quiz = () => {
   const { categoryPathId, topicPathId } = useParams<{ categoryPathId: string; topicPathId: string }>();
@@ -56,7 +57,7 @@ const Quiz = () => {
     }
   }, [timeLeft, quizCompleted, quizStarted]);
 
-  if (loading) return <p className="text-center mt-8">Loading quiz...</p>;
+  if (loading) return <SkeletonLoader variant='quiz'/>
   if (error) return <p className="text-center mt-8">{error}</p>;
   if (!topic || !topic.quizQuestions|| topic.quizQuestions.length === 0){
     return (

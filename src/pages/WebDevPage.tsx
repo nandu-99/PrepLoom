@@ -29,6 +29,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { backendURL } from "@/data/data";
 import { ClipLoader } from "react-spinners";
 import { usefulWebsites } from "@/data/data";
+import SkeletonLoader from "@/components/SkeletonLoader";
 
 // Define types
 interface Phase {
@@ -269,13 +270,9 @@ export function WebDevPage() {
     return matchesSearch && matchesTags && matchesCategory;
   });
 
-  const renderRoadmap = (): JSX.Element => {
+  const renderRoadmap = () => {
     if (tabsLoading || loading) {
-      return (
-        <div className="flex mt-20 h-[70vh] w-[80vw] justify-center z-50">
-          <ClipLoader color="#3498db" size={50} />
-        </div>
-      );
+        return <SkeletonLoader variant="roadmap" />;
     }
 
     if (error) {
@@ -320,11 +317,9 @@ export function WebDevPage() {
   };
 
   const renderSidebar = (): JSX.Element => {
-    if (tabsLoading || availableTabs.length === 0) {
+    if (tabsLoading || availableTabs.length === 0 || loading) {
       return (
-        <div className="flex justify-center items-center h-[20vh]">
-          <ClipLoader color="#3498db" size={30} />
-        </div>
+        <SkeletonLoader variant="sidebar"/>
       );
     }
 

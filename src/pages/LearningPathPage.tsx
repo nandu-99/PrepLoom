@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { ChevronRight, BookOpen, Link as LinkIcon, Code } from "lucide-react";
 import { useEffect, useState } from "react";
 import { backendURL } from "@/data/data";
-import { ClipLoader } from "react-spinners";
+import SkeletonLoader from "@/components/SkeletonLoader";
 
 interface Resource {
   id: string;
@@ -76,11 +76,7 @@ export function LearningPathPage() {
 
   if (!phaseData) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <p className="text-center text-muted-foreground">
-        <ClipLoader color="#3498db" size={50} />
-        </p>
-      </div>
+      <SkeletonLoader variant="learning"/>
     );
   }
 
