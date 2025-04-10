@@ -101,6 +101,13 @@ function ProjectsPage() {
   };
 
   const handleLike = async (projectId: string) => {
+    setProjects((prev) =>
+        prev.map((p) =>
+          p.id === projectId
+            ? { ...p, likes: p.liked ? p.likes - 1 : p.likes + 1, liked: !p.liked }
+            : p
+        )
+      );
     try {
       const token = localStorage.getItem("token");
       if (!token) throw new Error("No authentication token found");
@@ -111,13 +118,6 @@ function ProjectsPage() {
         { method, headers: { Authorization: `Bearer ${token}` } }
       );
       if (!response.ok) throw new Error("Failed to update like");
-      setProjects((prev) =>
-        prev.map((p) =>
-          p.id === projectId
-            ? { ...p, likes: p.liked ? p.likes - 1 : p.likes + 1, liked: !p.liked }
-            : p
-        )
-      );
     } catch (error) {
       toast.error(error instanceof Error ? error.message : "An error occurred");
     }

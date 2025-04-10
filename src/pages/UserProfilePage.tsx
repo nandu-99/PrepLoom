@@ -61,17 +61,7 @@ function UserProfilePage() {
   };
 
   const handleLike = async (projectId: string) => {
-    try {
-      const token = localStorage.getItem("token");
-      if (!token) throw new Error("No authentication token found");
-      const project = userData?.projects.find((p) => p.id === projectId);
-      const method = project?.liked ? "DELETE" : "POST";
-      const response = await fetch(
-        `https://preploom-users-server.vercel.app/projects/${projectId}/like`,
-        { method, headers: { Authorization: `Bearer ${token}` } }
-      );
-      if (!response.ok) throw new Error("Failed to update like");
-      setUserData((prev) =>
+    setUserData((prev) =>
         prev
           ? {
               ...prev,
@@ -87,6 +77,16 @@ function UserProfilePage() {
             }
           : null
       );
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) throw new Error("No authentication token found");
+      const project = userData?.projects.find((p) => p.id === projectId);
+      const method = project?.liked ? "DELETE" : "POST";
+      const response = await fetch(
+        `https://preploom-users-server.vercel.app/projects/${projectId}/like`,
+        { method, headers: { Authorization: `Bearer ${token}` } }
+      );
+      if (!response.ok) throw new Error("Failed to update like");
     } catch (error) {
       toast.error(error instanceof Error ? error.message : "An error occurred");
     }
