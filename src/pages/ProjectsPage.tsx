@@ -55,6 +55,16 @@ function ProjectsPage() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      toast.error("Please log in to access this page.");
+      navigate("/auth"); 
+    } else {
+      fetchProjects(true); 
+    }
+  }, [filter, navigate]);
+
+  useEffect(() => {
     fetchProjects(true);
   }, [filter]);
 
