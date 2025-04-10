@@ -70,6 +70,7 @@ export function Profile() {
   const [isLoading, setIsLoading] = useState(true);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   const [projectToDelete, setProjectToDelete] = useState<string | null>(null);
   const [editingProject, setEditingProject] = useState<Project | null>(null);
@@ -255,10 +256,11 @@ export function Profile() {
   const handleDeleteConfirm = async () => {
     if (!projectToDelete) return;
     try {
+      setIsDeleting(true)
       const token = localStorage.getItem("token");
       if (!token) throw new Error("No authentication token found");
       const response = await fetch(
-        `https://preploom-users-server.vercel.app/projects/${projectToDelete}`,
+        `http://localhost:3005/projects/${projectToDelete}`,
         { method: "DELETE", headers: { Authorization: `Bearer ${token}` } }
       );
       if (!response.ok) throw new Error("Failed to delete project");
@@ -266,6 +268,7 @@ export function Profile() {
       toast.success("Project deleted successfully!");
       setIsDeleteDialogOpen(false);
       setProjectToDelete(null);
+      setIsDeleting(false);
     } catch (error) {
       toast.error(error instanceof Error ? error.message : "An error occurred");
     }
@@ -667,7 +670,13 @@ export function Profile() {
               onClick={handleDeleteConfirm}
               className="w-full sm:w-auto"
             >
-              Delete
+              {
+                isDeleting ? (
+                  "Deleting..."
+                ) : (
+                  "Delete"
+                )
+              }
             </Button>
           </DialogFooter>
         </DialogContent>
