@@ -260,7 +260,7 @@ export function Profile() {
       const token = localStorage.getItem("token");
       if (!token) throw new Error("No authentication token found");
       const response = await fetch(
-        `http://localhost:3005/projects/${projectToDelete}`,
+        `https://preploom-users-server.vercel.app/projects/${projectToDelete}`,
         { method: "DELETE", headers: { Authorization: `Bearer ${token}` } }
       );
       if (!response.ok) throw new Error("Failed to delete project");
