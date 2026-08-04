@@ -1,0 +1,212 @@
+{
+  "version": 3,
+  "pages404": true,
+  "appType": "app",
+  "caseSensitive": false,
+  "basePath": "",
+  "redirects": [
+    {
+      "source": "/:path+/",
+      "destination": "/:path+",
+      "internal": true,
+      "priority": true,
+      "statusCode": 308,
+      "regex": "^(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))/$"
+    },
+    {
+      "source": "/hybrid",
+      "destination": "/",
+      "statusCode": 308,
+      "regex": "^(?!/_next)/hybrid(?:/)?$"
+    },
+    {
+      "source": "/hybrid/subjects/:path*",
+      "destination": "/subjects/:path*",
+      "statusCode": 308,
+      "regex": "^(?!/_next)/hybrid/subjects(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))?(?:/)?$"
+    },
+    {
+      "source": "/hybrid/roadmaps",
+      "destination": "/roadmaps",
+      "statusCode": 308,
+      "regex": "^(?!/_next)/hybrid/roadmaps(?:/)?$"
+    },
+    {
+      "source": "/hybrid/webdev",
+      "destination": "/webdev",
+      "statusCode": 308,
+      "regex": "^(?!/_next)/hybrid/webdev(?:/)?$"
+    },
+    {
+      "source": "/hybrid/dsa",
+      "destination": "/dsa",
+      "statusCode": 308,
+      "regex": "^(?!/_next)/hybrid/dsa(?:/)?$"
+    },
+    {
+      "source": "/hybrid/quizzes/:path*",
+      "destination": "/quizzes/:path*",
+      "statusCode": 308,
+      "regex": "^(?!/_next)/hybrid/quizzes(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))?(?:/)?$"
+    }
+  ],
+  "headers": [],
+  "onMatchHeaders": [],
+  "rewrites": {
+    "beforeFiles": [],
+    "afterFiles": [],
+    "fallback": []
+  },
+  "dynamicRoutes": [
+    {
+      "page": "/quizzes/[quizSlug]",
+      "regex": "^/quizzes/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPquizSlug": "nxtPquizSlug"
+      },
+      "namedRegex": "^/quizzes/(?<nxtPquizSlug>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/subjects/[subjectSlug]",
+      "regex": "^/subjects/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPsubjectSlug": "nxtPsubjectSlug"
+      },
+      "namedRegex": "^/subjects/(?<nxtPsubjectSlug>[^/]+?)(?:/)?$"
+    }
+  ],
+  "staticRoutes": [
+    {
+      "page": "/",
+      "regex": "^/(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/(?:/)?$"
+    },
+    {
+      "page": "/_global-error",
+      "regex": "^/_global\\-error(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/_global\\-error(?:/)?$"
+    },
+    {
+      "page": "/_not-found",
+      "regex": "^/_not\\-found(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/_not\\-found(?:/)?$"
+    },
+    {
+      "page": "/about",
+      "regex": "^/about(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/about(?:/)?$"
+    },
+    {
+      "page": "/apple-icon.png",
+      "regex": "^/apple\\-icon\\.png(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/apple\\-icon\\.png(?:/)?$"
+    },
+    {
+      "page": "/contact",
+      "regex": "^/contact(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/contact(?:/)?$"
+    },
+    {
+      "page": "/dsa",
+      "regex": "^/dsa(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/dsa(?:/)?$"
+    },
+    {
+      "page": "/favicon.ico",
+      "regex": "^/favicon\\.ico(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/favicon\\.ico(?:/)?$"
+    },
+    {
+      "page": "/feedback",
+      "regex": "^/feedback(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/feedback(?:/)?$"
+    },
+    {
+      "page": "/icon.png",
+      "regex": "^/icon\\.png(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/icon\\.png(?:/)?$"
+    },
+    {
+      "page": "/interview-questions",
+      "regex": "^/interview\\-questions(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/interview\\-questions(?:/)?$"
+    },
+    {
+      "page": "/interview-questions/css",
+      "regex": "^/interview\\-questions/css(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/interview\\-questions/css(?:/)?$"
+    },
+    {
+      "page": "/interview-questions/html",
+      "regex": "^/interview\\-questions/html(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/interview\\-questions/html(?:/)?$"
+    },
+    {
+      "page": "/interview-questions/javascript",
+      "regex": "^/interview\\-questions/javascript(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/interview\\-questions/javascript(?:/)?$"
+    },
+    {
+      "page": "/roadmaps",
+      "regex": "^/roadmaps(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/roadmaps(?:/)?$"
+    },
+    {
+      "page": "/subjects",
+      "regex": "^/subjects(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/subjects(?:/)?$"
+    },
+    {
+      "page": "/webdev",
+      "regex": "^/webdev(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/webdev(?:/)?$"
+    },
+    {
+      "page": "/webdev/interview-questions",
+      "regex": "^/webdev/interview\\-questions(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/webdev/interview\\-questions(?:/)?$"
+    },
+    {
+      "page": "/webdev/interview-questions/html",
+      "regex": "^/webdev/interview\\-questions/html(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/webdev/interview\\-questions/html(?:/)?$"
+    }
+  ],
+  "dataRoutes": [],
+  "rsc": {
+    "header": "rsc",
+    "varyHeader": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch",
+    "prefetchHeader": "next-router-prefetch",
+    "didPostponeHeader": "x-nextjs-postponed",
+    "contentTypeHeader": "text/x-component",
+    "suffix": ".rsc",
+    "prefetchSegmentHeader": "next-router-segment-prefetch",
+    "prefetchSegmentSuffix": ".segment.rsc",
+    "prefetchSegmentDirSuffix": ".segments",
+    "clientParamParsing": false,
+    "dynamicRSCPrerender": false
+  },
+  "rewriteHeaders": {
+    "pathHeader": "x-nextjs-rewritten-path",
+    "queryHeader": "x-nextjs-rewritten-query"
+  }
+}

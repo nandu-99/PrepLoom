@@ -1,0 +1,23 @@
+{
+  "/_global-error/page": "app/_global-error/page.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/about/page": "app/about/page.js",
+  "/apple-icon.png/route": "app/apple-icon.png/route.js",
+  "/contact/page": "app/contact/page.js",
+  "/dsa/page": "app/dsa/page.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/feedback/page": "app/feedback/page.js",
+  "/icon.png/route": "app/icon.png/route.js",
+  "/interview-questions/css/page": "app/interview-questions/css/page.js",
+  "/interview-questions/html/page": "app/interview-questions/html/page.js",
+  "/interview-questions/javascript/page": "app/interview-questions/javascript/page.js",
+  "/interview-questions/page": "app/interview-questions/page.js",
+  "/page": "app/page.js",
+  "/quizzes/[quizSlug]/page": "app/quizzes/[quizSlug]/page.js",
+  "/roadmaps/page": "app/roadmaps/page.js",
+  "/subjects/[subjectSlug]/page": "app/subjects/[subjectSlug]/page.js",
+  "/subjects/page": "app/subjects/page.js",
+  "/webdev/interview-questions/html/page": "app/webdev/interview-questions/html/page.js",
+  "/webdev/interview-questions/page": "app/webdev/interview-questions/page.js",
+  "/webdev/page": "app/webdev/page.js"
+}

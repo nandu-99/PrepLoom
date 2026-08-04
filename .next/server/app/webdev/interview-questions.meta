@@ -1,0 +1,18 @@
+{
+  "status": 308,
+  "headers": {
+    "location": "/interview-questions",
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/webdev/layout,_N_T_/webdev/interview-questions/layout,_N_T_/webdev/interview-questions/page,_N_T_/webdev/interview-questions"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/webdev/interview-questions/__PAGE__",
+    "/webdev/interview-questions",
+    "/webdev",
+    "/_index",
+    "/_head"
+  ]
+}
