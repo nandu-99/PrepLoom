@@ -1,8 +1,10 @@
 "use client";
 
 import { Select } from "@base-ui/react/select";
-import { Check, ChevronDown, Send } from "lucide-react";
+import { SubmissionNotice } from "@/components/forms/submission-notice";
+import { Check, ChevronDown, LoaderCircle, Send } from "lucide-react";
 import type { FormEvent } from "react";
+import { useState } from "react";
 
 const feedbackTypes = [
   "Content issue",
@@ -13,8 +15,36 @@ const feedbackTypes = [
 ];
 
 export function FeedbackForm() {
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    setStatus("sending");
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch("/api/send-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          formType: "feedback",
+          name: formData.get("name"),
+          email: formData.get("email"),
+          category: formData.get("feedbackType"),
+          pageUrl: formData.get("pageUrl"),
+          message: formData.get("feedback"),
+        }),
+      });
+
+      if (!response.ok) throw new Error("Feedback could not be sent");
+
+      form.reset();
+      setStatus("success");
+    } catch {
+      setStatus("error");
+    }
   }
 
   const fieldClassName =
@@ -118,13 +148,27 @@ export function FeedbackForm() {
         />
       </label>
 
+      <SubmissionNotice
+        status={status}
+        successTitle="Feedback sent successfully"
+        successMessage="Thanks for helping improve PrepLoom. Your feedback has reached our inbox."
+        errorTitle="Feedback not sent"
+        errorMessage="Something went wrong. Check your connection and try again."
+        onDismiss={() => setStatus("idle")}
+      />
+
       <div className="flex justify-end border-t border-black/[0.1] pt-5 dark:border-white/[0.11]">
         <button
           type="submit"
-          className="inline-flex h-10 shrink-0 items-center justify-center gap-2 rounded-[9px] bg-[#151515] px-4 text-[13px] font-medium text-white transition-[opacity,transform] hover:-translate-y-px hover:opacity-85 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/40 focus-visible:ring-offset-2 focus-visible:ring-offset-[#f7f7f5] dark:border dark:border-white/[0.14] dark:bg-[#242424] dark:text-[#f3f3f1] dark:hover:bg-[#2b2b2b] dark:focus-visible:ring-white/50 dark:focus-visible:ring-offset-[#0a0a0a]"
+          disabled={status === "sending"}
+          className="inline-flex h-10 shrink-0 items-center justify-center gap-2 self-end rounded-[9px] bg-[#151515] px-4 text-[13px] font-medium text-white transition-[opacity,transform] hover:-translate-y-px hover:opacity-85 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/40 focus-visible:ring-offset-2 focus-visible:ring-offset-[#f7f7f5] disabled:pointer-events-none disabled:opacity-60 dark:border dark:border-white/[0.14] dark:bg-[#242424] dark:text-[#f3f3f1] dark:hover:bg-[#2b2b2b] dark:focus-visible:ring-white/50 dark:focus-visible:ring-offset-[#0a0a0a]"
         >
-          Send feedback
-          <Send className="size-3.5" strokeWidth={1.7} aria-hidden="true" />
+          {status === "sending" ? "Sending..." : "Send feedback"}
+          {status === "sending" ? (
+            <LoaderCircle className="size-3.5 animate-spin" strokeWidth={1.7} aria-hidden="true" />
+          ) : (
+            <Send className="size-3.5" strokeWidth={1.7} aria-hidden="true" />
+          )}
         </button>
       </div>
     </form>
