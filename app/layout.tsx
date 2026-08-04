@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { CommandSearchProvider } from "@/components/command-search-provider";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import { Geist, Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
 
@@ -90,6 +91,7 @@ export default function RootLayout({
       <body className="flex min-h-full flex-col">
         <CommandSearchProvider>{children}</CommandSearchProvider>
       </body>
+      <GoogleAnalytics gaId="G-EL58LD1HMW" />
     </html>
   );
 }
