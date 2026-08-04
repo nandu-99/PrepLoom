@@ -1,0 +1,16 @@
+export default function QuizLoading() {
+  return (
+    <div className="min-h-screen bg-[#f7f7f5] font-[family-name:var(--font-geist-sans)] text-[#151515] dark:bg-[#0a0a0a] dark:text-[#f3f3f1]">
+      <div className="h-[73px] border-b border-black/[0.08] dark:border-white/[0.1]" />
+      <main className="mx-auto flex min-h-[calc(100svh-73px)] w-full max-w-[1240px] items-center px-5 py-16 sm:px-6 lg:px-8">
+        <div className="w-full max-w-[760px] animate-pulse">
+          <div className="h-3 w-36 rounded-full bg-black/[0.08] dark:bg-white/[0.09]" />
+          <div className="mt-7 h-16 w-full max-w-[650px] rounded-xl bg-black/[0.08] dark:bg-white/[0.09] sm:h-20" />
+          <div className="mt-5 h-6 w-full max-w-[580px] rounded-lg bg-black/[0.06] dark:bg-white/[0.07]" />
+          <div className="mt-3 h-6 w-4/5 max-w-[460px] rounded-lg bg-black/[0.06] dark:bg-white/[0.07]" />
+          <div className="mt-9 h-11 w-28 rounded-[10px] bg-black/[0.09] dark:bg-white/[0.1]" />
+        </div>
+      </main>
+    </div>
+  );
+}
