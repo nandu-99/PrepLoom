@@ -1,3 +1,0 @@
-module.exports=[91364,(a,b,c)=>{"use strict";c._=function(a){return a&&a.__esModule?a:{default:a}}},39497,a=>{"use strict";let b=(0,a.i(23541).default)("check",[["path",{d:"M20 6 9 17l-5-5",key:"1gmf2c"}]]);a.s(["Check",0,b],39497)},2748,a=>{"use strict";let b=(0,a.i(23541).default)("circle-check",[["circle",{cx:"12",cy:"12",r:"10",key:"1mglay"}],["path",{d:"m9 12 2 2 4-4",key:"dzmm74"}]]);a.s(["CheckCircle2",0,b],2748)}];
-
-//# sourceMappingURL=0bv__0znrpbl._.js.map
