@@ -21,6 +21,15 @@ export const subjects: Subject[] = [
   },
   {
     order: "02",
+    slug: "oop",
+    name: "OOP",
+    description:
+      "Master object-oriented principles and explain design choices clearly.",
+    topics: ["Classes", "Encapsulation", "Abstraction"],
+    availability: "available",
+  },
+  {
+    order: "03",
     slug: "dbms",
     name: "DBMS",
     description:
@@ -29,22 +38,13 @@ export const subjects: Subject[] = [
     availability: "coming-soon",
   },
   {
-    order: "03",
+    order: "04",
     slug: "computer-networks",
     name: "Computer Networks",
     description:
       "Learn how systems communicate through protocols, layers, and the web.",
     topics: ["TCP/IP", "HTTP", "DNS"],
     availability: "coming-soon",
-  },
-  {
-    order: "04",
-    slug: "oop",
-    name: "OOP",
-    description:
-      "Master object-oriented principles and explain design choices clearly.",
-    topics: ["Classes", "Encapsulation", "Abstraction"],
-    availability: "available",
   },
   {
     order: "05",
