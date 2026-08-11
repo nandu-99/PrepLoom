@@ -1,4 +1,5 @@
 import { ComingSoonPage } from "@/components/coming-soon-page";
+import OopPage from "@/components/subjects/oop/oop-page";
 import OperatingSystemsPage from "@/components/subjects/operating-systems/operating-systems-page";
 import { isAvailable } from "@/lib/release-status";
 import { subjects } from "@/lib/subjects";
@@ -25,9 +26,8 @@ export async function generateMetadata({
 
   if (isAvailable(subject.availability)) {
     return {
-      title: "Operating Systems | PrepLoom",
-      description:
-        "Learn Operating Systems with detailed notes, quick review, recall cues, and flexible reading layouts.",
+      title: `${subject.name} | PrepLoom`,
+      description: `Learn ${subject.name} with detailed notes, quick review, recall cues, and flexible reading layouts.`,
     };
   }
 
@@ -48,6 +48,10 @@ export default async function SubjectPage({ params }: SubjectPageProps) {
     isAvailable(subject.availability)
   ) {
     return <OperatingSystemsPage />;
+  }
+
+  if (subject.slug === "oop" && isAvailable(subject.availability)) {
+    return <OopPage />;
   }
 
   return (

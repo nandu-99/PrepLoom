@@ -43,8 +43,8 @@ export const subjects: Subject[] = [
     name: "OOP",
     description:
       "Master object-oriented principles and explain design choices clearly.",
-    topics: ["Principles", "Design", "Patterns"],
-    availability: "coming-soon",
+    topics: ["Classes", "Encapsulation", "Abstraction"],
+    availability: "available",
   },
   {
     order: "05",
