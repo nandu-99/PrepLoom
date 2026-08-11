@@ -423,9 +423,13 @@ function TopicList({
                 onClick={() => toggleModule(module.title)}
                 aria-expanded={isOpen}
                 aria-controls={panelId}
-                className="flex min-h-10 w-full items-center justify-between gap-3 rounded-[9px] px-2 text-left text-[12px] font-medium transition-colors hover:bg-black/[0.035] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/40 dark:hover:bg-white/[0.05] dark:focus-visible:ring-white/50"
+                className={`flex min-h-10 w-full items-center justify-between gap-3 rounded-[9px] px-2 py-2 text-left font-medium transition-colors hover:bg-black/[0.035] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/40 dark:hover:bg-white/[0.05] dark:focus-visible:ring-white/50 ${
+                  desktop ? "text-[11px]" : "text-[12px]"
+                }`}
               >
-                <span className="min-w-0 truncate">{clean(module.title)}</span>
+                <span className="min-w-0 break-words leading-4">
+                  {clean(module.title)}
+                </span>
                 <span className="flex shrink-0 items-center gap-1.5 text-[10px] font-normal text-[#777] dark:text-[#999]">
                   {module.topics.length}
                   <ChevronDown
@@ -451,13 +455,17 @@ function TopicList({
                     key={topic.slug}
                     type="button"
                     onClick={() => onSelect(topic.slug)}
-                    className={`flex min-h-10 w-full items-center justify-between gap-3 rounded-[9px] px-2.5 text-left text-[12px] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/40 dark:focus-visible:ring-white/50 ${
+                    className={`flex min-h-10 w-full items-center justify-between gap-3 rounded-[9px] px-2.5 py-2 text-left transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/40 dark:focus-visible:ring-white/50 ${
+                      desktop ? "text-[11px]" : "text-[12px]"
+                    } ${
                       selected
                         ? "bg-black/[0.06] font-medium text-[#151515] dark:bg-white/[0.08] dark:text-white"
                         : "text-[#606060] hover:bg-black/[0.035] hover:text-[#151515] dark:text-[#a8a8a8] dark:hover:bg-white/[0.05] dark:hover:text-white"
                     }`}
                   >
-                    <span>{clean(topic.title)}</span>
+                    <span className="min-w-0 break-words leading-4">
+                      {clean(topic.title)}
+                    </span>
                     {completed.includes(topic.slug) && (
                       <Check
                         className="size-3.5 shrink-0"
