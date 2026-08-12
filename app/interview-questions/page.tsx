@@ -4,6 +4,7 @@ import { InterviewOverviewAnimation } from "@/components/interview-questions/int
 import { cssInterviewQuestions } from "@/content/interview-questions/css";
 import { htmlInterviewQuestions } from "@/content/interview-questions/html";
 import { javascriptInterviewQuestions } from "@/content/interview-questions/javascript";
+import { reactInterviewQuestions } from "@/content/interview-questions/react";
 import {
   ArrowRight,
   Braces,
@@ -53,15 +54,16 @@ const topics: Topic[] = [
     detail: `${javascriptInterviewQuestions.length} questions`,
   },
   {
-    name: "TypeScript",
-    description: "Types, narrowing, generics, inference, and safer application code.",
-    icon: FileCode2,
-    detail: "Coming soon",
-  },
-  {
     name: "React",
     description: "Components, hooks, state, rendering, and application architecture.",
     icon: Code2,
+    href: "/interview-questions/react",
+    detail: `${reactInterviewQuestions.length} questions`,
+  },
+  {
+    name: "TypeScript",
+    description: "Types, narrowing, generics, inference, and safer application code.",
+    icon: FileCode2,
     detail: "Coming soon",
   },
   {

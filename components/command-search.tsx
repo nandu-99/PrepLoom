@@ -146,6 +146,13 @@ const searchGroups: SearchGroup[] = [
         keywords: ["css", "interview", "questions", "layout", "responsive"],
         icon: Code2,
       },
+      {
+        title: "React interview questions",
+        description: "Review components, hooks, state, rendering, and React 19",
+        href: "/interview-questions/react",
+        keywords: ["react", "interview", "questions", "hooks", "components"],
+        icon: Code2,
+      },
     ],
   },
   {

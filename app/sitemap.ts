@@ -14,6 +14,7 @@ const staticRoutes = [
   { path: "/interview-questions/html", changeFrequency: "monthly", priority: 0.8 },
   { path: "/interview-questions/css", changeFrequency: "monthly", priority: 0.8 },
   { path: "/interview-questions/javascript", changeFrequency: "monthly", priority: 0.8 },
+  { path: "/interview-questions/react", changeFrequency: "monthly", priority: 0.8 },
   { path: "/webdev", changeFrequency: "monthly", priority: 0.8 },
   { path: "/about", changeFrequency: "yearly", priority: 0.5 },
   { path: "/contact", changeFrequency: "yearly", priority: 0.4 },
