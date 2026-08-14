@@ -6,7 +6,8 @@ import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { QuizRunner } from "@/components/quizzes/quiz-runner";
 import { getQuizBySlug, quizzes } from "@/content/quizzes";
-import { isAvailable, quizAvailability } from "@/lib/release-status";
+import { quizAvailability } from "@/lib/feature-flags";
+import { isAvailable } from "@/lib/release-status";
 
 type QuizPageProps = {
   params: Promise<{ quizSlug: string }>;
