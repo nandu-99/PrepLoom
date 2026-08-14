@@ -1,7 +1,9 @@
 import type { MetadataRoute } from "next";
 
 import { quizzes } from "@/content/quizzes";
-import { isAvailable, quizAvailability } from "@/lib/release-status";
+import { isProductionEnvironment } from "@/lib/env";
+import { quizAvailability } from "@/lib/feature-flags";
+import { isAvailable } from "@/lib/release-status";
 import { siteUrl } from "@/lib/site-url";
 import { subjects } from "@/lib/subjects";
 
@@ -11,6 +13,11 @@ const staticRoutes = [
   { path: "/roadmaps", changeFrequency: "monthly", priority: 0.8 },
   { path: "/dsa", changeFrequency: "monthly", priority: 0.8 },
   { path: "/interview-questions", changeFrequency: "weekly", priority: 0.9 },
+  { path: "/interview-questions/behavioral", changeFrequency: "monthly", priority: 0.8 },
+  { path: "/interview-questions/computer-networks", changeFrequency: "monthly", priority: 0.8 },
+  { path: "/interview-questions/operating-systems", changeFrequency: "monthly", priority: 0.8 },
+  { path: "/interview-questions/oop", changeFrequency: "monthly", priority: 0.8 },
+  { path: "/interview-questions/dbms", changeFrequency: "monthly", priority: 0.8 },
   { path: "/interview-questions/html", changeFrequency: "monthly", priority: 0.8 },
   { path: "/interview-questions/css", changeFrequency: "monthly", priority: 0.8 },
   { path: "/interview-questions/javascript", changeFrequency: "monthly", priority: 0.8 },
@@ -22,6 +29,8 @@ const staticRoutes = [
 ] as const;
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  if (!isProductionEnvironment) return [];
+
   const subjectRoutes: MetadataRoute.Sitemap = subjects
     .filter((subject) => isAvailable(subject.availability))
     .map((subject) => ({
