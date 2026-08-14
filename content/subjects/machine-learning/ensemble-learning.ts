@@ -58,7 +58,9 @@ export const ensembleLearningAndBagging: SubjectTopic = {
       },
       {
         title: "Voting Numerical",
-        paragraphs: ["Combine individual predictions using the aggregation rule chosen for the task."],
+        paragraphs: [
+          "Combine individual predictions using the aggregation rule chosen for the task.",
+        ],
         problems: [
           {
             title: "Combine five classifiers",
@@ -73,7 +75,8 @@ export const ensembleLearningAndBagging: SubjectTopic = {
           },
           {
             title: "Average three regressors",
-            prompt: "Three regressors predict 18, 21, and 24. Find the ensemble prediction.",
+            prompt:
+              "Three regressors predict 18, 21, and 24. Find the ensemble prediction.",
             steps: ["Average = (18 + 21 + 24)/3", "Average = 63/3"],
             answer: "The ensemble prediction is 21.",
           },
@@ -131,12 +134,22 @@ export const ensembleLearningAndBagging: SubjectTopic = {
     sections: [
       {
         title: "Flow",
-        flow: ["Training data", "Bootstrap samples", "Independent models", "Combine"],
+        flow: [
+          "Training data",
+          "Bootstrap samples",
+          "Independent models",
+          "Combine",
+        ],
         wide: true,
       },
     ],
-    memoryLine: "Bagging reduces variance by averaging different fitted models.",
-    cues: ["Sampling is with replacement.", "Classification votes.", "Regression averages."],
+    memoryLine:
+      "Bagging reduces variance by averaging different fitted models.",
+    cues: [
+      "Sampling is with replacement.",
+      "Classification votes.",
+      "Regression averages.",
+    ],
     trap: "Do not confuse parallel bagging with sequential boosting.",
   },
 };
@@ -189,7 +202,9 @@ export const randomForest: SubjectTopic = {
       },
       {
         title: "Vote and Probability Numerical",
-        paragraphs: ["A classification forest can average tree probabilities before applying the chosen threshold."],
+        paragraphs: [
+          "A classification forest can average tree probabilities before applying the chosen threshold.",
+        ],
         problems: [
           {
             title: "Combine tree probabilities",
@@ -200,13 +215,16 @@ export const randomForest: SubjectTopic = {
               "Average probability = 1.90/3 ≈ 0.633.",
               "0.633 ≥ 0.5, so predict class 1.",
             ],
-            answer: "The forest probability is approximately 0.633 and the predicted class is 1.",
+            answer:
+              "The forest probability is approximately 0.633 and the predicted class is 1.",
           },
         ],
       },
       {
         title: "Important Hyperparameters",
-        paragraphs: ["Tune only settings that materially affect diversity and individual-tree complexity."],
+        paragraphs: [
+          "Tune only settings that materially affect diversity and individual-tree complexity.",
+        ],
         dataTable: {
           headers: ["Setting", "Main effect"],
           rows: [
@@ -219,7 +237,9 @@ export const randomForest: SubjectTopic = {
       },
       {
         title: "Strengths and Limits",
-        paragraphs: ["Random Forest is a strong tabular baseline, but it still requires honest validation."],
+        paragraphs: [
+          "Random Forest is a strong tabular baseline, but it still requires honest validation.",
+        ],
         points: [
           "Strong default for many tabular classification and regression tasks.",
           "Captures nonlinear relationships and feature interactions.",
@@ -254,7 +274,10 @@ export const randomForest: SubjectTopic = {
     sections: [
       {
         title: "Randomness",
-        points: ["Bootstrap rows per tree", "Random candidate features per split"],
+        points: [
+          "Bootstrap rows per tree",
+          "Random candidate features per split",
+        ],
       },
     ],
     essentialsStyle: "plain",
@@ -274,8 +297,13 @@ export const randomForest: SubjectTopic = {
         points: ["Rows: bootstrap sample", "Features: random subset per node"],
       },
     ],
-    memoryLine: "Different rows and different split choices create a diverse forest.",
-    cues: ["Many trees.", "Vote or average.", "OOB gives an internal estimate."],
+    memoryLine:
+      "Different rows and different split choices create a diverse forest.",
+    cues: [
+      "Many trees.",
+      "Vote or average.",
+      "OOB gives an internal estimate.",
+    ],
     trap: "Do not describe Random Forest as one large decision tree.",
   },
 };
@@ -309,13 +337,18 @@ export const boostingFundamentals: SubjectTopic = {
       },
       {
         title: "Bagging vs Boosting",
-        paragraphs: ["The main difference is whether learners are fitted independently or added in a dependent sequence."],
+        paragraphs: [
+          "The main difference is whether learners are fitted independently or added in a dependent sequence.",
+        ],
         table: {
           headers: ["Bagging", "Boosting"],
           rows: [
             ["Models train independently", "Models train sequentially"],
             ["Bootstrap samples", "Focus changes with current errors"],
-            ["Mainly reduces variance", "Can reduce bias and build complex fits"],
+            [
+              "Mainly reduces variance",
+              "Can reduce bias and build complex fits",
+            ],
             ["Easy to parallelize", "Order matters"],
           ],
         },
@@ -348,7 +381,9 @@ export const boostingFundamentals: SubjectTopic = {
       },
       {
         title: "Control Overfitting",
-        paragraphs: ["Control learner complexity and the number of correction steps using validation."],
+        paragraphs: [
+          "Control learner complexity and the number of correction steps using validation.",
+        ],
         points: [
           "Use a small learning rate so every new learner makes a limited correction.",
           "Control tree depth so individual learners remain suitably simple.",
@@ -382,7 +417,13 @@ export const boostingFundamentals: SubjectTopic = {
     sections: [
       {
         title: "Flow",
-        flow: ["Current model", "Find errors", "Train next learner", "Add weighted correction", "Repeat"],
+        flow: [
+          "Current model",
+          "Find errors",
+          "Train next learner",
+          "Add weighted correction",
+          "Repeat",
+        ],
       },
     ],
     essentialsStyle: "plain",
@@ -392,14 +433,20 @@ export const boostingFundamentals: SubjectTopic = {
       "Final prediction is a weighted combination.",
       "Learning rate, learner depth, and learner count control complexity.",
     ],
-    followUp: "What is the main training difference between bagging and boosting?",
+    followUp:
+      "What is the main training difference between bagging and boosting?",
   },
   lastMinute: {
     definition: "Add simple learners one by one to correct current errors.",
     sections: [
       {
         title: "Control",
-        points: ["Small learners", "Learning rate", "Number of learners", "Validate"],
+        points: [
+          "Small learners",
+          "Learning rate",
+          "Number of learners",
+          "Validate",
+        ],
       },
     ],
     memoryLine: "Bagging builds independently; boosting corrects sequentially.",

@@ -36,7 +36,8 @@ export const binaryCrossEntropyAndTraining: SubjectTopic = {
           alt: "Binary cross-entropy curves for positive and negative labels across predicted probability",
           width: 1536,
           height: 1024,
-          caption: "Log loss grows sharply when the model gives high confidence to the wrong class.",
+          caption:
+            "Log loss grows sharply when the model gives high confidence to the wrong class.",
         },
         dataTable: {
           headers: ["True y", "Predicted p̂", "Loss", "Meaning"],
@@ -68,7 +69,8 @@ export const binaryCrossEntropyAndTraining: SubjectTopic = {
         problems: [
           {
             title: "Calculate mean BCE",
-            prompt: "For y = [1, 0] and p̂ = [0.8, 0.3], calculate mean binary cross-entropy.",
+            prompt:
+              "For y = [1, 0] and p̂ = [0.8, 0.3], calculate mean binary cross-entropy.",
             steps: [
               "For y₁ = 1: L₁ = −ln(0.8) ≈ 0.2231.",
               "For y₂ = 0: L₂ = −ln(1 − 0.3) = −ln(0.7) ≈ 0.3567.",
@@ -86,8 +88,14 @@ export const binaryCrossEntropyAndTraining: SubjectTopic = {
           "The product form assumes the observations are conditionally independent given their features.",
         ],
         formulas: [
-          { label: "Bernoulli likelihood", expression: "ℒ(β) = ∏ᵢ p̂ᵢ^(yᵢ)(1 − p̂ᵢ)^(1 − yᵢ)" },
-          { label: "Training equivalence", expression: "minimize BCE ⇔ maximize likelihood" },
+          {
+            label: "Bernoulli likelihood",
+            expression: "ℒ(β) = ∏ᵢ p̂ᵢ^(yᵢ)(1 − p̂ᵢ)^(1 − yᵢ)",
+          },
+          {
+            label: "Training equivalence",
+            expression: "minimize BCE ⇔ maximize likelihood",
+          },
         ],
       },
       {
@@ -99,7 +107,10 @@ export const binaryCrossEntropyAndTraining: SubjectTopic = {
         ],
         formulas: [
           { label: "Sigmoid derivative", expression: "σ′(z) = σ(z)[1 − σ(z)]" },
-          { label: "One-example score derivative", expression: "∂L/∂z = p̂ − y" },
+          {
+            label: "One-example score derivative",
+            expression: "∂L/∂z = p̂ − y",
+          },
           { label: "Gradient", expression: "∇J(β) = (1/n)Xᵀ(p̂ − y)" },
           { label: "Update", expression: "β := β − α∇J(β)" },
         ],
@@ -109,13 +120,15 @@ export const binaryCrossEntropyAndTraining: SubjectTopic = {
         problems: [
           {
             title: "Update one coefficient",
-            prompt: "One example has x = 2, y = 1, β = 0, no intercept, and α = 0.1. Perform one update.",
+            prompt:
+              "One example has x = 2, y = 1, β = 0, no intercept, and α = 0.1. Perform one update.",
             steps: [
               "z = βx = 0, so p̂ = σ(0) = 0.5.",
               "Gradient = (p̂ − y)x = (0.5 − 1)(2) = −1.",
               "β := 0 − 0.1(−1) = 0.1.",
             ],
-            answer: "After one update, β = 0.1. The positive example pushes its score upward.",
+            answer:
+              "After one update, β = 0.1. The positive example pushes its score upward.",
           },
         ],
         paragraphs: [
@@ -137,7 +150,10 @@ export const binaryCrossEntropyAndTraining: SubjectTopic = {
         ],
         formulas: [
           { label: "L2-regularized objective", expression: "BCE + λΣⱼ₌₁ᵖ βⱼ²" },
-          { label: "L1-regularized objective", expression: "BCE + λΣⱼ₌₁ᵖ |βⱼ|" },
+          {
+            label: "L1-regularized objective",
+            expression: "BCE + λΣⱼ₌₁ᵖ |βⱼ|",
+          },
         ],
       },
     ],
@@ -177,7 +193,11 @@ export const binaryCrossEntropyAndTraining: SubjectTopic = {
       },
       {
         title: "Label Cases",
-        points: ["y = 1 → loss = −ln(p̂)", "y = 0 → loss = −ln(1−p̂)", "Confident wrong → very large loss"],
+        points: [
+          "y = 1 → loss = −ln(p̂)",
+          "y = 0 → loss = −ln(1−p̂)",
+          "Confident wrong → very large loss",
+        ],
       },
     ],
     essentialsStyle: "plain",
@@ -190,14 +210,20 @@ export const binaryCrossEntropyAndTraining: SubjectTopic = {
       "L1 or L2 regularization can stabilize logistic coefficients.",
       "Complete separation can prevent an unregularized finite maximum-likelihood solution.",
     ],
-    followUp: "Why does a confident wrong prediction receive very large log loss?",
+    followUp:
+      "Why does a confident wrong prediction receive very large log loss?",
   },
   lastMinute: {
-    definition: "BCE rewards probability on the true class and punishes confident mistakes.",
+    definition:
+      "BCE rewards probability on the true class and punishes confident mistakes.",
     sections: [
       {
         title: "Cases",
-        points: ["y = 1: −ln(p̂)", "y = 0: −ln(1−p̂)", "Average all example losses"],
+        points: [
+          "y = 1: −ln(p̂)",
+          "y = 0: −ln(1−p̂)",
+          "Average all example losses",
+        ],
       },
       {
         title: "Training",
@@ -206,7 +232,11 @@ export const binaryCrossEntropyAndTraining: SubjectTopic = {
       },
     ],
     memoryLine: "Wrong with confidence costs the most.",
-    cues: ["Natural logarithm.", "BCE = negative log-likelihood.", "Gradient = Xᵀ(p̂−y)/n."],
+    cues: [
+      "Natural logarithm.",
+      "BCE = negative log-likelihood.",
+      "Gradient = Xᵀ(p̂−y)/n.",
+    ],
     trap: "Do not compute BCE after converting probabilities into 0 and 1 predictions.",
   },
 };
@@ -233,7 +263,8 @@ export const classificationEvaluation: SubjectTopic = {
           alt: "Binary confusion matrix with true positive, false positive, false negative, and true negative cells",
           width: 1536,
           height: 1024,
-          caption: "Every binary prediction belongs to exactly one of the four confusion-matrix cells.",
+          caption:
+            "Every binary prediction belongs to exactly one of the four confusion-matrix cells.",
         },
         dataTable: {
           headers: ["Term", "Actual", "Predicted", "Meaning"],
@@ -264,7 +295,10 @@ export const classificationEvaluation: SubjectTopic = {
           "F1 ignores true negatives, so it should not be used automatically when correct negative decisions are important.",
         ],
         formulas: [
-          { label: "F1-score", expression: "F1 = 2(PR)/(P + R) = 2TP/(2TP + FP + FN)" },
+          {
+            label: "F1-score",
+            expression: "F1 = 2(PR)/(P + R) = 2TP/(2TP + FP + FN)",
+          },
         ],
       },
       {
@@ -275,7 +309,8 @@ export const classificationEvaluation: SubjectTopic = {
         problems: [
           {
             title: "Construct a confusion matrix from labels",
-            prompt: "For actual y = [1, 0, 1, 1, 0, 0] and predicted ŷ = [1, 1, 0, 1, 0, 0], find TP, TN, FP, and FN.",
+            prompt:
+              "For actual y = [1, 0, 1, 1, 0, 0] and predicted ŷ = [1, 1, 0, 1, 0, 0], find TP, TN, FP, and FN.",
             steps: [
               "Compare the pairs: (1,1), (0,1), (1,0), (1,1), (0,0), (0,0).",
               "The two (1,1) pairs give TP = 2.",
@@ -287,7 +322,8 @@ export const classificationEvaluation: SubjectTopic = {
           },
           {
             title: "Calculate all main metrics",
-            prompt: "Given TP = 40, TN = 50, FP = 10, and FN = 5, calculate accuracy, precision, recall, specificity, and F1.",
+            prompt:
+              "Given TP = 40, TN = 50, FP = 10, and FN = 5, calculate accuracy, precision, recall, specificity, and F1.",
             steps: [
               "Total = 40 + 50 + 10 + 5 = 105.",
               "Accuracy = (40 + 50)/105 = 90/105 ≈ 0.857.",
@@ -296,7 +332,8 @@ export const classificationEvaluation: SubjectTopic = {
               "Specificity = 50/(50 + 10) = 50/60 ≈ 0.833.",
               "F1 = 2(0.800)(0.889)/(0.800 + 0.889) ≈ 0.842.",
             ],
-            answer: "Accuracy ≈ 0.857, precision = 0.800, recall ≈ 0.889, specificity ≈ 0.833, and F1 ≈ 0.842.",
+            answer:
+              "Accuracy ≈ 0.857, precision = 0.800, recall ≈ 0.889, specificity ≈ 0.833, and F1 ≈ 0.842.",
           },
         ],
       },
@@ -305,11 +342,19 @@ export const classificationEvaluation: SubjectTopic = {
         dataTable: {
           headers: ["Priority", "Useful metric", "Example"],
           rows: [
-            ["Avoid false alarms", "Precision", "Do not wrongly block legitimate email"],
+            [
+              "Avoid false alarms",
+              "Precision",
+              "Do not wrongly block legitimate email",
+            ],
             ["Find most positives", "Recall", "Disease screening"],
             ["Reject most negatives", "Specificity", "Confirm healthy cases"],
             ["Balance precision and recall", "F1", "Rare positive class"],
-            ["Overall correctness with balanced costs", "Accuracy", "Classes and errors are reasonably balanced"],
+            [
+              "Overall correctness with balanced costs",
+              "Accuracy",
+              "Classes and errors are reasonably balanced",
+            ],
           ],
         },
         paragraphs: [
@@ -324,15 +369,22 @@ export const classificationEvaluation: SubjectTopic = {
           "Moving the threshold changes both rates. The diagonal line represents random ranking; curves closer to the top-left indicate stronger separation.",
         ],
         formulas: [
-          { label: "True-positive rate", expression: "TPR = TP/(TP + FN) = recall" },
-          { label: "False-positive rate", expression: "FPR = FP/(FP + TN) = 1 − specificity" },
+          {
+            label: "True-positive rate",
+            expression: "TPR = TP/(TP + FN) = recall",
+          },
+          {
+            label: "False-positive rate",
+            expression: "FPR = FP/(FP + TN) = 1 − specificity",
+          },
         ],
         visual: {
           src: "/notes/machine-learning/roc-auc.png",
           alt: "ROC and precision-recall curves showing threshold-independent classification evaluation",
           width: 1536,
           height: 1024,
-          caption: "ROC compares TPR with FPR; a precision–recall curve is often more informative for a rare positive class.",
+          caption:
+            "ROC compares TPR with FPR; a precision–recall curve is often more informative for a rare positive class.",
         },
       },
       {
@@ -345,13 +397,20 @@ export const classificationEvaluation: SubjectTopic = {
         formulas: [
           { label: "Precision", expression: "TP/(TP + FP)" },
           { label: "Recall", expression: "TP/(TP + FN)" },
-          { label: "PR baseline", expression: "positive examples / all examples" },
+          {
+            label: "PR baseline",
+            expression: "positive examples / all examples",
+          },
         ],
         dataTable: {
           headers: ["Curve", "Axes", "Especially useful when"],
           rows: [
             ["ROC", "FPR versus TPR", "Overall ranking across both classes"],
-            ["Precision–Recall", "Recall versus precision", "Positive class is rare"],
+            [
+              "Precision–Recall",
+              "Recall versus precision",
+              "Positive class is rare",
+            ],
           ],
         },
       },
@@ -365,7 +424,8 @@ export const classificationEvaluation: SubjectTopic = {
         problems: [
           {
             title: "Calculate ROC-AUC with trapezoids",
-            prompt: "An ROC curve passes through (FPR,TPR) = (0,0), (0.2,0.6), (0.5,0.8), and (1,1). Estimate AUC with the trapezoidal rule.",
+            prompt:
+              "An ROC curve passes through (FPR,TPR) = (0,0), (0.2,0.6), (0.5,0.8), and (1,1). Estimate AUC with the trapezoidal rule.",
             steps: [
               "From 0 to 0.2: area = 0.2(0 + 0.6)/2 = 0.06.",
               "From 0.2 to 0.5: area = 0.3(0.6 + 0.8)/2 = 0.21.",
@@ -448,19 +508,35 @@ export const classificationEvaluation: SubjectTopic = {
     followUp: "Why can a classifier have high accuracy but zero recall?",
   },
   lastMinute: {
-    definition: "Count TP, TN, FP, FN first; choose the metric from the cost of mistakes.",
+    definition:
+      "Count TP, TN, FP, FN first; choose the metric from the cost of mistakes.",
     sections: [
       {
         title: "Denominators",
-        points: ["Precision: predicted positives", "Recall: actual positives", "Specificity: actual negatives", "Accuracy: all examples"],
+        points: [
+          "Precision: predicted positives",
+          "Recall: actual positives",
+          "Specificity: actual negatives",
+          "Accuracy: all examples",
+        ],
       },
       {
         title: "ROC-AUC",
-        points: ["ROC: TPR vs FPR", "PR: precision vs recall", "PR is useful for rare positives", "AUC summarizes ranking"],
+        points: [
+          "ROC: TPR vs FPR",
+          "PR: precision vs recall",
+          "PR is useful for rare positives",
+          "AUC summarizes ranking",
+        ],
       },
     ],
-    memoryLine: "Precision checks alarms; recall checks positives; specificity checks negatives.",
-    cues: ["FPR = 1 − specificity.", "PR baseline = positive prevalence.", "Show raw counts and threshold."],
+    memoryLine:
+      "Precision checks alarms; recall checks positives; specificity checks negatives.",
+    cues: [
+      "FPR = 1 − specificity.",
+      "PR baseline = positive prevalence.",
+      "Show raw counts and threshold.",
+    ],
     trap: "Do not calculate precision with TP + FN; that denominator belongs to recall.",
   },
 };

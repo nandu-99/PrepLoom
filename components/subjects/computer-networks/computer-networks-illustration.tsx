@@ -66,7 +66,9 @@ export function ComputerNetworksIllustration() {
         aria-labelledby="cn-illustration-title cn-illustration-description"
         className="h-auto w-full text-[#151515] dark:text-[#d8d8d6]"
       >
-        <title id="cn-illustration-title">Packet traveling through a network</title>
+        <title id="cn-illustration-title">
+          Packet traveling through a network
+        </title>
         <desc id="cn-illustration-description">
           A packet moves from a laptop through a switch and two routers to a
           server. The switch also connects a phone and a desktop computer.
@@ -128,7 +130,10 @@ export function ComputerNetworksIllustration() {
           initial={reduceMotion ? false : { opacity: 0, x: -8 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, amount: 0.55 }}
-          transition={{ duration: reduceMotion ? 0 : 0.45, ease: [0.16, 1, 0.3, 1] }}
+          transition={{
+            duration: reduceMotion ? 0 : 0.45,
+            ease: [0.16, 1, 0.3, 1],
+          }}
         >
           <rect
             x="52"
@@ -222,14 +227,23 @@ export function ComputerNetworksIllustration() {
             vectorEffect="non-scaling-stroke"
             opacity="0.55"
           />
-          <circle cx="657" cy="116" r="3.5" fill="currentColor" opacity="0.55" />
+          <circle
+            cx="657"
+            cy="116"
+            r="3.5"
+            fill="currentColor"
+            opacity="0.55"
+          />
         </motion.g>
 
         <motion.g
           initial={reduceMotion ? false : { opacity: 0, y: 8 }}
           whileInView={{ opacity: 0.5, y: 0 }}
           viewport={{ once: true, amount: 0.45 }}
-          transition={{ duration: reduceMotion ? 0 : 0.45, delay: reduceMotion ? 0 : 1.2 }}
+          transition={{
+            duration: reduceMotion ? 0 : 0.45,
+            delay: reduceMotion ? 0 : 1.2,
+          }}
         >
           <rect
             x="291"

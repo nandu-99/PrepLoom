@@ -21,14 +21,18 @@ export const positionalInformationAndMasks: SubjectTopic = {
         ],
         formulas: [
           { label: "Token-embedding parameters", expression: "V × dmodel" },
-          { label: "Transformer input", expression: "Xpositioned = Xtoken + Xposition" },
+          {
+            label: "Transformer input",
+            expression: "Xpositioned = Xtoken + Xposition",
+          },
         ],
         visual: {
           src: "/notes/deep-learning/position-and-attention-masks.png",
           alt: "Token and position embeddings added together beside lower-triangular causal and padding masks",
           width: 1536,
           height: 1024,
-          caption: "Position changes representations; masks change which attention scores are allowed.",
+          caption:
+            "Position changes representations; masks change which attention scores are allowed.",
         },
       },
       {
@@ -38,15 +42,24 @@ export const positionalInformationAndMasks: SubjectTopic = {
           "Sinusoidal encodings use fixed sine and cosine waves at different frequencies. They add no trainable position parameters and give different dimensions different position patterns.",
         ],
         formulas: [
-          { label: "Even dimension", expression: "PE(pos,2i) = sin(pos / 10000^(2i/dmodel))" },
-          { label: "Odd dimension", expression: "PE(pos,2i+1) = cos(pos / 10000^(2i/dmodel))" },
+          {
+            label: "Even dimension",
+            expression: "PE(pos,2i) = sin(pos / 10000^(2i/dmodel))",
+          },
+          {
+            label: "Odd dimension",
+            expression: "PE(pos,2i+1) = cos(pos / 10000^(2i/dmodel))",
+          },
         ],
         table: {
           headers: ["Learned", "Sinusoidal"],
           rows: [
             ["Trainable vectors", "Fixed functions"],
             ["Adds position parameters", "Adds no position parameters"],
-            ["Configured position table", "Can be calculated for new positions"],
+            [
+              "Configured position table",
+              "Can be calculated for new positions",
+            ],
           ],
         },
       },
@@ -79,24 +92,38 @@ export const positionalInformationAndMasks: SubjectTopic = {
       },
       {
         title: "Practice",
-        paragraphs: ["State whether 1 means allowed or blocked before reading a binary mask."],
+        paragraphs: [
+          "State whether 1 means allowed or blocked before reading a binary mask.",
+        ],
         problems: [
           {
             title: "Allowed causal positions",
-            prompt: "In a length-5 causal sequence, which key positions may query position t = 3 attend to?",
-            steps: ["Causal attention allows the current and earlier positions.", "Future positions 4 and 5 are blocked."],
+            prompt:
+              "In a length-5 causal sequence, which key positions may query position t = 3 attend to?",
+            steps: [
+              "Causal attention allows the current and earlier positions.",
+              "Future positions 4 and 5 are blocked.",
+            ],
             answer: "Position 3 may attend to keys 1, 2, and 3.",
           },
           {
             title: "Padding mask",
-            prompt: "A sequence has valid length 3 and is padded to length 5. Use 1 for valid and 0 for padding.",
-            steps: ["Mark the first three positions valid.", "Mark the last two positions padded."],
+            prompt:
+              "A sequence has valid length 3 and is padded to length 5. Use 1 for valid and 0 for padding.",
+            steps: [
+              "Mark the first three positions valid.",
+              "Mark the last two positions padded.",
+            ],
             answer: "The mask is [1, 1, 1, 0, 0].",
           },
           {
             title: "Learned position parameters",
-            prompt: "A learned position table supports 512 positions with dmodel = 256. How many parameters does it contain?",
-            steps: ["Every position stores one vector of width 256.", "Parameters = 512 × 256."],
+            prompt:
+              "A learned position table supports 512 positions with dmodel = 256. How many parameters does it contain?",
+            steps: [
+              "Every position stores one vector of width 256.",
+              "Parameters = 512 × 256.",
+            ],
             answer: "The position table has 131,072 parameters.",
           },
         ],
@@ -124,8 +151,22 @@ export const positionalInformationAndMasks: SubjectTopic = {
     definition:
       "Position representations add order; masks block invalid attention connections before softmax.",
     sections: [
-      { title: "Position", points: ["Token and position widths must match", "Learned or sinusoidal", "Usually added before blocks"] },
-      { title: "Masks", points: ["Padding: block placeholders", "Causal: block future keys", "Apply before softmax"] },
+      {
+        title: "Position",
+        points: [
+          "Token and position widths must match",
+          "Learned or sinusoidal",
+          "Usually added before blocks",
+        ],
+      },
+      {
+        title: "Masks",
+        points: [
+          "Padding: block placeholders",
+          "Causal: block future keys",
+          "Apply before softmax",
+        ],
+      },
     ],
     essentialsStyle: "plain",
     essentials: [
@@ -135,16 +176,35 @@ export const positionalInformationAndMasks: SubjectTopic = {
       "Loss masking still remains necessary.",
       "Framework boolean-mask meanings can differ.",
     ],
-    followUp: "Why are positional vectors added rather than concatenated in the standard Transformer input?",
+    followUp:
+      "Why are positional vectors added rather than concatenated in the standard Transformer input?",
   },
   lastMinute: {
     definition: "Position says where; mask says whether attention is allowed.",
     sections: [
-      { title: "Causal Rule", points: ["Query t sees keys ≤ t", "Future scores → −∞", "Diagonal is allowed"] },
-      { title: "Padding Rule", points: ["Block pad keys", "Also mask padded loss", "Check API convention"] },
+      {
+        title: "Causal Rule",
+        points: [
+          "Query t sees keys ≤ t",
+          "Future scores → −∞",
+          "Diagonal is allowed",
+        ],
+      },
+      {
+        title: "Padding Rule",
+        points: [
+          "Block pad keys",
+          "Also mask padded loss",
+          "Check API convention",
+        ],
+      },
     ],
     memoryLine: "Add position to embeddings; add masks to scores.",
-    cues: ["Same dmodel width.", "Mask before softmax.", "Lower triangle means causal access."],
+    cues: [
+      "Same dmodel width.",
+      "Mask before softmax.",
+      "Lower triangle means causal access.",
+    ],
     trap: "Do not use a causal mask that blocks the current position itself unless the task explicitly requires it.",
   },
 };
@@ -172,7 +232,8 @@ export const transformerEncoderAndDecoder: SubjectTopic = {
           alt: "Transformer encoder and decoder stacks with self-attention, cross-attention, feedforward layers, residual normalization, and encoder memory",
           width: 1536,
           height: 1024,
-          caption: "The decoder uses masked self-attention, reads encoder memory through cross-attention, and projects final states to vocabulary probabilities.",
+          caption:
+            "The decoder uses masked self-attention, reads encoder memory through cross-attention, and projects final states to vocabulary probabilities.",
         },
       },
       {
@@ -188,7 +249,10 @@ export const transformerEncoderAndDecoder: SubjectTopic = {
           "The same two-layer network is applied independently to every position. Its inner width dff is usually larger than dmodel, but the second projection returns to dmodel for the residual connection.",
         ],
         formulas: [
-          { label: "Feedforward layer", expression: "FFN(x) = W₂ φ(W₁x + b₁) + b₂" },
+          {
+            label: "Feedforward layer",
+            expression: "FFN(x) = W₂ φ(W₁x + b₁) + b₂",
+          },
           { label: "Shapes", expression: "dmodel → dff → dmodel" },
           { label: "Parameters", expression: "2dmodeldff + dff + dmodel" },
         ],
@@ -201,7 +265,10 @@ export const transformerEncoderAndDecoder: SubjectTopic = {
           "The original Transformer uses post-normalization, commonly written LayerNorm(x + Sublayer(x)). Many modern implementations use pre-normalization, x + Sublayer(LayerNorm(x)). State the chosen convention because both exist.",
         ],
         formulas: [
-          { label: "LayerNorm", expression: "LN(x) = γ ⊙ (x − μfeature)/√(σfeature² + ε) + β" },
+          {
+            label: "LayerNorm",
+            expression: "LN(x) = γ ⊙ (x − μfeature)/√(σfeature² + ε) + β",
+          },
           { label: "One LayerNorm", expression: "parameters = 2dmodel" },
           { label: "Post-norm", expression: "y = LayerNorm(x + Sublayer(x))" },
           { label: "Pre-norm", expression: "y = x + Sublayer(LayerNorm(x))" },
@@ -215,37 +282,67 @@ export const transformerEncoderAndDecoder: SubjectTopic = {
         ],
         formulas: [
           { label: "Two LayerNorms", expression: "4dmodel parameters" },
-          { label: "Encoder block total", expression: "4dmodel² + 2dmodeldff + dff + 9dmodel" },
-          { label: "Decoder block total", expression: "8dmodel² + 2dmodeldff + dff + 15dmodel" },
+          {
+            label: "Encoder block total",
+            expression: "4dmodel² + 2dmodeldff + dff + 9dmodel",
+          },
+          {
+            label: "Decoder block total",
+            expression: "8dmodel² + 2dmodeldff + dff + 15dmodel",
+          },
         ],
       },
       {
         title: "Practice",
-        paragraphs: ["Do not include embeddings unless the question asks for the complete model."],
+        paragraphs: [
+          "Do not include embeddings unless the question asks for the complete model.",
+        ],
         problems: [
           {
             title: "Feedforward parameters",
-            prompt: "dmodel = 256 and dff = 1024. Count FFN parameters including biases.",
-            steps: ["First layer: 256×1024 weights + 1024 biases.", "Second layer: 1024×256 weights + 256 biases.", "Total = 2×256×1024 + 1024 + 256."],
+            prompt:
+              "dmodel = 256 and dff = 1024. Count FFN parameters including biases.",
+            steps: [
+              "First layer: 256×1024 weights + 1024 biases.",
+              "Second layer: 1024×256 weights + 256 biases.",
+              "Total = 2×256×1024 + 1024 + 256.",
+            ],
             answer: "The FFN has 525,568 parameters.",
           },
           {
             title: "Small encoder block",
-            prompt: "Use dmodel = 4 and dff = 8. Count one encoder block with biased MHA and two LayerNorms.",
-            steps: ["MHA = 4×4² + 4×4 = 80.", "FFN = 2×4×8 + 8 + 4 = 76.", "Two LayerNorms = 4×4 = 16.", "Total = 80 + 76 + 16."],
+            prompt:
+              "Use dmodel = 4 and dff = 8. Count one encoder block with biased MHA and two LayerNorms.",
+            steps: [
+              "MHA = 4×4² + 4×4 = 80.",
+              "FFN = 2×4×8 + 8 + 4 = 76.",
+              "Two LayerNorms = 4×4 = 16.",
+              "Total = 80 + 76 + 16.",
+            ],
             answer: "The encoder block has 172 parameters.",
           },
           {
             title: "Small decoder block",
-            prompt: "Use dmodel = 4 and dff = 8. Count one biased encoder-decoder Transformer decoder block with two MHA sublayers and three LayerNorms.",
-            steps: ["Two MHA sublayers = 2×80 = 160.", "FFN = 76.", "Three LayerNorms = 3×(2×4) = 24.", "Total = 160 + 76 + 24."],
+            prompt:
+              "Use dmodel = 4 and dff = 8. Count one biased encoder-decoder Transformer decoder block with two MHA sublayers and three LayerNorms.",
+            steps: [
+              "Two MHA sublayers = 2×80 = 160.",
+              "FFN = 76.",
+              "Three LayerNorms = 3×(2×4) = 24.",
+              "Total = 160 + 76 + 24.",
+            ],
             answer: "The decoder block has 260 parameters.",
           },
           {
             title: "Cross-attention sources",
-            prompt: "In a Transformer decoder, identify the sources of Q, K, and V for cross-attention.",
-            steps: ["The decoder asks for input information.", "The encoder memory contains that information."],
-            answer: "Q comes from the decoder; K and V come from encoder memory.",
+            prompt:
+              "In a Transformer decoder, identify the sources of Q, K, and V for cross-attention.",
+            steps: [
+              "The decoder asks for input information.",
+              "The encoder memory contains that information.",
+            ],
+            answer:
+              "Q comes from the decoder; K and V come from encoder memory.",
           },
         ],
       },
@@ -272,8 +369,14 @@ export const transformerEncoderAndDecoder: SubjectTopic = {
     definition:
       "A Transformer block combines attention, a position-wise FFN, residual connections, and LayerNorm.",
     sections: [
-      { title: "Encoder", flow: ["Self-attention", "Add/Norm", "FFN", "Add/Norm"] },
-      { title: "Decoder", flow: ["Masked self-attention", "Cross-attention", "FFN", "Output"] },
+      {
+        title: "Encoder",
+        flow: ["Self-attention", "Add/Norm", "FFN", "Add/Norm"],
+      },
+      {
+        title: "Decoder",
+        flow: ["Masked self-attention", "Cross-attention", "FFN", "Output"],
+      },
     ],
     essentialsStyle: "plain",
     essentials: [
@@ -283,16 +386,28 @@ export const transformerEncoderAndDecoder: SubjectTopic = {
       "FFN is shared across positions.",
       "Pre-norm and post-norm are different valid layouts.",
     ],
-    followUp: "Why must a Transformer sublayer output normally keep width dmodel?",
+    followUp:
+      "Why must a Transformer sublayer output normally keep width dmodel?",
   },
   lastMinute: {
-    definition: "Transformer block = attention + FFN + residual paths + LayerNorm.",
+    definition:
+      "Transformer block = attention + FFN + residual paths + LayerNorm.",
     sections: [
-      { title: "Encoder", points: ["Self-attention", "Two sublayers", "Two LayerNorms"] },
-      { title: "Decoder Extra", points: ["Causal self-attention", "Cross-attention", "Encoder memory"] },
+      {
+        title: "Encoder",
+        points: ["Self-attention", "Two sublayers", "Two LayerNorms"],
+      },
+      {
+        title: "Decoder Extra",
+        points: ["Causal self-attention", "Cross-attention", "Encoder memory"],
+      },
     ],
     memoryLine: "Attention mixes positions; FFN transforms each position.",
-    cues: ["Residual shapes must match.", "FFN: dmodel→dff→dmodel.", "Decoder cross-attention adds a third sublayer."],
+    cues: [
+      "Residual shapes must match.",
+      "FFN: dmodel→dff→dmodel.",
+      "Decoder cross-attention adds a third sublayer.",
+    ],
     trap: "Do not say the encoder uses a causal mask for ordinary bidirectional input understanding.",
   },
 };
@@ -326,7 +441,13 @@ export const transformerTrainingInferenceAndSelection: SubjectTopic = {
           "At inference time, the correct future targets are unavailable. The model predicts one token, appends the selected token to its input, and repeats until a stop condition.",
           "Generation is sequential even though attention inside one step is parallel across the available prefix. Caching earlier keys and values avoids recomputing every earlier projection at every step.",
         ],
-        flow: ["Start token", "Predict token", "Append", "Predict next", "Stop token or limit"],
+        flow: [
+          "Start token",
+          "Predict token",
+          "Append",
+          "Predict next",
+          "Stop token or limit",
+        ],
       },
       {
         title: "Three Main Transformer Families",
@@ -339,7 +460,8 @@ export const transformerTrainingInferenceAndSelection: SubjectTopic = {
           alt: "Comparison of encoder-only bidirectional, decoder-only causal, and encoder-decoder sequence-to-sequence Transformers",
           width: 1536,
           height: 1024,
-          caption: "Choose the attention direction and architecture from the required input-output behaviour.",
+          caption:
+            "Choose the attention direction and architecture from the required input-output behaviour.",
         },
         dataTable: {
           headers: ["Architecture", "Best fit"],
@@ -370,30 +492,49 @@ export const transformerTrainingInferenceAndSelection: SubjectTopic = {
       },
       {
         title: "Practice",
-        paragraphs: ["Choose the architecture from information access and output behaviour."],
+        paragraphs: [
+          "Choose the architecture from information access and output behaviour.",
+        ],
         problems: [
           {
             title: "Shift the target",
-            prompt: "The target tokens are [A, B, C, END]. Write the teacher-forced decoder input and prediction targets.",
-            steps: ["Place START before the target prefix.", "Shift the expected sequence one position left relative to decoder input."],
+            prompt:
+              "The target tokens are [A, B, C, END]. Write the teacher-forced decoder input and prediction targets.",
+            steps: [
+              "Place START before the target prefix.",
+              "Shift the expected sequence one position left relative to decoder input.",
+            ],
             answer: "Decoder input: [START, A, B, C]. Targets: [A, B, C, END].",
           },
           {
             title: "Output-head parameters",
-            prompt: "Vocabulary size V = 10,000 and dmodel = 256. Count an untied biased output projection.",
-            steps: ["Weights = 10,000 × 256 = 2,560,000.", "Biases = 10,000.", "Add both counts."],
+            prompt:
+              "Vocabulary size V = 10,000 and dmodel = 256. Count an untied biased output projection.",
+            steps: [
+              "Weights = 10,000 × 256 = 2,560,000.",
+              "Biases = 10,000.",
+              "Add both counts.",
+            ],
             answer: "The output head has 2,570,000 parameters.",
           },
           {
             title: "Choose an architecture",
-            prompt: "A task reads a complete sequence and assigns one category without generating text. Which Transformer family is the natural starting point?",
-            steps: ["The complete input is available.", "The task needs understanding and one label, not causal generation."],
+            prompt:
+              "A task reads a complete sequence and assigns one category without generating text. Which Transformer family is the natural starting point?",
+            steps: [
+              "The complete input is available.",
+              "The task needs understanding and one label, not causal generation.",
+            ],
             answer: "Use an encoder-only Transformer.",
           },
           {
             title: "Attention growth",
-            prompt: "Sequence length grows from 1,000 to 2,000. By what factor does the full T × T score count grow?",
-            steps: ["The length doubles.", "The score matrix grows quadratically: 2²."],
+            prompt:
+              "Sequence length grows from 1,000 to 2,000. By what factor does the full T × T score count grow?",
+            steps: [
+              "The length doubles.",
+              "The score matrix grows quadratically: 2².",
+            ],
             answer: "The score count grows by a factor of 4.",
           },
         ],
@@ -421,8 +562,18 @@ export const transformerTrainingInferenceAndSelection: SubjectTopic = {
     definition:
       "Training uses shifted correct targets with causal masking; inference repeatedly feeds back generated tokens.",
     sections: [
-      { title: "Architecture Choice", points: ["Encoder-only: understand", "Decoder-only: generate", "Encoder-decoder: transform sequences"] },
-      { title: "Generation", flow: ["Context", "Next-token logits", "Select", "Append", "Repeat"] },
+      {
+        title: "Architecture Choice",
+        points: [
+          "Encoder-only: understand",
+          "Decoder-only: generate",
+          "Encoder-decoder: transform sequences",
+        ],
+      },
+      {
+        title: "Generation",
+        flow: ["Context", "Next-token logits", "Select", "Append", "Repeat"],
+      },
     ],
     essentialsStyle: "plain",
     essentials: [
@@ -432,16 +583,38 @@ export const transformerTrainingInferenceAndSelection: SubjectTopic = {
       "Output projection creates vocabulary logits.",
       "Full attention score size is quadratic in length.",
     ],
-    followUp: "Why can causal Transformer training process target positions together while inference remains sequential?",
+    followUp:
+      "Why can causal Transformer training process target positions together while inference remains sequential?",
   },
   lastMinute: {
-    definition: "Train on shifted targets; generate by appending one prediction at a time.",
+    definition:
+      "Train on shifted targets; generate by appending one prediction at a time.",
     sections: [
-      { title: "Choose", points: ["Understand → encoder", "Generate → decoder", "Map sequences → encoder-decoder"] },
-      { title: "Loss", points: ["Vocabulary logits", "Cross-entropy", "Ignore padding", "No future leakage"] },
+      {
+        title: "Choose",
+        points: [
+          "Understand → encoder",
+          "Generate → decoder",
+          "Map sequences → encoder-decoder",
+        ],
+      },
+      {
+        title: "Loss",
+        points: [
+          "Vocabulary logits",
+          "Cross-entropy",
+          "Ignore padding",
+          "No future leakage",
+        ],
+      },
     ],
-    memoryLine: "Training knows the shifted past; inference must create the past it will use next.",
-    cues: ["Cache earlier K and V during generation.", "Output head: Vdmodel+V.", "Double length → 4× scores."],
+    memoryLine:
+      "Training knows the shifted past; inference must create the past it will use next.",
+    cues: [
+      "Cache earlier K and V during generation.",
+      "Output head: Vdmodel+V.",
+      "Double length → 4× scores.",
+    ],
     trap: "Do not feed the unshifted target into the decoder as its own input.",
   },
 };

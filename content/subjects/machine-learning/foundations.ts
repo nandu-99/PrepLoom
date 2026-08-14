@@ -36,9 +36,18 @@ export const introductionToMachineLearning: SubjectTopic = {
         table: {
           headers: ["Traditional program", "Machine-learning system"],
           rows: [
-            ["Rules + data produce answers", "Data + known answers produce a model"],
-            ["A programmer writes the decision logic", "An algorithm estimates the decision pattern"],
-            ["Best when rules are clear and stable", "Useful when patterns are complex but examples exist"],
+            [
+              "Rules + data produce answers",
+              "Data + known answers produce a model",
+            ],
+            [
+              "A programmer writes the decision logic",
+              "An algorithm estimates the decision pattern",
+            ],
+            [
+              "Best when rules are clear and stable",
+              "Useful when patterns are complex but examples exist",
+            ],
           ],
         },
       },
@@ -54,11 +63,23 @@ export const introductionToMachineLearning: SubjectTopic = {
             ["Example or sample", "One item in the dataset", "One house"],
             ["Feature", "Information given to the model", "Area"],
             ["Target", "Answer to learn or predict", "Sale price"],
-            ["Algorithm", "Procedure that learns from data", "Linear regression training"],
+            [
+              "Algorithm",
+              "Procedure that learns from data",
+              "Linear regression training",
+            ],
             ["Model", "The learned mapping", "The fitted price equation"],
             ["Parameter", "A value learned during training", "A coefficient"],
-            ["Hyperparameter", "A setting chosen before or around training", "Regularization strength"],
-            ["Loss", "A number measuring prediction error", "Difference from the true price"],
+            [
+              "Hyperparameter",
+              "A setting chosen before or around training",
+              "Regularization strength",
+            ],
+            [
+              "Loss",
+              "A number measuring prediction error",
+              "Difference from the true price",
+            ],
             ["Prediction", "Output for a new input", "Estimated price"],
           ],
         },
@@ -79,9 +100,15 @@ export const introductionToMachineLearning: SubjectTopic = {
         table: {
           headers: ["Training", "Inference"],
           rows: [
-            ["Learns from historical examples", "Uses the learned model on new data"],
+            [
+              "Learns from historical examples",
+              "Uses the learned model on new data",
+            ],
             ["Adjusts model parameters", "Keeps parameters fixed"],
-            ["Usually requires more computation", "Usually needs a quick prediction"],
+            [
+              "Usually requires more computation",
+              "Usually needs a quick prediction",
+            ],
           ],
         },
       },
@@ -187,7 +214,13 @@ export const introductionToMachineLearning: SubjectTopic = {
       },
       {
         title: "Basic Flow",
-        flow: ["Define the task", "Prepare representative data", "Train and validate", "Test once", "Predict new cases"],
+        flow: [
+          "Define the task",
+          "Prepare representative data",
+          "Train and validate",
+          "Test once",
+          "Predict new cases",
+        ],
       },
       {
         title: "Use ML When",
@@ -207,18 +240,29 @@ export const introductionToMachineLearning: SubjectTopic = {
       "A model learns patterns present in its data, including unwanted ones.",
       "A simple exact rule is better when the rule is already known.",
     ],
-    followUp: "What is the difference between an algorithm and a trained model?",
+    followUp:
+      "What is the difference between an algorithm and a trained model?",
   },
   lastMinute: {
     definition: "ML learns a mapping or pattern from examples.",
     sections: [
       {
         title: "Remember the Terms",
-        points: ["Feature = input", "Target = required answer", "Parameter = learned value", "Hyperparameter = chosen setting", "Loss = prediction error", "Model = learned result"],
+        points: [
+          "Feature = input",
+          "Target = required answer",
+          "Parameter = learned value",
+          "Hyperparameter = chosen setting",
+          "Loss = prediction error",
+          "Model = learned result",
+        ],
       },
       {
         title: "Two Stages",
-        points: ["Training learns parameters.", "Inference makes predictions with those parameters."],
+        points: [
+          "Training learns parameters.",
+          "Inference makes predictions with those parameters.",
+        ],
       },
       {
         title: "Workflow",
@@ -328,8 +372,16 @@ export const typesOfMachineLearning: SubjectTopic = {
         dataTable: {
           headers: ["Question", "Target available?", "Task"],
           rows: [
-            ["What price will this house sell for?", "Yes: price", "Regression"],
-            ["Is this house expensive or affordable?", "Yes: category", "Classification"],
+            [
+              "What price will this house sell for?",
+              "Yes: price",
+              "Regression",
+            ],
+            [
+              "Is this house expensive or affordable?",
+              "Yes: category",
+              "Classification",
+            ],
             ["Which houses naturally look similar?", "No", "Clustering"],
           ],
         },
@@ -413,7 +465,12 @@ export const typesOfMachineLearning: SubjectTopic = {
       },
       {
         title: "Fast Identification",
-        flow: ["Is a target supplied?", "Yes: number or category?", "Number: regression", "Category: classification"],
+        flow: [
+          "Is a target supplied?",
+          "Yes: number or category?",
+          "Number: regression",
+          "Category: classification",
+        ],
       },
     ],
     essentialsStyle: "plain",
@@ -432,14 +489,19 @@ export const typesOfMachineLearning: SubjectTopic = {
     sections: [
       {
         title: "Three Tasks",
-        points: ["Regression: predict a number", "Classification: predict a class", "Clustering: discover groups"],
+        points: [
+          "Regression: predict a number",
+          "Classification: predict a class",
+          "Clustering: discover groups",
+        ],
       },
       {
         title: "Label Check",
         points: ["Known target: supervised", "No target: unsupervised"],
       },
     ],
-    memoryLine: "Number = regression, class = classification, no label + groups = clustering.",
+    memoryLine:
+      "Number = regression, class = classification, no label + groups = clustering.",
     cues: [
       "Price is numerical.",
       "Spam is categorical.",
@@ -515,10 +577,18 @@ export const featuresLabelsAndDatasets: SubjectTopic = {
         dataTable: {
           headers: ["Feature type", "Meaning", "Example"],
           rows: [
-            ["Continuous numerical", "Measured quantity", "Height, temperature"],
+            [
+              "Continuous numerical",
+              "Measured quantity",
+              "Height, temperature",
+            ],
             ["Discrete numerical", "Count", "Number of purchases"],
             ["Nominal categorical", "Names with no order", "City, blood group"],
-            ["Ordinal categorical", "Categories with an order", "Low, medium, high"],
+            [
+              "Ordinal categorical",
+              "Categories with an order",
+              "Low, medium, high",
+            ],
             ["Binary", "Two possible states", "Yes / no"],
             ["Date or time", "Time information with structure", "Order date"],
           ],
@@ -568,7 +638,8 @@ export const featuresLabelsAndDatasets: SubjectTopic = {
               "y = pass_or_fail.",
               "student_id identifies the row but does not describe academic performance.",
             ],
-            answer: "Use three features and remove student_id from the model inputs.",
+            answer:
+              "Use three features and remove student_id from the model inputs.",
           },
           {
             title: "Find the matrix shape",
@@ -612,7 +683,11 @@ export const featuresLabelsAndDatasets: SubjectTopic = {
       {
         title: "Notation",
         formulas: [
-          { label: "Encoded inputs", expression: "X ∈ ℝⁿˣᵖ", note: "A numerical matrix with n samples and p features" },
+          {
+            label: "Encoded inputs",
+            expression: "X ∈ ℝⁿˣᵖ",
+            note: "A numerical matrix with n samples and p features",
+          },
           { label: "One labelled example", expression: "(xᵢ, yᵢ)" },
         ],
       },
@@ -642,11 +717,21 @@ export const featuresLabelsAndDatasets: SubjectTopic = {
     sections: [
       {
         title: "Read a Table",
-        points: ["Row = sample", "Input column = feature", "Answer column = target", "n rows and p features → X is n × p"],
+        points: [
+          "Row = sample",
+          "Input column = feature",
+          "Answer column = target",
+          "n rows and p features → X is n × p",
+        ],
       },
       {
         title: "Before Using a Feature",
-        points: ["Meaningful?", "Available in time?", "Correct type?", "Not just an ID?"],
+        points: [
+          "Meaningful?",
+          "Available in time?",
+          "Correct type?",
+          "Not just an ID?",
+        ],
       },
     ],
     memoryLine: "One row, one example; X goes in, y is learned.",
@@ -695,10 +780,26 @@ export const dataPreparation: SubjectTopic = {
         dataTable: {
           headers: ["Situation", "Possible treatment", "Important caution"],
           rows: [
-            ["Few incomplete rows", "Remove those rows", "Check that removal is not biased"],
-            ["Numerical values missing", "Median or mean imputation", "Learn the value from training data only"],
-            ["Category missing", "Mode or Unknown category", "Unknown must have a clear meaning"],
-            ["Column mostly empty", "Consider removing the column", "Do not discard an important signal blindly"],
+            [
+              "Few incomplete rows",
+              "Remove those rows",
+              "Check that removal is not biased",
+            ],
+            [
+              "Numerical values missing",
+              "Median or mean imputation",
+              "Learn the value from training data only",
+            ],
+            [
+              "Category missing",
+              "Mode or Unknown category",
+              "Unknown must have a clear meaning",
+            ],
+            [
+              "Column mostly empty",
+              "Consider removing the column",
+              "Do not discard an important signal blindly",
+            ],
           ],
         },
       },
@@ -712,8 +813,16 @@ export const dataPreparation: SubjectTopic = {
         dataTable: {
           headers: ["Original feature", "Suitable encoding", "Reason"],
           rows: [
-            ["City: Delhi, Mumbai, Pune", "One-hot encoding", "Cities have no natural rank"],
-            ["Size: small, medium, large", "Ordinal encoding", "The categories have an order"],
+            [
+              "City: Delhi, Mumbai, Pune",
+              "One-hot encoding",
+              "Cities have no natural rank",
+            ],
+            [
+              "Size: small, medium, large",
+              "Ordinal encoding",
+              "The categories have an order",
+            ],
             ["Subscribed: yes, no", "Binary 1 and 0", "There are two states"],
           ],
         },
@@ -770,12 +879,9 @@ export const dataPreparation: SubjectTopic = {
             title: "Find a standardized value",
             prompt:
               "The training mean is μ = 50 and the training standard deviation is σ = 10. Standardize x = 65.",
-            steps: [
-              "z = (x − μ) / σ",
-              "z = (65 − 50) / 10",
-              "z = 15 / 10",
-            ],
-            answer: "z = 1.5, so the value is 1.5 standard deviations above the mean.",
+            steps: ["z = (x − μ) / σ", "z = (65 − 50) / 10", "z = 15 / 10"],
+            answer:
+              "z = 1.5, so the value is 1.5 standard deviations above the mean.",
           },
         ],
       },
@@ -827,7 +933,8 @@ export const dataPreparation: SubjectTopic = {
               "The pipeline must follow a rule chosen during training.",
               "It can safely ignore the unknown one-hot category or map it to a defined Unknown category.",
             ],
-            answer: "Use the fitted encoder's predefined unknown-category rule; do not refit it on the single future row.",
+            answer:
+              "Use the fitted encoder's predefined unknown-category rule; do not refit it on the single future row.",
           },
         ],
       },
@@ -876,7 +983,12 @@ export const dataPreparation: SubjectTopic = {
       },
       {
         title: "Safe Order",
-        flow: ["Split", "Fit preparation on training", "Transform training", "Reuse on validation and test"],
+        flow: [
+          "Split",
+          "Fit preparation on training",
+          "Transform training",
+          "Reuse on validation and test",
+        ],
       },
     ],
     essentialsStyle: "plain",
@@ -893,15 +1005,26 @@ export const dataPreparation: SubjectTopic = {
     followUp: "Why must a scaler be fitted after the data split?",
   },
   lastMinute: {
-    definition: "Prepare data consistently without allowing validation or test information into training.",
+    definition:
+      "Prepare data consistently without allowing validation or test information into training.",
     sections: [
       {
         title: "Order",
-        flow: ["Inspect", "Split", "Fit cleaner and encoder", "Fit scaler", "Transform all splits"],
+        flow: [
+          "Inspect",
+          "Split",
+          "Fit cleaner and encoder",
+          "Fit scaler",
+          "Transform all splits",
+        ],
       },
       {
         title: "Two Formulas",
-        points: ["Min-max: (x − min) / (max − min)", "Z-score: (x − μ) / σ", "If the denominator is 0, handle the constant feature"],
+        points: [
+          "Min-max: (x − min) / (max − min)",
+          "Z-score: (x − μ) / σ",
+          "If the denominator is 0, handle the constant feature",
+        ],
       },
     ],
     memoryLine: "Fit on training; only transform validation and test.",
@@ -941,9 +1064,21 @@ export const trainValidationAndTestData: SubjectTopic = {
         dataTable: {
           headers: ["Set", "Used for", "Must not be used for"],
           rows: [
-            ["Training", "Learning model and preprocessing parameters", "Final performance claim"],
-            ["Validation", "Comparing choices and tuning hyperparameters", "Updating model parameters directly"],
-            ["Test", "One final unbiased evaluation", "Repeated model selection"],
+            [
+              "Training",
+              "Learning model and preprocessing parameters",
+              "Final performance claim",
+            ],
+            [
+              "Validation",
+              "Comparing choices and tuning hyperparameters",
+              "Updating model parameters directly",
+            ],
+            [
+              "Test",
+              "One final unbiased evaluation",
+              "Repeated model selection",
+            ],
           ],
         },
       },
@@ -964,7 +1099,10 @@ export const trainValidationAndTestData: SubjectTopic = {
         table: {
           headers: ["Holdout setup", "Cross-validation setup"],
           rows: [
-            ["Training + Validation + Test", "Development data with K-fold CV + Test"],
+            [
+              "Training + Validation + Test",
+              "Development data with K-fold CV + Test",
+            ],
             ["One fixed validation set", "Validation fold rotates K times"],
             ["Faster and simple", "Uses limited development data more fully"],
           ],
@@ -1014,7 +1152,8 @@ export const trainValidationAndTestData: SubjectTopic = {
               "Test negatives = 900 − 720 = 180",
               "Test positives = 100 − 80 = 20",
             ],
-            answer: "Training: 720 negative and 80 positive. Test: 180 negative and 20 positive.",
+            answer:
+              "Training: 720 negative and 80 positive. Test: 180 negative and 20 positive.",
           },
         ],
       },
@@ -1058,7 +1197,11 @@ export const trainValidationAndTestData: SubjectTopic = {
           "For time-series prediction, future observations must not train a model that is evaluated on the past. Keep chronological order: train on earlier data, validate on later data, and test on the latest period.",
           "Random shuffling can create a future-to-past leak and produce an unrealistic score.",
         ],
-        flow: ["Earlier observations: train", "Later observations: validate", "Latest untouched observations: test"],
+        flow: [
+          "Earlier observations: train",
+          "Later observations: validate",
+          "Latest untouched observations: test",
+        ],
       },
       {
         title: "The Test Set Is Not a Second Validation Set",
@@ -1145,7 +1288,13 @@ export const trainValidationAndTestData: SubjectTopic = {
       },
       {
         title: "Split Rules",
-        points: ["Choose holdout or K-fold CV", "Stratify classes", "Keep groups together", "Keep time in order", "Refit preprocessing in each fold"],
+        points: [
+          "Choose holdout or K-fold CV",
+          "Stratify classes",
+          "Keep groups together",
+          "Keep time in order",
+          "Refit preprocessing in each fold",
+        ],
       },
     ],
     memoryLine: "Train many times, validate choices, test once.",
@@ -1221,8 +1370,14 @@ export const modelGeneralization: SubjectTopic = {
           rows: [
             ["Model is too restricted", "Model is too sensitive"],
             ["Often underfits", "Often overfits"],
-            ["Training and validation errors are both high", "Training error is low but validation error is higher"],
-            ["May need better features or a more flexible model", "May need more data, regularization, or a simpler model"],
+            [
+              "Training and validation errors are both high",
+              "Training error is low but validation error is higher",
+            ],
+            [
+              "May need better features or a more flexible model",
+              "May need more data, regularization, or a simpler model",
+            ],
           ],
         },
         formulas: [
@@ -1285,11 +1440,31 @@ export const modelGeneralization: SubjectTopic = {
         dataTable: {
           headers: ["Leakage source", "Example", "Correct approach"],
           rows: [
-            ["Target leakage", "Using a field created after the outcome", "Use only information available at prediction time"],
-            ["Preprocessing leakage", "Scaling before splitting", "Split first and fit preprocessing on training data"],
-            ["Group leakage", "Same patient in train and test", "Split by patient"],
-            ["Time leakage", "Future records used to predict the past", "Preserve chronological order"],
-            ["Test-set leakage", "Choosing the model with repeated test scores", "Choose with validation data"],
+            [
+              "Target leakage",
+              "Using a field created after the outcome",
+              "Use only information available at prediction time",
+            ],
+            [
+              "Preprocessing leakage",
+              "Scaling before splitting",
+              "Split first and fit preprocessing on training data",
+            ],
+            [
+              "Group leakage",
+              "Same patient in train and test",
+              "Split by patient",
+            ],
+            [
+              "Time leakage",
+              "Future records used to predict the past",
+              "Preserve chronological order",
+            ],
+            [
+              "Test-set leakage",
+              "Choosing the model with repeated test scores",
+              "Choose with validation data",
+            ],
           ],
         },
       },
@@ -1378,18 +1553,36 @@ export const modelGeneralization: SubjectTopic = {
         dataTable: {
           headers: ["Observed behaviour", "Likely problem"],
           rows: [
-            ["Training and validation errors high with a small gap", "Underfitting / high bias"],
-            ["Training strong, validation much poorer", "Overfitting / high variance"],
-            ["Training and validation errors low with a small gap", "Good generalization"],
-            ["Unrealistically strong score", "Check leakage before celebrating"],
+            [
+              "Training and validation errors high with a small gap",
+              "Underfitting / high bias",
+            ],
+            [
+              "Training strong, validation much poorer",
+              "Overfitting / high variance",
+            ],
+            [
+              "Training and validation errors low with a small gap",
+              "Good generalization",
+            ],
+            [
+              "Unrealistically strong score",
+              "Check leakage before celebrating",
+            ],
           ],
         },
       },
       {
         title: "Regularization",
         formulas: [
-          { label: "Objective", expression: "data loss + λ × complexity penalty" },
-          { label: "Error view", expression: "bias² + variance + irreducible noise" },
+          {
+            label: "Objective",
+            expression: "data loss + λ × complexity penalty",
+          },
+          {
+            label: "Error view",
+            expression: "bias² + variance + irreducible noise",
+          },
         ],
       },
       {
@@ -1414,21 +1607,32 @@ export const modelGeneralization: SubjectTopic = {
       "Distribution shift can make an old test score unreliable for current data.",
       "Diagnose the data and split before changing the algorithm.",
     ],
-    followUp: "How can a model have an excellent test score and still be unusable?",
+    followUp:
+      "How can a model have an excellent test score and still be unusable?",
   },
   lastMinute: {
     definition: "A good model works on unseen data.",
     sections: [
       {
         title: "Fit Check",
-        points: ["Both errors high → underfit / high bias", "Large train-validation gap → overfit / high variance", "Both errors low with a small gap → good fit"],
+        points: [
+          "Both errors high → underfit / high bias",
+          "Large train-validation gap → overfit / high variance",
+          "Both errors low with a small gap → good fit",
+        ],
       },
       {
         title: "Leakage Check",
-        points: ["No future answer in features", "Fit preprocessing on train", "Keep groups together", "Do not tune on test"],
+        points: [
+          "No future answer in features",
+          "Fit preprocessing on train",
+          "Keep groups together",
+          "Do not tune on test",
+        ],
       },
     ],
-    memoryLine: "Learn the signal, ignore the noise, protect the test boundary.",
+    memoryLine:
+      "Learn the signal, ignore the noise, protect the test boundary.",
     cues: [
       "Regularization adds a complexity penalty.",
       "More complexity is not always better.",

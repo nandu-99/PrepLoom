@@ -48,7 +48,11 @@ export const functionalDependencies: SubjectTopic = {
           rows: [
             ["Trivial", "Y is a subset of X", "{A, B} → A"],
             ["Non-trivial", "Y is not a subset of X", "A → B"],
-            ["Completely non-trivial", "X and Y have no common attribute", "{A, B} → {C, D}"],
+            [
+              "Completely non-trivial",
+              "X and Y have no common attribute",
+              "{A, B} → {C, D}",
+            ],
           ],
         },
         paragraphs: [
@@ -75,9 +79,21 @@ export const functionalDependencies: SubjectTopic = {
         dataTable: {
           headers: ["Axiom", "Rule", "Simple meaning"],
           rows: [
-            ["Reflexivity", "If Y ⊆ X, then X → Y", "A set determines its own subsets"],
-            ["Augmentation", "If X → Y, then XZ → YZ", "Add the same attributes to both sides"],
-            ["Transitivity", "If X → Y and Y → Z, then X → Z", "Follow the dependency chain"],
+            [
+              "Reflexivity",
+              "If Y ⊆ X, then X → Y",
+              "A set determines its own subsets",
+            ],
+            [
+              "Augmentation",
+              "If X → Y, then XZ → YZ",
+              "Add the same attributes to both sides",
+            ],
+            [
+              "Transitivity",
+              "If X → Y and Y → Z, then X → Z",
+              "Follow the dependency chain",
+            ],
           ],
         },
         paragraphs: [
@@ -98,9 +114,7 @@ export const functionalDependencies: SubjectTopic = {
       },
       {
         title: "Practice: Infer the Dependencies",
-        paragraphs: [
-          "Given A → B, B → C, and CD → E:",
-        ],
+        paragraphs: ["Given A → B, B → C, and CD → E:"],
         points: [
           "A → C follows by transitivity.",
           "A → BC follows from A → B and A → C using union.",
@@ -157,7 +171,8 @@ export const functionalDependencies: SubjectTopic = {
       "Armstrong's axioms are sound and complete.",
       "X → Y is implied exactly when Y is contained in X+.",
     ],
-    followUp: "Given A → B and BC → D, what can be inferred after augmenting A → B with C?",
+    followUp:
+      "Given A → B and BC → D, what can be inferred after augmenting A → B with C?",
   },
   lastMinute: {
     definition:
@@ -239,8 +254,14 @@ export const attributeClosureAndCandidateKeys: SubjectTopic = {
         dataTable: {
           headers: ["Class", "Key-search use"],
           rows: [
-            ["Only on left or in no FD", "Cannot be derived, so include in every candidate key"],
-            ["Only on right", "Usually do not add initially because another attribute derives them"],
+            [
+              "Only on left or in no FD",
+              "Cannot be derived, so include in every candidate key",
+            ],
+            [
+              "Only on right",
+              "Usually do not add initially because another attribute derives them",
+            ],
             ["On both sides", "May be needed in some candidate keys"],
           ],
         },
@@ -310,7 +331,10 @@ export const attributeClosureAndCandidateKeys: SubjectTopic = {
         table: {
           headers: ["Super key", "Candidate key"],
           rows: [
-            ["Closure is the full schema", "Closure is full and the set is minimal"],
+            [
+              "Closure is the full schema",
+              "Closure is full and the set is minimal",
+            ],
             ["May contain extra attributes", "Contains no removable attribute"],
           ],
         },
@@ -333,7 +357,8 @@ export const attributeClosureAndCandidateKeys: SubjectTopic = {
       "Classify attributes first to reduce the candidate-key search.",
       "Closure also tests whether an FD is implied.",
     ],
-    followUp: "Why must D appear in every candidate key when no FD can derive D?",
+    followUp:
+      "Why must D appear in every candidate key when no FD can derive D?",
   },
   lastMinute: {
     definition:
@@ -401,9 +426,7 @@ export const minimalCover: SubjectTopic = {
       },
       {
         title: "Worked Minimal Cover",
-        paragraphs: [
-          "Let F = {A → BC, B → C, A → B, AB → C}.",
-        ],
+        paragraphs: ["Let F = {A → BC, B → C, A → B, AB → C}."],
         dataTable: {
           headers: ["Step", "FD set"],
           rows: [
@@ -424,9 +447,7 @@ export const minimalCover: SubjectTopic = {
       },
       {
         title: "Practice",
-        paragraphs: [
-          "Reduce F = {A → BC, B → C, A → B}.",
-        ],
+        paragraphs: ["Reduce F = {A → BC, B → C, A → B}."],
         points: [
           "Split A → BC into A → B and A → C.",
           "Remove the duplicate A → B.",
@@ -436,14 +457,18 @@ export const minimalCover: SubjectTopic = {
       },
       {
         title: "Harder Practice: Composite Left Side",
-        paragraphs: [
-          "Reduce F = {AB → C, A → B, B → D, C → E, AD → E}.",
-        ],
+        paragraphs: ["Reduce F = {AB → C, A → B, B → D, C → E, AD → E}."],
         dataTable: {
           headers: ["Test", "Result"],
           rows: [
-            ["Is B extraneous in AB → C?", "A+ contains B using A → B, then AB → C adds C; replace AB → C with A → C"],
-            ["Is D extraneous in AD → E?", "A+ gives B, then C using A → C, then E using C → E; replace AD → E with A → E"],
+            [
+              "Is B extraneous in AB → C?",
+              "A+ contains B using A → B, then AB → C adds C; replace AB → C with A → C",
+            ],
+            [
+              "Is D extraneous in AD → E?",
+              "A+ gives B, then C using A → C, then E using C → E; replace AD → E with A → E",
+            ],
             ["Is A → E redundant?", "Yes; A → C and C → E already imply it"],
             ["Minimal cover", "{A → B, A → C, B → D, C → E}"],
           ],
@@ -536,7 +561,13 @@ export const normalizationAndAnomalies: SubjectTopic = {
           "If one student takes several courses, StudentName repeats. If many students take one course, CourseName and Instructor repeat. The repeated facts create anomalies.",
         ],
         dataTable: {
-          headers: ["StudentId", "StudentName", "CourseId", "CourseName", "Instructor"],
+          headers: [
+            "StudentId",
+            "StudentName",
+            "CourseId",
+            "CourseName",
+            "Instructor",
+          ],
           rows: [
             ["S1", "Asha", "C1", "DBMS", "Rao"],
             ["S1", "Asha", "C2", "OS", "Mina"],
@@ -550,9 +581,18 @@ export const normalizationAndAnomalies: SubjectTopic = {
         dataTable: {
           headers: ["Anomaly", "Problem in the ENROLMENT relation"],
           rows: [
-            ["Insertion", "A new course cannot be stored until some student enrols, unless unwanted NULL values are used"],
-            ["Update", "Changing one course instructor requires updating several tuples"],
-            ["Deletion", "Deleting the last enrolment for a course can also remove the only stored course details"],
+            [
+              "Insertion",
+              "A new course cannot be stored until some student enrols, unless unwanted NULL values are used",
+            ],
+            [
+              "Update",
+              "Changing one course instructor requires updating several tuples",
+            ],
+            [
+              "Deletion",
+              "Deleting the last enrolment for a course can also remove the only stored course details",
+            ],
           ],
         },
       },
@@ -580,9 +620,18 @@ export const normalizationAndAnomalies: SubjectTopic = {
         dataTable: {
           headers: ["Dependency", "Why it violates 2NF"],
           rows: [
-            ["StudentId → StudentName", "StudentId is only part of the composite candidate key"],
-            ["CourseId → CourseName", "CourseId is only part of the composite candidate key"],
-            ["CourseId → Instructor", "CourseId is only part of the composite candidate key"],
+            [
+              "StudentId → StudentName",
+              "StudentId is only part of the composite candidate key",
+            ],
+            [
+              "CourseId → CourseName",
+              "CourseId is only part of the composite candidate key",
+            ],
+            [
+              "CourseId → Instructor",
+              "CourseId is only part of the composite candidate key",
+            ],
           ],
         },
       },
@@ -671,7 +720,10 @@ export const normalizationAndAnomalies: SubjectTopic = {
         table: {
           headers: ["1NF", "2NF"],
           rows: [
-            ["Atomic values and no repeating groups", "1NF plus no partial dependency of a non-prime attribute"],
+            [
+              "Atomic values and no repeating groups",
+              "1NF plus no partial dependency of a non-prime attribute",
+            ],
             ["Controls value structure", "Depends on candidate keys and FDs"],
           ],
         },
@@ -693,7 +745,8 @@ export const normalizationAndAnomalies: SubjectTopic = {
       "Check every candidate key, not only the primary key.",
       "Denormalize only for a measured need and keep duplicated values consistent.",
     ],
-    followUp: "Why is a 1NF relation with only single-attribute candidate keys automatically in 2NF?",
+    followUp:
+      "Why is a 1NF relation with only single-attribute candidate keys automatically in 2NF?",
   },
   lastMinute: {
     definition:
@@ -765,9 +818,18 @@ export const thirdNormalFormAndBcnf: SubjectTopic = {
         table: {
           headers: ["3NF", "BCNF"],
           rows: [
-            ["X is a super key or the right-side attribute is prime", "X must be a super key"],
-            ["May allow limited redundancy", "Stricter control of FD-based redundancy"],
-            ["Can always achieve lossless, dependency-preserving synthesis", "Lossless decomposition is possible, but dependencies may not all be preserved"],
+            [
+              "X is a super key or the right-side attribute is prime",
+              "X must be a super key",
+            ],
+            [
+              "May allow limited redundancy",
+              "Stricter control of FD-based redundancy",
+            ],
+            [
+              "Can always achieve lossless, dependency-preserving synthesis",
+              "Lossless decomposition is possible, but dependencies may not all be preserved",
+            ],
           ],
         },
       },
@@ -781,9 +843,7 @@ export const thirdNormalFormAndBcnf: SubjectTopic = {
       },
       {
         title: "BCNF Decomposition of the Example",
-        paragraphs: [
-          "Decompose on the violating FD Instructor → Course.",
-        ],
+        paragraphs: ["Decompose on the violating FD Instructor → Course."],
         points: [
           "R1(Instructor, Course).",
           "R2(Student, Instructor).",
@@ -794,7 +854,11 @@ export const thirdNormalFormAndBcnf: SubjectTopic = {
           headers: ["Relation", "Projected FD", "Candidate key"],
           rows: [
             ["R1(Instructor, Course)", "Instructor → Course", "Instructor"],
-            ["R2(Student, Instructor)", "No non-trivial projected FD from the given set", "{Student, Instructor}"],
+            [
+              "R2(Student, Instructor)",
+              "No non-trivial projected FD from the given set",
+              "{Student, Instructor}",
+            ],
           ],
         },
       },
@@ -851,7 +915,8 @@ export const thirdNormalFormAndBcnf: SubjectTopic = {
       "A 3NF relation can fail BCNF because of the prime-attribute exception.",
       "BCNF decomposition may lose dependency preservation.",
     ],
-    followUp: "How can Instructor → Course satisfy 3NF but violate BCNF in the worked example?",
+    followUp:
+      "How can Instructor → Course satisfy 3NF but violate BCNF in the worked example?",
   },
   lastMinute: {
     definition:
@@ -906,8 +971,14 @@ export const decompositionAndNormalizationPractice: SubjectTopic = {
           headers: ["Lossless join", "Dependency preservation"],
           rows: [
             ["Protects information", "Protects local constraint checking"],
-            ["Avoids missing or spurious tuples", "Avoids joining relations to verify every FD"],
-            ["Essential for a correct decomposition", "Highly desirable but may be lost in BCNF"],
+            [
+              "Avoids missing or spurious tuples",
+              "Avoids joining relations to verify every FD",
+            ],
+            [
+              "Essential for a correct decomposition",
+              "Highly desirable but may be lost in BCNF",
+            ],
           ],
         },
       },
@@ -943,7 +1014,10 @@ export const decompositionAndNormalizationPractice: SubjectTopic = {
             ["Original R", "(a1, b1, c1), (a1, b2, c2)"],
             ["R1(A, B)", "(a1, b1), (a1, b2)"],
             ["R2(A, C)", "(a1, c1), (a1, c2)"],
-            ["R1 ⋈ R2", "Original two tuples plus false tuples (a1, b1, c2), (a1, b2, c1)"],
+            [
+              "R1 ⋈ R2",
+              "Original two tuples plus false tuples (a1, b1, c2), (a1, b2, c1)",
+            ],
           ],
         },
       },
@@ -965,7 +1039,10 @@ export const decompositionAndNormalizationPractice: SubjectTopic = {
           rows: [
             ["Create from A → B", "R1(A, B)"],
             ["Create from B → C", "R2(B, C)"],
-            ["Check for an original candidate key", "Neither relation contains AD"],
+            [
+              "Check for an original candidate key",
+              "Neither relation contains AD",
+            ],
             ["Add key relation", "R3(A, D)"],
             ["Final keys", "A in R1, B in R2, and AD in R3"],
           ],
@@ -997,9 +1074,7 @@ export const decompositionAndNormalizationPractice: SubjectTopic = {
       },
       {
         title: "Answer Check",
-        paragraphs: [
-          "Read this only after attempting the previous problem.",
-        ],
+        paragraphs: ["Read this only after attempting the previous problem."],
         points: [
           "Start P+ = {P}. P → Q adds Q, Q → R adds R, and then PR → S adds S. Therefore P+ = {P, Q, R, S}, and P is the only candidate key.",
           "The relation is in 2NF because its only candidate key contains one attribute. Q → R violates 3NF because Q is not a super key and R is non-prime.",
@@ -1059,7 +1134,10 @@ export const decompositionAndNormalizationPractice: SubjectTopic = {
           rows: [
             ["Starts from a minimal cover", "Starts from a violating FD"],
             ["Preserves dependencies", "May lose dependency preservation"],
-            ["Ensure a relation contains a candidate key", "Each decomposition step is lossless"],
+            [
+              "Ensure a relation contains a candidate key",
+              "Each decomposition step is lossless",
+            ],
           ],
         },
       },

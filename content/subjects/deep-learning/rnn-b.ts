@@ -69,8 +69,14 @@ export const rnnGradientProblems: SubjectTopic = {
         table: {
           headers: ["Problem", "Most direct responses"],
           rows: [
-            ["Vanishing gradient", "LSTM or GRU, shorter paths, suitable initialization"],
-            ["Exploding gradient", "Global-norm clipping, lower learning rate, suitable initialization"],
+            [
+              "Vanishing gradient",
+              "LSTM or GRU, shorter paths, suitable initialization",
+            ],
+            [
+              "Exploding gradient",
+              "Global-norm clipping, lower learning rate, suitable initialization",
+            ],
           ],
         },
       },
@@ -87,7 +93,8 @@ export const rnnGradientProblems: SubjectTopic = {
               "0.6⁸ = 0.01679616.",
               "Only about 1.68% of the original magnitude remains in this simplified path.",
             ],
-            answer: "The multiplier is approximately 0.0168, showing strong gradient shrinkage.",
+            answer:
+              "The multiplier is approximately 0.0168, showing strong gradient shrinkage.",
           },
           {
             title: "Choose the correction",
@@ -97,7 +104,8 @@ export const rnnGradientProblems: SubjectTopic = {
               "Huge gradient norms indicate exploding gradients.",
               "Gradient clipping directly limits excessive gradient magnitude.",
             ],
-            answer: "Use gradient clipping, then also inspect learning rate and numerical stability.",
+            answer:
+              "Use gradient clipping, then also inspect learning rate and numerical stability.",
           },
         ],
       },
@@ -130,7 +138,10 @@ export const rnnGradientProblems: SubjectTopic = {
           headers: ["Vanishing", "Exploding"],
           rows: [
             ["Gradient becomes tiny", "Gradient becomes huge"],
-            ["Long dependencies are not learned", "Updates and loss become unstable"],
+            [
+              "Long dependencies are not learned",
+              "Updates and loss become unstable",
+            ],
           ],
         },
       },
@@ -150,19 +161,31 @@ export const rnnGradientProblems: SubjectTopic = {
     followUp: "Why does global-norm clipping preserve gradient direction?",
   },
   lastMinute: {
-    definition: "Small repeated factors vanish; large repeated factors explode.",
+    definition:
+      "Small repeated factors vanish; large repeated factors explode.",
     sections: [
       {
         title: "Symptoms",
-        points: ["Vanishing: near-zero gradients", "Exploding: spikes, infinity, or NaN"],
+        points: [
+          "Vanishing: near-zero gradients",
+          "Exploding: spikes, infinity, or NaN",
+        ],
       },
       {
         title: "Responses",
-        points: ["Exploding → clip", "Long dependency → LSTM or GRU", "Both → check learning rate and initialization"],
+        points: [
+          "Exploding → clip",
+          "Long dependency → LSTM or GRU",
+          "Both → check learning rate and initialization",
+        ],
       },
     ],
     memoryLine: "Clip what is too large; use gated memory for what fades away.",
-    cues: ["tanh bounds activations, not all gradients.", "Check gradient norms.", "Global norm keeps direction."],
+    cues: [
+      "tanh bounds activations, not all gradients.",
+      "Check gradient norms.",
+      "Global norm keeps direction.",
+    ],
     trap: "Do not say gradient clipping solves vanishing gradients.",
   },
 };
@@ -233,7 +256,10 @@ export const lstmNetworks: SubjectTopic = {
         ],
         formulas: [
           { label: "One gate or candidate", expression: "H(D + H + 1)" },
-          { label: "Complete LSTM cell", expression: "parameters = 4H(D + H + 1)" },
+          {
+            label: "Complete LSTM cell",
+            expression: "parameters = 4H(D + H + 1)",
+          },
           { label: "Optional output layer", expression: "add O(H + 1)" },
         ],
       },
@@ -243,8 +269,14 @@ export const lstmNetworks: SubjectTopic = {
           "For one scalar unit, let Cₜ₋₁ = 0.4, fₜ = 0.8, iₜ = 0.3, gₜ = 0.5, and oₜ = 0.9.",
         ],
         formulas: [
-          { label: "Cell state", expression: "Cₜ = 0.8×0.4 + 0.3×0.5 = 0.32 + 0.15 = 0.47" },
-          { label: "Hidden state", expression: "hₜ = 0.9×tanh(0.47) ≈ 0.9×0.438 ≈ 0.394" },
+          {
+            label: "Cell state",
+            expression: "Cₜ = 0.8×0.4 + 0.3×0.5 = 0.32 + 0.15 = 0.47",
+          },
+          {
+            label: "Hidden state",
+            expression: "hₜ = 0.9×tanh(0.47) ≈ 0.9×0.438 ≈ 0.394",
+          },
         ],
       },
       {
@@ -329,10 +361,12 @@ export const lstmNetworks: SubjectTopic = {
       "oₜ controls exposed hidden state.",
       "LSTM carries both Cₜ and hₜ.",
     ],
-    followUp: "Why does the additive cell-state update help long-range gradient flow?",
+    followUp:
+      "Why does the additive cell-state update help long-range gradient flow?",
   },
   lastMinute: {
-    definition: "LSTM = cell state plus forget, input, candidate, and output computations.",
+    definition:
+      "LSTM = cell state plus forget, input, candidate, and output computations.",
     sections: [
       {
         title: "Memory",
@@ -345,7 +379,11 @@ export const lstmNetworks: SubjectTopic = {
       },
     ],
     memoryLine: "Forget old, write new, expose what is needed.",
-    cues: ["Sigmoid gates lie in 0 to 1.", "Candidate uses tanh.", "⊙ means elementwise multiplication."],
+    cues: [
+      "Sigmoid gates lie in 0 to 1.",
+      "Candidate uses tanh.",
+      "⊙ means elementwise multiplication.",
+    ],
     trap: "Do not forget that LSTM has four parameter sets and two carried states.",
   },
 };
@@ -371,8 +409,14 @@ export const gruAndPracticalSequenceModelling: SubjectTopic = {
         formulas: [
           { label: "Update gate", expression: "zₜ = σ(Wz[hₜ₋₁, xₜ] + bz)" },
           { label: "Reset gate", expression: "rₜ = σ(Wr[hₜ₋₁, xₜ] + br)" },
-          { label: "Candidate state", expression: "h̃ₜ = tanh(Wh[rₜ ⊙ hₜ₋₁, xₜ] + bh)" },
-          { label: "New hidden state", expression: "hₜ = (1 − zₜ) ⊙ hₜ₋₁ + zₜ ⊙ h̃ₜ" },
+          {
+            label: "Candidate state",
+            expression: "h̃ₜ = tanh(Wh[rₜ ⊙ hₜ₋₁, xₜ] + bh)",
+          },
+          {
+            label: "New hidden state",
+            expression: "hₜ = (1 − zₜ) ⊙ hₜ₋₁ + zₜ ⊙ h̃ₜ",
+          },
         ],
       },
       {
@@ -383,7 +427,10 @@ export const gruAndPracticalSequenceModelling: SubjectTopic = {
         ],
         formulas: [
           { label: "One GRU computation", expression: "H(D + H + 1)" },
-          { label: "Complete GRU cell", expression: "parameters = 3H(D + H + 1)" },
+          {
+            label: "Complete GRU cell",
+            expression: "parameters = 3H(D + H + 1)",
+          },
           { label: "Optional output layer", expression: "add O(H + 1)" },
         ],
       },
@@ -426,15 +473,23 @@ export const gruAndPracticalSequenceModelling: SubjectTopic = {
         table: {
           headers: ["Task", "Useful recurrent output"],
           rows: [
-            ["Whole-sequence classification", "Final valid state or masked aggregation"],
+            [
+              "Whole-sequence classification",
+              "Final valid state or masked aggregation",
+            ],
             ["Label every time step", "All valid states"],
-            ["Predict next value at each step", "All required preceding states"],
+            [
+              "Predict next value at each step",
+              "All required preceding states",
+            ],
           ],
         },
       },
       {
         title: "Practice",
-        paragraphs: ["Use one GRU convention consistently and exclude padding from learning."],
+        paragraphs: [
+          "Use one GRU convention consistently and exclude padding from learning.",
+        ],
         problems: [
           {
             title: "GRU state mixture",
@@ -520,10 +575,12 @@ export const gruAndPracticalSequenceModelling: SubjectTopic = {
       "Masks mark valid and padded positions.",
       "Use the final valid state for padded sequence classification.",
     ],
-    followUp: "Why does a GRU usually have fewer parameters than an LSTM with the same sizes?",
+    followUp:
+      "Why does a GRU usually have fewer parameters than an LSTM with the same sizes?",
   },
   lastMinute: {
-    definition: "GRU = update gate, reset gate, candidate state, and one carried hidden state.",
+    definition:
+      "GRU = update gate, reset gate, candidate state, and one carried hidden state.",
     sections: [
       {
         title: "Counts",
@@ -531,12 +588,22 @@ export const gruAndPracticalSequenceModelling: SubjectTopic = {
       },
       {
         title: "Padding Rule",
-        flow: ["Pad", "Create mask", "Run model", "Use valid outputs", "Mask loss"],
+        flow: [
+          "Pad",
+          "Create mask",
+          "Run model",
+          "Use valid outputs",
+          "Mask loss",
+        ],
         wide: true,
       },
     ],
     memoryLine: "Gate the state, mask the padding, select the last real step.",
-    cues: ["GRU has no Cₜ.", "Mask: real = 1, pad = 0.", "All states: B × T × H."],
+    cues: [
+      "GRU has no Cₜ.",
+      "Mask: real = 1, pad = 0.",
+      "All states: B × T × H.",
+    ],
     trap: "Do not use the hidden state from the final padded position as the sequence summary.",
   },
 };

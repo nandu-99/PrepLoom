@@ -4,7 +4,8 @@ export const operatingSystemInterviewQuestions: OperatingSystemQuestion[] = [
   {
     id: "what-is-operating-system",
     category: "OS fundamentals",
-    question: "Let us start with the basics. What does an operating system actually do?",
+    question:
+      "Let us start with the basics. What does an operating system actually do?",
     answer:
       "An operating system sits between applications and the hardware. It manages resources such as the CPU, memory, storage, and devices, while giving programs simpler abstractions like processes, files, and sockets. It also provides isolation so one program cannot freely interfere with another.",
   },
@@ -25,14 +26,16 @@ export const operatingSystemInterviewQuestions: OperatingSystemQuestion[] = [
   {
     id: "interrupt-trap-exception",
     category: "OS fundamentals",
-    question: "How would you distinguish an interrupt, a trap, and an exception?",
+    question:
+      "How would you distinguish an interrupt, a trap, and an exception?",
     answer:
       "An interrupt is usually an asynchronous signal from hardware, such as a timer or network device. An exception is caused by the current instruction, for example a divide-by-zero or page fault. A trap is commonly used for an intentional transfer to the kernel, such as a system call, although terminology varies by architecture.",
   },
   {
     id: "monolithic-and-microkernel",
     category: "OS fundamentals",
-    question: "What is the main trade-off between a monolithic kernel and a microkernel?",
+    question:
+      "What is the main trade-off between a monolithic kernel and a microkernel?",
     answer:
       "A monolithic kernel keeps many services in kernel space, which makes communication fast but increases the amount of privileged code. A microkernel keeps only essential mechanisms in the kernel and moves more services to user space. That improves isolation and modularity, but communication between services can add overhead.",
   },
@@ -61,21 +64,24 @@ export const operatingSystemInterviewQuestions: OperatingSystemQuestion[] = [
   {
     id: "process-control-block",
     category: "Processes and threads",
-    question: "What information does the operating system keep in a process control block?",
+    question:
+      "What information does the operating system keep in a process control block?",
     answer:
       "It keeps the information needed to stop and later resume the process. That includes its identifier, state, CPU registers, scheduling data, memory-management information, open resources, and accounting details. The exact fields depend on the operating system.",
   },
   {
     id: "process-and-thread",
     category: "Processes and threads",
-    question: "Suppose I ask you to compare a process with a thread. How would you explain it?",
+    question:
+      "Suppose I ask you to compare a process with a thread. How would you explain it?",
     answer:
       "A process has its own address space and provides strong isolation. Threads are execution units inside a process, so they share code, heap memory, and open resources, while each thread keeps its own stack and registers. Threads are cheaper to create and communicate through shared memory, but a bad thread can affect the entire process.",
   },
   {
     id: "context-switch",
     category: "Processes and threads",
-    question: "What exactly is saved during a context switch, and why is the switch not free?",
+    question:
+      "What exactly is saved during a context switch, and why is the switch not free?",
     answer:
       "The operating system saves the current execution state, including registers, the program counter, and stack information, then restores another task's state. Switching between processes can also disturb caches and address-translation state. The kernel work and the lost cache locality make context switching an overhead.",
   },
@@ -97,35 +103,40 @@ export const operatingSystemInterviewQuestions: OperatingSystemQuestion[] = [
   {
     id: "preemptive-scheduling",
     category: "CPU scheduling",
-    question: "What is the practical difference between preemptive and non-preemptive scheduling?",
+    question:
+      "What is the practical difference between preemptive and non-preemptive scheduling?",
     answer:
       "With preemptive scheduling, the operating system can interrupt a running task and give the CPU to another task. With non-preemptive scheduling, a task keeps the CPU until it blocks or finishes. Preemption improves responsiveness, but it requires timer interrupts and careful synchronization around shared state.",
   },
   {
     id: "fcfs-sjf-round-robin",
     category: "CPU scheduling",
-    question: "When would Round Robin be a better choice than FCFS or Shortest Job First?",
+    question:
+      "When would Round Robin be a better choice than FCFS or Shortest Job First?",
     answer:
       "Round Robin is a good fit for interactive systems because every ready task gets CPU time within a bounded period. FCFS is simple but a long job can delay everything behind it. Shortest Job First can reduce average waiting time, but it needs a reliable estimate of each job's CPU burst and may starve long jobs.",
   },
   {
     id: "time-quantum",
     category: "CPU scheduling",
-    question: "What happens if the time quantum in Round Robin is too small or too large?",
+    question:
+      "What happens if the time quantum in Round Robin is too small or too large?",
     answer:
       "If it is too small, the system spends too much time context switching. If it is too large, Round Robin starts behaving like FCFS and interactive response gets worse. A useful quantum balances responsiveness against switching overhead.",
   },
   {
     id: "starvation-and-aging",
     category: "CPU scheduling",
-    question: "Can a scheduling policy cause starvation? How would you prevent it?",
+    question:
+      "Can a scheduling policy cause starvation? How would you prevent it?",
     answer:
       "Yes. Strict priority scheduling can keep a low-priority task waiting indefinitely if higher-priority work keeps arriving. Aging prevents this by gradually increasing the priority of a task the longer it waits.",
   },
   {
     id: "multilevel-feedback-queue",
     category: "CPU scheduling",
-    question: "How does a multilevel feedback queue respond to different kinds of workloads?",
+    question:
+      "How does a multilevel feedback queue respond to different kinds of workloads?",
     answer:
       "It uses multiple priority queues and changes a task's priority based on observed behavior. Interactive or I/O-bound tasks usually keep higher priority because they use short CPU bursts, while CPU-heavy tasks move down. Periodic priority boosts are used to reduce starvation and adapt when a task's behavior changes.",
   },
@@ -140,21 +151,24 @@ export const operatingSystemInterviewQuestions: OperatingSystemQuestion[] = [
   {
     id: "critical-section",
     category: "Synchronization",
-    question: "What properties should a correct critical-section solution provide?",
+    question:
+      "What properties should a correct critical-section solution provide?",
     answer:
       "It should guarantee mutual exclusion, so only one participant enters the critical section at a time. It should also make progress when the section is free and avoid making a waiting participant wait forever. Those requirements protect correctness without introducing unnecessary blocking.",
   },
   {
     id: "mutex-and-semaphore",
     category: "Synchronization",
-    question: "I often hear mutex and semaphore used interchangeably. Are they actually the same?",
+    question:
+      "I often hear mutex and semaphore used interchangeably. Are they actually the same?",
     answer:
       "No. A mutex represents ownership of a lock, so the thread that locks it is expected to unlock it. A semaphore is a counter used for signalling or controlling access to a limited number of resources, and it does not require the same ownership rule.",
   },
   {
     id: "binary-and-counting-semaphore",
     category: "Synchronization",
-    question: "When would you use a counting semaphore instead of a binary semaphore?",
+    question:
+      "When would you use a counting semaphore instead of a binary semaphore?",
     answer:
       "A binary semaphore represents one available permit and is often used for signalling or mutual exclusion. A counting semaphore represents several identical permits. For example, a connection pool with ten available connections can use a counting semaphore initialized to ten.",
   },
@@ -197,7 +211,8 @@ export const operatingSystemInterviewQuestions: OperatingSystemQuestion[] = [
   {
     id: "bankers-algorithm",
     category: "Deadlocks",
-    question: "What does Banker's algorithm check before granting a resource request?",
+    question:
+      "What does Banker's algorithm check before granting a resource request?",
     answer:
       "It temporarily assumes the request is granted and checks whether a safe sequence still exists. A safe sequence is an order in which every process can obtain its remaining maximum need and finish. The algorithm requires advance knowledge of maximum resource demands, which limits its practical use.",
   },
@@ -211,7 +226,8 @@ export const operatingSystemInterviewQuestions: OperatingSystemQuestion[] = [
   {
     id: "lock-ordering",
     category: "Deadlocks",
-    question: "A service occasionally freezes when two locks are involved. What would you inspect first?",
+    question:
+      "A service occasionally freezes when two locks are involved. What would you inspect first?",
     answer:
       "I would check whether different code paths acquire the two locks in different orders. That can create a circular wait when each thread holds one lock and asks for the other. Defining one global lock order and following it consistently is a common fix.",
   },
@@ -333,7 +349,8 @@ export const operatingSystemInterviewQuestions: OperatingSystemQuestion[] = [
   {
     id: "hdd-and-ssd",
     category: "I/O and storage",
-    question: "Why do disk-scheduling algorithms matter more for HDDs than SSDs?",
+    question:
+      "Why do disk-scheduling algorithms matter more for HDDs than SSDs?",
     answer:
       "An HDD has mechanical seek and rotational delays, so the order of requests strongly affects access time. An SSD has no moving head, which makes random access much faster and more uniform. SSDs still need scheduling and internal management, but minimizing physical head movement is no longer the concern.",
   },
@@ -355,14 +372,16 @@ export const operatingSystemInterviewQuestions: OperatingSystemQuestion[] = [
   {
     id: "authentication-authorization",
     category: "Protection and security",
-    question: "What is the difference between authentication and authorization?",
+    question:
+      "What is the difference between authentication and authorization?",
     answer:
       "Authentication establishes who the user or process is. Authorization decides what that identity is allowed to do. A user may authenticate successfully but still be denied access to a file because the authorization policy does not permit it.",
   },
   {
     id: "least-privilege",
     category: "Protection and security",
-    question: "Why is the principle of least privilege important at the OS level?",
+    question:
+      "Why is the principle of least privilege important at the OS level?",
     answer:
       "A process should receive only the permissions and resources needed for its job. If it is compromised or contains a bug, the damage is then limited by those permissions. Running every service with administrator or root access creates a much larger failure boundary.",
   },
@@ -391,21 +410,24 @@ export const operatingSystemInterviewQuestions: OperatingSystemQuestion[] = [
   {
     id: "high-cpu-debugging",
     category: "Practical scenarios",
-    question: "A production process is using almost 100 percent CPU. How would you investigate it?",
+    question:
+      "A production process is using almost 100 percent CPU. How would you investigate it?",
     answer:
       "I would first confirm whether the load belongs to one thread or many and whether it is expected traffic. Then I would inspect thread stacks, profiles, logs, and system metrics to look for a busy loop, excessive retries, lock contention, or heavy computation. I would compare the timing with recent releases before deciding whether to limit, restart, roll back, or fix the process.",
   },
   {
     id: "memory-keeps-growing",
     category: "Practical scenarios",
-    question: "An application's memory usage keeps growing. Is that automatically a memory leak?",
+    question:
+      "An application's memory usage keeps growing. Is that automatically a memory leak?",
     answer:
       "Not automatically. It could be a real leak, an intentionally growing cache, queued work, fragmentation, or memory that the allocator has not returned to the operating system. I would compare live allocations over time, inspect heap profiles, and check whether memory stabilizes when the workload becomes steady.",
   },
   {
     id: "many-page-faults",
     category: "Practical scenarios",
-    question: "The system is spending most of its time handling page faults. What might be happening?",
+    question:
+      "The system is spending most of its time handling page faults. What might be happening?",
     answer:
       "The active working sets may be larger than available physical memory, causing pages to be repeatedly evicted and loaded again. That behavior is called thrashing and it can make useful progress very slow. I would inspect memory pressure, swap activity, per-process working sets, and recent workload changes.",
   },
@@ -426,7 +448,8 @@ export const operatingSystemInterviewQuestions: OperatingSystemQuestion[] = [
   {
     id: "server-under-load",
     category: "Practical scenarios",
-    question: "A server becomes slow only under heavy load. Which OS-level limits would you consider?",
+    question:
+      "A server becomes slow only under heavy load. Which OS-level limits would you consider?",
     answer:
       "I would check CPU saturation, memory pressure, disk and network queues, open-file limits, socket backlogs, and the number of runnable or blocked threads. I would also look for lock contention and excessive context switching. The goal is to find which resource reaches its limit first instead of treating every slowdown as a CPU problem.",
   },

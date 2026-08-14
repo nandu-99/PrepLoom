@@ -18,7 +18,12 @@ export const hackComputerPlatform: SubjectTopic = {
           "A stored program is a sequence of binary instructions kept in memory. The CPU repeatedly fetches one instruction, performs its operation, and selects the address of the next instruction.",
           "Every processor understands a defined machine language. Hack instructions are 16 bits wide and directly control its registers, ALU, memory writes, and program counter.",
         ],
-        flow: ["PC supplies address", "Instruction memory returns instruction", "CPU executes", "PC selects next address"],
+        flow: [
+          "PC supplies address",
+          "Instruction memory returns instruction",
+          "CPU executes",
+          "PC selects next address",
+        ],
       },
       {
         title: "Hack Uses Separate Memories",
@@ -31,14 +36,24 @@ export const hackComputerPlatform: SubjectTopic = {
           alt: "Hack platform with ROM32K supplying instructions to the CPU and a separate data-memory space containing RAM16K, screen, and keyboard.",
           width: 1536,
           height: 1024,
-          caption: "Hack separates instruction memory from data memory and memory-mapped I/O.",
+          caption:
+            "Hack separates instruction memory from data memory and memory-mapped I/O.",
         },
         table: {
           headers: ["Von Neumann style", "Hack Harvard style"],
           rows: [
-            ["Instructions and data share memory", "Instructions and data use separate memories"],
-            ["One shared memory path may become a bottleneck", "Instruction and data paths are independent"],
-            ["Code and data share one address space", "ROM and data memory have separate addressing roles"],
+            [
+              "Instructions and data share memory",
+              "Instructions and data use separate memories",
+            ],
+            [
+              "One shared memory path may become a bottleneck",
+              "Instruction and data paths are independent",
+            ],
+            [
+              "Code and data share one address space",
+              "ROM and data memory have separate addressing roles",
+            ],
           ],
         },
       },
@@ -49,17 +64,29 @@ export const hackComputerPlatform: SubjectTopic = {
           headers: ["Component", "Main job"],
           rows: [
             ["CPU", "Decode and execute the current 16-bit instruction"],
-            ["ROM32K", "Store up to 32K program instructions loaded before execution"],
+            [
+              "ROM32K",
+              "Store up to 32K program instructions loaded before execution",
+            ],
             ["RAM16K", "Store working data"],
             ["Screen", "Display pixels through memory-mapped words"],
-            ["Keyboard", "Provide the current key code through a memory-mapped word"],
+            [
+              "Keyboard",
+              "Provide the current key code through a memory-mapped word",
+            ],
             ["Clock", "Coordinate state changes"],
             ["Reset", "Restart instruction fetching from address 0"],
           ],
         },
         formulas: [
-          { label: "Instruction-memory address count", expression: "32K = 2¹⁵ instruction addresses" },
-          { label: "Instruction width", expression: "One Hack instruction = 16 bits" },
+          {
+            label: "Instruction-memory address count",
+            expression: "32K = 2¹⁵ instruction addresses",
+          },
+          {
+            label: "Instruction width",
+            expression: "One Hack instruction = 16 bits",
+          },
         ],
       },
       {
@@ -79,8 +106,14 @@ export const hackComputerPlatform: SubjectTopic = {
         formulas: [
           { label: "Screen base", expression: "SCREEN = 16384 = 0x4000" },
           { label: "Keyboard address", expression: "KBD = 24576 = 0x6000" },
-          { label: "Screen size", expression: "512 × 256 pixels = 8192 words × 16 pixels" },
-          { label: "Pixel word address", expression: "SCREEN + row × 32 + floor(column ÷ 16)" },
+          {
+            label: "Screen size",
+            expression: "512 × 256 pixels = 8192 words × 16 pixels",
+          },
+          {
+            label: "Pixel word address",
+            expression: "SCREEN + row × 32 + floor(column ÷ 16)",
+          },
           { label: "Pixel bit", expression: "column mod 16" },
         ],
       },
@@ -95,7 +128,10 @@ export const hackComputerPlatform: SubjectTopic = {
           rows: [
             ["PC addresses ROM32K", "A supplies the data-memory address"],
             ["Read by the CPU", "Read or written by the CPU"],
-            ["Program loaded before execution", "Values change while the program runs"],
+            [
+              "Program loaded before execution",
+              "Values change while the program runs",
+            ],
           ],
         },
       },
@@ -105,7 +141,8 @@ export const hackComputerPlatform: SubjectTopic = {
         problems: [
           {
             title: "Find the ROM address width",
-            prompt: "ROM32K stores 32K instructions. How many address bits are required?",
+            prompt:
+              "ROM32K stores 32K instructions. How many address bits are required?",
             steps: [
               "32K = 32 × 1024 = 32768 instructions.",
               "32768 = 2¹⁵.",
@@ -115,7 +152,8 @@ export const hackComputerPlatform: SubjectTopic = {
           },
           {
             title: "Classify a memory access",
-            prompt: "What does the Hack computer access at data-memory addresses 120, 17000, and 24576?",
+            prompt:
+              "What does the Hack computer access at data-memory addresses 120, 17000, and 24576?",
             steps: [
               "120 is between 0 and 16383, so it selects RAM16K.",
               "17000 is between 16384 and 24575, so it selects screen memory.",
@@ -125,7 +163,8 @@ export const hackComputerPlatform: SubjectTopic = {
           },
           {
             title: "Find a screen pixel location",
-            prompt: "Which screen word and bit control the pixel at row 10, column 35? Rows and columns start at 0.",
+            prompt:
+              "Which screen word and bit control the pixel at row 10, column 35? Rows and columns start at 0.",
             steps: [
               "Each row uses 512 ÷ 16 = 32 screen words.",
               "The word offset is 10 × 32 + floor(35 ÷ 16) = 320 + 2 = 322.",
@@ -136,7 +175,8 @@ export const hackComputerPlatform: SubjectTopic = {
           },
           {
             title: "Read the keyboard register",
-            prompt: "What does RAM[24576] contain when no key is pressed, and how should a program test for a pressed key?",
+            prompt:
+              "What does RAM[24576] contain when no key is pressed, and how should a program test for a pressed key?",
             steps: [
               "Address 24576 is the predefined KBD register.",
               "It contains 0 when no key is pressed.",
@@ -171,7 +211,13 @@ export const hackComputerPlatform: SubjectTopic = {
     sections: [
       {
         title: "Platform Map",
-        flow: ["PC", "ROM32K", "16-bit instruction", "CPU", "RAM / Screen / Keyboard"],
+        flow: [
+          "PC",
+          "ROM32K",
+          "16-bit instruction",
+          "CPU",
+          "RAM / Screen / Keyboard",
+        ],
       },
       {
         title: "Important Addresses",
@@ -195,7 +241,8 @@ export const hackComputerPlatform: SubjectTopic = {
       "The program is loaded into ROM before execution; the CPU cannot write ROM.",
       "Reset makes instruction fetching restart at address 0.",
     ],
-    followUp: "Why can Hack fetch an instruction and access data memory through separate paths?",
+    followUp:
+      "Why can Hack fetch an instruction and access data memory through separate paths?",
   },
   lastMinute: {
     definition: "Hack = 16-bit CPU + ROM32K + RAM16K + screen + keyboard.",
@@ -212,7 +259,14 @@ export const hackComputerPlatform: SubjectTopic = {
       },
     ],
     memoryLine: "PC points to code; A points to data.",
-    cues: ["16-bit", "ROM32K", "RAM16K", "8192 screen words", "KBD zero", "Memory-mapped I/O"],
+    cues: [
+      "16-bit",
+      "ROM32K",
+      "RAM16K",
+      "8192 screen words",
+      "KBD zero",
+      "Memory-mapped I/O",
+    ],
     trap: "Do not say M is a third register. M means the data-memory word RAM[A].",
   },
 };
@@ -238,7 +292,10 @@ export const hackCpuDatapath: SubjectTopic = {
         formulas: [
           { label: "Memory symbol", expression: "M = RAM[A]" },
           { label: "ALU X input", expression: "X = D" },
-          { label: "ALU Y input", expression: "Y = A when a = 0; Y = M when a = 1" },
+          {
+            label: "ALU Y input",
+            expression: "Y = A when a = 0; Y = M when a = 1",
+          },
         ],
       },
       {
@@ -252,7 +309,8 @@ export const hackCpuDatapath: SubjectTopic = {
           alt: "Hack CPU datapath connecting the instruction, A and D registers, A-or-M selector, ALU, status flags, jump control, data-memory interface, and PC.",
           width: 1536,
           height: 1024,
-          caption: "Instruction fields control the data path, storage destinations, and next PC.",
+          caption:
+            "Instruction fields control the data path, storage destinations, and next PC.",
         },
       },
       {
@@ -282,7 +340,10 @@ export const hackCpuDatapath: SubjectTopic = {
         table: {
           headers: ["Combinational during cycle", "Stored at clock edge"],
           rows: [
-            ["ALU result, zr, ng, outM, writeM", "A register, D register, PC, memory write"],
+            [
+              "ALU result, zr, ng, outM, writeM",
+              "A register, D register, PC, memory write",
+            ],
           ],
         },
       },
@@ -330,7 +391,8 @@ export const hackCpuDatapath: SubjectTopic = {
           },
           {
             title: "Choose the ALU Y source",
-            prompt: "For D=D+M, A = 100, D = 7, and RAM[100] = 9. What enters the ALU and what is stored?",
+            prompt:
+              "For D=D+M, A = 100, D = 7, and RAM[100] = 9. What enters the ALU and what is stored?",
             steps: [
               "The expression uses M, so the a bit selects RAM[A] for Y.",
               "X = D = 7 and Y = RAM[100] = 9.",
@@ -341,7 +403,8 @@ export const hackCpuDatapath: SubjectTopic = {
           },
           {
             title: "Trace a simultaneous A and memory destination",
-            prompt: "Before AM=D executes, A = 20, D = 7, and RAM[20] = 3. What changes at the clock edge?",
+            prompt:
+              "Before AM=D executes, A = 20, D = 7, and RAM[20] = 3. What changes at the clock edge?",
             steps: [
               "The ALU result is the current D value, which is 7.",
               "M refers to RAM at the old A address, so the memory write targets RAM[20].",
@@ -352,7 +415,8 @@ export const hackCpuDatapath: SubjectTopic = {
           },
           {
             title: "Trace a write-and-jump instruction",
-            prompt: "Before A=D;JMP executes, A = 40 and D = 12. Which value enters A, and which address enters PC?",
+            prompt:
+              "Before A=D;JMP executes, A = 40 and D = 12. Which value enters A, and which address enters PC?",
             steps: [
               "The computation D produces 12.",
               "The A destination schedules A = 12 at the clock edge.",
@@ -425,10 +489,12 @@ export const hackCpuDatapath: SubjectTopic = {
       "A simultaneous write or jump uses the old A address during the current cycle.",
       "zr and ng describe the ALU result used by the jump test.",
     ],
-    followUp: "For D=M, which values supply the ALU inputs and where is the result stored?",
+    followUp:
+      "For D=M, which values supply the ALU inputs and where is the result stored?",
   },
   lastMinute: {
-    definition: "D is data, A selects A or RAM[A], and PC selects the instruction.",
+    definition:
+      "D is data, A selects A or RAM[A], and PC selects the instruction.",
     sections: [
       {
         title: "Datapath Recall",
@@ -442,7 +508,8 @@ export const hackCpuDatapath: SubjectTopic = {
         ],
       },
     ],
-    memoryLine: "D and A-or-M enter the ALU; destinations and jump bits use its result.",
+    memoryLine:
+      "D and A-or-M enter the ALU; destinations and jump bits use its result.",
     cues: ["A address", "D data", "M RAM[A]", "outM", "zr ng", "PC"],
     trap: "Changing A changes which memory word M refers to.",
   },
@@ -471,7 +538,8 @@ export const hackInstructionFormats: SubjectTopic = {
           alt: "Hack A-instruction format with a leading zero and 15-bit value, plus C-instruction format 111 a cccccc ddd jjj.",
           width: 1536,
           height: 1024,
-          caption: "The leading field distinguishes value loading from computation and control.",
+          caption:
+            "The leading field distinguishes value loading from computation and control.",
         },
         formulas: [
           { label: "A-instruction", expression: "0 vvvvvvvvvvvvvvv" },
@@ -537,7 +605,11 @@ export const hackInstructionFormats: SubjectTopic = {
             ["@32768", "Invalid", "Does not fit in 15 value bits"],
             ["D=D+A", "Valid", "D+A is an official comp mnemonic"],
             ["D=A+D", "Invalid", "A+D is not an official comp mnemonic"],
-            ["MD=D-1;JNE", "Valid", "Destination, comp, and jump are all legal"],
+            [
+              "MD=D-1;JNE",
+              "Valid",
+              "Destination, comp, and jump are all legal",
+            ],
           ],
         },
       },
@@ -567,7 +639,8 @@ export const hackInstructionFormats: SubjectTopic = {
           },
           {
             title: "Split a C-instruction",
-            prompt: "Split 1111110000010000 into prefix, a, c, d, and j fields.",
+            prompt:
+              "Split 1111110000010000 into prefix, a, c, d, and j fields.",
             steps: [
               "Group the bits as 111 | 1 | 110000 | 010 | 000.",
               "a = 1 and c = 110000 select M.",
@@ -577,7 +650,8 @@ export const hackInstructionFormats: SubjectTopic = {
           },
           {
             title: "Encode the A-instruction boundaries",
-            prompt: "Encode the smallest and largest legal numeric A-instructions: @0 and @32767.",
+            prompt:
+              "Encode the smallest and largest legal numeric A-instructions: @0 and @32767.",
             steps: [
               "The A prefix is 0.",
               "Zero uses fifteen 0 value bits.",
@@ -623,10 +697,7 @@ export const hackInstructionFormats: SubjectTopic = {
       },
       {
         title: "Syntax",
-        formulas: [
-          { expression: "@value" },
-          { expression: "dest=comp;jump" },
-        ],
+        formulas: [{ expression: "@value" }, { expression: "dest=comp;jump" }],
       },
     ],
     essentialsStyle: "plain",
@@ -639,10 +710,12 @@ export const hackInstructionFormats: SubjectTopic = {
       "Use exact comp spellings: D+A is legal, but A+D is not.",
       "The assembler resolves symbols before producing binary output.",
     ],
-    followUp: "How does the CPU distinguish @21 from a C-instruction without an opcode lookup table?",
+    followUp:
+      "How does the CPU distinguish @21 from a C-instruction without an opcode lookup table?",
   },
   lastMinute: {
-    definition: "0 + value loads A; 111 + control fields computes, stores, and jumps.",
+    definition:
+      "0 + value loads A; 111 + control fields computes, stores, and jumps.",
     sections: [
       {
         title: "Bit Order",
@@ -682,7 +755,8 @@ export const cInstructionControl: SubjectTopic = {
           alt: "Hack C-instruction fields controlling ALU computation, A-D-M destinations, and a jump decision based on j bits plus zr and ng flags.",
           width: 1536,
           height: 1024,
-          caption: "The computation creates a result; destination and jump fields decide how it is used.",
+          caption:
+            "The computation creates a result; destination and jump fields decide how it is used.",
         },
       },
       {
@@ -701,7 +775,14 @@ export const cInstructionControl: SubjectTopic = {
             ["no", "Invert the final output"],
           ],
         },
-        flow: ["Zero X?", "Invert X?", "Zero Y?", "Invert Y?", "Add or AND", "Invert output?"],
+        flow: [
+          "Zero X?",
+          "Invert X?",
+          "Zero Y?",
+          "Invert Y?",
+          "Add or AND",
+          "Invert output?",
+        ],
       },
       {
         title: "Computation Codes",
@@ -711,15 +792,33 @@ export const cInstructionControl: SubjectTopic = {
         dataTable: {
           headers: ["comp", "a", "cccccc"],
           rows: [
-            ["0", "0", "101010"], ["1", "0", "111111"], ["-1", "0", "111010"],
-            ["D", "0", "001100"], ["A", "0", "110000"], ["!D", "0", "001101"],
-            ["!A", "0", "110001"], ["-D", "0", "001111"], ["-A", "0", "110011"],
-            ["D+1", "0", "011111"], ["A+1", "0", "110111"], ["D-1", "0", "001110"],
-            ["A-1", "0", "110010"], ["D+A", "0", "000010"], ["D-A", "0", "010011"],
-            ["A-D", "0", "000111"], ["D&A", "0", "000000"], ["D|A", "0", "010101"],
-            ["M", "1", "110000"], ["!M", "1", "110001"], ["-M", "1", "110011"],
-            ["M+1", "1", "110111"], ["M-1", "1", "110010"], ["D+M", "1", "000010"],
-            ["D-M", "1", "010011"], ["M-D", "1", "000111"], ["D&M", "1", "000000"],
+            ["0", "0", "101010"],
+            ["1", "0", "111111"],
+            ["-1", "0", "111010"],
+            ["D", "0", "001100"],
+            ["A", "0", "110000"],
+            ["!D", "0", "001101"],
+            ["!A", "0", "110001"],
+            ["-D", "0", "001111"],
+            ["-A", "0", "110011"],
+            ["D+1", "0", "011111"],
+            ["A+1", "0", "110111"],
+            ["D-1", "0", "001110"],
+            ["A-1", "0", "110010"],
+            ["D+A", "0", "000010"],
+            ["D-A", "0", "010011"],
+            ["A-D", "0", "000111"],
+            ["D&A", "0", "000000"],
+            ["D|A", "0", "010101"],
+            ["M", "1", "110000"],
+            ["!M", "1", "110001"],
+            ["-M", "1", "110011"],
+            ["M+1", "1", "110111"],
+            ["M-1", "1", "110010"],
+            ["D+M", "1", "000010"],
+            ["D-M", "1", "010011"],
+            ["M-D", "1", "000111"],
+            ["D&M", "1", "000000"],
             ["D|M", "1", "010101"],
           ],
         },
@@ -732,8 +831,14 @@ export const cInstructionControl: SubjectTopic = {
         dataTable: {
           headers: ["ddd", "Destination"],
           rows: [
-            ["000", "None"], ["001", "M"], ["010", "D"], ["011", "MD"],
-            ["100", "A"], ["101", "AM"], ["110", "AD"], ["111", "AMD"],
+            ["000", "None"],
+            ["001", "M"],
+            ["010", "D"],
+            ["011", "MD"],
+            ["100", "A"],
+            ["101", "AM"],
+            ["110", "AD"],
+            ["111", "AMD"],
           ],
         },
       },
@@ -746,9 +851,14 @@ export const cInstructionControl: SubjectTopic = {
         dataTable: {
           headers: ["jjj", "Mnemonic", "Jump when result is"],
           rows: [
-            ["000", "None", "Never"], ["001", "JGT", "> 0"], ["010", "JEQ", "= 0"],
-            ["011", "JGE", ">= 0"], ["100", "JLT", "< 0"], ["101", "JNE", "!= 0"],
-            ["110", "JLE", "<= 0"], ["111", "JMP", "Always"],
+            ["000", "None", "Never"],
+            ["001", "JGT", "> 0"],
+            ["010", "JEQ", "= 0"],
+            ["011", "JGE", ">= 0"],
+            ["100", "JLT", "< 0"],
+            ["101", "JNE", "!= 0"],
+            ["110", "JLE", "<= 0"],
+            ["111", "JMP", "Always"],
           ],
         },
         formulas: [
@@ -782,9 +892,18 @@ export const cInstructionControl: SubjectTopic = {
           "This means a positive addition can wrap into a negative bit pattern. Jump logic then tests the wrapped 16-bit result through zr and ng.",
         ],
         formulas: [
-          { label: "Signed range", expression: "-2¹⁵ to 2¹⁵ - 1 = -32768 to 32767" },
-          { label: "Overflow example", expression: "32767 + 1 = 1000000000000000₂ = -32768" },
-          { label: "Stored result", expression: "result = arithmetic output mod 2¹⁶" },
+          {
+            label: "Signed range",
+            expression: "-2¹⁵ to 2¹⁵ - 1 = -32768 to 32767",
+          },
+          {
+            label: "Overflow example",
+            expression: "32767 + 1 = 1000000000000000₂ = -32768",
+          },
+          {
+            label: "Stored result",
+            expression: "result = arithmetic output mod 2¹⁶",
+          },
         ],
       },
       {
@@ -816,7 +935,8 @@ export const cInstructionControl: SubjectTopic = {
           },
           {
             title: "Evaluate a jump",
-            prompt: "A = 240, D = 5, and the instruction is D;JGT. What happens to the PC?",
+            prompt:
+              "A = 240, D = 5, and the instruction is D;JGT. What happens to the PC?",
             steps: [
               "The ALU result is D = 5.",
               "Five is positive, so zr = 0 and ng = 0.",
@@ -850,7 +970,8 @@ export const cInstructionControl: SubjectTopic = {
           },
           {
             title: "Evaluate signed overflow",
-            prompt: "D contains 32767 and D=D+1 executes. What is the new D value, and would D;JLT jump next?",
+            prompt:
+              "D contains 32767 and D=D+1 executes. What is the new D value, and would D;JLT jump next?",
             steps: [
               "32767 is 0111111111111111 in 16 bits.",
               "Adding 1 produces 1000000000000000.",
@@ -886,7 +1007,12 @@ export const cInstructionControl: SubjectTopic = {
     sections: [
       {
         title: "Field Jobs",
-        flow: ["a + cccccc: compute", "ddd: store", "jjj + zr/ng: jump", "PC loads A or increments"],
+        flow: [
+          "a + cccccc: compute",
+          "ddd: store",
+          "jjj + zr/ng: jump",
+          "PC loads A or increments",
+        ],
       },
       {
         title: "Destination Bit Order",
@@ -941,7 +1067,8 @@ export const cInstructionControl: SubjectTopic = {
         ],
       },
     ],
-    memoryLine: "Compute first; store the result; test the same result for jumping.",
+    memoryLine:
+      "Compute first; store the result; test the same result for jumping.",
     cues: ["zx nx zy ny f no", "A D M", "zr ng", "16-bit wrap", "PC loads A"],
     trap: "For M computations set a = 1. Keeping a = 0 selects A instead.",
   },
@@ -968,9 +1095,17 @@ export const hackAssemblyProgramming: SubjectTopic = {
           headers: ["Form", "Example", "Meaning"],
           rows: [
             ["A-instruction", "@21", "Load 21 into A"],
-            ["Symbolic A-instruction", "@count", "Load the resolved address of count"],
+            [
+              "Symbolic A-instruction",
+              "@count",
+              "Load the resolved address of count",
+            ],
             ["C-instruction", "D=M", "Read RAM[A] into D"],
-            ["Label", "(LOOP)", "Name the address of the next real instruction"],
+            [
+              "Label",
+              "(LOOP)",
+              "Name the address of the next real instruction",
+            ],
             ["Comment", "// repeat", "Explanation ignored by assembler"],
           ],
         },
@@ -979,7 +1114,8 @@ export const hackAssemblyProgramming: SubjectTopic = {
           alt: "A Hack assembly loop showing how @count and D=M access data and how @LOOP followed by D;JGT can load the PC from A.",
           width: 1536,
           height: 1024,
-          caption: "A selects an address; a C-instruction uses it for memory or control flow.",
+          caption:
+            "A selects an address; a C-instruction uses it for memory or control flow.",
         },
       },
       {
@@ -991,9 +1127,13 @@ export const hackAssemblyProgramming: SubjectTopic = {
           headers: ["Symbol", "Address or role"],
           rows: [
             ["R0 to R15", "RAM addresses 0 to 15"],
-            ["SP", "RAM[0]"], ["LCL", "RAM[1]"], ["ARG", "RAM[2]"],
-            ["THIS", "RAM[3]"], ["THAT", "RAM[4]"],
-            ["SCREEN", "16384"], ["KBD", "24576"],
+            ["SP", "RAM[0]"],
+            ["LCL", "RAM[1]"],
+            ["ARG", "RAM[2]"],
+            ["THIS", "RAM[3]"],
+            ["THAT", "RAM[4]"],
+            ["SCREEN", "16384"],
+            ["KBD", "24576"],
           ],
         },
       },
@@ -1004,7 +1144,13 @@ export const hackAssemblyProgramming: SubjectTopic = {
           "The standard assembler assigns new variable symbols from RAM address 16 upward in the order they first appear. A two-pass assembler first records labels, then translates instructions and allocates variables.",
           "A symbol may contain letters, digits, underscore, dot, dollar sign, and colon, but it cannot start with a digit. Numeric A values must remain between 0 and 32767. Duplicate labels and unknown C-instruction mnemonics should be reported as assembler errors.",
         ],
-        flow: ["Pass 1: remove labels and record ROM addresses", "Pass 2: resolve A symbols", "Allocate variables from RAM[16]", "Encode C fields", "Write .hack file"],
+        flow: [
+          "Pass 1: remove labels and record ROM addresses",
+          "Pass 2: resolve A symbols",
+          "Allocate variables from RAM[16]",
+          "Encode C fields",
+          "Write .hack file",
+        ],
       },
       {
         title: "Complete Two-Pass Assembler Example",
@@ -1012,7 +1158,12 @@ export const hackAssemblyProgramming: SubjectTopic = {
           "In pass 1, only real A- and C-instructions increase the ROM counter. In pass 2, the assembler uses the completed symbol table and allocates each new variable once.",
         ],
         dataTable: {
-          headers: ["Source line", "ROM address", "Symbol action", "Pass 2 value"],
+          headers: [
+            "Source line",
+            "ROM address",
+            "Symbol action",
+            "Pass 2 value",
+          ],
           rows: [
             ["@2", "0", "None", "2"],
             ["D=A", "1", "None", "C-instruction"],
@@ -1045,7 +1196,18 @@ export const hackAssemblyProgramming: SubjectTopic = {
           "The following control flow repeatedly decreases R0 until it reaches zero. END then loops forever, which is a normal way to stop a bare Hack program.",
         ],
         flow: [
-          "(LOOP)", "@R0", "D=M", "@END", "D;JEQ", "@R0", "M=M-1", "@LOOP", "0;JMP", "(END)", "@END", "0;JMP",
+          "(LOOP)",
+          "@R0",
+          "D=M",
+          "@END",
+          "D;JEQ",
+          "@R0",
+          "M=M-1",
+          "@LOOP",
+          "0;JMP",
+          "(END)",
+          "@END",
+          "0;JMP",
         ],
       },
       {
@@ -1054,8 +1216,20 @@ export const hackAssemblyProgramming: SubjectTopic = {
           "This complete loop makes the first 16 screen pixels black while a key is pressed and white when no key is pressed. KBD is read-only, while SCREEN can be written.",
         ],
         flow: [
-          "(LOOP)", "@KBD", "D=M", "@WHITE", "D;JEQ", "@SCREEN", "M=-1", "@LOOP", "0;JMP",
-          "(WHITE)", "@SCREEN", "M=0", "@LOOP", "0;JMP",
+          "(LOOP)",
+          "@KBD",
+          "D=M",
+          "@WHITE",
+          "D;JEQ",
+          "@SCREEN",
+          "M=-1",
+          "@LOOP",
+          "0;JMP",
+          "(WHITE)",
+          "@SCREEN",
+          "M=0",
+          "@LOOP",
+          "0;JMP",
         ],
       },
       {
@@ -1064,9 +1238,31 @@ export const hackAssemblyProgramming: SubjectTopic = {
           "This pattern adds RAM[100], RAM[101], and RAM[102]. The variable ptr stores the current address, count stores the remaining number of values, and sum stores the running total.",
         ],
         flow: [
-          "@100", "D=A", "@ptr", "M=D", "@3", "D=A", "@count", "M=D", "@sum", "M=0",
-          "(ARRAY_LOOP)", "@ptr", "A=M", "D=M", "@sum", "M=D+M", "@ptr", "M=M+1",
-          "@count", "MD=M-1", "@ARRAY_LOOP", "D;JGT", "(ARRAY_END)", "@ARRAY_END", "0;JMP",
+          "@100",
+          "D=A",
+          "@ptr",
+          "M=D",
+          "@3",
+          "D=A",
+          "@count",
+          "M=D",
+          "@sum",
+          "M=0",
+          "(ARRAY_LOOP)",
+          "@ptr",
+          "A=M",
+          "D=M",
+          "@sum",
+          "M=D+M",
+          "@ptr",
+          "M=M+1",
+          "@count",
+          "MD=M-1",
+          "@ARRAY_LOOP",
+          "D;JGT",
+          "(ARRAY_END)",
+          "@ARRAY_END",
+          "0;JMP",
         ],
       },
       {
@@ -1075,9 +1271,28 @@ export const hackAssemblyProgramming: SubjectTopic = {
           "Hack has no multiply instruction. For non-negative RAM[1], this loop calculates RAM[0] × RAM[1] and stores the result in RAM[2]. It adds RAM[0] once for each count.",
         ],
         flow: [
-          "@R2", "M=0", "@R1", "D=M", "@count", "M=D", "(MULT_LOOP)", "@count", "D=M",
-          "@MULT_END", "D;JEQ", "@R0", "D=M", "@R2", "M=D+M", "@count", "M=M-1",
-          "@MULT_LOOP", "0;JMP", "(MULT_END)", "@MULT_END", "0;JMP",
+          "@R2",
+          "M=0",
+          "@R1",
+          "D=M",
+          "@count",
+          "M=D",
+          "(MULT_LOOP)",
+          "@count",
+          "D=M",
+          "@MULT_END",
+          "D;JEQ",
+          "@R0",
+          "D=M",
+          "@R2",
+          "M=D+M",
+          "@count",
+          "M=M-1",
+          "@MULT_LOOP",
+          "0;JMP",
+          "(MULT_END)",
+          "@MULT_END",
+          "0;JMP",
         ],
       },
       {
@@ -1086,7 +1301,14 @@ export const hackAssemblyProgramming: SubjectTopic = {
           "Assume D = 0 and RAM[20] = 0 before this short program. The PC shown is the next instruction address after each row executes.",
         ],
         dataTable: {
-          headers: ["ROM", "Instruction", "A after", "D after", "RAM[20] after", "Next PC"],
+          headers: [
+            "ROM",
+            "Instruction",
+            "A after",
+            "D after",
+            "RAM[20] after",
+            "Next PC",
+          ],
           rows: [
             ["0", "@7", "7", "0", "0", "1"],
             ["1", "D=A", "7", "7", "0", "2"],
@@ -1107,7 +1329,10 @@ export const hackAssemblyProgramming: SubjectTopic = {
           rows: [
             ["Multiplication", "Repeated addition and a loop"],
             ["Division", "Repeated subtraction or a longer algorithm"],
-            ["Function call and return", "A software stack and saved return address"],
+            [
+              "Function call and return",
+              "A software stack and saved return address",
+            ],
             ["Array access", "A RAM variable used as a pointer"],
             ["Immediate value in D", "@value followed by D=A"],
           ],
@@ -1119,7 +1344,8 @@ export const hackAssemblyProgramming: SubjectTopic = {
         problems: [
           {
             title: "Store a constant in RAM",
-            prompt: "Write the instruction sequence that stores decimal 7 in RAM[0].",
+            prompt:
+              "Write the instruction sequence that stores decimal 7 in RAM[0].",
             steps: [
               "Use @7 to place the constant in A.",
               "Use D=A to copy the constant into D.",
@@ -1130,7 +1356,8 @@ export const hackAssemblyProgramming: SubjectTopic = {
           },
           {
             title: "Add two RAM values",
-            prompt: "Write Hack assembly steps that store RAM[0] + RAM[1] in RAM[2].",
+            prompt:
+              "Write Hack assembly steps that store RAM[0] + RAM[1] in RAM[2].",
             steps: [
               "@R0 then D=M loads RAM[0] into D.",
               "@R1 then D=D+M adds RAM[1].",
@@ -1140,7 +1367,8 @@ export const hackAssemblyProgramming: SubjectTopic = {
           },
           {
             title: "Resolve labels",
-            prompt: "For instructions @1, D=A, (LOOP), @LOOP, 0;JMP, what ROM address does LOOP represent?",
+            prompt:
+              "For instructions @1, D=A, (LOOP), @LOOP, 0;JMP, what ROM address does LOOP represent?",
             steps: [
               "@1 is ROM instruction 0.",
               "D=A is ROM instruction 1.",
@@ -1151,7 +1379,8 @@ export const hackAssemblyProgramming: SubjectTopic = {
           },
           {
             title: "Allocate variables",
-            prompt: "A program first uses @sum and later @count, with neither predefined. Which RAM addresses are assigned?",
+            prompt:
+              "A program first uses @sum and later @count, with neither predefined. Which RAM addresses are assigned?",
             steps: [
               "New variables begin at RAM[16].",
               "sum appears first, so sum receives address 16.",
@@ -1161,7 +1390,8 @@ export const hackAssemblyProgramming: SubjectTopic = {
           },
           {
             title: "Trace a conditional jump",
-            prompt: "D = -3, A = 40, and the instruction D;JGE executes. Is the jump taken?",
+            prompt:
+              "D = -3, A = 40, and the instruction D;JGE executes. Is the jump taken?",
             steps: [
               "The computed result is D = -3.",
               "JGE requires a result greater than or equal to zero.",
@@ -1172,7 +1402,8 @@ export const hackAssemblyProgramming: SubjectTopic = {
           },
           {
             title: "Build a symbol table in two passes",
-            prompt: "In @2, D=A, (LOOP), @sum, M=D, @LOOP, 0;JMP, find the values of LOOP and sum.",
+            prompt:
+              "In @2, D=A, (LOOP), @sum, M=D, @LOOP, 0;JMP, find the values of LOOP and sum.",
             steps: [
               "@2 and D=A occupy ROM addresses 0 and 1.",
               "LOOP names the next real instruction, so LOOP = ROM address 2.",
@@ -1189,7 +1420,8 @@ export const hackAssemblyProgramming: SubjectTopic = {
               "A=M reads RAM[ptr] and places its value, 101, into A.",
               "D=M now reads RAM[101] into D.",
             ],
-            answer: "The sequence follows the pointer and loads RAM[101] into D.",
+            answer:
+              "The sequence follows the pointer and loads RAM[101] into D.",
           },
         ],
       },
@@ -1237,7 +1469,10 @@ export const hackAssemblyProgramming: SubjectTopic = {
           headers: ["Need", "Pattern"],
           rows: [
             ["Read keyboard", "@KBD then D=M; zero means no key"],
-            ["Write screen", "@SCREEN or another mapped screen address, then M=value"],
+            [
+              "Write screen",
+              "@SCREEN or another mapped screen address, then M=value",
+            ],
             ["Follow pointer", "@ptr, then A=M, then use M"],
             ["Multiply", "Repeated addition loop"],
           ],
@@ -1255,7 +1490,8 @@ export const hackAssemblyProgramming: SubjectTopic = {
       "New symbols cannot start with a digit, and numeric A values stop at 32767.",
       "Hack has no direct multiply, divide, call, return, push, or pop instruction.",
     ],
-    followUp: "Why must a program copy a source value into D before changing A to the destination address?",
+    followUp:
+      "Why must a program copy a source value into D before changing A to the destination address?",
   },
   lastMinute: {
     definition: "@ selects; C-instruction computes, stores, or jumps.",
@@ -1274,7 +1510,15 @@ export const hackAssemblyProgramming: SubjectTopic = {
       },
     ],
     memoryLine: "A selects the place; D carries the value; M accesses RAM[A].",
-    cues: ["@value", "dest=comp;jump", "R0-R15", "Labels no ROM word", "Variables from 16", "Pointers", "KBD SCREEN"],
+    cues: [
+      "@value",
+      "dest=comp;jump",
+      "R0-R15",
+      "Labels no ROM word",
+      "Variables from 16",
+      "Pointers",
+      "KBD SCREEN",
+    ],
     trap: "@x loads the address or value of x into A. It does not load RAM[x] into A.",
   },
 };

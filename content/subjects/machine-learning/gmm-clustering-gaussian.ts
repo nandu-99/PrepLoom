@@ -23,7 +23,8 @@ export const clusteringAndKMeansRecap: SubjectTopic = {
           alt: "K-Means assignment and centroid update for two clusters",
           width: 1536,
           height: 1024,
-          caption: "K-Means alternates between assigning each point to one centroid and recomputing centroid means.",
+          caption:
+            "K-Means alternates between assigning each point to one centroid and recomputing centroid means.",
         },
       },
       {
@@ -31,26 +32,41 @@ export const clusteringAndKMeansRecap: SubjectTopic = {
         paragraphs: [
           "K-Means tries to reduce the total squared distance from every example to the centroid of its assigned cluster. This is called within-cluster sum of squares or inertia.",
         ],
-        formulas: [{ label: "K-Means objective", expression: "J = Σᵢ ||xᵢ−μcᵢ||²" }],
+        formulas: [
+          { label: "K-Means objective", expression: "J = Σᵢ ||xᵢ−μcᵢ||²" },
+        ],
       },
       {
         title: "Assignment and Update Steps",
-        paragraphs: ["Training repeatedly performs two operations until assignments or centroids stop changing enough."],
+        paragraphs: [
+          "Training repeatedly performs two operations until assignments or centroids stop changing enough.",
+        ],
         dataTable: {
           headers: ["Step", "Operation", "Result"],
           rows: [
-            ["Assignment", "Choose nearest centroid", "One cluster per example"],
-            ["Update", "Average examples in each cluster", "New centroid positions"],
+            [
+              "Assignment",
+              "Choose nearest centroid",
+              "One cluster per example",
+            ],
+            [
+              "Update",
+              "Average examples in each cluster",
+              "New centroid positions",
+            ],
           ],
         },
       },
       {
         title: "Complete One-Dimensional Numerical",
-        paragraphs: ["A small example shows one complete assignment and centroid update."],
+        paragraphs: [
+          "A small example shows one complete assignment and centroid update.",
+        ],
         problems: [
           {
             title: "Perform one K-Means iteration",
-            prompt: "For points [1,2,8,9], use K=2 with initial centroids μ₁=1 and μ₂=8. Assign points, update centroids, and calculate the final SSE.",
+            prompt:
+              "For points [1,2,8,9], use K=2 with initial centroids μ₁=1 and μ₂=8. Assign points, update centroids, and calculate the final SSE.",
             steps: [
               "Points 1 and 2 are nearer μ₁; points 8 and 9 are nearer μ₂.",
               "New μ₁=(1+2)/2=1.5.",
@@ -58,7 +74,8 @@ export const clusteringAndKMeansRecap: SubjectTopic = {
               "SSE=(1−1.5)²+(2−1.5)²+(8−8.5)²+(9−8.5)².",
               "SSE=0.25+0.25+0.25+0.25=1.",
             ],
-            answer: "The clusters are [1,2] and [8,9], the updated centroids are 1.5 and 8.5, and SSE is 1.",
+            answer:
+              "The clusters are [1,2] and [8,9], the updated centroids are 1.5 and 8.5, and SSE is 1.",
           },
         ],
       },
@@ -105,8 +122,14 @@ export const clusteringAndKMeansRecap: SubjectTopic = {
     definition:
       "K-Means assigns each example to one nearest centroid and updates each centroid to its cluster mean.",
     sections: [
-      { title: "Cycle", flow: ["Initialize", "Assign", "Average", "Repeat", "Stop"] },
-      { title: "Objective", formulas: [{ label: "SSE", expression: "Σ||xᵢ−μcᵢ||²" }] },
+      {
+        title: "Cycle",
+        flow: ["Initialize", "Assign", "Average", "Repeat", "Stop"],
+      },
+      {
+        title: "Objective",
+        formulas: [{ label: "SSE", expression: "Σ||xᵢ−μcᵢ||²" }],
+      },
     ],
     essentialsStyle: "plain",
     essentials: [
@@ -121,11 +144,25 @@ export const clusteringAndKMeansRecap: SubjectTopic = {
   lastMinute: {
     definition: "Assign to the nearest mean, recompute means, and repeat.",
     sections: [
-      { title: "Two Steps", points: ["Assignment: nearest centroid", "Update: cluster mean"] },
-      { title: "Limits", points: ["Hard membership", "Spherical bias", "Initialization-sensitive"] },
+      {
+        title: "Two Steps",
+        points: ["Assignment: nearest centroid", "Update: cluster mean"],
+      },
+      {
+        title: "Limits",
+        points: [
+          "Hard membership",
+          "Spherical bias",
+          "Initialization-sensitive",
+        ],
+      },
     ],
     memoryLine: "K-Means assigns hard labels around means.",
-    cues: ["Minimize within-cluster SSE.", "Scale distance features.", "K must be selected."],
+    cues: [
+      "Minimize within-cluster SSE.",
+      "Scale distance features.",
+      "K must be selected.",
+    ],
     trap: "Do not report K-Means distance as a cluster-membership probability.",
   },
 };
@@ -148,13 +185,19 @@ export const gaussianDistributionFoundations: SubjectTopic = {
           "For one numerical variable, μ sets the centre and σ² sets the variance. The probability density is largest near μ and decreases as x moves away.",
           "A density value is not the probability of one exact continuous value. Probabilities come from the area under the density curve over an interval.",
         ],
-        formulas: [{ label: "Gaussian density", expression: "N(x|μ,σ²) = [1/(√(2π)σ)] exp(−(x−μ)²/(2σ²))" }],
+        formulas: [
+          {
+            label: "Gaussian density",
+            expression: "N(x|μ,σ²) = [1/(√(2π)σ)] exp(−(x−μ)²/(2σ²))",
+          },
+        ],
         visual: {
           src: "/notes/machine-learning/gaussian-univariate-multivariate.png",
           alt: "Univariate Gaussian bell curve and multivariate Gaussian covariance ellipses",
           width: 1536,
           height: 1024,
-          caption: "Mean controls location; variance and covariance control spread, direction, and shape.",
+          caption:
+            "Mean controls location; variance and covariance control spread, direction, and shape.",
         },
       },
       {
@@ -167,11 +210,15 @@ export const gaussianDistributionFoundations: SubjectTopic = {
             ["σ", "Standard deviation", "Controls spread in original units"],
           ],
         },
-        paragraphs: ["A larger variance produces a wider and lower density curve because the total area must remain 1."],
+        paragraphs: [
+          "A larger variance produces a wider and lower density curve because the total area must remain 1.",
+        ],
       },
       {
         title: "Density Numerical",
-        paragraphs: ["Substitute the mean, standard deviation, and observed value carefully into the density formula."],
+        paragraphs: [
+          "Substitute the mean, standard deviation, and observed value carefully into the density formula.",
+        ],
         problems: [
           {
             title: "Calculate a Gaussian density",
@@ -192,7 +239,11 @@ export const gaussianDistributionFoundations: SubjectTopic = {
           "For d features, the mean becomes a vector μ and the variance becomes a covariance matrix Σ. The covariance matrix records the spread of every feature and how pairs of features vary together.",
         ],
         formulas: [
-          { label: "Multivariate density", expression: "N(x|μ,Σ) = exp[−(1/2)(x−μ)ᵀΣ⁻¹(x−μ)] / [(2π)^(d/2)|Σ|^(1/2)]" },
+          {
+            label: "Multivariate density",
+            expression:
+              "N(x|μ,Σ) = exp[−(1/2)(x−μ)ᵀΣ⁻¹(x−μ)] / [(2π)^(d/2)|Σ|^(1/2)]",
+          },
         ],
       },
       {
@@ -214,7 +265,12 @@ export const gaussianDistributionFoundations: SubjectTopic = {
         paragraphs: [
           "The quadratic term inside the multivariate Gaussian measures distance after accounting for covariance. It treats movement along a high-variance direction as less surprising than the same Euclidean movement along a low-variance direction.",
         ],
-        formulas: [{ label: "Squared Mahalanobis distance", expression: "D² = (x−μ)ᵀΣ⁻¹(x−μ)" }],
+        formulas: [
+          {
+            label: "Squared Mahalanobis distance",
+            expression: "D² = (x−μ)ᵀΣ⁻¹(x−μ)",
+          },
+        ],
       },
     ],
     mechanism: {
@@ -243,10 +299,16 @@ export const gaussianDistributionFoundations: SubjectTopic = {
         title: "Parameters",
         table: {
           headers: ["One variable", "Many variables"],
-          rows: [["Mean μ", "Mean vector μ"], ["Variance σ²", "Covariance matrix Σ"]],
+          rows: [
+            ["Mean μ", "Mean vector μ"],
+            ["Variance σ²", "Covariance matrix Σ"],
+          ],
         },
       },
-      { title: "Distance", formulas: [{ label: "Mahalanobis", expression: "(x−μ)ᵀΣ⁻¹(x−μ)" }] },
+      {
+        title: "Distance",
+        formulas: [{ label: "Mahalanobis", expression: "(x−μ)ᵀΣ⁻¹(x−μ)" }],
+      },
     ],
     essentialsStyle: "plain",
     essentials: [
@@ -259,13 +321,24 @@ export const gaussianDistributionFoundations: SubjectTopic = {
     followUp: "How can covariance rotate the shape of a Gaussian component?",
   },
   lastMinute: {
-    definition: "Gaussian density falls as covariance-aware distance from the mean grows.",
+    definition:
+      "Gaussian density falls as covariance-aware distance from the mean grows.",
     sections: [
-      { title: "1D", points: ["μ: centre", "σ²: spread", "Bell-shaped density"] },
-      { title: "Multi-D", points: ["μ: vector", "Σ: covariance matrix", "Elliptical contours"] },
+      {
+        title: "1D",
+        points: ["μ: centre", "σ²: spread", "Bell-shaped density"],
+      },
+      {
+        title: "Multi-D",
+        points: ["μ: vector", "Σ: covariance matrix", "Elliptical contours"],
+      },
     ],
     memoryLine: "Mean places the Gaussian; covariance shapes it.",
-    cues: ["Density is not point probability.", "Σ must describe valid spread.", "Mahalanobis uses Σ⁻¹."],
+    cues: [
+      "Density is not point probability.",
+      "Σ must describe valid spread.",
+      "Mahalanobis uses Σ⁻¹.",
+    ],
     trap: "Do not use σ where the formula asks for variance σ².",
   },
 };

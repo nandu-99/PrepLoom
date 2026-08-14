@@ -3,7 +3,8 @@ import type { SubjectTopic } from "@/lib/subject-content";
 export const storageAndFileOrganization: SubjectTopic = {
   slug: "storage-and-file-organization",
   title: "Storage and File Organization",
-  description: "Understand pages, records, buffers, and the main ways a DBMS stores table files.",
+  description:
+    "Understand pages, records, buffers, and the main ways a DBMS stores table files.",
   readTime: "32 min",
   difficulty: "Foundation",
   tags: ["Pages", "Records", "File Organization"],
@@ -24,10 +25,26 @@ export const storageAndFileOrganization: SubjectTopic = {
         dataTable: {
           headers: ["Term", "Meaning", "Why it matters"],
           rows: [
-            ["Page", "Fixed-size unit of storage transfer", "Most I/O costs are counted in page reads and writes"],
-            ["Record", "Stored form of one table row", "Contains fixed-length or variable-length fields"],
-            ["Record ID (RID)", "Usually a page number and slot number", "Lets an index locate a record"],
-            ["Page header", "Metadata about the page", "Tracks slots, free space, and page type"],
+            [
+              "Page",
+              "Fixed-size unit of storage transfer",
+              "Most I/O costs are counted in page reads and writes",
+            ],
+            [
+              "Record",
+              "Stored form of one table row",
+              "Contains fixed-length or variable-length fields",
+            ],
+            [
+              "Record ID (RID)",
+              "Usually a page number and slot number",
+              "Lets an index locate a record",
+            ],
+            [
+              "Page header",
+              "Metadata about the page",
+              "Tracks slots, free space, and page type",
+            ],
           ],
         },
         paragraphs: [
@@ -39,7 +56,10 @@ export const storageAndFileOrganization: SubjectTopic = {
         table: {
           headers: ["Unspanned", "Spanned"],
           rows: [
-            ["One record must fit completely inside one page", "A record may continue on another page"],
+            [
+              "One record must fit completely inside one page",
+              "A record may continue on another page",
+            ],
             ["Simpler to read", "Uses leftover space better for large records"],
           ],
         },
@@ -52,9 +72,21 @@ export const storageAndFileOrganization: SubjectTopic = {
         dataTable: {
           headers: ["Organization", "Good for", "Main weakness"],
           rows: [
-            ["Heap", "Fast insertion and full scans", "Searching without an index may scan every page"],
-            ["Sorted or sequential", "Ordered output and range access", "Insertion may require movement or overflow pages"],
-            ["Hashed", "Equality search using a hash key", "Poor for ranges and may create overflow buckets"],
+            [
+              "Heap",
+              "Fast insertion and full scans",
+              "Searching without an index may scan every page",
+            ],
+            [
+              "Sorted or sequential",
+              "Ordered output and range access",
+              "Insertion may require movement or overflow pages",
+            ],
+            [
+              "Hashed",
+              "Equality search using a hash key",
+              "Poor for ranges and may create overflow buckets",
+            ],
           ],
         },
         paragraphs: [
@@ -76,11 +108,13 @@ export const storageAndFileOrganization: SubjectTopic = {
         formulas: [
           {
             label: "Blocking factor",
-            expression: "bfr = floor(page size / record size) = floor(4096 / 100) = 40 records",
+            expression:
+              "bfr = floor(page size / record size) = floor(4096 / 100) = 40 records",
           },
           {
             label: "Pages required",
-            expression: "b = ceil(number of records / bfr) = ceil(10000 / 40) = 250 pages",
+            expression:
+              "b = ceil(number of records / bfr) = ceil(10000 / 40) = 250 pages",
           },
         ],
         points: [
@@ -106,8 +140,14 @@ export const storageAndFileOrganization: SubjectTopic = {
           "Store the earlier 10,000 records of 100 bytes in 4,096-byte pages, but now allow records to span pages. Ignore page headers and continuation-pointer space.",
         ],
         formulas: [
-          { label: "Total record bytes", expression: "10000 × 100 = 1,000,000 bytes" },
-          { label: "Pages required", expression: "ceil(1000000 / 4096) = 245 pages" },
+          {
+            label: "Total record bytes",
+            expression: "10000 × 100 = 1,000,000 bytes",
+          },
+          {
+            label: "Pages required",
+            expression: "ceil(1000000 / 4096) = 245 pages",
+          },
         ],
         points: [
           "The unspanned version required 250 pages; spanning uses leftover page space more fully.",
@@ -154,10 +194,12 @@ export const storageAndFileOrganization: SubjectTopic = {
       "Unspanned blocking factor uses floor(page size / record size).",
       "A dirty buffer page has not yet been written to permanent storage.",
     ],
-    followUp: "Why can an unspanned file need more pages than total bytes divided by page size?",
+    followUp:
+      "Why can an unspanned file need more pages than total bytes divided by page size?",
   },
   lastMinute: {
-    definition: "Files contain pages; pages contain records; buffers hold pages in memory.",
+    definition:
+      "Files contain pages; pages contain records; buffers hold pages in memory.",
     sections: [
       {
         title: "Formula",
@@ -173,7 +215,8 @@ export const storageAndFileOrganization: SubjectTopic = {
 export const indexingFundamentals: SubjectTopic = {
   slug: "indexing-fundamentals",
   title: "Indexing Fundamentals",
-  description: "Learn index entries, dense and sparse indexes, clustering, selectivity, and index cost.",
+  description:
+    "Learn index entries, dense and sparse indexes, clustering, selectivity, and index cost.",
   readTime: "34 min",
   difficulty: "Intermediate",
   tags: ["Indexes", "Dense and Sparse", "Clustered Index"],
@@ -193,8 +236,14 @@ export const indexingFundamentals: SubjectTopic = {
         table: {
           headers: ["Dense index", "Sparse index"],
           rows: [
-            ["Has an entry for every search-key value or record", "Has entries for only some search-key values"],
-            ["Can point close to the exact record", "Finds a nearby page, then searches within the ordered data"],
+            [
+              "Has an entry for every search-key value or record",
+              "Has entries for only some search-key values",
+            ],
+            [
+              "Can point close to the exact record",
+              "Finds a nearby page, then searches within the ordered data",
+            ],
             ["Uses more index space", "Uses less index space"],
           ],
         },
@@ -208,8 +257,16 @@ export const indexingFundamentals: SubjectTopic = {
           headers: ["Traditional term", "File ordering", "Search field"],
           rows: [
             ["Primary index", "Ordered on the field", "Unique ordering key"],
-            ["Clustering index", "Ordered on the field", "Non-unique ordering field"],
-            ["Secondary index", "Not the file-ordering field", "Key or non-key field"],
+            [
+              "Clustering index",
+              "Ordered on the field",
+              "Non-unique ordering field",
+            ],
+            [
+              "Secondary index",
+              "Not the file-ordering field",
+              "Key or non-key field",
+            ],
           ],
         },
         paragraphs: [
@@ -249,9 +306,15 @@ export const indexingFundamentals: SubjectTopic = {
         dataTable: {
           headers: ["Often helpful", "May not help"],
           rows: [
-            ["Equality on a selective value", "A query returning most table rows"],
+            [
+              "Equality on a selective value",
+              "A query returning most table rows",
+            ],
             ["Range on an ordered tree index", "A very small table"],
-            ["Join, filter, or order columns used often", "A frequently updated, low-cardinality column whose common value matches many rows"],
+            [
+              "Join, filter, or order columns used often",
+              "A frequently updated, low-cardinality column whose common value matches many rows",
+            ],
           ],
         },
         paragraphs: [
@@ -265,9 +328,19 @@ export const indexingFundamentals: SubjectTopic = {
         ],
         formulas: [
           { label: "Data pages", expression: "100000 / 100 = 1,000 pages" },
-          { label: "First-level entries", expression: "1 entry per data page = 1,000 entries" },
-          { label: "First-level pages", expression: "ceil(1000 / 200) = 5 pages" },
-          { label: "Second-level entries", expression: "1 per first-level page = 5 entries, so it fits in 1 page" },
+          {
+            label: "First-level entries",
+            expression: "1 entry per data page = 1,000 entries",
+          },
+          {
+            label: "First-level pages",
+            expression: "ceil(1000 / 200) = 5 pages",
+          },
+          {
+            label: "Second-level entries",
+            expression:
+              "1 per first-level page = 5 entries, so it fits in 1 page",
+          },
         ],
         points: [
           "With the top page in storage, locating a data page needs one top-index read, one first-level-index read, and one data-page read: 3 page reads.",
@@ -304,7 +377,8 @@ export const indexingFundamentals: SubjectTopic = {
       "An index does not make every query faster. Reading a large part of a table through scattered index pointers can cost more than a sequential scan.",
   },
   revise: {
-    definition: "An index stores search keys with pointers to reduce the pages examined by a query.",
+    definition:
+      "An index stores search keys with pointers to reduce the pages examined by a query.",
     sections: [
       {
         title: "Fast Comparison",
@@ -323,14 +397,19 @@ export const indexingFundamentals: SubjectTopic = {
       "Composite-index order matters.",
       "A highly selective condition has a small matching fraction and often benefits from index access.",
     ],
-    followUp: "Why might a DBMS ignore an available index when a condition matches 80% of a table?",
+    followUp:
+      "Why might a DBMS ignore an available index when a condition matches 80% of a table?",
   },
   lastMinute: {
     definition: "Index = search key plus pointer, arranged for faster access.",
     sections: [
       {
         title: "Choose Carefully",
-        points: ["Selective lookup → index often wins", "Most rows → scan often wins", "More indexes → slower writes"],
+        points: [
+          "Selective lookup → index often wins",
+          "Most rows → scan often wins",
+          "More indexes → slower writes",
+        ],
       },
     ],
     memoryLine: "Fewer searched pages, but extra space and write work",
@@ -342,7 +421,8 @@ export const indexingFundamentals: SubjectTopic = {
 export const bTreesBPlusTreesAndHashing: SubjectTopic = {
   slug: "b-trees-b-plus-trees-and-hashing",
   title: "B-Trees, B+ Trees, and Hashing",
-  description: "Compare balanced tree indexes with hash indexes and solve basic order and search problems.",
+  description:
+    "Compare balanced tree indexes with hash indexes and solve basic order and search problems.",
   readTime: "34 min",
   difficulty: "Advanced",
   tags: ["B-Tree", "B+ Tree", "Hashing"],
@@ -368,7 +448,8 @@ export const bTreesBPlusTreesAndHashing: SubjectTopic = {
           alt: "A correct B+ tree with separator keys in internal nodes, record pointers in leaves, and linked leaf nodes.",
           width: 1536,
           height: 1024,
-          caption: "Internal nodes guide the search; linked leaves hold the searchable entries and record pointers.",
+          caption:
+            "Internal nodes guide the search; linked leaves hold the searchable entries and record pointers.",
         },
       },
       {
@@ -376,9 +457,18 @@ export const bTreesBPlusTreesAndHashing: SubjectTopic = {
         table: {
           headers: ["B-tree", "B+ tree"],
           rows: [
-            ["Record pointers may appear in internal and leaf nodes", "Record pointers are kept at leaf level"],
-            ["A successful search may stop at an internal node", "Search reaches a leaf"],
-            ["Leaves need not form one linked sequence", "Leaves are linked for ordered scans"],
+            [
+              "Record pointers may appear in internal and leaf nodes",
+              "Record pointers are kept at leaf level",
+            ],
+            [
+              "A successful search may stop at an internal node",
+              "Search reaches a leaf",
+            ],
+            [
+              "Leaves need not form one linked sequence",
+              "Leaves are linked for ordered scans",
+            ],
           ],
         },
         paragraphs: [
@@ -427,8 +517,14 @@ export const bTreesBPlusTreesAndHashing: SubjectTopic = {
         ],
         formulas: [
           { label: "Maximum leaves", expression: "100 × 100 = 10,000 leaves" },
-          { label: "Maximum indexed entries", expression: "10000 × 99 = 990,000 entries" },
-          { label: "Point-search path", expression: "3 index pages from root through leaf" },
+          {
+            label: "Maximum indexed entries",
+            expression: "10000 × 99 = 990,000 entries",
+          },
+          {
+            label: "Point-search path",
+            expression: "3 index pages from root through leaf",
+          },
         ],
       },
       {
@@ -436,7 +532,10 @@ export const bTreesBPlusTreesAndHashing: SubjectTopic = {
         table: {
           headers: ["B-tree internal split", "B+ tree leaf split"],
           rows: [
-            ["The separator key is promoted to the parent and leaves the split node", "The first key of the right leaf is copied to the parent and remains in the leaf"],
+            [
+              "The separator key is promoted to the parent and leaves the split node",
+              "The first key of the right leaf is copied to the parent and remains in the leaf",
+            ],
           ],
         },
         paragraphs: [
@@ -453,8 +552,16 @@ export const bTreesBPlusTreesAndHashing: SubjectTopic = {
           headers: ["Query", "Hash index", "B+ tree"],
           rows: [
             ["ID = 42", "Excellent expected access", "Good"],
-            ["ID between 40 and 60", "Poor because bucket order is not key order", "Excellent through linked leaves"],
-            ["ORDER BY ID", "Does not naturally provide order", "Can scan leaves in order"],
+            [
+              "ID between 40 and 60",
+              "Poor because bucket order is not key order",
+              "Excellent through linked leaves",
+            ],
+            [
+              "ORDER BY ID",
+              "Does not naturally provide order",
+              "Can scan leaves in order",
+            ],
           ],
         },
       },
@@ -520,14 +627,19 @@ export const bTreesBPlusTreesAndHashing: SubjectTopic = {
       "B+ tree insertion may split a node and propagate a separator upward.",
       "Dynamic hashing grows its bucket structure as data grows.",
     ],
-    followUp: "Why does a B+ tree normally perform range queries better than a hash index?",
+    followUp:
+      "Why does a B+ tree normally perform range queries better than a hash index?",
   },
   lastMinute: {
     definition: "B+ tree = balanced order; hash index = calculated bucket.",
     sections: [
       {
         title: "Choose",
-        points: ["Equality only → hash can fit", "Equality plus ranges/order → B+ tree", "Overflow → split and propagate"],
+        points: [
+          "Equality only → hash can fit",
+          "Equality plus ranges/order → B+ tree",
+          "Overflow → split and propagate",
+        ],
       },
     ],
     memoryLine: "Tree keeps order • hash chooses bucket",
@@ -539,7 +651,8 @@ export const bTreesBPlusTreesAndHashing: SubjectTopic = {
 export const logBasedRecoveryAndWal: SubjectTopic = {
   slug: "log-based-recovery-and-wal",
   title: "Log-Based Recovery and WAL",
-  description: "Use logs, write-ahead logging, undo, and redo to recover transactions after failure.",
+  description:
+    "Use logs, write-ahead logging, undo, and redo to recover transactions after failure.",
   readTime: "32 min",
   difficulty: "Advanced",
   tags: ["Recovery Log", "WAL", "Undo and Redo"],
@@ -553,9 +666,21 @@ export const logBasedRecoveryAndWal: SubjectTopic = {
         dataTable: {
           headers: ["Failure", "Example", "Typical response"],
           rows: [
-            ["Transaction failure", "Constraint error or deadlock victim", "Roll back that transaction"],
-            ["System crash", "Power or operating-system failure", "Use the log after restart"],
-            ["Media failure", "Damaged storage device", "Restore a backup and apply later log records"],
+            [
+              "Transaction failure",
+              "Constraint error or deadlock victim",
+              "Roll back that transaction",
+            ],
+            [
+              "System crash",
+              "Power or operating-system failure",
+              "Use the log after restart",
+            ],
+            [
+              "Media failure",
+              "Damaged storage device",
+              "Restore a backup and apply later log records",
+            ],
           ],
         },
       },
@@ -582,7 +707,8 @@ export const logBasedRecoveryAndWal: SubjectTopic = {
           alt: "Write-ahead logging rules: flush an update log record before its data page and flush required log records including commit before reporting success.",
           width: 1536,
           height: 1024,
-          caption: "WAL makes update and commit information durable before the related database action is considered safe.",
+          caption:
+            "WAL makes update and commit information durable before the related database action is considered safe.",
         },
       },
       {
@@ -592,8 +718,14 @@ export const logBasedRecoveryAndWal: SubjectTopic = {
           headers: ["UNDO", "REDO"],
           rows: [
             ["Restores old values", "Reapplies new values"],
-            ["Used for incomplete transactions whose changes may be on disk", "Used for committed transactions whose changes may not be on disk"],
-            ["Usually follows log records backward", "Usually follows log records forward"],
+            [
+              "Used for incomplete transactions whose changes may be on disk",
+              "Used for committed transactions whose changes may not be on disk",
+            ],
+            [
+              "Usually follows log records backward",
+              "Usually follows log records forward",
+            ],
           ],
         },
       },
@@ -602,10 +734,26 @@ export const logBasedRecoveryAndWal: SubjectTopic = {
         dataTable: {
           headers: ["Policy", "Meaning", "Recovery effect"],
           rows: [
-            ["Steal", "An uncommitted dirty page may be written", "UNDO may be needed"],
-            ["No-steal", "Uncommitted dirty pages stay in memory", "Avoids UNDO for those pages"],
-            ["Force", "All changed pages are written at commit", "Avoids REDO for committed pages"],
-            ["No-force", "Commit need not write every changed page", "REDO may be needed"],
+            [
+              "Steal",
+              "An uncommitted dirty page may be written",
+              "UNDO may be needed",
+            ],
+            [
+              "No-steal",
+              "Uncommitted dirty pages stay in memory",
+              "Avoids UNDO for those pages",
+            ],
+            [
+              "Force",
+              "All changed pages are written at commit",
+              "Avoids REDO for committed pages",
+            ],
+            [
+              "No-force",
+              "Commit need not write every changed page",
+              "REDO may be needed",
+            ],
           ],
         },
         paragraphs: [
@@ -617,8 +765,14 @@ export const logBasedRecoveryAndWal: SubjectTopic = {
         table: {
           headers: ["Immediate update", "Deferred update"],
           rows: [
-            ["A data page may be written before transaction commit", "Database changes are postponed until commit"],
-            ["May require UNDO and REDO", "Normally needs REDO but not UNDO for database pages"],
+            [
+              "A data page may be written before transaction commit",
+              "Database changes are postponed until commit",
+            ],
+            [
+              "May require UNDO and REDO",
+              "Normally needs REDO but not UNDO for database pages",
+            ],
           ],
         },
         paragraphs: [
@@ -670,7 +824,12 @@ export const logBasedRecoveryAndWal: SubjectTopic = {
     sections: [
       {
         title: "Policy Map",
-        points: ["Steal → may need UNDO", "No-force → may need REDO", "Winner → committed", "Loser → uncommitted at crash"],
+        points: [
+          "Steal → may need UNDO",
+          "No-force → may need REDO",
+          "Winner → committed",
+          "Loser → uncommitted at crash",
+        ],
       },
     ],
     essentialsStyle: "plain",
@@ -683,11 +842,17 @@ export const logBasedRecoveryAndWal: SubjectTopic = {
     followUp: "Why can a committed transaction need REDO in a no-force system?",
   },
   lastMinute: {
-    definition: "Log first, data later; redo winners and undo losers as required.",
+    definition:
+      "Log first, data later; redo winners and undo losers as required.",
     sections: [
       {
         title: "Remember",
-        points: ["Old value → UNDO", "New value → REDO", "Steal → UNDO", "No-force → REDO"],
+        points: [
+          "Old value → UNDO",
+          "New value → REDO",
+          "Steal → UNDO",
+          "No-force → REDO",
+        ],
       },
     ],
     memoryLine: "WAL protects the instructions needed after a crash",
@@ -699,7 +864,8 @@ export const logBasedRecoveryAndWal: SubjectTopic = {
 export const checkpointsAndCrashRecovery: SubjectTopic = {
   slug: "checkpoints-and-crash-recovery",
   title: "Checkpoints and Crash Recovery",
-  description: "Limit recovery work with checkpoints and understand the essential ARIES recovery phases.",
+  description:
+    "Limit recovery work with checkpoints and understand the essential ARIES recovery phases.",
   readTime: "26 min",
   difficulty: "Advanced",
   tags: ["Checkpoints", "ARIES", "Crash Recovery"],
@@ -719,8 +885,14 @@ export const checkpointsAndCrashRecovery: SubjectTopic = {
         table: {
           headers: ["Sharp checkpoint", "Fuzzy checkpoint"],
           rows: [
-            ["Pauses relevant update activity to make a clean point", "Allows transactions and page writes to continue"],
-            ["Simpler but causes a pause", "Less disruption but needs richer recovery information"],
+            [
+              "Pauses relevant update activity to make a clean point",
+              "Allows transactions and page writes to continue",
+            ],
+            [
+              "Simpler but causes a pause",
+              "Less disruption but needs richer recovery information",
+            ],
           ],
         },
         paragraphs: [
@@ -736,8 +908,16 @@ export const checkpointsAndCrashRecovery: SubjectTopic = {
         dataTable: {
           headers: ["Transaction", "State at crash", "Simplified action"],
           rows: [
-            ["T1", "Committed after checkpoint", "REDO if its update may be missing"],
-            ["T2", "Started and committed after checkpoint", "REDO if its update may be missing"],
+            [
+              "T1",
+              "Committed after checkpoint",
+              "REDO if its update may be missing",
+            ],
+            [
+              "T2",
+              "Started and committed after checkpoint",
+              "REDO if its update may be missing",
+            ],
             ["T3", "Uncommitted", "UNDO its update"],
           ],
         },
@@ -750,9 +930,21 @@ export const checkpointsAndCrashRecovery: SubjectTopic = {
         dataTable: {
           headers: ["Phase", "Main job", "Simple meaning"],
           rows: [
-            ["Analysis", "Rebuild transaction and dirty-page information", "Find what was active and what may need recovery"],
-            ["Redo", "Repeat history from the required point", "Reapply logged actions that may be missing"],
-            ["Undo", "Roll back loser transactions", "Remove incomplete work backward"],
+            [
+              "Analysis",
+              "Rebuild transaction and dirty-page information",
+              "Find what was active and what may need recovery",
+            ],
+            [
+              "Redo",
+              "Repeat history from the required point",
+              "Reapply logged actions that may be missing",
+            ],
+            [
+              "Undo",
+              "Roll back loser transactions",
+              "Remove incomplete work backward",
+            ],
           ],
         },
       },
@@ -796,7 +988,10 @@ export const checkpointsAndCrashRecovery: SubjectTopic = {
       {
         title: "ARIES Order",
         flow: ["Analysis", "Redo", "Undo"],
-        points: ["CLRs record completed undo work.", "Page LSNs help avoid unnecessary redo."],
+        points: [
+          "CLRs record completed undo work.",
+          "Page LSNs help avoid unnecessary redo.",
+        ],
       },
     ],
     essentialsStyle: "plain",
@@ -807,14 +1002,19 @@ export const checkpointsAndCrashRecovery: SubjectTopic = {
       "ARIES redo repeats required history before loser undo.",
       "CLRs record undo work so recovery can restart safely.",
     ],
-    followUp: "Why must recovery examine a transaction that was active at the latest checkpoint?",
+    followUp:
+      "Why must recovery examine a transaction that was active at the latest checkpoint?",
   },
   lastMinute: {
-    definition: "Checkpoint shortens the search; ARIES runs analysis → redo → undo.",
+    definition:
+      "Checkpoint shortens the search; ARIES runs analysis → redo → undo.",
     sections: [
       {
         title: "Crash vs Media",
-        points: ["Crash → restart from log", "Lost storage → restore backup, then apply logs"],
+        points: [
+          "Crash → restart from log",
+          "Lost storage → restore backup, then apply logs",
+        ],
       },
     ],
     memoryLine: "Find state • repeat history • remove losers",
@@ -826,7 +1026,8 @@ export const checkpointsAndCrashRecovery: SubjectTopic = {
 export const queryProcessingAndOptimization: SubjectTopic = {
   slug: "query-processing-and-optimization",
   title: "Query Processing and Optimization",
-  description: "Follow a SQL query through parsing, planning, optimization, and execution, then compare plan costs.",
+  description:
+    "Follow a SQL query through parsing, planning, optimization, and execution, then compare plan costs.",
   readTime: "40 min",
   difficulty: "Advanced",
   tags: ["Query Plans", "Optimization", "Join Algorithms"],
@@ -845,7 +1046,8 @@ export const queryProcessingAndOptimization: SubjectTopic = {
           alt: "SQL query processing from parser to logical plan, optimizer, physical plan, executor, and result, with candidate plans compared by estimated cost.",
           width: 1536,
           height: 1024,
-          caption: "The optimizer maps one logical request to a physical plan with a low estimated cost.",
+          caption:
+            "The optimizer maps one logical request to a physical plan with a low estimated cost.",
         },
       },
       {
@@ -853,8 +1055,14 @@ export const queryProcessingAndOptimization: SubjectTopic = {
         table: {
           headers: ["Logical plan", "Physical plan"],
           rows: [
-            ["Says which relational operations are required", "Says how each operation will run"],
-            ["Selection, projection, join, grouping", "Table scan, index scan, hash join, sort-merge join"],
+            [
+              "Says which relational operations are required",
+              "Says how each operation will run",
+            ],
+            [
+              "Selection, projection, join, grouping",
+              "Table scan, index scan, hash join, sort-merge join",
+            ],
           ],
         },
         paragraphs: [
@@ -882,7 +1090,8 @@ export const queryProcessingAndOptimization: SubjectTopic = {
         formulas: [
           {
             label: "Simple equality estimate",
-            expression: "estimated rows = total rows / number of distinct values",
+            expression:
+              "estimated rows = total rows / number of distinct values",
             note: "This assumes values are roughly uniform and no better statistics are available.",
           },
         ],
@@ -904,9 +1113,21 @@ export const queryProcessingAndOptimization: SubjectTopic = {
         dataTable: {
           headers: ["Access path", "Main cost idea", "Good situation"],
           rows: [
-            ["Sequential table scan", "Read the table's pages in order", "Large result or no useful index"],
-            ["Index scan", "Read index path plus matching data pages", "Small selective result"],
-            ["Index-only scan", "Required columns are available in the index", "Avoids many table-page visits"],
+            [
+              "Sequential table scan",
+              "Read the table's pages in order",
+              "Large result or no useful index",
+            ],
+            [
+              "Index scan",
+              "Read index path plus matching data pages",
+              "Small selective result",
+            ],
+            [
+              "Index-only scan",
+              "Required columns are available in the index",
+              "Avoids many table-page visits",
+            ],
           ],
         },
       },
@@ -922,10 +1143,26 @@ export const queryProcessingAndOptimization: SubjectTopic = {
         dataTable: {
           headers: ["Algorithm", "Basic idea", "Works well when"],
           rows: [
-            ["Nested-loop join", "For rows or blocks of one input, search the other", "Outer input is small or inner side has a useful index"],
-            ["Block nested-loop join", "Load several outer pages, then scan the inner input", "Memory can hold a useful outer block"],
-            ["Hash join", "Partition both inputs, then build a hash table on the smaller input or partition", "Large equi-joins"],
-            ["Sort-merge join", "Sort both inputs and merge matching keys", "Inputs are sorted or ordered output is useful"],
+            [
+              "Nested-loop join",
+              "For rows or blocks of one input, search the other",
+              "Outer input is small or inner side has a useful index",
+            ],
+            [
+              "Block nested-loop join",
+              "Load several outer pages, then scan the inner input",
+              "Memory can hold a useful outer block",
+            ],
+            [
+              "Hash join",
+              "Partition both inputs, then build a hash table on the smaller input or partition",
+              "Large equi-joins",
+            ],
+            [
+              "Sort-merge join",
+              "Sort both inputs and merge matching keys",
+              "Inputs are sorted or ordered output is useful",
+            ],
           ],
         },
         paragraphs: [
@@ -937,8 +1174,14 @@ export const queryProcessingAndOptimization: SubjectTopic = {
         table: {
           headers: ["Pipelining", "Materialization"],
           rows: [
-            ["Pass rows directly to the next operator", "Store an intermediate result before the next operator reads it"],
-            ["Uses less temporary I/O and can return rows sooner", "Useful when a result is reused or an operator must finish first"],
+            [
+              "Pass rows directly to the next operator",
+              "Store an intermediate result before the next operator reads it",
+            ],
+            [
+              "Uses less temporary I/O and can return rows sooner",
+              "Useful when a result is reused or an operator must finish first",
+            ],
           ],
         },
         paragraphs: [
@@ -957,7 +1200,8 @@ export const queryProcessingAndOptimization: SubjectTopic = {
           },
           {
             label: "Cost",
-            expression: "bR + outer blocks × bS = 1000 + 50 × 200 = 11,000 page reads",
+            expression:
+              "bR + outer blocks × bS = 1000 + 50 × 200 = 11,000 page reads",
           },
         ],
         points: [
@@ -1044,14 +1288,20 @@ export const queryProcessingAndOptimization: SubjectTopic = {
       "Pipelining avoids storing some intermediate results.",
       "Bad cardinality estimates can cause a bad plan.",
     ],
-    followUp: "Why can changing the join order reduce cost even when the final result is unchanged?",
+    followUp:
+      "Why can changing the join order reduce cost even when the final result is unchanged?",
   },
   lastMinute: {
     definition: "Parse → logical plan → optimize → physical plan → execute.",
     sections: [
       {
         title: "Plan Choice",
-        points: ["Few rows → index", "Many rows → scan", "Large equi-join → hash often fits", "Ordered inputs → merge may fit"],
+        points: [
+          "Few rows → index",
+          "Many rows → scan",
+          "Large equi-join → hash often fits",
+          "Ordered inputs → merge may fit",
+        ],
       },
     ],
     memoryLine: "Reduce rows early, then choose the cheapest valid operators",

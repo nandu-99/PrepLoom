@@ -24,7 +24,9 @@ export const commonSvmKernels: SubjectTopic = {
         paragraphs: [
           "The polynomial kernel represents interactions up to a selected degree. Higher degree allows more curved boundaries but increases the risk of fitting noise.",
         ],
-        formulas: [{ label: "Polynomial kernel", expression: "K(x,z)=(γxᵀz+r)ᵈ" }],
+        formulas: [
+          { label: "Polynomial kernel", expression: "K(x,z)=(γxᵀz+r)ᵈ" },
+        ],
         dataTable: {
           headers: ["Parameter", "Role"],
           rows: [
@@ -39,29 +41,36 @@ export const commonSvmKernels: SubjectTopic = {
         paragraphs: [
           "The RBF kernel gives high similarity to nearby points and similarity approaching zero as squared distance grows. It can create flexible local boundaries and is a common nonlinear default.",
         ],
-        formulas: [{ label: "RBF kernel", expression: "K(x,z)=exp(−γ||x−z||²)" }],
+        formulas: [
+          { label: "RBF kernel", expression: "K(x,z)=exp(−γ||x−z||²)" },
+        ],
         visual: {
           src: "/notes/machine-learning/svm-kernel-comparison.png",
           alt: "Linear, polynomial, and RBF SVM kernels compared through their formulas and boundary shapes",
           width: 1536,
           height: 1024,
-          caption: "Kernel choice and its hyperparameters control the complexity and shape of the SVM boundary.",
+          caption:
+            "Kernel choice and its hyperparameters control the complexity and shape of the SVM boundary.",
         },
       },
       {
         title: "Kernel Numerical",
-        paragraphs: ["The three kernels can return very different similarity values for the same pair of inputs."],
+        paragraphs: [
+          "The three kernels can return very different similarity values for the same pair of inputs.",
+        ],
         problems: [
           {
             title: "Calculate three kernel values",
-            prompt: "For x=[1,2] and z=[2,0], calculate the linear kernel; polynomial kernel with γ=1, r=1, d=2; and RBF kernel with γ=1.",
+            prompt:
+              "For x=[1,2] and z=[2,0], calculate the linear kernel; polynomial kernel with γ=1, r=1, d=2; and RBF kernel with γ=1.",
             steps: [
               "xᵀz=1(2)+2(0)=2, so Klinear=2.",
               "Kpoly=(1·2+1)²=3²=9.",
               "||x−z||²=(1−2)²+(2−0)²=1+4=5.",
               "KRBF=exp(−1·5)=e⁻⁵≈0.0067.",
             ],
-            answer: "The kernel values are linear=2, polynomial=9, and RBF≈0.0067.",
+            answer:
+              "The kernel values are linear=2, polynomial=9, and RBF≈0.0067.",
           },
         ],
       },
@@ -70,7 +79,10 @@ export const commonSvmKernels: SubjectTopic = {
         table: {
           headers: ["Smaller γ", "Larger γ"],
           rows: [
-            ["Each point influences a wider region", "Each point influences a narrow region"],
+            [
+              "Each point influences a wider region",
+              "Each point influences a narrow region",
+            ],
             ["Smoother boundary", "More local, complex boundary"],
             ["Can underfit", "Can overfit"],
           ],
@@ -137,13 +149,24 @@ export const commonSvmKernels: SubjectTopic = {
     followUp: "Why can a very large RBF gamma cause overfitting?",
   },
   lastMinute: {
-    definition: "The kernel controls similarity and the allowed boundary shape.",
+    definition:
+      "The kernel controls similarity and the allowed boundary shape.",
     sections: [
-      { title: "Match", points: ["Linear: dot product", "Polynomial: degree", "RBF: distance"] },
-      { title: "RBF γ", points: ["Small: broad and smooth", "Large: local and complex"] },
+      {
+        title: "Match",
+        points: ["Linear: dot product", "Polynomial: degree", "RBF: distance"],
+      },
+      {
+        title: "RBF γ",
+        points: ["Small: broad and smooth", "Large: local and complex"],
+      },
     ],
     memoryLine: "Linear compares direction; RBF compares closeness.",
-    cues: ["RBF uses squared distance.", "Degree belongs to polynomial.", "Validate kernel settings."],
+    cues: [
+      "RBF uses squared distance.",
+      "Degree belongs to polynomial.",
+      "Validate kernel settings.",
+    ],
     trap: "Do not interpret a larger gamma as stronger regularization.",
   },
 };
@@ -171,7 +194,8 @@ export const svmTrainingTuningAndEvaluation: SubjectTopic = {
           alt: "Leakage-safe SVM workflow with training split, scaling, cross-validation, tuning, and final test evaluation",
           width: 1536,
           height: 1024,
-          caption: "Fit preprocessing only on training data inside every validation fold.",
+          caption:
+            "Fit preprocessing only on training data inside every validation fold.",
         },
       },
       {
@@ -181,7 +205,11 @@ export const svmTrainingTuningAndEvaluation: SubjectTopic = {
           rows: [
             ["C", "All soft-margin SVMs", "Penalty for margin violations"],
             ["kernel", "Kernel SVM", "Allowed similarity and boundary shape"],
-            ["γ", "RBF and polynomial", "Similarity reach or dot-product scale"],
+            [
+              "γ",
+              "RBF and polynomial",
+              "Similarity reach or dot-product scale",
+            ],
             ["degree", "Polynomial", "Polynomial interaction degree"],
           ],
         },
@@ -191,7 +219,9 @@ export const svmTrainingTuningAndEvaluation: SubjectTopic = {
       },
       {
         title: "Model-Selection Numerical",
-        paragraphs: ["Compare hyperparameter candidates using the chosen validation metric, not training performance."],
+        paragraphs: [
+          "Compare hyperparameter candidates using the chosen validation metric, not training performance.",
+        ],
         dataTable: {
           headers: ["Candidate", "Kernel", "C", "γ", "Mean validation F1"],
           rows: [
@@ -203,13 +233,15 @@ export const svmTrainingTuningAndEvaluation: SubjectTopic = {
         problems: [
           {
             title: "Choose the validated SVM",
-            prompt: "Which candidate should be selected from the table, and what does Candidate C suggest?",
+            prompt:
+              "Which candidate should be selected from the table, and what does Candidate C suggest?",
             steps: [
               "Candidate B has the highest mean validation F1, 0.88.",
               "Candidate C uses large C and large γ but performs worse on validation data.",
               "Its flexible local boundary and strong violation penalty may be fitting training details too closely.",
             ],
-            answer: "Choose Candidate B, lock its settings, and evaluate it once on the untouched test set.",
+            answer:
+              "Choose Candidate B, lock its settings, and evaluate it once on the untouched test set.",
           },
         ],
       },
@@ -240,9 +272,18 @@ export const svmTrainingTuningAndEvaluation: SubjectTopic = {
           headers: ["Strengths", "Limitations"],
           rows: [
             ["Strong margin-based classifier", "Sensitive to scaling"],
-            ["Effective in high-dimensional spaces", "C, kernel, and γ require tuning"],
-            ["Linear SVM works well with sparse features", "Nonlinear kernel training scales poorly with many rows"],
-            ["Uses support vectors for the boundary", "Raw scores are not probabilities"],
+            [
+              "Effective in high-dimensional spaces",
+              "C, kernel, and γ require tuning",
+            ],
+            [
+              "Linear SVM works well with sparse features",
+              "Nonlinear kernel training scales poorly with many rows",
+            ],
+            [
+              "Uses support vectors for the boundary",
+              "Raw scores are not probabilities",
+            ],
           ],
         },
         paragraphs: [
@@ -289,7 +330,12 @@ export const svmTrainingTuningAndEvaluation: SubjectTopic = {
         title: "Tune",
         table: {
           headers: ["Parameter", "Remember"],
-          rows: [["C", "Violation penalty"], ["γ", "RBF locality"], ["degree", "Polynomial only"], ["kernel", "Boundary family"]],
+          rows: [
+            ["C", "Violation penalty"],
+            ["γ", "RBF locality"],
+            ["degree", "Polynomial only"],
+            ["kernel", "Boundary family"],
+          ],
         },
       },
     ],
@@ -301,16 +347,33 @@ export const svmTrainingTuningAndEvaluation: SubjectTopic = {
       "Kernel SVM can be expensive for large sample counts.",
       "Many support vectors can slow prediction.",
     ],
-    followUp: "Why must the scaler be fitted separately inside every cross-validation fold?",
+    followUp:
+      "Why must the scaler be fitted separately inside every cross-validation fold?",
   },
   lastMinute: {
-    definition: "Scale, validate C and kernel settings, lock them, then test once.",
+    definition:
+      "Scale, validate C and kernel settings, lock them, then test once.",
     sections: [
-      { title: "Pipeline", flow: ["Split", "Scale in fold", "Tune", "Lock", "Test once"], wide: true },
-      { title: "Limits", points: ["Large n can be slow", "Scaling required", "No native probability"] },
+      {
+        title: "Pipeline",
+        flow: ["Split", "Scale in fold", "Tune", "Lock", "Test once"],
+        wide: true,
+      },
+      {
+        title: "Limits",
+        points: [
+          "Large n can be slow",
+          "Scaling required",
+          "No native probability",
+        ],
+      },
     ],
     memoryLine: "Scale inside the fold; tune before the final test.",
-    cues: ["C applies to soft margin.", "Gamma belongs to RBF/poly.", "OvR or OvO handles multiclass."],
+    cues: [
+      "C applies to soft margin.",
+      "Gamma belongs to RBF/poly.",
+      "OvR or OvO handles multiclass.",
+    ],
     trap: "Do not fit the scaler on the full dataset before cross-validation.",
   },
 };

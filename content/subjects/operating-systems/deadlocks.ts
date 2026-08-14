@@ -118,8 +118,14 @@ const deadlockFundamentalsDetailed: SubjectTopic = {
         table: {
           headers: ["Reusable Resource", "Consumable Resource"],
           rows: [
-            ["Used and released for another process", "Created and consumed once"],
-            ["Examples: locks, files, Printers", "Examples: messages, signals, events"],
+            [
+              "Used and released for another process",
+              "Created and consumed once",
+            ],
+            [
+              "Examples: locks, files, Printers",
+              "Examples: messages, signals, events",
+            ],
           ],
         },
       },
@@ -174,10 +180,22 @@ const deadlockFundamentalsDetailed: SubjectTopic = {
         dataTable: {
           headers: ["Condition", "Simple meaning"],
           rows: [
-            ["Mutual Exclusion", "At least one resource can be used by only one process at a time."],
-            ["Hold and Wait", "A process holds a resource while waiting for another resource."],
-            ["No Preemption", "A held resource cannot be safely taken away by force."],
-            ["Circular Wait", "A circular chain exists in which every process waits for the next process."],
+            [
+              "Mutual Exclusion",
+              "At least one resource can be used by only one process at a time.",
+            ],
+            [
+              "Hold and Wait",
+              "A process holds a resource while waiting for another resource.",
+            ],
+            [
+              "No Preemption",
+              "A held resource cannot be safely taken away by force.",
+            ],
+            [
+              "Circular Wait",
+              "A circular chain exists in which every process waits for the next process.",
+            ],
           ],
         },
         visual: {
@@ -197,9 +215,21 @@ const deadlockFundamentalsDetailed: SubjectTopic = {
         dataTable: {
           headers: ["Problem", "What happens", "Is the system active?"],
           rows: [
-            ["Deadlock", "Processes wait for one another in a cycle", "The affected processes are blocked"],
-            ["Starvation", "A process keeps losing access to a needed resource", "Other processes continue working"],
-            ["Livelock", "Processes keep reacting to one another but make no progress", "Processes remain active"],
+            [
+              "Deadlock",
+              "Processes wait for one another in a cycle",
+              "The affected processes are blocked",
+            ],
+            [
+              "Starvation",
+              "A process keeps losing access to a needed resource",
+              "Other processes continue working",
+            ],
+            [
+              "Livelock",
+              "Processes keep reacting to one another but make no progress",
+              "Processes remain active",
+            ],
           ],
         },
       },
@@ -232,9 +262,21 @@ const deadlockFundamentalsDetailed: SubjectTopic = {
         dataTable: {
           headers: ["Situation", "Practical strategy", "Reason"],
           rows: [
-            ["Kernel locks", "Prevention through lock ordering", "Circular Wait can be blocked by a fixed rule"],
-            ["Database transactions", "Detection and rollback", "A victim transaction can be restarted"],
-            ["Rare, low-impact case", "Ostrich approach, timeout, or restart", "Continuous checking may cost more than recovery"],
+            [
+              "Kernel locks",
+              "Prevention through lock ordering",
+              "Circular Wait can be blocked by a fixed rule",
+            ],
+            [
+              "Database transactions",
+              "Detection and rollback",
+              "A victim transaction can be restarted",
+            ],
+            [
+              "Rare, low-impact case",
+              "Ostrich approach, timeout, or restart",
+              "Continuous checking may cost more than recovery",
+            ],
           ],
         },
       },
@@ -280,8 +322,14 @@ const deadlockFundamentalsDetailed: SubjectTopic = {
         table: {
           headers: ["Preemptable", "Non-Preemptable"],
           rows: [
-            ["Can be safely taken away", "Cannot normally be safely taken away"],
-            ["Example: CPU time", "Example: Printer during an active operation"],
+            [
+              "Can be safely taken away",
+              "Cannot normally be safely taken away",
+            ],
+            [
+              "Example: CPU time",
+              "Example: Printer during an active operation",
+            ],
           ],
         },
       },
@@ -357,7 +405,8 @@ const deadlockFundamentalsDetailed: SubjectTopic = {
       "All four Coffman conditions are required for a resource Deadlock.",
       "Real systems may combine strategies; the Ostrich Approach deliberately accepts selected low-risk cases.",
     ],
-    followUp: "Why does a cycle prove Deadlock only when every resource type has one instance?",
+    followUp:
+      "Why does a cycle prove Deadlock only when every resource type has one instance?",
   },
   lastMinute: {
     definition:
@@ -461,9 +510,15 @@ const deadlockPreventionAvoidanceDetailed: SubjectTopic = {
         table: {
           headers: ["Deadlock Prevention", "Deadlock Avoidance"],
           rows: [
-            ["Breaks at least one Coffman condition", "Keeps the system in a Safe State"],
+            [
+              "Breaks at least one Coffman condition",
+              "Keeps the system in a Safe State",
+            ],
             ["Uses fixed allocation rules", "Checks each resource request"],
-            ["Does not need future maximum requests", "Needs each process's maximum resource claim"],
+            [
+              "Does not need future maximum requests",
+              "Needs each process's maximum resource claim",
+            ],
           ],
         },
         visual: {
@@ -614,9 +669,7 @@ const deadlockPreventionAvoidanceDetailed: SubjectTopic = {
       },
       {
         title: "Safety Algorithm",
-        paragraphs: [
-          "The Safety Algorithm tries to build a Safe Sequence.",
-        ],
+        paragraphs: ["The Safety Algorithm tries to build a Safe Sequence."],
         points: [
           "Start with Work = Available.",
           "Find an unfinished process whose Need is less than or equal to Work.",
@@ -639,8 +692,16 @@ const deadlockPreventionAvoidanceDetailed: SubjectTopic = {
         dataTable: {
           headers: ["Feature", "Prevention", "Avoidance"],
           rows: [
-            ["Main idea", "Break a Coffman condition", "Remain in a Safe State"],
-            ["Allocation", "Restricted by fixed rules", "Checked for every request"],
+            [
+              "Main idea",
+              "Break a Coffman condition",
+              "Remain in a Safe State",
+            ],
+            [
+              "Allocation",
+              "Restricted by fixed rules",
+              "Checked for every request",
+            ],
             ["Future maximum need", "Not required", "Required"],
             ["Resource use", "Usually lower", "Usually better"],
             ["Complexity", "Lower", "Higher"],
@@ -656,9 +717,18 @@ const deadlockPreventionAvoidanceDetailed: SubjectTopic = {
         table: {
           headers: ["Deadlock Prevention", "Deadlock Avoidance"],
           rows: [
-            ["Guarantees Deadlock cannot form under the chosen rule", "Allows more flexible resource allocation"],
-            ["May waste resources and reduce concurrency", "Adds safety-checking overhead"],
-            ["Does not need maximum future claims", "Needs accurate maximum claims in advance"],
+            [
+              "Guarantees Deadlock cannot form under the chosen rule",
+              "Allows more flexible resource allocation",
+            ],
+            [
+              "May waste resources and reduce concurrency",
+              "Adds safety-checking overhead",
+            ],
+            [
+              "Does not need maximum future claims",
+              "Needs accurate maximum claims in advance",
+            ],
           ],
         },
       },
@@ -946,7 +1016,10 @@ const deadlockDetectionRecoveryDetailed: SubjectTopic = {
           headers: ["Detection Algorithm", "Safety Algorithm"],
           rows: [
             ["Uses current outstanding Request", "Uses maximum remaining Need"],
-            ["Finds a Deadlock that already exists", "Checks whether a future allocation is safe"],
+            [
+              "Finds a Deadlock that already exists",
+              "Checks whether a future allocation is safe",
+            ],
             ["Used after normal allocation", "Used before granting a request"],
           ],
         },
@@ -987,7 +1060,10 @@ const deadlockDetectionRecoveryDetailed: SubjectTopic = {
         table: {
           headers: ["Useful because", "Cost"],
           rows: [
-            ["Simple and removes the Deadlock immediately", "All unfinished work from those processes is lost"],
+            [
+              "Simple and removes the Deadlock immediately",
+              "All unfinished work from those processes is lost",
+            ],
           ],
         },
       },
@@ -999,7 +1075,10 @@ const deadlockDetectionRecoveryDetailed: SubjectTopic = {
         table: {
           headers: ["Useful because", "Cost"],
           rows: [
-            ["May preserve more completed work", "May require several victim selections and detection runs"],
+            [
+              "May preserve more completed work",
+              "May require several victim selections and detection runs",
+            ],
           ],
         },
       },
@@ -1025,8 +1104,14 @@ const deadlockDetectionRecoveryDetailed: SubjectTopic = {
         table: {
           headers: ["Total Rollback", "Partial Rollback"],
           rows: [
-            ["Restart the process from the beginning", "Return to the latest safe checkpoint"],
-            ["Simple but loses all completed work", "Preserves more work but needs checkpoint support"],
+            [
+              "Restart the process from the beginning",
+              "Return to the latest safe checkpoint",
+            ],
+            [
+              "Simple but loses all completed work",
+              "Preserves more work but needs checkpoint support",
+            ],
           ],
         },
         points: [
@@ -1064,9 +1149,15 @@ const deadlockDetectionRecoveryDetailed: SubjectTopic = {
         table: {
           headers: ["Benefits", "Costs"],
           rows: [
-            ["Fewer restrictions on normal allocation", "Deadlocks exist until they are detected"],
+            [
+              "Fewer restrictions on normal allocation",
+              "Deadlocks exist until they are detected",
+            ],
             ["Potentially better resource use", "Detection consumes CPU time"],
-            ["Recovery runs only after a Deadlock is found", "Termination or rollback may lose work"],
+            [
+              "Recovery runs only after a Deadlock is found",
+              "Termination or rollback may lose work",
+            ],
           ],
         },
       },
@@ -1159,7 +1250,8 @@ const deadlockDetectionRecoveryDetailed: SubjectTopic = {
       "Recovery uses termination, Resource Preemption, or Rollback.",
       "Victim Selection should minimize lost work and avoid Starvation.",
     ],
-    followUp: "Why is a Wait-for Graph not enough for multiple resource instances?",
+    followUp:
+      "Why is a Wait-for Graph not enough for multiple resource instances?",
   },
   lastMinute: {
     definition:

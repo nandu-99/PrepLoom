@@ -26,22 +26,24 @@ export function DeepLearningIllustration() {
         </desc>
 
         <g opacity="0.22">
-          {layers.slice(0, -1).flatMap((layer, layerIndex) =>
-            layer.nodes.flatMap((sourceY, sourceIndex) =>
-              layers[layerIndex + 1].nodes.map((targetY, targetIndex) => (
-                <line
-                  key={`${layerIndex}-${sourceIndex}-${targetIndex}`}
-                  x1={layer.x}
-                  y1={sourceY}
-                  x2={layers[layerIndex + 1].x}
-                  y2={targetY}
-                  stroke="currentColor"
-                  strokeWidth="1.2"
-                  vectorEffect="non-scaling-stroke"
-                />
-              )),
-            ),
-          )}
+          {layers
+            .slice(0, -1)
+            .flatMap((layer, layerIndex) =>
+              layer.nodes.flatMap((sourceY, sourceIndex) =>
+                layers[layerIndex + 1].nodes.map((targetY, targetIndex) => (
+                  <line
+                    key={`${layerIndex}-${sourceIndex}-${targetIndex}`}
+                    x1={layer.x}
+                    y1={sourceY}
+                    x2={layers[layerIndex + 1].x}
+                    y2={targetY}
+                    stroke="currentColor"
+                    strokeWidth="1.2"
+                    vectorEffect="non-scaling-stroke"
+                  />
+                )),
+              ),
+            )}
         </g>
 
         {layers.flatMap((layer, layerIndex) =>
@@ -78,9 +80,15 @@ export function DeepLearningIllustration() {
           fontSize="12"
           textAnchor="middle"
         >
-          <text x="100" y="370" opacity="0.6">INPUT</text>
-          <text x="380" y="370" opacity="0.6">LEARNED REPRESENTATIONS</text>
-          <text x="650" y="370" opacity="0.6">OUTPUT</text>
+          <text x="100" y="370" opacity="0.6">
+            INPUT
+          </text>
+          <text x="380" y="370" opacity="0.6">
+            LEARNED REPRESENTATIONS
+          </text>
+          <text x="650" y="370" opacity="0.6">
+            OUTPUT
+          </text>
         </motion.g>
       </svg>
     </figure>

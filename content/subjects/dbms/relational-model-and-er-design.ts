@@ -152,7 +152,8 @@ export const relationalModelFundamentals: SubjectTopic = {
       "NULL is not zero or an empty string.",
       "Tuple order has no meaning unless a query requests an order.",
     ],
-    followUp: "A relation has six attributes and 40 tuples. What are its degree and cardinality?",
+    followUp:
+      "A relation has six attributes and 40 tuples. What are its degree and cardinality?",
   },
   lastMinute: {
     definition:
@@ -243,7 +244,10 @@ export const databaseKeys: SubjectTopic = {
           rows: [
             ["One per table", "Several may exist in one table"],
             ["Cannot contain NULL", "NULL behavior depends on the DBMS"],
-            ["Main selected identifier", "Also prevents duplicate non-NULL values"],
+            [
+              "Main selected identifier",
+              "Also prevents duplicate non-NULL values",
+            ],
             ["May be composite", "May also cover several attributes"],
           ],
         },
@@ -324,7 +328,8 @@ export const databaseKeys: SubjectTopic = {
       "Prime attributes belong to candidate keys.",
       "A foreign key may refer to a candidate key, not only the primary key.",
     ],
-    followUp: "Why is {StudentId, Name} a super key but not a candidate key when StudentId is already unique?",
+    followUp:
+      "Why is {StudentId, Name} a super key but not a candidate key when StudentId is already unique?",
   },
   lastMinute: {
     definition:
@@ -413,9 +418,15 @@ export const integrityConstraints: SubjectTopic = {
         dataTable: {
           headers: ["Action", "Result"],
           rows: [
-            ["RESTRICT or NO ACTION", "Reject the parent change when dependent rows exist"],
+            [
+              "RESTRICT or NO ACTION",
+              "Reject the parent change when dependent rows exist",
+            ],
             ["CASCADE", "Apply the delete or key update to dependent rows"],
-            ["SET NULL", "Set child foreign-key columns to NULL; those columns must allow NULL"],
+            [
+              "SET NULL",
+              "Set child foreign-key columns to NULL; those columns must allow NULL",
+            ],
           ],
         },
       },
@@ -473,7 +484,10 @@ export const integrityConstraints: SubjectTopic = {
             ["Domain", "Values must belong to the allowed domain"],
             ["Key", "Candidate-key values must be unique"],
             ["Entity integrity", "Primary-key attributes cannot be NULL"],
-            ["Referential integrity", "Non-NULL foreign keys must match a parent key"],
+            [
+              "Referential integrity",
+              "Non-NULL foreign keys must match a parent key",
+            ],
           ],
         },
       },
@@ -611,8 +625,14 @@ export const erModelAndRelationalMapping: SubjectTopic = {
         dataTable: {
           headers: ["Relationship", "Relational mapping"],
           rows: [
-            ["1:1", "Place a UNIQUE foreign key on a suitable side, usually the total-participation side"],
-            ["1:N", "Place the 1-side primary key as a foreign key on the N side; use NOT NULL when N-side participation is total"],
+            [
+              "1:1",
+              "Place a UNIQUE foreign key on a suitable side, usually the total-participation side",
+            ],
+            [
+              "1:N",
+              "Place the 1-side primary key as a foreign key on the N side; use NOT NULL when N-side participation is total",
+            ],
             ["M:N", "Create a new relation containing keys from both sides"],
           ],
         },

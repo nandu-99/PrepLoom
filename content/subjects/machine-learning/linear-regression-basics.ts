@@ -39,7 +39,11 @@ export const simpleLinearRegression: SubjectTopic = {
             ["y", "Observed target", "Actual mark"],
             ["ŷ", "Predicted target", "Predicted mark"],
             ["β₀", "Prediction when x = 0", "Starting mark"],
-            ["β₁", "Change in prediction for one-unit rise in x", "Marks per extra hour"],
+            [
+              "β₁",
+              "Change in prediction for one-unit rise in x",
+              "Marks per extra hour",
+            ],
           ],
         },
       },
@@ -133,7 +137,8 @@ export const simpleLinearRegression: SubjectTopic = {
               "At x = 4: ŷ = 1/3 + 6 = 19/3",
               "The observed x range is 1 to 3, so x = 4 is an extrapolation.",
             ],
-            answer: "β̂₁ = 1.5, β̂₀ = 1/3, and ŷ(4) = 19/3 ≈ 6.33. Treat this extrapolated prediction carefully.",
+            answer:
+              "β̂₁ = 1.5, β̂₀ = 1/3, and ŷ(4) = 19/3 ≈ 6.33. Treat this extrapolated prediction carefully.",
           },
           {
             title: "Calculate one residual",
@@ -144,7 +149,8 @@ export const simpleLinearRegression: SubjectTopic = {
               "e = y − ŷ = 5 − 29/6",
               "e = 1/6",
             ],
-            answer: "The residual is 1/6 ≈ 0.17, so the point lies slightly above the line.",
+            answer:
+              "The residual is 1/6 ≈ 0.17, so the point lies slightly above the line.",
           },
         ],
       },
@@ -156,8 +162,14 @@ export const simpleLinearRegression: SubjectTopic = {
         table: {
           headers: ["Interpolation", "Extrapolation"],
           rows: [
-            ["Prediction inside the training range", "Prediction outside the training range"],
-            ["Usually safer when data coverage is good", "Depends on an untested continuation of the line"],
+            [
+              "Prediction inside the training range",
+              "Prediction outside the training range",
+            ],
+            [
+              "Usually safer when data coverage is good",
+              "Depends on an untested continuation of the line",
+            ],
           ],
         },
       },
@@ -228,15 +240,27 @@ export const simpleLinearRegression: SubjectTopic = {
     sections: [
       {
         title: "Formula Order",
-        flow: ["Find x̄ and ȳ", "Find β̂₁", "Find β̂₀", "Write the line", "Predict or find residual"],
+        flow: [
+          "Find x̄ and ȳ",
+          "Find β̂₁",
+          "Find β̂₀",
+          "Write the line",
+          "Predict or find residual",
+        ],
         wide: true,
       },
       {
         title: "Signs",
-        points: ["β₁ > 0: rising line", "β₁ < 0: falling line", "e > 0: point above line", "e < 0: point below line"],
+        points: [
+          "β₁ > 0: rising line",
+          "β₁ < 0: falling line",
+          "e > 0: point above line",
+          "e < 0: point below line",
+        ],
       },
     ],
-    memoryLine: "Slope gives the change; intercept gives the start; residual gives the miss.",
+    memoryLine:
+      "Slope gives the change; intercept gives the start; residual gives the miss.",
     cues: [
       "OLS minimizes squared residuals.",
       "The intercept may lack practical meaning outside the data range.",
@@ -292,7 +316,11 @@ export const multipleLinearRegression: SubjectTopic = {
         dataTable: {
           headers: ["Quantity", "Dimensions", "Meaning"],
           rows: [
-            ["X", "n × (p + 1)", "Design matrix, including the intercept column"],
+            [
+              "X",
+              "n × (p + 1)",
+              "Design matrix, including the intercept column",
+            ],
             ["β", "(p + 1) × 1", "Intercept and p coefficients"],
             ["y", "n × 1", "Observed targets"],
             ["ŷ", "n × 1", "Predicted targets"],
@@ -315,7 +343,8 @@ export const multipleLinearRegression: SubjectTopic = {
               "An extra 100 square feet changes the prediction by 0.045 × 100 = 4.5 lakh.",
               "The bedroom coefficient is 4 lakh while area stays fixed.",
             ],
-            answer: "Holding the other feature fixed: +100 sq ft adds 4.5 lakh, and +1 bedroom adds 4 lakh.",
+            answer:
+              "Holding the other feature fixed: +100 sq ft adds 4.5 lakh, and +1 bedroom adds 4 lakh.",
           },
         ],
       },
@@ -416,7 +445,8 @@ export const multipleLinearRegression: SubjectTopic = {
               "Hold experience and skills fixed.",
               "The predicted difference is 1.2 lakh.",
             ],
-            answer: "The model predicts 1.2 lakh more for postgraduate = 1, holding the other included features fixed.",
+            answer:
+              "The model predicts 1.2 lakh more for postgraduate = 1, holding the other included features fixed.",
           },
         ],
       },
@@ -472,10 +502,12 @@ export const multipleLinearRegression: SubjectTopic = {
       "Perfect multicollinearity prevents a unique OLS inverse solution.",
       "Association after adjustment is still not proof of causation.",
     ],
-    followUp: "Why must we say holding other features fixed when interpreting a coefficient?",
+    followUp:
+      "Why must we say holding other features fixed when interpreting a coefficient?",
   },
   lastMinute: {
-    definition: "One prediction equals an intercept plus one weighted term per feature.",
+    definition:
+      "One prediction equals an intercept plus one weighted term per feature.",
     sections: [
       {
         title: "Equation",
@@ -483,10 +515,16 @@ export const multipleLinearRegression: SubjectTopic = {
       },
       {
         title: "Interpret Carefully",
-        points: ["State units", "Hold other features fixed", "Know the reference category", "Do not claim causation"],
+        points: [
+          "State units",
+          "Hold other features fixed",
+          "Know the reference category",
+          "Do not claim causation",
+        ],
       },
     ],
-    memoryLine: "Each coefficient changes one feature while the others stay fixed.",
+    memoryLine:
+      "Each coefficient changes one feature while the others stay fixed.",
     cues: [
       "Several features can explain one numerical target.",
       "Dummy-variable trap means perfect dependence between encoded columns.",

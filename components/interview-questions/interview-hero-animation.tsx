@@ -101,7 +101,10 @@ function CssIllustration({ reduceMotion }: { reduceMotion: boolean }) {
         <p className="font-[family-name:var(--font-geist-mono)] text-[10px] text-[#777] dark:text-[#858585]">
           THE CASCADE
         </p>
-        <Braces className="size-4 text-[#777] dark:text-[#858585]" strokeWidth={1.5} />
+        <Braces
+          className="size-4 text-[#777] dark:text-[#858585]"
+          strokeWidth={1.5}
+        />
       </div>
       <div className="space-y-2">
         {rules.map(([number, name, priority], index) => (
@@ -155,7 +158,11 @@ function JavascriptIllustration({ reduceMotion }: { reduceMotion: boolean }) {
 
         <motion.div
           animate={reduceMotion ? undefined : { rotate: [0, 180, 360] }}
-          transition={{ duration: 5, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
+          transition={{
+            duration: 5,
+            repeat: Number.POSITIVE_INFINITY,
+            ease: "linear",
+          }}
           className="grid size-9 place-items-center rounded-full border border-black/[0.12] dark:border-white/[0.14]"
         >
           <ArrowRight className="size-4" strokeWidth={1.5} />
@@ -192,7 +199,11 @@ function ReactIllustration({ reduceMotion }: { reduceMotion: boolean }) {
     <div className="flex min-h-[230px] flex-col items-center justify-center">
       <motion.div
         animate={reduceMotion ? undefined : { y: [0, -3, 0] }}
-        transition={{ duration: 3.2, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+        transition={{
+          duration: 3.2,
+          repeat: Number.POSITIVE_INFINITY,
+          ease: "easeInOut",
+        }}
         className="rounded-[10px] border border-black/[0.14] px-6 py-3 text-[12px] font-semibold dark:border-white/[0.15]"
       >
         App
@@ -230,7 +241,11 @@ function ReactIllustration({ reduceMotion }: { reduceMotion: boolean }) {
   );
 }
 
-function OperatingSystemsIllustration({ reduceMotion }: { reduceMotion: boolean }) {
+function OperatingSystemsIllustration({
+  reduceMotion,
+}: {
+  reduceMotion: boolean;
+}) {
   return (
     <div className="flex min-h-[230px] flex-col justify-center">
       <div className="flex items-center justify-between gap-3">
@@ -255,7 +270,10 @@ function OperatingSystemsIllustration({ reduceMotion }: { reduceMotion: boolean 
             ))}
           </div>
         </div>
-        <ArrowRight className="size-4 shrink-0 text-[#777] dark:text-[#858585]" strokeWidth={1.5} />
+        <ArrowRight
+          className="size-4 shrink-0 text-[#777] dark:text-[#858585]"
+          strokeWidth={1.5}
+        />
         <motion.div
           animate={reduceMotion ? undefined : { scale: [1, 1.05, 1] }}
           transition={{ duration: 2.2, repeat: Number.POSITIVE_INFINITY }}
@@ -268,7 +286,9 @@ function OperatingSystemsIllustration({ reduceMotion }: { reduceMotion: boolean 
         </motion.div>
       </div>
       <div className="mt-5 flex items-center gap-3 border-t border-black/[0.09] pt-4 text-[10px] text-[#777] dark:border-white/[0.1] dark:text-[#858585]">
-        <span className="font-[family-name:var(--font-geist-mono)]">TIME SLICE</span>
+        <span className="font-[family-name:var(--font-geist-mono)]">
+          TIME SLICE
+        </span>
         <span className="h-px flex-1 bg-black/[0.1] dark:bg-white/[0.11]" />
         <span>running process returns or finishes</span>
       </div>
@@ -276,7 +296,11 @@ function OperatingSystemsIllustration({ reduceMotion }: { reduceMotion: boolean 
   );
 }
 
-function ComputerNetworksIllustration({ reduceMotion }: { reduceMotion: boolean }) {
+function ComputerNetworksIllustration({
+  reduceMotion,
+}: {
+  reduceMotion: boolean;
+}) {
   const stops = [
     [Laptop, "Client"],
     [Network, "Router"],
@@ -289,7 +313,11 @@ function ComputerNetworksIllustration({ reduceMotion }: { reduceMotion: boolean 
         <div className="absolute left-[16.66%] right-[16.66%] top-[59px] h-px bg-black/[0.14] dark:bg-white/[0.16]" />
         <motion.span
           animate={reduceMotion ? undefined : { left: ["15%", "50%", "82%"] }}
-          transition={{ duration: 3.4, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+          transition={{
+            duration: 3.4,
+            repeat: Number.POSITIVE_INFINITY,
+            ease: "easeInOut",
+          }}
           className="absolute top-[54px] z-20 size-3 -translate-x-1/2 rounded-[4px] border border-black/[0.25] bg-[#f7f7f5] dark:border-white/[0.3] dark:bg-[#0a0a0a]"
         />
         {stops.map(([Icon, label]) => (
@@ -322,7 +350,10 @@ function OopIllustration({ reduceMotion }: { reduceMotion: boolean }) {
           <span>login()</span>
         </div>
       </div>
-      <ArrowDown className="my-3 size-4 text-[#777] dark:text-[#858585]" strokeWidth={1.5} />
+      <ArrowDown
+        className="my-3 size-4 text-[#777] dark:text-[#858585]"
+        strokeWidth={1.5}
+      />
       <div className="grid w-full grid-cols-2 gap-3">
         {["vivek: User", "admin: User"].map((object, index) => (
           <motion.div
@@ -415,6 +446,8 @@ export function InterviewHeroAnimation({
   }[variant];
 
   return (
-    <IllustrationFrame label={labels[variant]}>{illustration}</IllustrationFrame>
+    <IllustrationFrame label={labels[variant]}>
+      {illustration}
+    </IllustrationFrame>
   );
 }

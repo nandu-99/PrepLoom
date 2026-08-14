@@ -28,7 +28,9 @@ export function MachineLearningIllustration() {
         aria-labelledby="ml-illustration-title ml-illustration-description"
         className="h-auto w-full text-[#151515] dark:text-[#d8d8d6]"
       >
-        <title id="ml-illustration-title">Data points becoming a learned model</title>
+        <title id="ml-illustration-title">
+          Data points becoming a learned model
+        </title>
         <desc id="ml-illustration-description">
           Training examples appear on a coordinate plane, followed by a line
           representing the stable pattern learned by a model.

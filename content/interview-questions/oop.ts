@@ -11,7 +11,8 @@ export const oopInterviewQuestions: OopQuestion[] = [
   {
     id: "class-and-object",
     category: "OOP foundations",
-    question: "How would you explain the difference between a class and an object?",
+    question:
+      "How would you explain the difference between a class and an object?",
     answer:
       "A class defines the structure and behaviour of a type. An object is one runtime instance created from that definition, with its own identity and field values. For example, `BankAccount` can be a class, while two customer accounts are separate objects of that class.",
   },
@@ -46,7 +47,8 @@ export const oopInterviewQuestions: OopQuestion[] = [
   {
     id: "object-reference",
     category: "OOP foundations",
-    question: "What is stored when one object variable is assigned to another in Java?",
+    question:
+      "What is stored when one object variable is assigned to another in Java?",
     answer:
       "For an object type, the reference value is copied, not the object itself. Both variables then refer to the same object, so a mutation through one reference is visible through the other. Creating an independent object requires an explicit copy strategy.",
   },
@@ -61,7 +63,8 @@ export const oopInterviewQuestions: OopQuestion[] = [
   {
     id: "getters-setters-encapsulation",
     category: "Encapsulation and abstraction",
-    question: "Why are getters and setters not automatically good encapsulation?",
+    question:
+      "Why are getters and setters not automatically good encapsulation?",
     answer:
       "If every field has an unrestricted getter and setter, callers can still control the object like a data container and may create invalid states. Good encapsulation exposes operations that express business intent. For example, `withdraw(amount)` can validate balance rules better than `setBalance(value)`.",
   },
@@ -75,7 +78,8 @@ export const oopInterviewQuestions: OopQuestion[] = [
   {
     id: "access-modifiers",
     category: "Encapsulation and abstraction",
-    question: "How do you decide whether a member should be public, protected, or private?",
+    question:
+      "How do you decide whether a member should be public, protected, or private?",
     answer:
       "I start with the narrowest access the design needs. Public members form the supported API, private members are implementation details, and protected members are extension points for subclasses. Making too much public increases coupling because callers can begin depending on details that should be free to change.",
   },
@@ -132,7 +136,8 @@ export const oopInterviewQuestions: OopQuestion[] = [
   {
     id: "superclass-constructor",
     category: "Inheritance and relationships",
-    question: "How does constructor chaining work between a superclass and subclass in modern Java?",
+    question:
+      "How does constructor chaining work between a superclass and subclass in modern Java?",
     answer:
       "Each constructor invokes another constructor in the same class or the direct superclass, either explicitly or implicitly. Java 25 allows safe prologue statements before an explicit invocation, but they cannot use the object under construction. Superclass construction completes before the remaining subclass initialization and constructor body.",
   },
@@ -154,7 +159,8 @@ export const oopInterviewQuestions: OopQuestion[] = [
   {
     id: "overloading-vs-overriding",
     category: "Polymorphism and binding",
-    question: "What is the difference between method overloading and method overriding?",
+    question:
+      "What is the difference between method overloading and method overriding?",
     answer:
       "Overloading uses the same method name with different parameter lists, and the compiler selects a compatible signature. Overriding replaces inherited instance behaviour in a subtype, and runtime dispatch selects the implementation based on the actual object. Return type alone cannot create a Java overload.",
   },
@@ -168,7 +174,8 @@ export const oopInterviewQuestions: OopQuestion[] = [
   {
     id: "parent-reference-child-object",
     category: "Polymorphism and binding",
-    question: "A parent reference points to a child object. Which methods and fields are accessible?",
+    question:
+      "A parent reference points to a child object. Which methods and fields are accessible?",
     answer:
       "The reference type controls which members the compiler allows the code to access. For an overridden instance method, the runtime object decides which implementation executes. Java field access is not polymorphic, so a hidden field is selected from the reference type rather than the runtime object.",
   },
@@ -197,21 +204,24 @@ export const oopInterviewQuestions: OopQuestion[] = [
   {
     id: "abstract-class-vs-interface",
     category: "Interfaces and abstract classes",
-    question: "When would you choose an abstract class instead of an interface?",
+    question:
+      "When would you choose an abstract class instead of an interface?",
     answer:
       "I would use an abstract class when related subclasses need shared state, protected helpers, or a common construction process. I would use an interface when different kinds of classes only need to promise a capability. Interfaces keep the contract separate from one inheritance hierarchy.",
   },
   {
     id: "interface-multiple-inheritance",
     category: "Interfaces and abstract classes",
-    question: "Why can a Java class implement multiple interfaces but extend only one class?",
+    question:
+      "Why can a Java class implement multiple interfaces but extend only one class?",
     answer:
       "Multiple class inheritance can create conflicting state, constructors, and inherited implementations. Interfaces primarily describe contracts, so implementing several of them lets a class support multiple roles without inheriting several object layouts. Java still has rules to resolve conflicts between inherited default methods.",
   },
   {
     id: "abstract-class-constructor",
     category: "Interfaces and abstract classes",
-    question: "Why can an abstract class have a constructor if it cannot be instantiated directly?",
+    question:
+      "Why can an abstract class have a constructor if it cannot be instantiated directly?",
     answer:
       "The constructor initializes the abstract portion of a concrete subclass object. Every subclass instance still contains the state inherited from the abstract class, so that state must be established consistently. The subclass constructor invokes it as part of the normal construction chain.",
   },
@@ -225,7 +235,8 @@ export const oopInterviewQuestions: OopQuestion[] = [
   {
     id: "depend-on-interface",
     category: "Interfaces and abstract classes",
-    question: "Why do we often depend on an interface rather than a concrete class?",
+    question:
+      "Why do we often depend on an interface rather than a concrete class?",
     answer:
       "An interface keeps the caller focused on required behaviour instead of one implementation. That makes it easier to replace a database, payment provider, or test double without changing the caller. The interface should represent a real stable role, not be added mechanically around every class.",
   },
@@ -233,7 +244,8 @@ export const oopInterviewQuestions: OopQuestion[] = [
   {
     id: "identity-vs-equality",
     category: "Equality, copying, and immutability",
-    question: "What is the difference between object identity and logical equality?",
+    question:
+      "What is the difference between object identity and logical equality?",
     answer:
       "Identity asks whether two references point to the exact same object. Logical equality asks whether two objects should be considered equivalent based on their values or domain meaning. In Java, `==` checks reference identity for objects, while `equals` is used for logical equality.",
   },
@@ -254,7 +266,8 @@ export const oopInterviewQuestions: OopQuestion[] = [
   {
     id: "assignment-not-copy",
     category: "Equality, copying, and immutability",
-    question: "Why is assigning an object reference not considered copying the object?",
+    question:
+      "Why is assigning an object reference not considered copying the object?",
     answer:
       "Assignment only copies the reference value, so both variables still reach the same object. No constructor runs and no new object state is created. A real copy requires an explicit approach such as a copy constructor, factory method, or domain-specific conversion.",
   },
@@ -304,7 +317,8 @@ export const oopInterviewQuestions: OopQuestion[] = [
   {
     id: "object-and-memory",
     category: "Object context and lifecycle",
-    question: "Are Java objects always on the heap and local variables always on the stack?",
+    question:
+      "Are Java objects always on the heap and local variables always on the stack?",
     answer:
       "That is a useful beginner model but not a strict language guarantee. Local variables have method scope, while objects have independent lifetimes based on reachability. The JVM may optimize allocation or even eliminate an object, so code should rely on language semantics rather than physical placement assumptions.",
   },
@@ -340,7 +354,8 @@ export const oopInterviewQuestions: OopQuestion[] = [
   {
     id: "interface-segregation",
     category: "SOLID and good design",
-    question: "Why is one large interface often worse than several focused interfaces?",
+    question:
+      "Why is one large interface often worse than several focused interfaces?",
     answer:
       "A large interface forces clients to depend on methods they do not use and makes implementations provide irrelevant behaviour. Focused interfaces describe smaller roles, so changes affect fewer consumers. The split should follow real client needs rather than producing many tiny interfaces without meaning.",
   },
@@ -362,7 +377,8 @@ export const oopInterviewQuestions: OopQuestion[] = [
   {
     id: "factory-pattern",
     category: "Design patterns",
-    question: "When is a factory more useful than calling a constructor directly?",
+    question:
+      "When is a factory more useful than calling a constructor directly?",
     answer:
       "A factory is useful when creation involves selecting an implementation, applying validation, caching instances, or hiding a complex construction process. The caller asks for the required abstraction without knowing the concrete class. For straightforward construction, a normal constructor is clearer.",
   },
@@ -391,35 +407,40 @@ export const oopInterviewQuestions: OopQuestion[] = [
   {
     id: "design-notification-system",
     category: "Practical design scenarios",
-    question: "How would you design a notification service that supports email, SMS, and push?",
+    question:
+      "How would you design a notification service that supports email, SMS, and push?",
     answer:
       "I would define a small notification channel interface and create one implementation per delivery method. The service would choose or receive the required channel and delegate sending to it. This uses strategy-style polymorphism, keeps provider details separate, and allows another channel without editing one large conditional.",
   },
   {
     id: "design-payment-system",
     category: "Practical design scenarios",
-    question: "A checkout must support several payment providers. How would you structure it?",
+    question:
+      "A checkout must support several payment providers. How would you structure it?",
     answer:
       "I would keep checkout logic dependent on a payment interface that represents operations the business actually needs. Provider adapters would translate that contract to Stripe, Razorpay, or another API. A factory or configuration layer can select the provider, while the checkout remains independent of provider-specific request formats.",
   },
   {
     id: "refactor-god-class",
     category: "Practical design scenarios",
-    question: "A class validates orders, stores them, charges customers, and sends emails. What would you change?",
+    question:
+      "A class validates orders, stores them, charges customers, and sends emails. What would you change?",
     answer:
       "The class has several reasons to change, so I would separate validation, persistence, payment, and notification behind clear collaborators. An order service can coordinate the workflow without owning every implementation. I would refactor gradually around tested behaviour rather than splitting files only for appearance.",
   },
   {
     id: "rectangle-square-problem",
     category: "Practical design scenarios",
-    question: "Why can making Square inherit from Rectangle cause design problems?",
+    question:
+      "Why can making Square inherit from Rectangle cause design problems?",
     answer:
       "A mutable rectangle usually allows width and height to change independently, while a square must keep them equal. A square subtype would either break that invariant or surprise code using the rectangle contract. Separate immutable shapes or a shared area interface often models the domain more honestly.",
   },
   {
     id: "role-permission-design",
     category: "Practical design scenarios",
-    question: "How would you model users, roles, and permissions without filling User with conditionals?",
+    question:
+      "How would you model users, roles, and permissions without filling User with conditionals?",
     answer:
       "I would model roles and permissions as separate domain concepts and let an authorization policy answer whether an action is allowed. The user holds assigned roles rather than implementing every rule itself. This keeps changing access policy separate from user identity and profile behaviour.",
   },

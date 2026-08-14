@@ -26,7 +26,8 @@ export const gaussianMixtureModelFundamentals: SubjectTopic = {
           alt: "Overlapping Gaussian components with soft membership probabilities compared with hard K-Means labels",
           width: 1536,
           height: 1024,
-          caption: "GMM combines weighted component densities and gives uncertain points partial membership in multiple components.",
+          caption:
+            "GMM combines weighted component densities and gives uncertain points partial membership in multiple components.",
         },
       },
       {
@@ -35,18 +36,33 @@ export const gaussianMixtureModelFundamentals: SubjectTopic = {
           "Instead of returning only one cluster ID, GMM calculates a responsibility for every component. Under the current fitted model, each responsibility is the posterior probability that the component generated that example. Responsibilities for one example sum to 1.",
           "A hard label can still be produced by choosing the component with the largest responsibility, but this discards uncertainty information.",
         ],
-        formulas: [{ label: "Hard label from GMM", expression: "cluster(xᵢ) = arg maxₖ γᵢₖ" }],
+        formulas: [
+          {
+            label: "Hard label from GMM",
+            expression: "cluster(xᵢ) = arg maxₖ γᵢₖ",
+          },
+        ],
       },
       {
         title: "GMM vs K-Means",
-        paragraphs: ["Both divide data into groups, but they represent membership and cluster shape differently."],
+        paragraphs: [
+          "Both divide data into groups, but they represent membership and cluster shape differently.",
+        ],
         dataTable: {
           headers: ["Property", "K-Means", "GMM"],
           rows: [
             ["Membership", "Hard", "Soft responsibilities"],
             ["Cluster centre", "Centroid", "Gaussian mean"],
-            ["Cluster shape", "Distance-based spherical bias", "Covariance-based ellipses"],
-            ["Output model", "Assignments and centroids", "Probability density model"],
+            [
+              "Cluster shape",
+              "Distance-based spherical bias",
+              "Covariance-based ellipses",
+            ],
+            [
+              "Output model",
+              "Assignments and centroids",
+              "Probability density model",
+            ],
             ["Training", "Assign and average", "Expectation-Maximization"],
           ],
         },
@@ -61,7 +77,10 @@ export const gaussianMixtureModelFundamentals: SubjectTopic = {
           headers: ["Simpler covariance", "Full covariance"],
           rows: [
             ["Fewer parameters", "More parameters"],
-            ["Faster and more stable with limited data", "More flexible component shape"],
+            [
+              "Faster and more stable with limited data",
+              "More flexible component shape",
+            ],
             ["Stronger shape assumptions", "Needs enough data per component"],
           ],
         },
@@ -123,10 +142,22 @@ export const gaussianMixtureModelFundamentals: SubjectTopic = {
     definition: "Several weighted Gaussians combine into one density model.",
     sections: [
       { title: "Component", points: ["π: weight", "μ: centre", "Σ: shape"] },
-      { title: "Output", points: ["Density p(x)", "Soft responsibilities", "Optional hard label"] },
+      {
+        title: "Output",
+        points: [
+          "Density p(x)",
+          "Soft responsibilities",
+          "Optional hard label",
+        ],
+      },
     ],
-    memoryLine: "Weight the component densities, then normalize for membership.",
-    cues: ["Weights sum to 1.", "GMM is soft clustering.", "Covariance allows ellipses."],
+    memoryLine:
+      "Weight the component densities, then normalize for membership.",
+    cues: [
+      "Weights sum to 1.",
+      "GMM is soft clustering.",
+      "Covariance allows ellipses.",
+    ],
     trap: "Do not add component densities without multiplying by their mixing weights.",
   },
 };
@@ -166,7 +197,10 @@ export const likelihoodLatentVariablesAndResponsibilities: SubjectTopic = {
           "Responsibility γᵢₖ is the posterior probability that component k generated xᵢ under the current parameters. Its numerator is that component's weighted density, and its denominator is the total mixture density.",
         ],
         formulas: [
-          { label: "Responsibility", expression: "γᵢₖ = [πₖN(xᵢ|μₖ,Σₖ)] / [ΣⱼπⱼN(xᵢ|μⱼ,Σⱼ)]" },
+          {
+            label: "Responsibility",
+            expression: "γᵢₖ = [πₖN(xᵢ|μₖ,Σₖ)] / [ΣⱼπⱼN(xᵢ|μⱼ,Σⱼ)]",
+          },
           { label: "Per-example normalization", expression: "Σₖ γᵢₖ = 1" },
         ],
         visual: {
@@ -174,16 +208,20 @@ export const likelihoodLatentVariablesAndResponsibilities: SubjectTopic = {
           alt: "Two weighted Gaussian contributions normalized into component responsibilities",
           width: 1536,
           height: 1024,
-          caption: "Divide each weighted component density by their sum to obtain responsibilities.",
+          caption:
+            "Divide each weighted component density by their sum to obtain responsibilities.",
         },
       },
       {
         title: "Complete Responsibility Numerical",
-        paragraphs: ["Use the same two-component values as the mixture-density example and normalize their contributions."],
+        paragraphs: [
+          "Use the same two-component values as the mixture-density example and normalize their contributions.",
+        ],
         problems: [
           {
             title: "Calculate soft membership",
-            prompt: "For x, let π₁=0.4, N₁(x)=0.10, π₂=0.6, and N₂(x)=0.20. Find γ₁ and γ₂.",
+            prompt:
+              "For x, let π₁=0.4, N₁(x)=0.10, π₂=0.6, and N₂(x)=0.20. Find γ₁ and γ₂.",
             steps: [
               "Weighted contribution 1 = 0.4(0.10)=0.04.",
               "Weighted contribution 2 = 0.6(0.20)=0.12.",
@@ -192,23 +230,28 @@ export const likelihoodLatentVariablesAndResponsibilities: SubjectTopic = {
               "γ₂=0.12/0.16=0.75.",
               "Check: 0.25+0.75=1.",
             ],
-            answer: "The responsibilities are 0.25 for Component 1 and 0.75 for Component 2.",
+            answer:
+              "The responsibilities are 0.25 for Component 1 and 0.75 for Component 2.",
           },
         ],
       },
       {
         title: "Log-Likelihood Numerical",
-        paragraphs: ["Natural logarithms are normally used for likelihood optimization."],
+        paragraphs: [
+          "Natural logarithms are normally used for likelihood optimization.",
+        ],
         problems: [
           {
             title: "Convert product to sum",
-            prompt: "Two independent observations have mixture densities 0.2 and 0.5. Find their likelihood and natural log-likelihood.",
+            prompt:
+              "Two independent observations have mixture densities 0.2 and 0.5. Find their likelihood and natural log-likelihood.",
             steps: [
               "L=0.2(0.5)=0.1.",
               "ℓ=ln(0.2)+ln(0.5)=ln(0.1).",
               "ℓ≈−1.609−0.693=−2.302.",
             ],
-            answer: "The likelihood is 0.1 and the log-likelihood is approximately −2.302.",
+            answer:
+              "The likelihood is 0.1 and the log-likelihood is approximately −2.302.",
           },
         ],
       },
@@ -221,7 +264,9 @@ export const likelihoodLatentVariablesAndResponsibilities: SubjectTopic = {
           "Adding likelihoods instead of multiplying them.",
           "Multiplying log-likelihood terms instead of adding them.",
         ],
-        paragraphs: ["A responsibility must lie between 0 and 1, and all component responsibilities for one example must sum to 1."],
+        paragraphs: [
+          "A responsibility must lie between 0 and 1, and all component responsibilities for one example must sum to 1.",
+        ],
       },
     ],
     mechanism: {
@@ -264,16 +309,30 @@ export const likelihoodLatentVariablesAndResponsibilities: SubjectTopic = {
       "Responsibilities normalize weighted component densities.",
       "Responsibilities for one example sum to 1.",
     ],
-    followUp: "Why does GMM use log-likelihood rather than multiplying many densities directly?",
+    followUp:
+      "Why does GMM use log-likelihood rather than multiplying many densities directly?",
   },
   lastMinute: {
-    definition: "Responsibility tells how strongly one component explains one example.",
+    definition:
+      "Responsibility tells how strongly one component explains one example.",
     sections: [
-      { title: "Order", flow: ["Density", "Multiply by π", "Sum", "Divide", "Check total 1"], wide: true },
-      { title: "Likelihood", points: ["Product across rows", "Log turns product into sum"] },
+      {
+        title: "Order",
+        flow: ["Density", "Multiply by π", "Sum", "Divide", "Check total 1"],
+        wide: true,
+      },
+      {
+        title: "Likelihood",
+        points: ["Product across rows", "Log turns product into sum"],
+      },
     ],
-    memoryLine: "Weighted density divided by total density gives responsibility.",
-    cues: ["Normalize across components.", "Use current parameters.", "Log-likelihood can be negative."],
+    memoryLine:
+      "Weighted density divided by total density gives responsibility.",
+    cues: [
+      "Normalize across components.",
+      "Use current parameters.",
+      "Log-likelihood can be negative.",
+    ],
     trap: "Do not confuse a component's prior weight πₖ with its posterior responsibility γᵢₖ.",
   },
 };

@@ -56,10 +56,7 @@ export function CategorizedQuestionPractice({
               Filter by category
             </p>
             <div className="-mx-5 overflow-x-auto px-5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:px-0">
-              <div
-                className="flex w-max gap-1.5"
-                aria-label={categoryLabel}
-              >
+              <div className="flex w-max gap-1.5" aria-label={categoryLabel}>
                 {categoryOptions.map((option) => {
                   const active = category === option;
                   return (

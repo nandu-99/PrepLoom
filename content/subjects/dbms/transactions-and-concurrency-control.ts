@@ -3,12 +3,14 @@ import type { SubjectTopic } from "@/lib/subject-content";
 export const transactionsAndAcidProperties: SubjectTopic = {
   slug: "transactions-and-acid-properties",
   title: "Transactions and ACID Properties",
-  description: "Understand transaction boundaries, ACID guarantees, and transaction states.",
+  description:
+    "Understand transaction boundaries, ACID guarantees, and transaction states.",
   readTime: "24 min",
   difficulty: "Foundation",
   tags: ["Transactions", "ACID", "Transaction States"],
   learn: {
-    opening: "A transaction is one logical unit of database work. It must either complete correctly or leave the database as though it never happened.",
+    opening:
+      "A transaction is one logical unit of database work. It must either complete correctly or leave the database as though it never happened.",
     sections: [
       {
         title: "Transaction Basics",
@@ -22,10 +24,26 @@ export const transactionsAndAcidProperties: SubjectTopic = {
         dataTable: {
           headers: ["Property", "Meaning", "Transfer example"],
           rows: [
-            ["Atomicity", "All operations happen or none happen", "Both debit and credit complete"],
-            ["Consistency", "A valid state changes into another valid state", "Constraints and balance rules remain valid"],
-            ["Isolation", "Concurrent transactions behave according to the chosen isolation guarantee", "Other work does not see unsafe intermediate transfer data"],
-            ["Durability", "Committed changes survive later failure", "The completed transfer remains after restart"],
+            [
+              "Atomicity",
+              "All operations happen or none happen",
+              "Both debit and credit complete",
+            ],
+            [
+              "Consistency",
+              "A valid state changes into another valid state",
+              "Constraints and balance rules remain valid",
+            ],
+            [
+              "Isolation",
+              "Concurrent transactions behave according to the chosen isolation guarantee",
+              "Other work does not see unsafe intermediate transfer data",
+            ],
+            [
+              "Durability",
+              "Committed changes survive later failure",
+              "The completed transfer remains after restart",
+            ],
           ],
         },
         paragraphs: [
@@ -63,13 +81,17 @@ export const transactionsAndAcidProperties: SubjectTopic = {
           alt: "Transaction states showing normal commit, failure, abort, restart, and termination paths.",
           width: 1536,
           height: 1024,
-          caption: "Partially committed work can still fail before its commit becomes durable.",
+          caption:
+            "Partially committed work can still fail before its commit becomes durable.",
         },
         dataTable: {
           headers: ["State", "Meaning"],
           rows: [
             ["Active", "Instructions are executing"],
-            ["Partially committed", "Last statement finished, but commit is not yet guaranteed durable"],
+            [
+              "Partially committed",
+              "Last statement finished, but commit is not yet guaranteed durable",
+            ],
             ["Committed", "Successful completion is recorded"],
             ["Failed", "The transaction cannot continue"],
             ["Aborted", "Its effects have been undone"],
@@ -109,18 +131,44 @@ export const transactionsAndAcidProperties: SubjectTopic = {
       title: "Online order",
       body: "Creating an order and reducing stock should be one transaction. If payment validation fails, both changes should roll back rather than leaving an order without the correct stock update.",
     },
-    misconception: "ACID does not mean every transaction runs alone. Concurrency is allowed when the chosen control method preserves the required correctness.",
+    misconception:
+      "ACID does not mean every transaction runs alone. Concurrency is allowed when the chosen control method preserves the required correctness.",
   },
   revise: {
-    definition: "A transaction is a logical unit of work that commits completely or aborts without leaving partial effects.",
-    sections: [{ title: "ACID Recall", points: ["Atomicity: all or nothing.", "Consistency: valid state to valid state.", "Isolation: controlled concurrent visibility.", "Durability: committed means persistent."] }],
+    definition:
+      "A transaction is a logical unit of work that commits completely or aborts without leaving partial effects.",
+    sections: [
+      {
+        title: "ACID Recall",
+        points: [
+          "Atomicity: all or nothing.",
+          "Consistency: valid state to valid state.",
+          "Isolation: controlled concurrent visibility.",
+          "Durability: committed means persistent.",
+        ],
+      },
+    ],
     essentialsStyle: "plain",
-    essentials: ["COMMIT accepts changes; ROLLBACK cancels uncommitted changes.", "Partially committed is not yet safely committed.", "An aborted transaction may restart or terminate.", "Consistency also depends on correct application logic."],
-    followUp: "Which ACID property is violated when only the debit part of a transfer remains?",
+    essentials: [
+      "COMMIT accepts changes; ROLLBACK cancels uncommitted changes.",
+      "Partially committed is not yet safely committed.",
+      "An aborted transaction may restart or terminate.",
+      "Consistency also depends on correct application logic.",
+    ],
+    followUp:
+      "Which ACID property is violated when only the debit part of a transfer remains?",
   },
   lastMinute: {
     definition: "Transaction = one complete logical database action.",
-    sections: [{ title: "State Path", points: ["Normal: active → partially committed → committed.", "Failure: active or partially committed → failed → aborted."] }],
+    sections: [
+      {
+        title: "State Path",
+        points: [
+          "Normal: active → partially committed → committed.",
+          "Failure: active or partially committed → failed → aborted.",
+        ],
+      },
+    ],
     memoryLine: "All or nothing • valid • isolated • permanent",
     cues: ["BEGIN", "COMMIT", "ROLLBACK"],
     trap: "Partially committed does not mean durable.",
@@ -130,27 +178,39 @@ export const transactionsAndAcidProperties: SubjectTopic = {
 export const schedulesAndSerializability: SubjectTopic = {
   slug: "schedules-and-serializability",
   title: "Schedules and Serializability",
-  description: "Analyse concurrent schedules using conflicts and precedence graphs.",
+  description:
+    "Analyse concurrent schedules using conflicts and precedence graphs.",
   readTime: "32 min",
   difficulty: "Advanced",
   tags: ["Schedules", "Serializability", "Precedence Graph"],
   learn: {
-    opening: "A schedule is the order in which operations from transactions execute. It preserves the internal order of every individual transaction.",
+    opening:
+      "A schedule is the order in which operations from transactions execute. It preserves the internal order of every individual transaction.",
     sections: [
       {
         title: "Serial and Non-Serial Schedules",
         table: {
           headers: ["Serial", "Non-serial"],
           rows: [
-            ["One transaction finishes before another starts", "Operations from transactions are interleaved"],
-            ["Simple and safe but less concurrent", "Higher concurrency but needs correctness checks"],
+            [
+              "One transaction finishes before another starts",
+              "Operations from transactions are interleaved",
+            ],
+            [
+              "Simple and safe but less concurrent",
+              "Higher concurrency but needs correctness checks",
+            ],
           ],
         },
-        paragraphs: ["A serializable non-serial schedule has the same relevant effect as some serial order."],
+        paragraphs: [
+          "A serializable non-serial schedule has the same relevant effect as some serial order.",
+        ],
       },
       {
         title: "When Two Operations Conflict",
-        paragraphs: ["Two operations conflict when they belong to different transactions, access the same item, and at least one is a write."],
+        paragraphs: [
+          "Two operations conflict when they belong to different transactions, access the same item, and at least one is a write.",
+        ],
         dataTable: {
           headers: ["Pair", "Conflict?", "Reason"],
           rows: [
@@ -183,13 +243,16 @@ export const schedulesAndSerializability: SubjectTopic = {
       },
       {
         title: "Worked Acyclic Graph",
-        paragraphs: ["The schedule creates T1 → T2 from X and T2 → T3 from Y. Its only topological order is T1, T2, T3."],
+        paragraphs: [
+          "The schedule creates T1 → T2 from X and T2 → T3 from Y. Its only topological order is T1, T2, T3.",
+        ],
         visual: {
           src: "/notes/dbms/precedence-graph.png",
           alt: "An acyclic precedence graph for three transactions with serial order T1, T2, T3.",
           width: 1536,
           height: 1024,
-          caption: "An acyclic precedence graph proves conflict serializability.",
+          caption:
+            "An acyclic precedence graph proves conflict serializability.",
         },
       },
       {
@@ -204,7 +267,9 @@ export const schedulesAndSerializability: SubjectTopic = {
       },
       {
         title: "Worked Conflict Table",
-        paragraphs: ["For S = r1(X), w1(X), r2(X), w2(Y), r3(Y), list conflicts before drawing the graph."],
+        paragraphs: [
+          "For S = r1(X), w1(X), r2(X), w2(Y), r3(Y), list conflicts before drawing the graph.",
+        ],
         dataTable: {
           headers: ["Earlier operation", "Later operation", "Edge"],
           rows: [
@@ -216,7 +281,9 @@ export const schedulesAndSerializability: SubjectTopic = {
       },
       {
         title: "Practice: Three Transactions",
-        paragraphs: ["For S = w1(X), r2(X), w2(Y), r3(Y), w3(Z), r1(Z), find the graph."],
+        paragraphs: [
+          "For S = w1(X), r2(X), w2(Y), r3(Y), w3(Z), r1(Z), find the graph.",
+        ],
         points: [
           "X creates T1 → T2.",
           "Y creates T2 → T3.",
@@ -254,18 +321,46 @@ export const schedulesAndSerializability: SubjectTopic = {
       title: "Several valid serial orders",
       body: "If a graph contains only T1 → T3 and T2 → T3, both T1,T2,T3 and T2,T1,T3 are valid serial orders because T1 and T2 have no required order between them.",
     },
-    misconception: "A non-serial schedule is not automatically incorrect. It may still be serializable.",
+    misconception:
+      "A non-serial schedule is not automatically incorrect. It may still be serializable.",
   },
   revise: {
-    definition: "Conflict serializability means preserving the order of conflicting operations from some serial schedule.",
-    sections: [{ title: "Graph Test", flow: ["Find conflicts", "Draw earlier → later edges", "Check for cycle", "Topologically sort if acyclic"] }],
+    definition:
+      "Conflict serializability means preserving the order of conflicting operations from some serial schedule.",
+    sections: [
+      {
+        title: "Graph Test",
+        flow: [
+          "Find conflicts",
+          "Draw earlier → later edges",
+          "Check for cycle",
+          "Topologically sort if acyclic",
+        ],
+      },
+    ],
     essentialsStyle: "plain",
-    essentials: ["Same item, different transactions, and at least one write creates a conflict.", "Acyclic graph means conflict serializable.", "A cycle means not conflict serializable.", "Topological orders are equivalent serial orders."],
+    essentials: [
+      "Same item, different transactions, and at least one write creates a conflict.",
+      "Acyclic graph means conflict serializable.",
+      "A cycle means not conflict serializable.",
+      "Topological orders are equivalent serial orders.",
+    ],
     followUp: "Which edge is created when w2(X) occurs before r1(X)?",
   },
   lastMinute: {
-    definition: "Precedence graph: transaction nodes and earlier-to-later conflict edges.",
-    sections: [{ title: "Fast Conflict Check", points: ["Read-read: no.", "Read-write: yes.", "Write-read: yes.", "Write-write: yes."] }],
+    definition:
+      "Precedence graph: transaction nodes and earlier-to-later conflict edges.",
+    sections: [
+      {
+        title: "Fast Conflict Check",
+        points: [
+          "Read-read: no.",
+          "Read-write: yes.",
+          "Write-read: yes.",
+          "Write-write: yes.",
+        ],
+      },
+    ],
     memoryLine: "No cycle → serializable → topological order",
     cues: ["Same item", "At least one write", "Cycle"],
     trap: "Do not draw edges for operations on different data items.",
@@ -275,16 +370,20 @@ export const schedulesAndSerializability: SubjectTopic = {
 export const recoverabilityOfSchedules: SubjectTopic = {
   slug: "recoverability-of-schedules",
   title: "Recoverability of Schedules",
-  description: "Distinguish recoverable, cascadeless, and strict schedules using read-from relationships.",
+  description:
+    "Distinguish recoverable, cascadeless, and strict schedules using read-from relationships.",
   readTime: "26 min",
   difficulty: "Intermediate",
   tags: ["Recoverability", "Dirty Read", "Strict Schedule"],
   learn: {
-    opening: "Serializability controls the logical result of concurrent work. Recoverability controls whether commits and aborts can be handled safely.",
+    opening:
+      "Serializability controls the logical result of concurrent work. Recoverability controls whether commits and aborts can be handled safely.",
     sections: [
       {
         title: "Reading From Another Transaction",
-        paragraphs: ["If T1 writes X and T2 later reads that value, T2 reads from T1. The commit order now matters if T1 has not committed yet."],
+        paragraphs: [
+          "If T1 writes X and T2 later reads that value, T2 reads from T1. The commit order now matters if T1 has not committed yet.",
+        ],
       },
       {
         title: "Recoverable Schedule",
@@ -310,7 +409,9 @@ export const recoverabilityOfSchedules: SubjectTopic = {
       {
         title: "Strength Relationship",
         flow: ["Strict", "Cascadeless", "Recoverable"],
-        paragraphs: ["Every strict schedule is cascadeless, and every cascadeless schedule is recoverable. The reverse implications do not always hold."],
+        paragraphs: [
+          "Every strict schedule is cascadeless, and every cascadeless schedule is recoverable. The reverse implications do not always hold.",
+        ],
       },
       {
         title: "Practice: Classify Schedules",
@@ -318,20 +419,40 @@ export const recoverabilityOfSchedules: SubjectTopic = {
         dataTable: {
           headers: ["Schedule", "Classification", "Reason"],
           rows: [
-            ["w1(X), r2(X), c1, c2", "Recoverable, not cascadeless", "T2 reads dirty data but commits later"],
-            ["w1(X), c1, r2(X), c2", "Cascadeless and recoverable", "Read occurs after writer commits"],
-            ["w1(X), w2(X), c1, c2", "Cascadeless and recoverable, not strict", "No reads occur, but T2 overwrites uncommitted X"],
-            ["w1(X), r2(X), c2, a1", "Unrecoverable", "Reader commits before writer aborts"],
+            [
+              "w1(X), r2(X), c1, c2",
+              "Recoverable, not cascadeless",
+              "T2 reads dirty data but commits later",
+            ],
+            [
+              "w1(X), c1, r2(X), c2",
+              "Cascadeless and recoverable",
+              "Read occurs after writer commits",
+            ],
+            [
+              "w1(X), w2(X), c1, c2",
+              "Cascadeless and recoverable, not strict",
+              "No reads occur, but T2 overwrites uncommitted X",
+            ],
+            [
+              "w1(X), r2(X), c2, a1",
+              "Unrecoverable",
+              "Reader commits before writer aborts",
+            ],
           ],
         },
       },
       {
         title: "Cascading Rollback",
-        paragraphs: ["If T2 reads an uncommitted value from T1 and T3 reads an uncommitted value from T2, aborting T1 may force T2 and T3 to abort. Cascadeless schedules prevent this chain."],
+        paragraphs: [
+          "If T2 reads an uncommitted value from T1 and T3 reads an uncommitted value from T2, aborting T1 may force T2 and T3 to abort. Cascadeless schedules prevent this chain.",
+        ],
       },
       {
         title: "Practice: Track the Actual Writer",
-        paragraphs: ["Consider w1(X), w2(X), r3(X), c2, c3, c1. The read by T3 obtains the latest value, written by T2, not the older value from T1."],
+        paragraphs: [
+          "Consider w1(X), w2(X), r3(X), c2, c3, c1. The read by T3 obtains the latest value, written by T2, not the older value from T1.",
+        ],
         points: [
           "T3 reads from T2.",
           "T3 commits after T2, so that read-from relationship is recoverable.",
@@ -354,18 +475,47 @@ export const recoverabilityOfSchedules: SubjectTopic = {
       title: "Recoverable but not cascadeless",
       body: "In w1(X), r2(X), c1, c2, T2 reads uncommitted X, so the schedule is not cascadeless. T2 waits to commit until after T1 commits, so it is recoverable.",
     },
-    misconception: "A recoverable schedule may still allow dirty reads. Cascadelessness is the stronger condition that prevents them.",
+    misconception:
+      "A recoverable schedule may still allow dirty reads. Cascadelessness is the stronger condition that prevents them.",
   },
   revise: {
-    definition: "Recoverability restricts commit order after read-from dependencies.",
-    sections: [{ title: "Three Levels", dataTable: { headers: ["Property", "Required wait"], rows: [["Recoverable", "Reader's commit waits for writer's commit"], ["Cascadeless", "Read waits for writer's commit"], ["Strict", "Read and write wait after an uncommitted write"]] } }],
+    definition:
+      "Recoverability restricts commit order after read-from dependencies.",
+    sections: [
+      {
+        title: "Three Levels",
+        dataTable: {
+          headers: ["Property", "Required wait"],
+          rows: [
+            ["Recoverable", "Reader's commit waits for writer's commit"],
+            ["Cascadeless", "Read waits for writer's commit"],
+            ["Strict", "Read and write wait after an uncommitted write"],
+          ],
+        },
+      },
+    ],
     essentialsStyle: "plain",
-    essentials: ["Strict ⇒ cascadeless ⇒ recoverable.", "Dirty read means reading an uncommitted write.", "Dirty write means overwriting an uncommitted write.", "Commit order alone does not make a schedule cascadeless."],
+    essentials: [
+      "Strict ⇒ cascadeless ⇒ recoverable.",
+      "Dirty read means reading an uncommitted write.",
+      "Dirty write means overwriting an uncommitted write.",
+      "Commit order alone does not make a schedule cascadeless.",
+    ],
     followUp: "Why is w1(X), r2(X), c1, c2 recoverable but not cascadeless?",
   },
   lastMinute: {
-    definition: "Recoverable protects commit order; cascadeless protects reads; strict protects reads and writes.",
-    sections: [{ title: "Fast Order", points: ["Strict is strongest.", "Uncommitted read breaks cascadelessness.", "Reader commit before writer commit breaks recoverability."] }],
+    definition:
+      "Recoverable protects commit order; cascadeless protects reads; strict protects reads and writes.",
+    sections: [
+      {
+        title: "Fast Order",
+        points: [
+          "Strict is strongest.",
+          "Uncommitted read breaks cascadelessness.",
+          "Reader commit before writer commit breaks recoverability.",
+        ],
+      },
+    ],
     memoryLine: "Commit waits → read waits → read and write wait",
     cues: ["Reads-from", "Commit order", "Dirty data"],
     trap: "Serializability and recoverability are different schedule properties.",
@@ -375,12 +525,14 @@ export const recoverabilityOfSchedules: SubjectTopic = {
 export const concurrencyProblemsAndLocking: SubjectTopic = {
   slug: "concurrency-problems-and-locking",
   title: "Concurrency Problems and Locking",
-  description: "Recognize concurrency anomalies and use shared and exclusive locks correctly.",
+  description:
+    "Recognize concurrency anomalies and use shared and exclusive locks correctly.",
   readTime: "26 min",
   difficulty: "Intermediate",
   tags: ["Concurrency", "Locks", "Isolation Levels"],
   learn: {
-    opening: "Concurrent transactions improve throughput, but uncontrolled interleaving can expose partial work or produce incorrect results.",
+    opening:
+      "Concurrent transactions improve throughput, but uncontrolled interleaving can expose partial work or produce incorrect results.",
     sections: [
       {
         title: "Common Concurrency Problems",
@@ -388,10 +540,26 @@ export const concurrencyProblemsAndLocking: SubjectTopic = {
         dataTable: {
           headers: ["Problem", "What happens", "Short example"],
           rows: [
-            ["Lost update", "One write overwrites another update", "T1 and T2 both read 100, then write 110 and 120"],
-            ["Dirty read", "A transaction reads uncommitted data", "T2 reads T1's value before T1 aborts"],
-            ["Non-repeatable read", "The same row gives different committed values", "T1 reads X, T2 updates and commits, T1 reads X again"],
-            ["Phantom read", "A repeated condition query returns a changed row set", "T2 inserts a matching row between T1's two queries"],
+            [
+              "Lost update",
+              "One write overwrites another update",
+              "T1 and T2 both read 100, then write 110 and 120",
+            ],
+            [
+              "Dirty read",
+              "A transaction reads uncommitted data",
+              "T2 reads T1's value before T1 aborts",
+            ],
+            [
+              "Non-repeatable read",
+              "The same row gives different committed values",
+              "T1 reads X, T2 updates and commits, T1 reads X again",
+            ],
+            [
+              "Phantom read",
+              "A repeated condition query returns a changed row set",
+              "T2 inserts a matching row between T1's two queries",
+            ],
           ],
         },
       },
@@ -460,7 +628,12 @@ export const concurrencyProblemsAndLocking: SubjectTopic = {
           rows: [
             ["Read Uncommitted", "May occur", "May occur", "May occur"],
             ["Read Committed", "Prevented", "May occur", "May occur"],
-            ["Repeatable Read", "Prevented", "Prevented", "May occur by the standard"],
+            [
+              "Repeatable Read",
+              "Prevented",
+              "Prevented",
+              "May occur by the standard",
+            ],
             ["Serializable", "Prevented", "Prevented", "Prevented"],
           ],
         },
@@ -476,7 +649,9 @@ export const concurrencyProblemsAndLocking: SubjectTopic = {
       },
       {
         title: "Worked Lock Sequence",
-        paragraphs: ["Process the requests in order. Locks belong to different transactions."],
+        paragraphs: [
+          "Process the requests in order. Locks belong to different transactions.",
+        ],
         dataTable: {
           headers: ["Request", "Decision", "Lock state"],
           rows: [
@@ -511,18 +686,47 @@ export const concurrencyProblemsAndLocking: SubjectTopic = {
       title: "Two readers and one writer",
       body: "T1 and T2 may both hold S(X). If T3 requests X(X), it waits until both readers release their shared locks.",
     },
-    misconception: "Repeatable Read and Serializable are not always implemented with the same locks in every DBMS. The required isolation guarantee matters more than one implementation detail.",
+    misconception:
+      "Repeatable Read and Serializable are not always implemented with the same locks in every DBMS. The required isolation guarantee matters more than one implementation detail.",
   },
   revise: {
-    definition: "Concurrency control prevents harmful interaction while allowing safe overlap between transactions.",
-    sections: [{ title: "Lock Compatibility", table: { headers: ["Shared lock", "Exclusive lock"], rows: [["Compatible with shared", "Compatible with no other lock"], ["Used for reading", "Required for writing"]] } }],
+    definition:
+      "Concurrency control prevents harmful interaction while allowing safe overlap between transactions.",
+    sections: [
+      {
+        title: "Lock Compatibility",
+        table: {
+          headers: ["Shared lock", "Exclusive lock"],
+          rows: [
+            ["Compatible with shared", "Compatible with no other lock"],
+            ["Used for reading", "Required for writing"],
+          ],
+        },
+      },
+    ],
     essentialsStyle: "plain",
-    essentials: ["Lost update overwrites completed work.", "Dirty read uses uncommitted data.", "Non-repeatable read changes one row; phantom changes a qualifying row set.", "Serializable prevents the listed standard anomalies."],
-    followUp: "Why can two transactions share S(X) while an X(X) request must wait?",
+    essentials: [
+      "Lost update overwrites completed work.",
+      "Dirty read uses uncommitted data.",
+      "Non-repeatable read changes one row; phantom changes a qualifying row set.",
+      "Serializable prevents the listed standard anomalies.",
+    ],
+    followUp:
+      "Why can two transactions share S(X) while an X(X) request must wait?",
   },
   lastMinute: {
     definition: "S reads and shares; X writes and excludes.",
-    sections: [{ title: "Anomaly Recall", points: ["Overwrite → lost update.", "Uncommitted value → dirty read.", "Changed row → non-repeatable read.", "Changed result set → phantom."] }],
+    sections: [
+      {
+        title: "Anomaly Recall",
+        points: [
+          "Overwrite → lost update.",
+          "Uncommitted value → dirty read.",
+          "Changed row → non-repeatable read.",
+          "Changed result set → phantom.",
+        ],
+      },
+    ],
     memoryLine: "Many readers or one writer",
     cues: ["S lock", "X lock", "Isolation level"],
     trap: "A phantom is about a changed set of matching rows, not merely a changed value in one known row.",
@@ -532,12 +736,14 @@ export const concurrencyProblemsAndLocking: SubjectTopic = {
 export const twoPhaseLockingAndDeadlocks: SubjectTopic = {
   slug: "two-phase-locking-and-deadlocks",
   title: "Two-Phase Locking and Deadlocks",
-  description: "Use 2PL variants and wait-for graphs to reason about serializability and deadlocks.",
+  description:
+    "Use 2PL variants and wait-for graphs to reason about serializability and deadlocks.",
   readTime: "26 min",
   difficulty: "Advanced",
   tags: ["2PL", "Deadlock", "Wait-For Graph"],
   learn: {
-    opening: "Two-Phase Locking controls when transactions acquire and release locks. It guarantees conflict serializability, but ordinary 2PL can still allow deadlocks and cascading rollback.",
+    opening:
+      "Two-Phase Locking controls when transactions acquire and release locks. It guarantees conflict serializability, but ordinary 2PL can still allow deadlocks and cascading rollback.",
     sections: [
       {
         title: "Basic Two-Phase Locking",
@@ -548,17 +754,35 @@ export const twoPhaseLockingAndDeadlocks: SubjectTopic = {
             ["Shrinking", "Release locks and downgrade; acquire no new lock"],
           ],
         },
-        paragraphs: ["The point at which a transaction obtains its final lock is called its lock point. Serial order can be related to lock-point order."],
+        paragraphs: [
+          "The point at which a transaction obtains its final lock is called its lock point. Serial order can be related to lock-point order.",
+        ],
       },
       {
         title: "Legal and Illegal 2PL Sequences",
         dataTable: {
           headers: ["Sequence", "Decision", "Reason"],
           rows: [
-            ["lock-S(A), lock-X(B), unlock(A), unlock(B)", "Legal", "All acquisitions occur before the first unlock"],
-            ["lock-S(A), unlock(A), lock-X(B)", "Illegal", "A new lock is requested after shrinking starts"],
-            ["lock-S(A), upgrade A to X, unlock(A)", "Legal", "The upgrade occurs in the growing phase"],
-            ["lock-X(A), downgrade A to S, lock-S(B)", "Illegal", "A downgrade starts shrinking before the new lock"],
+            [
+              "lock-S(A), lock-X(B), unlock(A), unlock(B)",
+              "Legal",
+              "All acquisitions occur before the first unlock",
+            ],
+            [
+              "lock-S(A), unlock(A), lock-X(B)",
+              "Illegal",
+              "A new lock is requested after shrinking starts",
+            ],
+            [
+              "lock-S(A), upgrade A to X, unlock(A)",
+              "Legal",
+              "The upgrade occurs in the growing phase",
+            ],
+            [
+              "lock-X(A), downgrade A to S, lock-S(B)",
+              "Illegal",
+              "A downgrade starts shrinking before the new lock",
+            ],
           ],
         },
         paragraphs: [
@@ -571,16 +795,34 @@ export const twoPhaseLockingAndDeadlocks: SubjectTopic = {
         dataTable: {
           headers: ["Protocol", "Rule", "Main effect"],
           rows: [
-            ["Basic 2PL", "No new lock after the first unlock", "Conflict serializable"],
-            ["Conservative 2PL", "Acquire all required locks together before execution; start only if all are granted", "Deadlock-free but lower concurrency"],
-            ["Strict 2PL", "Hold all X locks until commit or abort", "Strict schedules and simpler recovery"],
-            ["Rigorous 2PL", "Hold all S and X locks until commit or abort", "Commit order matches serialization order"],
+            [
+              "Basic 2PL",
+              "No new lock after the first unlock",
+              "Conflict serializable",
+            ],
+            [
+              "Conservative 2PL",
+              "Acquire all required locks together before execution; start only if all are granted",
+              "Deadlock-free but lower concurrency",
+            ],
+            [
+              "Strict 2PL",
+              "Hold all X locks until commit or abort",
+              "Strict schedules and simpler recovery",
+            ],
+            [
+              "Rigorous 2PL",
+              "Hold all S and X locks until commit or abort",
+              "Commit order matches serialization order",
+            ],
           ],
         },
       },
       {
         title: "Deadlock Conditions",
-        paragraphs: ["A deadlock can occur when all four Coffman conditions hold together."],
+        paragraphs: [
+          "A deadlock can occur when all four Coffman conditions hold together.",
+        ],
         points: [
           "Mutual exclusion: a resource cannot be shared in the requested mode.",
           "Hold and wait: a transaction holds one resource while waiting for another.",
@@ -598,7 +840,8 @@ export const twoPhaseLockingAndDeadlocks: SubjectTopic = {
           alt: "Two-transaction wait-for graph cycle in which each transaction waits for a lock held by the other.",
           width: 1536,
           height: 1024,
-          caption: "The two directed waits form a cycle, so one victim must be rolled back.",
+          caption:
+            "The two directed waits form a cycle, so one victim must be rolled back.",
         },
       },
       {
@@ -607,16 +850,29 @@ export const twoPhaseLockingAndDeadlocks: SubjectTopic = {
         dataTable: {
           headers: ["Approach", "How it works"],
           rows: [
-            ["Prevention", "Break a deadlock condition using ordering or conservative locking"],
-            ["Detection", "Allow waits, find a wait-for cycle, and abort a victim"],
-            ["Timeout", "Abort a transaction that waits too long; simple but may abort without a true deadlock"],
+            [
+              "Prevention",
+              "Break a deadlock condition using ordering or conservative locking",
+            ],
+            [
+              "Detection",
+              "Allow waits, find a wait-for cycle, and abort a victim",
+            ],
+            [
+              "Timeout",
+              "Abort a transaction that waits too long; simple but may abort without a true deadlock",
+            ],
           ],
         },
       },
       {
         title: "Practice: Find the Cycle",
         paragraphs: ["T1 waits for T2, T2 waits for T3, and T3 waits for T1."],
-        points: ["Edges: T1 → T2, T2 → T3, T3 → T1.", "The directed cycle proves deadlock.", "The DBMS chooses a victim using factors such as rollback cost, work completed, and resources held."],
+        points: [
+          "Edges: T1 → T2, T2 → T3, T3 → T1.",
+          "The directed cycle proves deadlock.",
+          "The DBMS chooses a victim using factors such as rollback cost, work completed, and resources held.",
+        ],
       },
       {
         title: "Victim Rollback and Starvation",
@@ -639,18 +895,46 @@ export const twoPhaseLockingAndDeadlocks: SubjectTopic = {
       title: "Strict 2PL does not prevent deadlock",
       body: "T1 may hold X(X) and wait for Y while T2 holds X(Y) and waits for X. Holding exclusive locks until commit makes recovery safer, but the circular wait still creates deadlock.",
     },
-    misconception: "2PL guarantees conflict serializability, not deadlock freedom. Conservative 2PL is the deadlock-preventing variant listed here.",
+    misconception:
+      "2PL guarantees conflict serializability, not deadlock freedom. Conservative 2PL is the deadlock-preventing variant listed here.",
   },
   revise: {
-    definition: "2PL has a growing lock-acquisition phase followed by a shrinking release phase.",
-    sections: [{ title: "Variant Recall", points: ["Basic: serializable.", "Conservative: all locks first.", "Strict: X locks until end.", "Rigorous: all locks until end."] }],
+    definition:
+      "2PL has a growing lock-acquisition phase followed by a shrinking release phase.",
+    sections: [
+      {
+        title: "Variant Recall",
+        points: [
+          "Basic: serializable.",
+          "Conservative: all locks first.",
+          "Strict: X locks until end.",
+          "Rigorous: all locks until end.",
+        ],
+      },
+    ],
     essentialsStyle: "plain",
-    essentials: ["A wait-for edge points from waiter to holder.", "A wait-for cycle means deadlock.", "Detection needs victim rollback.", "Strict 2PL improves recovery but does not prevent deadlock."],
-    followUp: "Why can strict 2PL still deadlock even though it produces strict schedules?",
+    essentials: [
+      "A wait-for edge points from waiter to holder.",
+      "A wait-for cycle means deadlock.",
+      "Detection needs victim rollback.",
+      "Strict 2PL improves recovery but does not prevent deadlock.",
+    ],
+    followUp:
+      "Why can strict 2PL still deadlock even though it produces strict schedules?",
   },
   lastMinute: {
-    definition: "Grow locks, then shrink; never acquire after releasing under 2PL.",
-    sections: [{ title: "Deadlock Check", points: ["Build waiter → holder graph.", "Cycle? Deadlock.", "Break it by aborting a victim."] }],
+    definition:
+      "Grow locks, then shrink; never acquire after releasing under 2PL.",
+    sections: [
+      {
+        title: "Deadlock Check",
+        points: [
+          "Build waiter → holder graph.",
+          "Cycle? Deadlock.",
+          "Break it by aborting a victim.",
+        ],
+      },
+    ],
     memoryLine: "2PL serializes; strict simplifies recovery; cycle deadlocks",
     cues: ["Growing", "Shrinking", "Waiter → holder"],
     trap: "Strict 2PL holds X locks, while rigorous 2PL holds both S and X locks until the end.",
@@ -660,12 +944,14 @@ export const twoPhaseLockingAndDeadlocks: SubjectTopic = {
 export const timestampAndOptimisticConcurrencyControl: SubjectTopic = {
   slug: "timestamp-and-optimistic-concurrency-control",
   title: "Timestamp and Optimistic Concurrency Control",
-  description: "Order conflicting operations with timestamps and validate low-conflict transactions optimistically.",
+  description:
+    "Order conflicting operations with timestamps and validate low-conflict transactions optimistically.",
   readTime: "20 min",
   difficulty: "Advanced",
   tags: ["Timestamp Ordering", "Optimistic Control"],
   learn: {
-    opening: "Timestamp ordering uses transaction ages instead of locks. Optimistic control allows work to proceed privately and checks for conflicts before writing shared data.",
+    opening:
+      "Timestamp ordering uses transaction ages instead of locks. Optimistic control allows work to proceed privately and checks for conflicts before writing shared data.",
     sections: [
       {
         title: "Timestamp Ordering Basics",
@@ -698,7 +984,11 @@ export const timestampAndOptimisticConcurrencyControl: SubjectTopic = {
           rows: [
             ["r2(X)", "10 < 0 is false", "Allow; read_TS(X) = 10"],
             ["w1(X)", "5 < read_TS(X)=10", "Reject and restart T1"],
-            ["w2(X)", "10 is not less than either timestamp", "Allow; write_TS(X) = 10"],
+            [
+              "w2(X)",
+              "10 is not less than either timestamp",
+              "Allow; write_TS(X) = 10",
+            ],
           ],
         },
       },
@@ -727,9 +1017,18 @@ export const timestampAndOptimisticConcurrencyControl: SubjectTopic = {
         dataTable: {
           headers: ["Phase", "Work"],
           rows: [
-            ["Read", "Read database values and make tentative changes privately"],
-            ["Validation", "Check whether overlapping transactions create a forbidden conflict"],
-            ["Write", "Publish changes if validation succeeds; otherwise restart"],
+            [
+              "Read",
+              "Read database values and make tentative changes privately",
+            ],
+            [
+              "Validation",
+              "Check whether overlapping transactions create a forbidden conflict",
+            ],
+            [
+              "Write",
+              "Publish changes if validation succeeds; otherwise restart",
+            ],
           ],
         },
       },
@@ -756,18 +1055,47 @@ export const timestampAndOptimisticConcurrencyControl: SubjectTopic = {
       title: "Locks vs timestamps",
       body: "Locking may make a transaction wait, which can lead to deadlock. Basic timestamp ordering normally aborts a transaction instead of waiting when an operation violates timestamp order, so it avoids deadlock but may cause more restarts.",
     },
-    misconception: "A larger timestamp means a newer transaction. It does not automatically mean that every operation from that transaction is allowed; apply the read and write rules to the specific item.",
+    misconception:
+      "A larger timestamp means a newer transaction. It does not automatically mean that every operation from that transaction is allowed; apply the read and write rules to the specific item.",
   },
   revise: {
-    definition: "Timestamp ordering forces conflicting operations to respect transaction timestamp order.",
-    sections: [{ title: "Rules", dataTable: { headers: ["Operation", "Reject when"], rows: [["read_i(X)", "TS(Ti) < write_TS(X)"], ["write_i(X)", "TS(Ti) < read_TS(X) or TS(Ti) < write_TS(X)"]]} }],
+    definition:
+      "Timestamp ordering forces conflicting operations to respect transaction timestamp order.",
+    sections: [
+      {
+        title: "Rules",
+        dataTable: {
+          headers: ["Operation", "Reject when"],
+          rows: [
+            ["read_i(X)", "TS(Ti) < write_TS(X)"],
+            ["write_i(X)", "TS(Ti) < read_TS(X) or TS(Ti) < write_TS(X)"],
+          ],
+        },
+      },
+    ],
     essentialsStyle: "plain",
-    essentials: ["Smaller timestamp means older transaction.", "Allowed reads update read_TS.", "Allowed writes update write_TS.", "Timestamp ordering avoids deadlock but can restart transactions."],
-    followUp: "Why must an old write still abort when a newer transaction has already read the old value?",
+    essentials: [
+      "Smaller timestamp means older transaction.",
+      "Allowed reads update read_TS.",
+      "Allowed writes update write_TS.",
+      "Timestamp ordering avoids deadlock but can restart transactions.",
+    ],
+    followUp:
+      "Why must an old write still abort when a newer transaction has already read the old value?",
   },
   lastMinute: {
-    definition: "Compare TS(Ti) with read_TS(X) and write_TS(X) before each operation.",
-    sections: [{ title: "Fast Rule", points: ["Old read after newer write → abort.", "Old write after newer read → abort.", "Old write after newer write → abort under basic timestamp ordering."] }],
+    definition:
+      "Compare TS(Ti) with read_TS(X) and write_TS(X) before each operation.",
+    sections: [
+      {
+        title: "Fast Rule",
+        points: [
+          "Old read after newer write → abort.",
+          "Old write after newer read → abort.",
+          "Old write after newer write → abort under basic timestamp ordering.",
+        ],
+      },
+    ],
     memoryLine: "Older work cannot move behind newer conflicting work",
     cues: ["TS", "read_TS", "write_TS"],
     trap: "Update read_TS or write_TS only after the operation is allowed.",

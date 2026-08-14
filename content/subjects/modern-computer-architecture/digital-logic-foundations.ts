@@ -178,10 +178,12 @@ export const binaryNumbersAndPlaceValue: SubjectTopic = {
       "Leading zeros do not change an unsigned value.",
       "Eight unsigned bits store 0 to 255.",
     ],
-    followUp: "Why does an unsigned n-bit number have a maximum value of 2ⁿ - 1?",
+    followUp:
+      "Why does an unsigned n-bit number have a maximum value of 2ⁿ - 1?",
   },
   lastMinute: {
-    definition: "Binary uses 0 and 1, with place values 1, 2, 4, 8, 16, and so on.",
+    definition:
+      "Binary uses 0 and 1, with place values 1, 2, 4, 8, 16, and so on.",
     sections: [
       {
         title: "Do This",
@@ -233,7 +235,11 @@ export const signedBinaryAndTwosComplement: SubjectTopic = {
           "Older systems and exam questions may also use sign magnitude or one's complement. Two's complement is preferred because it has only one zero and works naturally with binary addition.",
         ],
         dataTable: {
-          headers: ["Representation", "How -5 looks in 4 bits", "Important point"],
+          headers: [
+            "Representation",
+            "How -5 looks in 4 bits",
+            "Important point",
+          ],
           rows: [
             ["Sign magnitude", "1101", "First bit stores sign; has +0 and -0"],
             ["One's complement", "1010", "Invert +5; has +0 and -0"],
@@ -322,7 +328,8 @@ export const signedBinaryAndTwosComplement: SubjectTopic = {
               "01100100 + 00110010 = 10010110",
               "Both inputs are positive, but the result starts with 1 and appears negative.",
             ],
-            answer: "Signed overflow occurs because 150 is outside the 8-bit signed range -128 to 127.",
+            answer:
+              "Signed overflow occurs because 150 is outside the 8-bit signed range -128 to 127.",
           },
           {
             title: "Negative plus negative overflow",
@@ -333,7 +340,8 @@ export const signedBinaryAndTwosComplement: SubjectTopic = {
               "Both inputs are negative, but the stored result starts with 0 and appears positive.",
               "The true result -140 is below the minimum value -128.",
             ],
-            answer: "Signed overflow occurs. The 8-bit pattern cannot represent -140.",
+            answer:
+              "Signed overflow occurs. The 8-bit pattern cannot represent -140.",
           },
           {
             title: "Subtract with two's complement",
@@ -396,7 +404,8 @@ export const signedBinaryAndTwosComplement: SubjectTopic = {
       "Carry out and signed overflow answer different questions.",
       "When increasing width, copy the sign bit into the new left positions.",
     ],
-    followUp: "Why can adding two positive 8-bit numbers produce a pattern that looks negative?",
+    followUp:
+      "Why can adding two positive 8-bit numbers produce a pattern that looks negative?",
   },
   lastMinute: {
     definition: "Two's complement: invert all bits and add 1.",
@@ -439,7 +448,8 @@ export const booleanAlgebraAndLogicGates: SubjectTopic = {
           alt: "Symbols and meanings of the AND, OR, NOT, and XOR logic operations.",
           width: 1536,
           height: 1024,
-          caption: "Boolean expressions and gate symbols describe the same operations.",
+          caption:
+            "Boolean expressions and gate symbols describe the same operations.",
         },
         formulas: [
           { label: "AND", expression: "Y = A ∧ B" },
@@ -513,7 +523,13 @@ export const booleanAlgebraAndLogicGates: SubjectTopic = {
           "Break an expression into small operations. For F = (A ∧ B) ∨ ¬C, first connect A and B to an AND gate, send C through a NOT gate, and connect those two results to an OR gate.",
           "To read a circuit as an expression, label the output of each gate and work from the inputs toward the final output.",
         ],
-        flow: ["Inputs A and B", "AND gate", "Combine with ¬C", "OR gate", "Output F"],
+        flow: [
+          "Inputs A and B",
+          "AND gate",
+          "Combine with ¬C",
+          "OR gate",
+          "Output F",
+        ],
       },
       {
         title: "Worked Problems",
@@ -532,11 +548,7 @@ export const booleanAlgebraAndLogicGates: SubjectTopic = {
           {
             title: "Evaluate a Boolean function",
             prompt: "Find F = (A ∧ B) ∨ ¬C when A = 1, B = 0, C = 0.",
-            steps: [
-              "A ∧ B = 1 ∧ 0 = 0",
-              "¬C = ¬0 = 1",
-              "F = 0 ∨ 1 = 1",
-            ],
+            steps: ["A ∧ B = 1 ∧ 0 = 0", "¬C = ¬0 = 1", "F = 0 ∨ 1 = 1"],
             answer: "F = 1",
           },
           {
@@ -551,7 +563,8 @@ export const booleanAlgebraAndLogicGates: SubjectTopic = {
           },
           {
             title: "Read a small logic circuit",
-            prompt: "A and B enter an XOR gate. Its output and C enter an AND gate. Find F for A = 1, B = 0, C = 1.",
+            prompt:
+              "A and B enter an XOR gate. Its output and C enter an AND gate. Find F for A = 1, B = 0, C = 1.",
             steps: [
               "Write the expression: F = (A ⊕ B) ∧ C.",
               "A ⊕ B = 1 ⊕ 0 = 1.",
@@ -615,10 +628,12 @@ export const booleanAlgebraAndLogicGates: SubjectTopic = {
       "XNOR means equal.",
       "NAND alone can create NOT, AND, and OR.",
     ],
-    followUp: "How do De Morgan's laws change an AND into an OR and an OR into an AND?",
+    followUp:
+      "How do De Morgan's laws change an AND into an OR and an OR into an AND?",
   },
   lastMinute: {
-    definition: "AND: both. OR: any. NOT: reverse. XOR: different. XNOR: equal.",
+    definition:
+      "AND: both. OR: any. NOT: reverse. XOR: different. XNOR: equal.",
     sections: [
       {
         title: "Recall",
@@ -631,7 +646,13 @@ export const booleanAlgebraAndLogicGates: SubjectTopic = {
       },
     ],
     memoryLine: "AND both, OR any, XOR different, XNOR equal, NOT flips.",
-    cues: ["0 and 1", "2ⁿ rows", "NAND universal", "De Morgan swaps", "XNOR equal"],
+    cues: [
+      "0 and 1",
+      "2ⁿ rows",
+      "NAND universal",
+      "De Morgan swaps",
+      "XNOR equal",
+    ],
     trap: "For A = 1 and B = 1, OR is 1 but XOR is 0.",
   },
 };
@@ -707,7 +728,10 @@ export const combinationalCircuits: SubjectTopic = {
           rows: [
             ["Decoder", "Binary code to one active output"],
             ["Encoder", "One active input to binary code"],
-            ["Priority encoder", "Highest-priority active input to binary code"],
+            [
+              "Priority encoder",
+              "Highest-priority active input to binary code",
+            ],
           ],
         },
       },
@@ -774,7 +798,8 @@ export const combinationalCircuits: SubjectTopic = {
         problems: [
           {
             title: "Trace a multiplexer",
-            prompt: "For a 4-to-1 MUX, I₀ = 0, I₁ = 1, I₂ = 1, I₃ = 0, and S₁S₀ = 10. Find Y.",
+            prompt:
+              "For a 4-to-1 MUX, I₀ = 0, I₁ = 1, I₂ = 1, I₃ = 0, and S₁S₀ = 10. Find Y.",
             steps: [
               "Select code 10 chooses input I₂.",
               "I₂ contains 1.",
@@ -794,7 +819,8 @@ export const combinationalCircuits: SubjectTopic = {
           },
           {
             title: "Implement a function using a MUX",
-            prompt: "Use a 4-to-1 MUX to implement F(A, B) = A ⊕ B. A and B are the select inputs.",
+            prompt:
+              "Use a 4-to-1 MUX to implement F(A, B) = A ⊕ B. A and B are the select inputs.",
             steps: [
               "List XOR outputs in select order AB = 00, 01, 10, 11.",
               "The outputs are 0, 1, 1, 0.",
@@ -805,7 +831,8 @@ export const combinationalCircuits: SubjectTopic = {
           },
           {
             title: "Trace a demultiplexer",
-            prompt: "A 1-to-4 DEMUX receives D = 1 and select code S₁S₀ = 11. Find its outputs.",
+            prompt:
+              "A 1-to-4 DEMUX receives D = 1 and select code S₁S₀ = 11. Find its outputs.",
             steps: [
               "Select code 11 chooses output Y₃.",
               "Send D = 1 to Y₃.",
@@ -884,8 +911,15 @@ export const combinationalCircuits: SubjectTopic = {
         ],
       },
     ],
-    memoryLine: "MUX chooses, decoder activates, adder calculates, comparator decides.",
-    cues: ["No memory", "2ᵏ choices", "XOR gives sum", "AND gives half-adder carry", "Full adder has 8 rows"],
+    memoryLine:
+      "MUX chooses, decoder activates, adder calculates, comparator decides.",
+    cues: [
+      "No memory",
+      "2ᵏ choices",
+      "XOR gives sum",
+      "AND gives half-adder carry",
+      "Full adder has 8 rows",
+    ],
     trap: "Do not confuse a decoder with a DEMUX: a DEMUX also has a data input.",
   },
 };
@@ -912,7 +946,8 @@ export const aluFoundationsAndControl: SubjectTopic = {
           alt: "A simple ALU receiving operands A and B plus an operation control, and producing a result with zero and carry flags.",
           width: 1536,
           height: 1024,
-          caption: "The operation control chooses what the ALU does with its operands.",
+          caption:
+            "The operation control chooses what the ALU does with its operands.",
         },
       },
       {
@@ -975,9 +1010,17 @@ export const aluFoundationsAndControl: SubjectTopic = {
         dataTable: {
           headers: ["Operation on 8-bit 10110100", "Result", "Main use"],
           rows: [
-            ["Logical left by 1", "01101000", "Unsigned multiply by 2 if no overflow"],
+            [
+              "Logical left by 1",
+              "01101000",
+              "Unsigned multiply by 2 if no overflow",
+            ],
             ["Logical right by 1", "01011010", "Unsigned divide by 2"],
-            ["Arithmetic right by 1", "11011010", "Signed divide by 2 approximately"],
+            [
+              "Arithmetic right by 1",
+              "11011010",
+              "Signed divide by 2 approximately",
+            ],
           ],
         },
       },
@@ -990,7 +1033,10 @@ export const aluFoundationsAndControl: SubjectTopic = {
           headers: ["Flag", "Typical meaning"],
           rows: [
             ["Zero, Z", "The result is all zeros"],
-            ["Negative, N", "For two's complement, the result's most significant bit is 1"],
+            [
+              "Negative, N",
+              "For two's complement, the result's most significant bit is 1",
+            ],
             ["Carry, C", "Unsigned carry leaves the most significant bit"],
             ["Overflow, V", "The signed result does not fit"],
           ],
@@ -999,7 +1045,8 @@ export const aluFoundationsAndControl: SubjectTopic = {
           { label: "Zero flag", expression: "Z = 1 when result = 0" },
           {
             label: "Addition overflow",
-            expression: "V = 1 when same-sign inputs produce an opposite-sign result",
+            expression:
+              "V = 1 when same-sign inputs produce an opposite-sign result",
           },
         ],
       },
@@ -1009,7 +1056,8 @@ export const aluFoundationsAndControl: SubjectTopic = {
         problems: [
           {
             title: "Trace an ALU operation",
-            prompt: "A 4-bit ALU receives A = 0101, B = 0011, and control ADD. Find the result and Z, N, C, V flags.",
+            prompt:
+              "A 4-bit ALU receives A = 0101, B = 0011, and control ADD. Find the result and Z, N, C, V flags.",
             steps: [
               "0101₂ = 5 and 0011₂ = 3.",
               "0101 + 0011 = 1000.",
@@ -1069,7 +1117,13 @@ export const aluFoundationsAndControl: SubjectTopic = {
     sections: [
       {
         title: "ALU Flow",
-        flow: ["Registers", "Operands A and B", "ALU + control", "Result", "Destination register"],
+        flow: [
+          "Registers",
+          "Operands A and B",
+          "ALU + control",
+          "Result",
+          "Destination register",
+        ],
       },
       {
         title: "Flags",
@@ -1106,7 +1160,8 @@ export const aluFoundationsAndControl: SubjectTopic = {
       "The control unit commands the ALU; the ALU performs the operation.",
       "A MUX inside the ALU selects the requested candidate result.",
     ],
-    followUp: "How can a processor test A = B by using subtraction and the zero flag?",
+    followUp:
+      "How can a processor test A = B by using subtraction and the zero flag?",
   },
   lastMinute: {
     definition: "ALU = operands + operation code → result + flags.",

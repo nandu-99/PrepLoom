@@ -158,11 +158,31 @@ export const activationFunctions: SubjectTopic = {
         dataTable: {
           headers: ["Location or task", "Common activation", "Output meaning"],
           rows: [
-            ["Hidden dense or convolution layer", "ReLU", "Nonnegative feature values"],
-            ["Binary classification output", "Sigmoid", "One positive-class probability"],
-            ["Multi-label classification output", "Independent sigmoid per label", "Several labels may be true together"],
-            ["Single-label multiclass output", "Softmax", "Class probabilities that sum to 1"],
-            ["Regression output", "Linear or no activation", "Unrestricted numerical value"],
+            [
+              "Hidden dense or convolution layer",
+              "ReLU",
+              "Nonnegative feature values",
+            ],
+            [
+              "Binary classification output",
+              "Sigmoid",
+              "One positive-class probability",
+            ],
+            [
+              "Multi-label classification output",
+              "Independent sigmoid per label",
+              "Several labels may be true together",
+            ],
+            [
+              "Single-label multiclass output",
+              "Softmax",
+              "Class probabilities that sum to 1",
+            ],
+            [
+              "Regression output",
+              "Linear or no activation",
+              "Unrestricted numerical value",
+            ],
             ["Some recurrent hidden states", "Tanh", "Values between −1 and 1"],
           ],
         },
@@ -261,7 +281,11 @@ export const activationFunctions: SubjectTopic = {
             ["ReLU", "[0, ∞)", "Hidden layers"],
             ["Sigmoid", "(0, 1)", "Binary output"],
             ["Tanh", "(−1, 1)", "Some recurrent states"],
-            ["Softmax", "Each (0, 1), sum = 1", "Single-label multiclass output"],
+            [
+              "Softmax",
+              "Each (0, 1), sum = 1",
+              "Single-label multiclass output",
+            ],
           ],
         },
       },
@@ -289,7 +313,8 @@ export const activationFunctions: SubjectTopic = {
       "Why do several dense layers without nonlinear activations behave like one dense layer?",
   },
   lastMinute: {
-    definition: "Activation functions decide how z becomes the neuron output a.",
+    definition:
+      "Activation functions decide how z becomes the neuron output a.",
     sections: [
       {
         title: "Selection Map",
@@ -317,8 +342,7 @@ export const activationFunctions: SubjectTopic = {
       "Softmax accepts a vector of logits.",
       "Activation choice must match target and loss.",
     ],
-    trap:
-      "Do not use softmax for unrelated labels that may all be true; softmax forces one shared distribution.",
+    trap: "Do not use softmax for unrelated labels that may all be true; softmax forces one shared distribution.",
   },
 };
 
@@ -369,7 +393,11 @@ export const layersAndFeedforwardNetworks: SubjectTopic = {
           rows: [
             ["Input", "Holds one example's features", "No"],
             ["Hidden", "Builds an internal representation", "Usually yes"],
-            ["Output", "Produces task-specific scores or values", "Usually yes"],
+            [
+              "Output",
+              "Produces task-specific scores or values",
+              "Usually yes",
+            ],
           ],
         },
       },
@@ -476,9 +504,7 @@ export const layersAndFeedforwardNetworks: SubjectTopic = {
     sections: [
       {
         title: "Dense-Layer Shape",
-        formulas: [
-          { expression: "X(B × D) · W(D × U) + b(U) = Z(B × U)" },
-        ],
+        formulas: [{ expression: "X(B × D) · W(D × U) + b(U) = Z(B × U)" }],
       },
       {
         title: "Layer Roles",
@@ -522,8 +548,7 @@ export const layersAndFeedforwardNetworks: SubjectTopic = {
       "Hidden layers build representations.",
       "Output size matches the task.",
     ],
-    trap:
-      "Do not count the input layer as a parameterized transformation, and do not change the batch size when tracking a dense layer.",
+    trap: "Do not count the input layer as a parameterized transformation, and do not change the batch size when tracking a dense layer.",
   },
 };
 
@@ -808,9 +833,7 @@ export const forwardPropagationAndParameterCounting: SubjectTopic = {
       },
       {
         title: "Parameter Formula",
-        formulas: [
-          { expression: "Dense parameters = D × U + U = (D + 1)U" },
-        ],
+        formulas: [{ expression: "Dense parameters = D × U + U = (D + 1)U" }],
       },
       {
         title: "What to Count",
@@ -845,7 +868,13 @@ export const forwardPropagationAndParameterCounting: SubjectTopic = {
       },
       {
         title: "Numerical Order",
-        flow: ["Check shapes", "Multiply and add", "Activate", "Next layer", "Verify output"],
+        flow: [
+          "Check shapes",
+          "Multiply and add",
+          "Activate",
+          "Next layer",
+          "Verify output",
+        ],
         wide: true,
       },
     ],
@@ -855,7 +884,6 @@ export const forwardPropagationAndParameterCounting: SubjectTopic = {
       "Batch size does not multiply parameter count.",
       "Output range should match its activation.",
     ],
-    trap:
-      "Do not count connections into the input layer, do not omit biases, and do not apply the next layer before activating the current one.",
+    trap: "Do not count connections into the input layer, do not omit biases, and do not apply the next layer before activating the current one.",
   },
 };

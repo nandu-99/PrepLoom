@@ -84,41 +84,47 @@ const topics: Topic[] = [
   },
   {
     name: "HTML",
-    description: "Document structure, semantics, forms, accessibility, and browser behavior.",
+    description:
+      "Document structure, semantics, forms, accessibility, and browser behavior.",
     icon: Code2,
     href: "/interview-questions/html",
     detail: `${htmlInterviewQuestions.length} questions`,
   },
   {
     name: "CSS",
-    description: "Layout, responsive design, selectors, the cascade, and rendering.",
+    description:
+      "Layout, responsive design, selectors, the cascade, and rendering.",
     icon: Sparkles,
     href: "/interview-questions/css",
     detail: `${cssInterviewQuestions.length} questions`,
   },
   {
     name: "JavaScript",
-    description: "Language fundamentals, the runtime, asynchronous code, and the DOM.",
+    description:
+      "Language fundamentals, the runtime, asynchronous code, and the DOM.",
     icon: Braces,
     href: "/interview-questions/javascript",
     detail: `${javascriptInterviewQuestions.length} questions`,
   },
   {
     name: "React",
-    description: "Components, hooks, state, rendering, and application architecture.",
+    description:
+      "Components, hooks, state, rendering, and application architecture.",
     icon: Code2,
     href: "/interview-questions/react",
     detail: `${reactInterviewQuestions.length} questions`,
   },
   {
     name: "TypeScript",
-    description: "Types, narrowing, generics, inference, and safer application code.",
+    description:
+      "Types, narrowing, generics, inference, and safer application code.",
     icon: FileCode2,
     detail: "Coming soon",
   },
   {
     name: "Node.js",
-    description: "The event loop, APIs, modules, streams, and backend fundamentals.",
+    description:
+      "The event loop, APIs, modules, streams, and backend fundamentals.",
     icon: Server,
     detail: "Coming soon",
   },
@@ -147,7 +153,8 @@ export default function InterviewQuestionsPage() {
                 Prepare your answers before the interview.
               </h1>
               <p className="mt-6 max-w-[55ch] text-[15px] leading-7 text-[#555] dark:text-[#b3b3b3] sm:text-[17px] sm:leading-8">
-                Choose a topic, explain each answer aloud, and check what you missed.
+                Choose a topic, explain each answer aloud, and check what you
+                missed.
               </p>
             </div>
 
@@ -166,7 +173,11 @@ export default function InterviewQuestionsPage() {
                 const content = (
                   <>
                     <div className="flex items-start justify-between gap-5">
-                      <Icon className="size-5 text-[#777] dark:text-[#858585]" strokeWidth={1.55} aria-hidden="true" />
+                      <Icon
+                        className="size-5 text-[#777] dark:text-[#858585]"
+                        strokeWidth={1.55}
+                        aria-hidden="true"
+                      />
                       <span className="text-[10px] text-[#777] dark:text-[#858585]">
                         {topic.detail}
                       </span>
@@ -180,7 +191,11 @@ export default function InterviewQuestionsPage() {
                     {topic.href && (
                       <span className="mt-5 inline-flex items-center gap-2 text-[12px] font-medium">
                         Start practicing
-                        <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" strokeWidth={1.7} aria-hidden="true" />
+                        <ArrowRight
+                          className="size-4 transition-transform group-hover:translate-x-0.5"
+                          strokeWidth={1.7}
+                          aria-hidden="true"
+                        />
                       </span>
                     )}
                   </>

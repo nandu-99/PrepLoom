@@ -33,9 +33,15 @@ export const introductionToComputerNetworks: SubjectTopic = {
         table: {
           headers: ["Part", "Meaning"],
           rows: [
-            ["End device", "Creates or receives data, such as a laptop or server"],
+            [
+              "End device",
+              "Creates or receives data, such as a laptop or server",
+            ],
             ["Link", "Carries signals through cable, fiber, or wireless radio"],
-            ["Intermediate device", "Forwards data, such as a switch or router"],
+            [
+              "Intermediate device",
+              "Forwards data, such as a switch or router",
+            ],
             ["Protocol", "Defines the rules used by communicating devices"],
           ],
         },
@@ -50,15 +56,36 @@ export const introductionToComputerNetworks: SubjectTopic = {
           alt: "PAN, LAN, MAN, and WAN arranged from personal coverage to worldwide coverage",
           width: 1536,
           height: 1024,
-          caption: "Coverage generally grows from a personal network to a wide area network.",
+          caption:
+            "Coverage generally grows from a personal network to a wide area network.",
         },
         dataTable: {
           headers: ["Type", "Typical area", "Example", "Usual ownership"],
           rows: [
-            ["PAN", "Around one person", "Phone connected to earbuds", "One person"],
-            ["LAN", "Home, lab, or building", "College computer lab", "One home or organization"],
-            ["MAN", "Town or city", "City-wide campus network", "Provider or large organization"],
-            ["WAN", "Country or worldwide", "Bank branches across India", "Several providers or organizations"],
+            [
+              "PAN",
+              "Around one person",
+              "Phone connected to earbuds",
+              "One person",
+            ],
+            [
+              "LAN",
+              "Home, lab, or building",
+              "College computer lab",
+              "One home or organization",
+            ],
+            [
+              "MAN",
+              "Town or city",
+              "City-wide campus network",
+              "Provider or large organization",
+            ],
+            [
+              "WAN",
+              "Country or worldwide",
+              "Bank branches across India",
+              "Several providers or organizations",
+            ],
           ],
         },
       },
@@ -97,11 +124,23 @@ export const introductionToComputerNetworks: SubjectTopic = {
         dataTable: {
           headers: ["Term", "Simple meaning", "Common unit"],
           rows: [
-            ["Bandwidth", "Maximum data-carrying capacity", "bit/s, Mbit/s, Gbit/s"],
-            ["Throughput", "Rate of successfully delivered data", "bit/s, Mbit/s, Gbit/s"],
+            [
+              "Bandwidth",
+              "Maximum data-carrying capacity",
+              "bit/s, Mbit/s, Gbit/s",
+            ],
+            [
+              "Throughput",
+              "Rate of successfully delivered data",
+              "bit/s, Mbit/s, Gbit/s",
+            ],
             ["Latency", "Time taken for data to travel", "ms"],
             ["Jitter", "Variation in packet delay", "ms"],
-            ["Packet loss", "Packets that never reach the destination", "Percentage"],
+            [
+              "Packet loss",
+              "Packets that never reach the destination",
+              "Percentage",
+            ],
           ],
         },
       },
@@ -113,9 +152,21 @@ export const introductionToComputerNetworks: SubjectTopic = {
         dataTable: {
           headers: ["Mode", "Direction", "Example"],
           rows: [
-            ["Simplex", "Only one side sends", "Traditional keyboard to computer"],
-            ["Half-duplex", "Both sides send, but not at the same time", "Walkie-talkie"],
-            ["Full-duplex", "Both sides send at the same time", "Phone call or switched Ethernet"],
+            [
+              "Simplex",
+              "Only one side sends",
+              "Traditional keyboard to computer",
+            ],
+            [
+              "Half-duplex",
+              "Both sides send, but not at the same time",
+              "Walkie-talkie",
+            ],
+            [
+              "Full-duplex",
+              "Both sides send at the same time",
+              "Phone call or switched Ethernet",
+            ],
           ],
         },
       },
@@ -166,17 +217,27 @@ export const introductionToComputerNetworks: SubjectTopic = {
     comparison: {
       left: {
         label: "Internet",
-        points: ["Public network of networks", "No single owner", "Globally reachable"],
+        points: [
+          "Public network of networks",
+          "No single owner",
+          "Globally reachable",
+        ],
       },
       right: {
         label: "Intranet",
-        points: ["Private organizational network", "Controlled by one organization", "Restricted access"],
+        points: [
+          "Private organizational network",
+          "Controlled by one organization",
+          "Restricted access",
+        ],
       },
     },
-    followUp: "Why does a network require common protocols in addition to a physical connection?",
+    followUp:
+      "Why does a network require common protocols in addition to a physical connection?",
   },
   lastMinute: {
-    definition: "Network = connected devices + communication links + agreed protocols.",
+    definition:
+      "Network = connected devices + communication links + agreed protocols.",
     memoryLine: "PAN is personal, LAN is local, MAN is a city, WAN is wide.",
     cues: [
       "Internet: public network of networks.",
@@ -218,7 +279,8 @@ export const networkCommunicationModels: SubjectTopic = {
           alt: "Client-server communication compared with direct peer-to-peer sharing",
           width: 1536,
           height: 1024,
-          caption: "Client-server uses a central service. Peers can communicate directly with one another.",
+          caption:
+            "Client-server uses a central service. Peers can communicate directly with one another.",
         },
       },
       {
@@ -230,10 +292,19 @@ export const networkCommunicationModels: SubjectTopic = {
         table: {
           headers: ["Client-server", "Peer-to-peer"],
           rows: [
-            ["Roles are clearly separated", "A peer can act as client and server"],
+            [
+              "Roles are clearly separated",
+              "A peer can act as client and server",
+            ],
             ["Central management is simpler", "Control is more distributed"],
-            ["Server capacity limits the service", "Resources can grow with peers"],
-            ["Examples: web and email", "Examples: file sharing and blockchains"],
+            [
+              "Server capacity limits the service",
+              "Resources can grow with peers",
+            ],
+            [
+              "Examples: web and email",
+              "Examples: file sharing and blockchains",
+            ],
           ],
         },
       },
@@ -246,9 +317,21 @@ export const networkCommunicationModels: SubjectTopic = {
         dataTable: {
           headers: ["Design", "Main idea", "Typical concern"],
           rows: [
-            ["Centralized", "One main control point", "Bottleneck or single point of failure"],
-            ["Decentralized", "Control is shared by several authorities", "Coordination and consistency"],
-            ["Distributed", "Work or data spans multiple computers", "Communication and partial failures"],
+            [
+              "Centralized",
+              "One main control point",
+              "Bottleneck or single point of failure",
+            ],
+            [
+              "Decentralized",
+              "Control is shared by several authorities",
+              "Coordination and consistency",
+            ],
+            [
+              "Distributed",
+              "Work or data spans multiple computers",
+              "Communication and partial failures",
+            ],
           ],
         },
       },
@@ -275,10 +358,22 @@ export const networkCommunicationModels: SubjectTopic = {
         table: {
           headers: ["Stateless", "Stateful"],
           rows: [
-            ["Each request stands on its own", "Later actions depend on stored context"],
-            ["Easier to distribute between servers", "Needs state storage or session coordination"],
-            ["Failure loses less interaction context", "Failure may interrupt an active session"],
-            ["Example: public search request", "Example: online multiplayer session"],
+            [
+              "Each request stands on its own",
+              "Later actions depend on stored context",
+            ],
+            [
+              "Easier to distribute between servers",
+              "Needs state storage or session coordination",
+            ],
+            [
+              "Failure loses less interaction context",
+              "Failure may interrupt an active session",
+            ],
+            [
+              "Example: public search request",
+              "Example: online multiplayer session",
+            ],
           ],
         },
       },
@@ -300,7 +395,11 @@ export const networkCommunicationModels: SubjectTopic = {
           rows: [
             ["Model", "Data and business rules", "User data and validation"],
             ["View", "Presents information", "Web page or application screen"],
-            ["Controller", "Handles input and coordinates work", "Login request handler"],
+            [
+              "Controller",
+              "Handles input and coordinates work",
+              "Login request handler",
+            ],
           ],
         },
       },
@@ -331,7 +430,10 @@ export const networkCommunicationModels: SubjectTopic = {
         table: {
           headers: ["Stateless", "Stateful"],
           rows: [
-            ["Request is self-contained", "Server remembers interaction context"],
+            [
+              "Request is self-contained",
+              "Server remembers interaction context",
+            ],
             ["Simpler horizontal distribution", "Needs coordinated state"],
           ],
         },
@@ -349,17 +451,27 @@ export const networkCommunicationModels: SubjectTopic = {
     comparison: {
       left: {
         label: "Client-server",
-        points: ["Central control", "Simpler management", "Server needs capacity and redundancy"],
+        points: [
+          "Central control",
+          "Simpler management",
+          "Server needs capacity and redundancy",
+        ],
       },
       right: {
         label: "Peer-to-peer",
-        points: ["Distributed participants", "Direct sharing", "Coordination is harder"],
+        points: [
+          "Distributed participants",
+          "Direct sharing",
+          "Coordination is harder",
+        ],
       },
     },
-    followUp: "How can an HTTP application remember a login even though HTTP is stateless?",
+    followUp:
+      "How can an HTTP application remember a login even though HTTP is stateless?",
   },
   lastMinute: {
-    definition: "Client-server centralizes a service. P2P distributes service among peers.",
+    definition:
+      "Client-server centralizes a service. P2P distributes service among peers.",
     memoryLine: "Stateless remembers no conversation; stateful keeps context.",
     cues: [
       "Client and server are software roles.",
@@ -413,12 +525,32 @@ export const osiAndTcpIpModels: SubjectTopic = {
         dataTable: {
           headers: ["Layer", "Main responsibility", "Examples"],
           rows: [
-            ["7 Application", "Network services used by applications", "HTTP, DNS, SMTP"],
-            ["6 Presentation", "Data format, compression, encryption", "Text encoding, image format"],
-            ["5 Session", "Starts, manages, and ends dialogs", "Checkpoints, session control"],
-            ["4 Transport", "Process delivery, reliability, flow control", "TCP, UDP"],
+            [
+              "7 Application",
+              "Network services used by applications",
+              "HTTP, DNS, SMTP",
+            ],
+            [
+              "6 Presentation",
+              "Data format, compression, encryption",
+              "Text encoding, image format",
+            ],
+            [
+              "5 Session",
+              "Starts, manages, and ends dialogs",
+              "Checkpoints, session control",
+            ],
+            [
+              "4 Transport",
+              "Process delivery, reliability, flow control",
+              "TCP, UDP",
+            ],
             ["3 Network", "Logical addressing and routing", "IPv4, IPv6, ICMP"],
-            ["2 Data Link", "Frames and local link delivery", "Ethernet, Wi-Fi, MAC"],
+            [
+              "2 Data Link",
+              "Frames and local link delivery",
+              "Ethernet, Wi-Fi, MAC",
+            ],
             ["1 Physical", "Transmits bits as signals", "Copper, fiber, radio"],
           ],
         },
@@ -431,10 +563,18 @@ export const osiAndTcpIpModels: SubjectTopic = {
         dataTable: {
           headers: ["TCP/IP layer", "Responsibility", "Examples"],
           rows: [
-            ["Application", "Application data and communication rules", "HTTP, DNS, SMTP, SSH"],
+            [
+              "Application",
+              "Application data and communication rules",
+              "HTTP, DNS, SMTP, SSH",
+            ],
             ["Transport", "End-to-end process communication", "TCP, UDP"],
             ["Internet", "Addressing and routing across networks", "IP, ICMP"],
-            ["Network Access", "Local framing and physical transmission", "Ethernet, Wi-Fi"],
+            [
+              "Network Access",
+              "Local framing and physical transmission",
+              "Ethernet, Wi-Fi",
+            ],
           ],
         },
       },
@@ -448,8 +588,14 @@ export const osiAndTcpIpModels: SubjectTopic = {
           headers: ["TCP", "UDP"],
           rows: [
             ["Connection-oriented", "Connectionless"],
-            ["Reliable and ordered byte stream", "Best-effort independent datagrams"],
-            ["More transport control", "Smaller transport header and no setup handshake"],
+            [
+              "Reliable and ordered byte stream",
+              "Best-effort independent datagrams",
+            ],
+            [
+              "More transport control",
+              "Smaller transport header and no setup handshake",
+            ],
           ],
         },
       },
@@ -463,7 +609,8 @@ export const osiAndTcpIpModels: SubjectTopic = {
           alt: "The seven OSI layers mapped to the four TCP/IP layers",
           width: 1536,
           height: 1024,
-          caption: "TCP/IP groups several OSI responsibilities into broader layers.",
+          caption:
+            "TCP/IP groups several OSI responsibilities into broader layers.",
         },
       },
       {
@@ -543,17 +690,27 @@ export const osiAndTcpIpModels: SubjectTopic = {
     comparison: {
       left: {
         label: "OSI",
-        points: ["Seven layers", "Conceptual reference model", "Fine separation of responsibilities"],
+        points: [
+          "Seven layers",
+          "Conceptual reference model",
+          "Fine separation of responsibilities",
+        ],
       },
       right: {
         label: "TCP/IP",
-        points: ["Four broad layers", "Practical Internet model", "Built around the Internet protocol suite"],
+        points: [
+          "Four broad layers",
+          "Practical Internet model",
+          "Built around the Internet protocol suite",
+        ],
       },
     },
-    followUp: "Why can the same web application work over both Ethernet and Wi-Fi?",
+    followUp:
+      "Why can the same web application work over both Ethernet and Wi-Fi?",
   },
   lastMinute: {
-    definition: "OSI explains seven jobs; TCP/IP groups them into four practical layers.",
+    definition:
+      "OSI explains seven jobs; TCP/IP groups them into four practical layers.",
     memoryLine: "Application, Transport, Internet, Network Access.",
     cues: [
       "OSI 7-6-5 maps to TCP/IP Application.",
@@ -585,10 +742,18 @@ export const encapsulationAndPacketJourney: SubjectTopic = {
           "Each layer views the information in its own form. The names help us state which layer is doing the work. In everyday speech, people often say packet for many forms, but exam answers should use the specific names.",
         ],
         dataTable: {
-          headers: ["Layer", "Common data-unit name", "Important control information"],
+          headers: [
+            "Layer",
+            "Common data-unit name",
+            "Important control information",
+          ],
           rows: [
             ["Application", "Data or message", "Application-specific fields"],
-            ["Transport", "TCP segment or UDP datagram", "Ports and transport control"],
+            [
+              "Transport",
+              "TCP segment or UDP datagram",
+              "Ports and transport control",
+            ],
             ["Network", "IP packet or datagram", "Source and destination IP"],
             ["Data Link", "Frame", "Source and destination MAC, error check"],
             ["Physical", "Bits", "Electrical, light, or radio signals"],
@@ -606,7 +771,8 @@ export const encapsulationAndPacketJourney: SubjectTopic = {
           alt: "Application data becoming a TCP segment, IP packet, Ethernet frame, and bits before decapsulation",
           width: 1536,
           height: 1024,
-          caption: "Every lower layer wraps the data for its own job. The receiver unwraps it in reverse order.",
+          caption:
+            "Every lower layer wraps the data for its own job. The receiver unwraps it in reverse order.",
         },
       },
       {
@@ -617,9 +783,24 @@ export const encapsulationAndPacketJourney: SubjectTopic = {
         dataTable: {
           headers: ["Identifier", "Identifies", "Scope", "Example"],
           rows: [
-            ["Port", "Application process", "Transport endpoint", "HTTPS server port 443"],
-            ["IP address", "Network interface", "Across routed networks", "192.0.2.20"],
-            ["MAC address", "Link interface", "Current local link", "00:1A:2B:3C:4D:5E"],
+            [
+              "Port",
+              "Application process",
+              "Transport endpoint",
+              "HTTPS server port 443",
+            ],
+            [
+              "IP address",
+              "Network interface",
+              "Across routed networks",
+              "192.0.2.20",
+            ],
+            [
+              "MAC address",
+              "Link interface",
+              "Current local link",
+              "00:1A:2B:3C:4D:5E",
+            ],
           ],
         },
         visual: {
@@ -627,7 +808,8 @@ export const encapsulationAndPacketJourney: SubjectTopic = {
           alt: "IP addresses and port numbers remaining end to end while MAC addresses change at router hops",
           width: 1536,
           height: 1024,
-          caption: "Without translation, endpoint IP addresses and transport ports identify the conversation while each link uses a new frame and MAC pair.",
+          caption:
+            "Without translation, endpoint IP addresses and transport ports identify the conversation while each link uses a new frame and MAC pair.",
         },
       },
       {
@@ -653,7 +835,8 @@ export const encapsulationAndPacketJourney: SubjectTopic = {
           alt: "Direct delivery through a switch compared with remote delivery through a default gateway",
           width: 1536,
           height: 1024,
-          caption: "A remote IP packet is first framed for the default gateway, not directly for the remote host's MAC address.",
+          caption:
+            "A remote IP packet is first framed for the default gateway, not directly for the remote host's MAC address.",
         },
       },
       {
@@ -675,11 +858,31 @@ export const encapsulationAndPacketJourney: SubjectTopic = {
           "Assume host A sends to server B through two routers and no NAT is used. The endpoint IP addresses and transport ports continue to identify the same conversation, but every routed link receives a new frame with a new source and destination MAC pair.",
         ],
         dataTable: {
-          headers: ["Link", "Packet destination IP", "Frame source MAC", "Frame destination MAC"],
+          headers: [
+            "Link",
+            "Packet destination IP",
+            "Frame source MAC",
+            "Frame destination MAC",
+          ],
           rows: [
-            ["Host A to Router 1", "Server B", "Host A", "Router 1 incoming interface"],
-            ["Router 1 to Router 2", "Server B", "Router 1 outgoing interface", "Router 2 incoming interface"],
-            ["Router 2 to Server B", "Server B", "Router 2 outgoing interface", "Server B"],
+            [
+              "Host A to Router 1",
+              "Server B",
+              "Host A",
+              "Router 1 incoming interface",
+            ],
+            [
+              "Router 1 to Router 2",
+              "Server B",
+              "Router 1 outgoing interface",
+              "Router 2 incoming interface",
+            ],
+            [
+              "Router 2 to Server B",
+              "Server B",
+              "Router 2 outgoing interface",
+              "Server B",
+            ],
           ],
         },
       },
@@ -716,7 +919,13 @@ export const encapsulationAndPacketJourney: SubjectTopic = {
     sections: [
       {
         title: "Data-unit Order",
-        flow: ["Application data", "Segment or datagram", "IP packet", "Frame", "Bits"],
+        flow: [
+          "Application data",
+          "Segment or datagram",
+          "IP packet",
+          "Frame",
+          "Bits",
+        ],
       },
       {
         title: "Address Roles",
@@ -739,11 +948,14 @@ export const encapsulationAndPacketJourney: SubjectTopic = {
       "ARP resolves a next-hop IPv4 address to a MAC address; IPv6 uses Neighbor Discovery.",
       "NAT may change endpoint IP addresses and transport ports.",
     ],
-    followUp: "Why does a remote packet use the server's IP address but the gateway's MAC address on the first link?",
+    followUp:
+      "Why does a remote packet use the server's IP address but the gateway's MAC address on the first link?",
   },
   lastMinute: {
-    definition: "Data becomes segment, packet, frame, then bits; the receiver reverses the order.",
-    memoryLine: "Port finds the process, IP finds the endpoint, MAC finds the next local interface.",
+    definition:
+      "Data becomes segment, packet, frame, then bits; the receiver reverses the order.",
+    memoryLine:
+      "Port finds the process, IP finds the endpoint, MAC finds the next local interface.",
     cues: [
       "Application: data.",
       "Transport: segment or datagram.",
@@ -786,17 +998,48 @@ export const networkTopologiesAndDevices: SubjectTopic = {
           alt: "Bus, star, ring, mesh, tree, and hybrid network topologies",
           width: 1536,
           height: 1024,
-          caption: "Each topology arranges nodes and links differently, creating different costs and failure behavior.",
+          caption:
+            "Each topology arranges nodes and links differently, creating different costs and failure behavior.",
         },
         dataTable: {
           headers: ["Topology", "Main idea", "Strength", "Main weakness"],
           rows: [
-            ["Bus", "All nodes share one backbone", "Low cable use", "Backbone failure affects all"],
-            ["Star", "Every node connects to a center", "Easy to add and isolate nodes", "Center is critical"],
-            ["Ring", "Each node has two neighbors", "Orderly path", "A break can interrupt the ring"],
-            ["Mesh", "Nodes have several direct links", "High redundancy", "High link and port cost"],
-            ["Tree", "Stars form a hierarchy", "Scales in branches", "Upper failure affects descendants"],
-            ["Hybrid", "Combines topology types", "Flexible", "Design and management are complex"],
+            [
+              "Bus",
+              "All nodes share one backbone",
+              "Low cable use",
+              "Backbone failure affects all",
+            ],
+            [
+              "Star",
+              "Every node connects to a center",
+              "Easy to add and isolate nodes",
+              "Center is critical",
+            ],
+            [
+              "Ring",
+              "Each node has two neighbors",
+              "Orderly path",
+              "A break can interrupt the ring",
+            ],
+            [
+              "Mesh",
+              "Nodes have several direct links",
+              "High redundancy",
+              "High link and port cost",
+            ],
+            [
+              "Tree",
+              "Stars form a hierarchy",
+              "Scales in branches",
+              "Upper failure affects descendants",
+            ],
+            [
+              "Hybrid",
+              "Combines topology types",
+              "Flexible",
+              "Design and management are complex",
+            ],
           ],
         },
       },
@@ -825,14 +1068,30 @@ export const networkTopologiesAndDevices: SubjectTopic = {
           alt: "Hub copying traffic to all devices, switch forwarding by MAC, and router forwarding between networks by IP",
           width: 1536,
           height: 1024,
-          caption: "Hub repeats bits, switch forwards local frames, and router forwards packets between networks.",
+          caption:
+            "Hub repeats bits, switch forwards local frames, and router forwards packets between networks.",
         },
         dataTable: {
-          headers: ["Device", "Primary layer", "Decision information", "Main job"],
+          headers: [
+            "Device",
+            "Primary layer",
+            "Decision information",
+            "Main job",
+          ],
           rows: [
             ["Hub", "Physical", "None", "Repeat signals to all ports"],
-            ["Bridge or switch", "Data Link", "MAC address", "Connect LAN segments and forward frames"],
-            ["Router", "Network", "IP prefix", "Connect networks and forward packets"],
+            [
+              "Bridge or switch",
+              "Data Link",
+              "MAC address",
+              "Connect LAN segments and forward frames",
+            ],
+            [
+              "Router",
+              "Network",
+              "IP prefix",
+              "Connect networks and forward packets",
+            ],
           ],
         },
       },
@@ -858,8 +1117,16 @@ export const networkTopologiesAndDevices: SubjectTopic = {
         dataTable: {
           headers: ["Cable", "Traditional use", "Pin arrangement"],
           rows: [
-            ["Straight-through", "Unlike devices: PC-switch, switch-router", "Same wiring standard at both ends"],
-            ["Crossover", "Like devices: PC-PC, switch-switch", "Transmit and receive pairs crossed"],
+            [
+              "Straight-through",
+              "Unlike devices: PC-switch, switch-router",
+              "Same wiring standard at both ends",
+            ],
+            [
+              "Crossover",
+              "Like devices: PC-PC, switch-switch",
+              "Transmit and receive pairs crossed",
+            ],
           ],
         },
       },
@@ -873,10 +1140,22 @@ export const networkTopologiesAndDevices: SubjectTopic = {
           rows: [
             ["Repeater", "Regenerates or repeats a weakened signal"],
             ["Wireless access point", "Bridges wireless devices into a LAN"],
-            ["Modem", "Adapts signals for an access technology used by the provider"],
-            ["Gateway", "Connects systems, often translating protocols or serving as the route out"],
-            ["Firewall", "Allows or blocks traffic according to security rules"],
-            ["Load balancer", "Distributes service requests across several servers"],
+            [
+              "Modem",
+              "Adapts signals for an access technology used by the provider",
+            ],
+            [
+              "Gateway",
+              "Connects systems, often translating protocols or serving as the route out",
+            ],
+            [
+              "Firewall",
+              "Allows or blocks traffic according to security rules",
+            ],
+            [
+              "Load balancer",
+              "Distributes service requests across several servers",
+            ],
           ],
         },
       },
@@ -972,17 +1251,27 @@ export const networkTopologiesAndDevices: SubjectTopic = {
     comparison: {
       left: {
         label: "Switch",
-        points: ["Mainly Layer 2", "Uses MAC addresses", "Forwards inside a LAN"],
+        points: [
+          "Mainly Layer 2",
+          "Uses MAC addresses",
+          "Forwards inside a LAN",
+        ],
       },
       right: {
         label: "Router",
-        points: ["Mainly Layer 3", "Uses IP prefixes", "Forwards between networks"],
+        points: [
+          "Mainly Layer 3",
+          "Uses IP prefixes",
+          "Forwards between networks",
+        ],
       },
     },
-    followUp: "How many direct links and ports per node are needed for a full mesh of 8 nodes?",
+    followUp:
+      "How many direct links and ports per node are needed for a full mesh of 8 nodes?",
   },
   lastMinute: {
-    definition: "Topology is the connection pattern; devices decide how traffic moves through it.",
+    definition:
+      "Topology is the connection pattern; devices decide how traffic moves through it.",
     memoryLine: "Hub repeats, switch learns MAC, router chooses an IP route.",
     cues: [
       "Full mesh links: n(n - 1) / 2.",

@@ -85,7 +85,8 @@ export const behavioralInterviewQuestions: BehavioralQuestion[] = [
   {
     id: "production-traffic",
     category: "Ownership and problem-solving",
-    question: "Tell me about a system you built that handled real users at scale.",
+    question:
+      "Tell me about a system you built that handled real users at scale.",
     howToAnswer:
       "Give the scale only after explaining what the system did and what you owned. Include one real production lesson so the answer is more than a list of metrics.",
     example:
@@ -103,7 +104,8 @@ export const behavioralInterviewQuestions: BehavioralQuestion[] = [
   {
     id: "data-driven-impact",
     category: "Ownership and problem-solving",
-    question: "Tell me about a time you used data to improve a business result.",
+    question:
+      "Tell me about a time you used data to improve a business result.",
     howToAnswer:
       "Connect the technical change to the business decision it improved. Be precise about shared results and avoid claiming sole credit for a team outcome.",
     example:
@@ -121,7 +123,8 @@ export const behavioralInterviewQuestions: BehavioralQuestion[] = [
   {
     id: "explain-technical-work",
     category: "Teamwork and communication",
-    question: "Tell me about a time you explained a technical issue to a non-technical stakeholder.",
+    question:
+      "Tell me about a time you explained a technical issue to a non-technical stakeholder.",
     howToAnswer:
       "Start from the stakeholder's goal, not the implementation. Explain the consequence, the proposed change, and what they needed to decide.",
     example:
@@ -130,7 +133,8 @@ export const behavioralInterviewQuestions: BehavioralQuestion[] = [
   {
     id: "external-company-demo",
     category: "Teamwork and communication",
-    question: "Tell me about a time you worked directly with an external company or customer.",
+    question:
+      "Tell me about a time you worked directly with an external company or customer.",
     howToAnswer:
       "Explain what the external party needed, how you translated it into a solution, and what you learned about understanding users. Do not overstate sales or onboarding responsibility.",
     example:
@@ -157,7 +161,8 @@ export const behavioralInterviewQuestions: BehavioralQuestion[] = [
   {
     id: "team-contribution",
     category: "Teamwork and communication",
-    question: "How do you describe your contribution when a result belongs to a team?",
+    question:
+      "How do you describe your contribution when a result belongs to a team?",
     howToAnswer:
       "Separate your actions from the shared result. Use 'I' for your work and 'we' for outcomes that depended on multiple people.",
     example:
@@ -175,7 +180,8 @@ export const behavioralInterviewQuestions: BehavioralQuestion[] = [
   {
     id: "lead-without-title",
     category: "Leadership and initiative",
-    question: "Tell me about a time you led without having a formal leadership title.",
+    question:
+      "Tell me about a time you led without having a formal leadership title.",
     howToAnswer:
       "Leadership can mean giving clarity and helping work move forward. Describe the responsibility you accepted and how it helped other people deliver.",
     example:
@@ -193,7 +199,8 @@ export const behavioralInterviewQuestions: BehavioralQuestion[] = [
   {
     id: "prioritize-work",
     category: "Leadership and initiative",
-    question: "How do you prioritize when several tasks are competing for your attention?",
+    question:
+      "How do you prioritize when several tasks are competing for your attention?",
     howToAnswer:
       "Describe the system you actually use and how you identify the most important work. Acknowledge how your approach has improved over time.",
     example:
@@ -202,7 +209,8 @@ export const behavioralInterviewQuestions: BehavioralQuestion[] = [
   {
     id: "beyond-role",
     category: "Leadership and initiative",
-    question: "Tell me about a time you took responsibility beyond your original role.",
+    question:
+      "Tell me about a time you took responsibility beyond your original role.",
     howToAnswer:
       "Show how the additional responsibility served the company rather than only expanding your title. Connect the new area to a skill you developed.",
     example:
@@ -292,7 +300,8 @@ export const behavioralInterviewQuestions: BehavioralQuestion[] = [
   {
     id: "adapt-new-domain",
     category: "Pressure and adaptability",
-    question: "Tell me about a time you adapted to a new domain or responsibility.",
+    question:
+      "Tell me about a time you adapted to a new domain or responsibility.",
     howToAnswer:
       "Describe what changed, how you closed the knowledge gap, and how your previous skills still helped. Focus on a successful transition, not just willingness.",
     example:
@@ -319,7 +328,8 @@ export const behavioralInterviewQuestions: BehavioralQuestion[] = [
   {
     id: "handle-pressure",
     category: "Pressure and adaptability",
-    question: "How do you handle pressure when progress is slower than expected?",
+    question:
+      "How do you handle pressure when progress is slower than expected?",
     howToAnswer:
       "Describe the habits that keep you useful under pressure. Support them with an experience where patience and consistency mattered.",
     example:

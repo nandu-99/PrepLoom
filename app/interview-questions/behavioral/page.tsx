@@ -49,7 +49,8 @@ export default function BehavioralInterviewQuestionsPage() {
                 Behavioral interview questions
               </h1>
               <p className="mt-6 max-w-[56ch] text-[15px] leading-7 text-[#555] dark:text-[#b3b3b3] sm:text-[17px] sm:leading-8">
-                Build concise answers from real experience, then practise speaking without memorising a script.
+                Build concise answers from real experience, then practise
+                speaking without memorising a script.
               </p>
             </div>
 

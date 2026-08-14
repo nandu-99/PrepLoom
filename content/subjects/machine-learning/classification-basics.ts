@@ -49,18 +49,26 @@ export const classificationFundamentals: SubjectTopic = {
           "The two class probabilities add to 1. If P̂(y = 1 | x) = 0.72, then P̂(y = 0 | x) = 0.28.",
         ],
         formulas: [
-          { label: "Positive-class probability", expression: "p̂ = P̂(y = 1 | x)" },
-          { label: "Negative-class probability", expression: "P̂(y = 0 | x) = 1 − p̂" },
+          {
+            label: "Positive-class probability",
+            expression: "p̂ = P̂(y = 1 | x)",
+          },
+          {
+            label: "Negative-class probability",
+            expression: "P̂(y = 0 | x) = 1 − p̂",
+          },
         ],
         problems: [
           {
             title: "Read a probability prediction",
-            prompt: "A model gives p̂ = 0.82 for fraud. What are the two class probabilities?",
+            prompt:
+              "A model gives p̂ = 0.82 for fraud. What are the two class probabilities?",
             steps: [
               "The positive class is fraud, so P̂(fraud) = 0.82.",
               "P̂(not fraud) = 1 − 0.82 = 0.18.",
             ],
-            answer: "The estimated probabilities are 82% fraud and 18% not fraud.",
+            answer:
+              "The estimated probabilities are 82% fraud and 18% not fraud.",
           },
         ],
       },
@@ -87,7 +95,8 @@ export const classificationFundamentals: SubjectTopic = {
           alt: "Two binary classes separated by a linear decision boundary with probability regions",
           width: 1536,
           height: 1024,
-          caption: "The boundary separates predicted classes; probability changes continuously across it.",
+          caption:
+            "The boundary separates predicted classes; probability changes continuously across it.",
         },
       },
       {
@@ -106,13 +115,15 @@ export const classificationFundamentals: SubjectTopic = {
         problems: [
           {
             title: "Misleading accuracy",
-            prompt: "Only 10 of 1,000 transactions are fraudulent. A model predicts every transaction as not fraud. Find its accuracy.",
+            prompt:
+              "Only 10 of 1,000 transactions are fraudulent. A model predicts every transaction as not fraud. Find its accuracy.",
             steps: [
               "The model correctly labels the 990 non-fraud transactions.",
               "Accuracy = 990 / 1,000 = 0.99.",
               "It detects 0 of the 10 fraud cases.",
             ],
-            answer: "Accuracy is 99%, but the model is useless for detecting fraud.",
+            answer:
+              "Accuracy is 99%, but the model is useless for detecting fraud.",
           },
         ],
         points: [
@@ -175,7 +186,8 @@ export const classificationFundamentals: SubjectTopic = {
     followUp: "Why might a medical classifier use a threshold below 0.5?",
   },
   lastMinute: {
-    definition: "Estimate P(y = 1 | x), compare it with a threshold, and predict 0 or 1.",
+    definition:
+      "Estimate P(y = 1 | x), compare it with a threshold, and predict 0 or 1.",
     sections: [
       {
         title: "Flow",
@@ -184,7 +196,11 @@ export const classificationFundamentals: SubjectTopic = {
       },
       {
         title: "Core Differences",
-        points: ["Regression: how much", "Classification: which class", "Boundary: where class changes"],
+        points: [
+          "Regression: how much",
+          "Classification: which class",
+          "Boundary: where class changes",
+        ],
       },
     ],
     memoryLine: "Probability first, threshold second, class last.",
@@ -217,7 +233,10 @@ export const logisticRegressionAndSigmoid: SubjectTopic = {
         ],
         formulas: [
           { label: "One feature", expression: "z = β₀ + β₁x" },
-          { label: "Several features", expression: "z = β₀ + β₁x₁ + … + βₚxₚ = βᵀx" },
+          {
+            label: "Several features",
+            expression: "z = β₀ + β₁x₁ + … + βₚxₚ = βᵀx",
+          },
         ],
       },
       {
@@ -228,14 +247,18 @@ export const logisticRegressionAndSigmoid: SubjectTopic = {
         formulas: [
           { label: "Sigmoid", expression: "σ(z) = 1 / (1 + e⁻ᶻ)" },
           { label: "Sigmoid derivative", expression: "σ′(z) = σ(z)[1 − σ(z)]" },
-          { label: "Logistic-regression probability", expression: "p̂ = σ(βᵀx)" },
+          {
+            label: "Logistic-regression probability",
+            expression: "p̂ = σ(βᵀx)",
+          },
         ],
         visual: {
           src: "/notes/machine-learning/sigmoid-function.png",
           alt: "S-shaped sigmoid curve mapping a linear score to a probability",
           width: 1536,
           height: 1024,
-          caption: "The sigmoid turns any real-valued score into a probability between 0 and 1.",
+          caption:
+            "The sigmoid turns any real-valued score into a probability between 0 and 1.",
         },
         points: [
           "The derivative is largest at z = 0, where σ(z) = 0.5.",
@@ -263,16 +286,18 @@ export const logisticRegressionAndSigmoid: SubjectTopic = {
         problems: [
           {
             title: "Calculate a logistic prediction",
-            prompt: "For z = −1 + 0.8x and x = 2, calculate p̂ and predict the class at threshold 0.5.",
+            prompt:
+              "For z = −1 + 0.8x and x = 2, calculate p̂ and predict the class at threshold 0.5.",
             steps: [
               "z = −1 + 0.8(2) = 0.6.",
               "p̂ = 1 / (1 + e⁻⁰·⁶).",
               "e⁻⁰·⁶ ≈ 0.5488, so p̂ ≈ 1 / 1.5488 ≈ 0.646.",
               "Because 0.646 ≥ 0.5, predict class 1.",
             ],
-            answer: "The positive-class probability is approximately 0.646 and the predicted class is 1.",
+            answer:
+              "The positive-class probability is approximately 0.646 and the predicted class is 1.",
           },
-      ],
+        ],
         paragraphs: [
           "Keep the linear-score calculation and the sigmoid calculation as separate steps to avoid sign mistakes.",
         ],
@@ -282,7 +307,8 @@ export const logisticRegressionAndSigmoid: SubjectTopic = {
         problems: [
           {
             title: "Prediction with two features",
-            prompt: "Use z = −3 + 0.04(age) + 1.2(smoker) for age = 50 and smoker = 1.",
+            prompt:
+              "Use z = −3 + 0.04(age) + 1.2(smoker) for age = 50 and smoker = 1.",
             steps: [
               "z = −3 + 0.04(50) + 1.2(1) = −3 + 2 + 1.2 = 0.2.",
               "p̂ = σ(0.2) = 1 / (1 + e⁻⁰·²) ≈ 0.550.",
@@ -342,7 +368,11 @@ export const logisticRegressionAndSigmoid: SubjectTopic = {
       },
       {
         title: "Anchor Values",
-        points: ["σ(0) = 0.5", "σ(z) approaches 1 as z grows", "σ(z) approaches 0 as z becomes negative"],
+        points: [
+          "σ(0) = 0.5",
+          "σ(z) approaches 1 as z grows",
+          "σ(z) approaches 0 as z becomes negative",
+        ],
       },
     ],
     essentialsStyle: "plain",
@@ -361,7 +391,12 @@ export const logisticRegressionAndSigmoid: SubjectTopic = {
     sections: [
       {
         title: "Prediction Flow",
-        flow: ["z = βᵀx", "p̂ = 1/(1 + e⁻ᶻ)", "Compare with t", "Predict 0 or 1"],
+        flow: [
+          "z = βᵀx",
+          "p̂ = 1/(1 + e⁻ᶻ)",
+          "Compare with t",
+          "Predict 0 or 1",
+        ],
         wide: true,
       },
       {
@@ -369,7 +404,8 @@ export const logisticRegressionAndSigmoid: SubjectTopic = {
         points: ["z = 0 → p̂ = 0.5", "z > 0 → p̂ > 0.5", "z < 0 → p̂ < 0.5"],
       },
     ],
-    memoryLine: "The score can be anything; the sigmoid keeps probability between zero and one.",
+    memoryLine:
+      "The score can be anything; the sigmoid keeps probability between zero and one.",
     cues: [
       "Calculate z before calculating p̂.",
       "p̂ represents class 1.",

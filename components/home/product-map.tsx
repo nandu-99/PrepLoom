@@ -36,7 +36,9 @@ function ProductTile({
       href={href}
       className={`group relative flex min-h-[132px] overflow-hidden rounded-[16px] border border-black/[0.1] bg-black/[0.018] p-5 transition-[border-color,background-color,transform] hover:-translate-y-0.5 hover:border-black/25 hover:bg-black/[0.035] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/40 focus-visible:ring-offset-2 focus-visible:ring-offset-[#f7f7f5] active:translate-y-0 dark:border-white/[0.11] dark:bg-white/[0.025] dark:hover:border-white/25 dark:hover:bg-white/[0.05] dark:focus-visible:ring-white/50 dark:focus-visible:ring-offset-[#0a0a0a] sm:p-6 ${className}`}
     >
-      <div className={`relative z-10 flex min-w-0 flex-1 flex-col ${contentClassName}`}>
+      <div
+        className={`relative z-10 flex min-w-0 flex-1 flex-col ${contentClassName}`}
+      >
         <span className="grid size-9 place-items-center rounded-[10px] border border-black/[0.1] text-[#606060] dark:border-white/[0.12] dark:text-[#aaa]">
           <Icon className="size-[17px]" strokeWidth={1.6} aria-hidden="true" />
         </span>

@@ -109,11 +109,12 @@ export const introductionToDatabasesAndDbms: SubjectTopic = {
     essentials: [
       "Applications normally access stored data through the DBMS.",
       "A DBMS controls structure, queries, updates, access, concurrent work, and recovery.",
-          "Metadata is stored in the system catalog or data dictionary.",
-          "An RDBMS is a DBMS that organizes data using the relational model.",
+      "Metadata is stored in the system catalog or data dictionary.",
+      "An RDBMS is a DBMS that organizes data using the relational model.",
       "DBMS means the managing software, not the stored data itself.",
     ],
-    followUp: "Why should an application use a DBMS instead of editing database files directly?",
+    followUp:
+      "Why should an application use a DBMS instead of editing database files directly?",
   },
   lastMinute: {
     definition:
@@ -130,7 +131,12 @@ export const introductionToDatabasesAndDbms: SubjectTopic = {
       },
     ],
     memoryLine: "Application → DBMS → Database",
-    cues: ["Database stores", "DBMS manages", "RDBMS uses tables", "Metadata describes"],
+    cues: [
+      "Database stores",
+      "DBMS manages",
+      "RDBMS uses tables",
+      "Metadata describes",
+    ],
     trap: "Do not use database and DBMS as if they mean the same thing.",
   },
 };
@@ -188,12 +194,30 @@ export const fileSystemVsDbms: SubjectTopic = {
         table: {
           headers: ["File-based approach", "DBMS approach"],
           rows: [
-            ["Applications manage their own formats", "A defined schema describes shared data"],
-            ["File changes can require program changes", "The DBMS separates programs from many storage details"],
-            ["Duplicate copies are common", "Central structure can reduce unnecessary copies"],
-            ["Rules stay in separate programs", "Constraints are checked by the DBMS"],
-            ["Programs coordinate updates", "Transactions control concurrent updates"],
-            ["Recovery is application work", "Logging and recovery are built-in services"],
+            [
+              "Applications manage their own formats",
+              "A defined schema describes shared data",
+            ],
+            [
+              "File changes can require program changes",
+              "The DBMS separates programs from many storage details",
+            ],
+            [
+              "Duplicate copies are common",
+              "Central structure can reduce unnecessary copies",
+            ],
+            [
+              "Rules stay in separate programs",
+              "Constraints are checked by the DBMS",
+            ],
+            [
+              "Programs coordinate updates",
+              "Transactions control concurrent updates",
+            ],
+            [
+              "Recovery is application work",
+              "Logging and recovery are built-in services",
+            ],
           ],
         },
       },
@@ -241,9 +265,18 @@ export const fileSystemVsDbms: SubjectTopic = {
           headers: ["File System", "DBMS"],
           rows: [
             ["Stores general files", "Manages structured database data"],
-            ["Understands bytes and file permissions", "Understands schemas, constraints, and queries"],
-            ["Limited coordination between applications", "Transactions coordinate concurrent work"],
-            ["Suitable for simple independent files", "Suitable for shared data that must stay correct"],
+            [
+              "Understands bytes and file permissions",
+              "Understands schemas, constraints, and queries",
+            ],
+            [
+              "Limited coordination between applications",
+              "Transactions coordinate concurrent work",
+            ],
+            [
+              "Suitable for simple independent files",
+              "Suitable for shared data that must stay correct",
+            ],
           ],
         },
       },
@@ -307,8 +340,16 @@ export const dataModelsSchemasAndInstances: SubjectTopic = {
           headers: ["Category", "What it describes", "Example"],
           rows: [
             ["Conceptual", "Real-world entities and relationships", "ER model"],
-            ["Logical", "Database structure without storage details", "Relational model"],
-            ["Physical", "How records are stored and accessed", "Files, pages, and indexes"],
+            [
+              "Logical",
+              "Database structure without storage details",
+              "Relational model",
+            ],
+            [
+              "Physical",
+              "How records are stored and accessed",
+              "Files, pages, and indexes",
+            ],
           ],
         },
       },
@@ -348,9 +389,18 @@ export const dataModelsSchemasAndInstances: SubjectTopic = {
           headers: ["Schema", "Instance"],
           rows: [
             ["Database design", "Current database data"],
-            ["Changes less often", "Changes whenever data is inserted, updated, or deleted"],
-            ["Defines allowed structure and rules", "Must follow that structure and those rules"],
-            ["Also called intension", "Also called extension or database state"],
+            [
+              "Changes less often",
+              "Changes whenever data is inserted, updated, or deleted",
+            ],
+            [
+              "Defines allowed structure and rules",
+              "Must follow that structure and those rules",
+            ],
+            [
+              "Also called intension",
+              "Also called extension or database state",
+            ],
           ],
         },
       },
@@ -406,7 +456,8 @@ export const dataModelsSchemasAndInstances: SubjectTopic = {
       "An instance is a valid snapshot of the data at one time.",
       "Changing rows changes the instance; changing structure changes the schema.",
     ],
-    followUp: "Does inserting a new row change the schema or the instance, and why?",
+    followUp:
+      "Does inserting a new row change the schema or the instance, and why?",
   },
   lastMinute: {
     definition: "Model = rules. Schema = design. Instance = data now.",
@@ -531,8 +582,16 @@ export const threeSchemaArchitectureAndDataIndependence: SubjectTopic = {
           headers: ["Level", "Describes", "How many"],
           rows: [
             ["External or view", "User or application views", "Many"],
-            ["Conceptual or logical", "Complete logical database design", "One"],
-            ["Internal or physical", "Physical storage and access structures", "One"],
+            [
+              "Conceptual or logical",
+              "Complete logical database design",
+              "One",
+            ],
+            [
+              "Internal or physical",
+              "Physical storage and access structures",
+              "One",
+            ],
           ],
         },
       },
@@ -542,8 +601,14 @@ export const threeSchemaArchitectureAndDataIndependence: SubjectTopic = {
           headers: ["Physical", "Logical"],
           rows: [
             ["Internal level changes", "Conceptual level changes"],
-            ["Conceptual and external levels stay stable", "Unaffected external views stay stable"],
-            ["Example: add an index", "Example: split a table while preserving its view"],
+            [
+              "Conceptual and external levels stay stable",
+              "Unaffected external views stay stable",
+            ],
+            [
+              "Example: add an index",
+              "Example: split a table while preserving its view",
+            ],
             ["Usually easier", "Usually harder"],
           ],
         },
@@ -557,7 +622,8 @@ export const threeSchemaArchitectureAndDataIndependence: SubjectTopic = {
       "Physical independence hides storage changes from higher levels.",
       "Logical independence protects unaffected views from logical design changes.",
     ],
-    followUp: "Why is adding an index an example of physical data independence?",
+    followUp:
+      "Why is adding an index an example of physical data independence?",
   },
   lastMinute: {
     definition:

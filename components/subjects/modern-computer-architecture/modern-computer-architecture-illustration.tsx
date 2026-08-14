@@ -15,10 +15,12 @@ export function ModernComputerArchitectureIllustration() {
         aria-labelledby="mca-illustration-title mca-illustration-description"
         className="h-auto w-full text-[#151515] dark:text-[#d8d8d6]"
       >
-        <title id="mca-illustration-title">Bits moving through an arithmetic logic unit</title>
+        <title id="mca-illustration-title">
+          Bits moving through an arithmetic logic unit
+        </title>
         <desc id="mca-illustration-description">
-          Two four-bit inputs enter an ALU. A control signal selects the operation,
-          and a four-bit result leaves the unit.
+          Two four-bit inputs enter an ALU. A control signal selects the
+          operation, and a four-bit result leaves the unit.
         </desc>
 
         <g fill="none" stroke="currentColor" strokeWidth="1.4" opacity="0.22">
@@ -32,7 +34,10 @@ export function ModernComputerArchitectureIllustration() {
             initial={reduceMotion ? false : { opacity: 0, x: -10 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.55 }}
-            transition={{ duration: reduceMotion ? 0 : 0.45, delay: row * 0.12 }}
+            transition={{
+              duration: reduceMotion ? 0 : 0.45,
+              delay: row * 0.12,
+            }}
           >
             {bits.map((bit, index) => (
               <g key={`${y}-${index}`}>
@@ -66,7 +71,10 @@ export function ModernComputerArchitectureIllustration() {
           initial={reduceMotion ? false : { opacity: 0, scale: 0.92 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true, amount: 0.55 }}
-          transition={{ duration: reduceMotion ? 0 : 0.5, delay: reduceMotion ? 0 : 0.24 }}
+          transition={{
+            duration: reduceMotion ? 0 : 0.5,
+            delay: reduceMotion ? 0 : 0.24,
+          }}
           style={{ transformBox: "fill-box", transformOrigin: "center" }}
         >
           <path
@@ -103,7 +111,10 @@ export function ModernComputerArchitectureIllustration() {
           initial={reduceMotion ? false : { opacity: 0, y: -8 }}
           whileInView={{ opacity: 0.7, y: 0 }}
           viewport={{ once: true, amount: 0.55 }}
-          transition={{ duration: reduceMotion ? 0 : 0.4, delay: reduceMotion ? 0 : 0.48 }}
+          transition={{
+            duration: reduceMotion ? 0 : 0.4,
+            delay: reduceMotion ? 0 : 0.48,
+          }}
         >
           <rect
             x="324"
@@ -115,7 +126,13 @@ export function ModernComputerArchitectureIllustration() {
             stroke="currentColor"
             strokeWidth="1.2"
           />
-          <text x="360" y="70" textAnchor="middle" fill="currentColor" fontSize="9">
+          <text
+            x="360"
+            y="70"
+            textAnchor="middle"
+            fill="currentColor"
+            fontSize="9"
+          >
             CONTROL
           </text>
         </motion.g>
@@ -124,7 +141,10 @@ export function ModernComputerArchitectureIllustration() {
           initial={reduceMotion ? false : { opacity: 0, x: 10 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, amount: 0.55 }}
-          transition={{ duration: reduceMotion ? 0 : 0.45, delay: reduceMotion ? 0 : 0.62 }}
+          transition={{
+            duration: reduceMotion ? 0 : 0.45,
+            delay: reduceMotion ? 0 : 0.62,
+          }}
         >
           {["0", "1", "1", "1"].map((bit, index) => (
             <g key={index}>
@@ -153,10 +173,21 @@ export function ModernComputerArchitectureIllustration() {
           ))}
         </motion.g>
 
-        <g fill="currentColor" fontFamily="monospace" fontSize="10" opacity="0.42">
-          <text x="52" y="101">OPERAND A</text>
-          <text x="52" y="219">OPERAND B</text>
-          <text x="548" y="165">RESULT</text>
+        <g
+          fill="currentColor"
+          fontFamily="monospace"
+          fontSize="10"
+          opacity="0.42"
+        >
+          <text x="52" y="101">
+            OPERAND A
+          </text>
+          <text x="52" y="219">
+            OPERAND B
+          </text>
+          <text x="548" y="165">
+            RESULT
+          </text>
         </g>
       </svg>
     </figure>

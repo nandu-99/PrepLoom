@@ -21,11 +21,26 @@ export const cpuLimitationsAndPerformance: SubjectTopic = {
         dataTable: {
           headers: ["Simple Hack design", "Why modern CPUs add more"],
           rows: [
-            ["A and D registers", "More registers reduce repeated memory access"],
-            ["One instruction at a time", "Overlapping or parallel work improves throughput"],
-            ["No hardware interrupt support", "Interrupts avoid constant device checking"],
-            ["No hardware stack instruction", "Calling conventions support functions and recursion"],
-            ["Separate slow memory access", "Caches keep frequent data closer to the CPU"],
+            [
+              "A and D registers",
+              "More registers reduce repeated memory access",
+            ],
+            [
+              "One instruction at a time",
+              "Overlapping or parallel work improves throughput",
+            ],
+            [
+              "No hardware interrupt support",
+              "Interrupts avoid constant device checking",
+            ],
+            [
+              "No hardware stack instruction",
+              "Calling conventions support functions and recursion",
+            ],
+            [
+              "Separate slow memory access",
+              "Caches keep frequent data closer to the CPU",
+            ],
           ],
         },
       },
@@ -40,12 +55,22 @@ export const cpuLimitationsAndPerformance: SubjectTopic = {
           alt: "CPU performance diagram showing instruction count, CPI, and clock cycle time feeding the CPU-time equation, with latency and throughput below.",
           width: 1536,
           height: 1024,
-          caption: "CPU time depends on work, cycles per instruction, and the duration of each cycle.",
+          caption:
+            "CPU time depends on work, cycles per instruction, and the duration of each cycle.",
         },
         formulas: [
-          { label: "Clock cycle time", expression: "Clock cycle time = 1 ÷ clock rate" },
-          { label: "Latency", expression: "Latency = completion time - start time" },
-          { label: "Throughput", expression: "Throughput = completed tasks ÷ elapsed time" },
+          {
+            label: "Clock cycle time",
+            expression: "Clock cycle time = 1 ÷ clock rate",
+          },
+          {
+            label: "Latency",
+            expression: "Latency = completion time - start time",
+          },
+          {
+            label: "Throughput",
+            expression: "Throughput = completed tasks ÷ elapsed time",
+          },
         ],
       },
       {
@@ -56,10 +81,22 @@ export const cpuLimitationsAndPerformance: SubjectTopic = {
           "CPU time measures time spent executing the program on the CPU. Elapsed time, also called wall-clock time, also includes I/O waits, operating-system delays, and time waiting for other work.",
         ],
         formulas: [
-          { label: "CPU cycles", expression: "CPU cycles = Instruction count × Average CPI" },
-          { label: "CPU time", expression: "CPU time = Instruction count × CPI × Clock cycle time" },
-          { label: "Using clock rate", expression: "CPU time = (Instruction count × CPI) ÷ Clock rate" },
-          { label: "Speedup", expression: "Speedup = Old execution time ÷ New execution time" },
+          {
+            label: "CPU cycles",
+            expression: "CPU cycles = Instruction count × Average CPI",
+          },
+          {
+            label: "CPU time",
+            expression: "CPU time = Instruction count × CPI × Clock cycle time",
+          },
+          {
+            label: "Using clock rate",
+            expression: "CPU time = (Instruction count × CPI) ÷ Clock rate",
+          },
+          {
+            label: "Speedup",
+            expression: "Speedup = Old execution time ÷ New execution time",
+          },
         ],
       },
       {
@@ -69,7 +106,10 @@ export const cpuLimitationsAndPerformance: SubjectTopic = {
         ],
         formulas: [
           { label: "Total cycles", expression: "Total cycles = Σ(ICᵢ × CPIᵢ)" },
-          { label: "Average CPI", expression: "Average CPI = Σ(ICᵢ × CPIᵢ) ÷ Total instruction count" },
+          {
+            label: "Average CPI",
+            expression: "Average CPI = Σ(ICᵢ × CPIᵢ) ÷ Total instruction count",
+          },
         ],
       },
       {
@@ -79,8 +119,16 @@ export const cpuLimitationsAndPerformance: SubjectTopic = {
           "A program with fewer instructions can still be slow if those instructions frequently wait for memory. This is why cache behaviour must be included in a serious performance comparison.",
         ],
         formulas: [
-          { label: "Effective CPI", expression: "Effective CPI = Base CPI + Memory stall cycles per instruction + Other stalls" },
-          { label: "Memory stalls", expression: "Stall cycles per instruction = Misses per instruction × Miss penalty" },
+          {
+            label: "Effective CPI",
+            expression:
+              "Effective CPI = Base CPI + Memory stall cycles per instruction + Other stalls",
+          },
+          {
+            label: "Memory stalls",
+            expression:
+              "Stall cycles per instruction = Misses per instruction × Miss penalty",
+          },
         ],
       },
       {
@@ -91,8 +139,15 @@ export const cpuLimitationsAndPerformance: SubjectTopic = {
           "Modern designs also consider performance per watt. A faster processor may be a poor choice for a phone or data centre if it requires much more power for a small speed gain. More cores mainly improve throughput when enough work can run in parallel; they do not automatically reduce one task's latency.",
         ],
         formulas: [
-          { label: "Amdahl's Law", expression: "Overall speedup = 1 ÷ ((1 - f) + f ÷ s)" },
-          { label: "Performance per watt", expression: "Performance per watt = Work completed per second ÷ Power in watts" },
+          {
+            label: "Amdahl's Law",
+            expression: "Overall speedup = 1 ÷ ((1 - f) + f ÷ s)",
+          },
+          {
+            label: "Performance per watt",
+            expression:
+              "Performance per watt = Work completed per second ÷ Power in watts",
+          },
         ],
       },
       {
@@ -104,10 +159,26 @@ export const cpuLimitationsAndPerformance: SubjectTopic = {
         dataTable: {
           headers: ["Idea", "Meaning", "Main limit"],
           rows: [
-            ["Single core", "One main processing core", "One thread cannot use several cores"],
-            ["Multicore", "Several cores execute work concurrently", "Needs parallel threads or tasks"],
-            ["ILP", "Overlap independent instructions", "Instruction dependencies"],
-            ["TLP", "Run independent threads concurrently", "Serial parts and coordination"],
+            [
+              "Single core",
+              "One main processing core",
+              "One thread cannot use several cores",
+            ],
+            [
+              "Multicore",
+              "Several cores execute work concurrently",
+              "Needs parallel threads or tasks",
+            ],
+            [
+              "ILP",
+              "Overlap independent instructions",
+              "Instruction dependencies",
+            ],
+            [
+              "TLP",
+              "Run independent threads concurrently",
+              "Serial parts and coordination",
+            ],
           ],
         },
       },
@@ -117,7 +188,8 @@ export const cpuLimitationsAndPerformance: SubjectTopic = {
         problems: [
           {
             title: "Calculate CPU execution time",
-            prompt: "A program executes 2 million instructions with an average CPI of 1.5 on a 2 GHz CPU. Find CPU time.",
+            prompt:
+              "A program executes 2 million instructions with an average CPI of 1.5 on a 2 GHz CPU. Find CPU time.",
             steps: [
               "CPU cycles = 2 × 10⁶ × 1.5 = 3 × 10⁶ cycles.",
               "Clock rate = 2 × 10⁹ cycles per second.",
@@ -128,7 +200,8 @@ export const cpuLimitationsAndPerformance: SubjectTopic = {
           },
           {
             title: "Find average CPI",
-            prompt: "A program has 60% instructions with CPI 1, 30% with CPI 2, and 10% with CPI 4. Find average CPI.",
+            prompt:
+              "A program has 60% instructions with CPI 1, 30% with CPI 2, and 10% with CPI 4. Find average CPI.",
             steps: [
               "Weighted CPI = 0.60 × 1 + 0.30 × 2 + 0.10 × 4.",
               "Weighted CPI = 0.60 + 0.60 + 0.40.",
@@ -137,7 +210,8 @@ export const cpuLimitationsAndPerformance: SubjectTopic = {
           },
           {
             title: "Calculate speedup",
-            prompt: "An old processor completes a program in 12 ms. A new processor completes it in 8 ms. Find speedup.",
+            prompt:
+              "An old processor completes a program in 12 ms. A new processor completes it in 8 ms. Find speedup.",
             steps: [
               "Speedup = old time ÷ new time.",
               "Speedup = 12 ÷ 8 = 1.5.",
@@ -146,16 +220,15 @@ export const cpuLimitationsAndPerformance: SubjectTopic = {
           },
           {
             title: "Calculate throughput",
-            prompt: "A system completes 4 tasks in 20 ms. Find its throughput in tasks per second.",
-            steps: [
-              "20 ms = 0.020 seconds.",
-              "Throughput = 4 ÷ 0.020.",
-            ],
+            prompt:
+              "A system completes 4 tasks in 20 ms. Find its throughput in tasks per second.",
+            steps: ["20 ms = 0.020 seconds.", "Throughput = 4 ÷ 0.020."],
             answer: "Throughput = 200 tasks per second.",
           },
           {
             title: "Use Amdahl's Law",
-            prompt: "Forty percent of a program is improved by a factor of 4. Find the overall speedup.",
+            prompt:
+              "Forty percent of a program is improved by a factor of 4. Find the overall speedup.",
             steps: [
               "The improved fraction is f = 0.40 and its speedup is s = 4.",
               "Unchanged time = 1 - 0.40 = 0.60.",
@@ -166,7 +239,8 @@ export const cpuLimitationsAndPerformance: SubjectTopic = {
           },
           {
             title: "Include memory stalls in CPI",
-            prompt: "A CPU has base CPI 1.2. A program has 0.05 cache misses per instruction, and each miss costs 20 cycles. Find effective CPI.",
+            prompt:
+              "A CPU has base CPI 1.2. A program has 0.05 cache misses per instruction, and each miss costs 20 cycles. Find effective CPI.",
             steps: [
               "Memory stalls per instruction = 0.05 × 20 = 1 cycle.",
               "Effective CPI = base CPI + stall CPI.",
@@ -176,7 +250,8 @@ export const cpuLimitationsAndPerformance: SubjectTopic = {
           },
           {
             title: "Compare performance per watt",
-            prompt: "CPU A completes 240 tasks per second using 60 W. CPU B completes 300 tasks per second using 100 W. Which is more energy efficient?",
+            prompt:
+              "CPU A completes 240 tasks per second using 60 W. CPU B completes 300 tasks per second using 100 W. Which is more energy efficient?",
             steps: [
               "CPU A: 240 ÷ 60 = 4 tasks per second per watt.",
               "CPU B: 300 ÷ 100 = 3 tasks per second per watt.",
@@ -239,10 +314,12 @@ export const cpuLimitationsAndPerformance: SubjectTopic = {
       "ILP overlaps instructions; TLP runs independent threads.",
       "GHz alone is not a complete performance measure.",
     ],
-    followUp: "Why can a processor with a lower clock rate still finish a program sooner?",
+    followUp:
+      "Why can a processor with a lower clock rate still finish a program sooner?",
   },
   lastMinute: {
-    definition: "CPU time = instructions × cycles per instruction × time per cycle.",
+    definition:
+      "CPU time = instructions × cycles per instruction × time per cycle.",
     sections: [
       {
         title: "Formula Recall",
@@ -255,7 +332,8 @@ export const cpuLimitationsAndPerformance: SubjectTopic = {
         ],
       },
     ],
-    memoryLine: "Count the work, count its cycles, then divide by cycles per second.",
+    memoryLine:
+      "Count the work, count its cycles, then divide by cycles per second.",
     cues: ["IC", "CPI", "Clock rate", "Latency", "Throughput"],
     trap: "Do not compare processors using clock rate alone.",
   },
@@ -279,7 +357,13 @@ export const pollingAndInterrupts: SubjectTopic = {
           "In polling, software reads a device status register again and again. If the device is not ready, the program either checks again immediately or waits before the next check.",
           "Polling is simple and predictable. It works well when events are frequent, response time must be tightly controlled, or the CPU has no useful work to perform. Frequent polling wastes cycles when events are rare.",
         ],
-        flow: ["Read status", "Ready?", "No: check again", "Yes: transfer data", "Continue"],
+        flow: [
+          "Read status",
+          "Ready?",
+          "No: check again",
+          "Yes: transfer data",
+          "Continue",
+        ],
       },
       {
         title: "Interrupt-Driven I/O",
@@ -293,7 +377,8 @@ export const pollingAndInterrupts: SubjectTopic = {
           alt: "Two-lane comparison: polling repeatedly checks device readiness, while an interrupt saves context, runs an ISR, restores context, and resumes the main program.",
           width: 1536,
           height: 1024,
-          caption: "Polling asks repeatedly; an interrupt lets the device request service.",
+          caption:
+            "Polling asks repeatedly; an interrupt lets the device request service.",
         },
       },
       {
@@ -322,7 +407,10 @@ export const pollingAndInterrupts: SubjectTopic = {
         dataTable: {
           headers: ["Term", "Meaning"],
           rows: [
-            ["Interrupt latency", "Time from the request until its handler begins"],
+            [
+              "Interrupt latency",
+              "Time from the request until its handler begins",
+            ],
             ["Mask", "Control that temporarily blocks selected interrupts"],
             ["Priority", "Rule for choosing among simultaneous requests"],
             ["Vector", "Address or table entry used to locate a handler"],
@@ -336,12 +424,36 @@ export const pollingAndInterrupts: SubjectTopic = {
         dataTable: {
           headers: ["Type", "Meaning", "Typical use"],
           rows: [
-            ["Maskable", "Can be temporarily disabled", "Normal devices and timers"],
-            ["Non-maskable", "Cannot be blocked by the normal mask", "Critical hardware failure"],
-            ["Vectored", "Hardware selects a handler entry or vector", "Fast cause-specific dispatch"],
-            ["Non-vectored", "Control enters a common handler", "Software identifies the cause"],
-            ["Edge-triggered", "Request is signalled by a transition", "Short event pulse"],
-            ["Level-triggered", "Request stays active while a level is asserted", "Device waits until serviced"],
+            [
+              "Maskable",
+              "Can be temporarily disabled",
+              "Normal devices and timers",
+            ],
+            [
+              "Non-maskable",
+              "Cannot be blocked by the normal mask",
+              "Critical hardware failure",
+            ],
+            [
+              "Vectored",
+              "Hardware selects a handler entry or vector",
+              "Fast cause-specific dispatch",
+            ],
+            [
+              "Non-vectored",
+              "Control enters a common handler",
+              "Software identifies the cause",
+            ],
+            [
+              "Edge-triggered",
+              "Request is signalled by a transition",
+              "Short event pulse",
+            ],
+            [
+              "Level-triggered",
+              "Request stays active while a level is asserted",
+              "Device waits until serviced",
+            ],
           ],
         },
       },
@@ -355,9 +467,18 @@ export const pollingAndInterrupts: SubjectTopic = {
           headers: ["Risk", "Safe response"],
           rows: [
             ["ISR runs too long", "Defer large work outside the ISR"],
-            ["Shared value changes halfway", "Use atomic access or a protected critical section"],
-            ["Lower-priority request waits", "Keep handlers short and design priorities carefully"],
-            ["Nested handler corrupts state", "Use a valid stack and save every required register"],
+            [
+              "Shared value changes halfway",
+              "Use atomic access or a protected critical section",
+            ],
+            [
+              "Lower-priority request waits",
+              "Keep handlers short and design priorities carefully",
+            ],
+            [
+              "Nested handler corrupts state",
+              "Use a valid stack and save every required register",
+            ],
           ],
         },
       },
@@ -367,11 +488,31 @@ export const pollingAndInterrupts: SubjectTopic = {
         dataTable: {
           headers: ["Factor", "Polling", "Interrupts"],
           rows: [
-            ["CPU activity", "Checks status repeatedly", "Runs normal work until requested"],
-            ["Best for", "Frequent or predictable events", "Rare or unpredictable events"],
-            ["Overhead", "Every status check", "Context and handler work per event"],
-            ["Response", "Limited by poll interval", "Limited by interrupt latency"],
-            ["Complexity", "Usually simpler", "Needs handler, priority, and safe shared state"],
+            [
+              "CPU activity",
+              "Checks status repeatedly",
+              "Runs normal work until requested",
+            ],
+            [
+              "Best for",
+              "Frequent or predictable events",
+              "Rare or unpredictable events",
+            ],
+            [
+              "Overhead",
+              "Every status check",
+              "Context and handler work per event",
+            ],
+            [
+              "Response",
+              "Limited by poll interval",
+              "Limited by interrupt latency",
+            ],
+            [
+              "Complexity",
+              "Usually simpler",
+              "Needs handler, priority, and safe shared state",
+            ],
           ],
         },
       },
@@ -383,9 +524,21 @@ export const pollingAndInterrupts: SubjectTopic = {
         dataTable: {
           headers: ["Method", "CPU role", "Best fit"],
           rows: [
-            ["Polling", "Checks device repeatedly", "Simple or frequent events"],
-            ["Interrupt per event", "Runs an ISR for each event", "Occasional small transfers"],
-            ["DMA", "Sets up a block and handles completion", "Large or high-rate data blocks"],
+            [
+              "Polling",
+              "Checks device repeatedly",
+              "Simple or frequent events",
+            ],
+            [
+              "Interrupt per event",
+              "Runs an ISR for each event",
+              "Occasional small transfers",
+            ],
+            [
+              "DMA",
+              "Sets up a block and handles completion",
+              "Large or high-rate data blocks",
+            ],
           ],
         },
       },
@@ -395,7 +548,8 @@ export const pollingAndInterrupts: SubjectTopic = {
         problems: [
           {
             title: "Find polling CPU cost",
-            prompt: "A 1 MHz CPU polls a device 10,000 times per second. Each poll uses 50 cycles. What percentage of CPU cycles are spent polling?",
+            prompt:
+              "A 1 MHz CPU polls a device 10,000 times per second. Each poll uses 50 cycles. What percentage of CPU cycles are spent polling?",
             steps: [
               "Polling cycles per second = 10,000 × 50 = 500,000 cycles.",
               "The CPU provides 1,000,000 cycles per second.",
@@ -405,7 +559,8 @@ export const pollingAndInterrupts: SubjectTopic = {
           },
           {
             title: "Find interrupt CPU cost",
-            prompt: "The same device creates 100 events per second. Each ISR, including save and restore work, uses 200 cycles on the 1 MHz CPU. Find the CPU percentage.",
+            prompt:
+              "The same device creates 100 events per second. Each ISR, including save and restore work, uses 200 cycles on the 1 MHz CPU. Find the CPU percentage.",
             steps: [
               "Interrupt cycles per second = 100 × 200 = 20,000 cycles.",
               "Percentage = 20,000 ÷ 1,000,000 × 100.",
@@ -414,7 +569,8 @@ export const pollingAndInterrupts: SubjectTopic = {
           },
           {
             title: "Find worst-case polling delay",
-            prompt: "A device is polled once every 100 microseconds. What is the worst-case detection delay and the average delay for uniformly timed events?",
+            prompt:
+              "A device is polled once every 100 microseconds. What is the worst-case detection delay and the average delay for uniformly timed events?",
             steps: [
               "An event just after a poll waits almost one complete interval.",
               "Worst-case delay is therefore approximately 100 microseconds.",
@@ -424,7 +580,8 @@ export const pollingAndInterrupts: SubjectTopic = {
           },
           {
             title: "Choose an I/O method",
-            prompt: "A temperature sensor reports once each minute while the CPU performs other work. Should the system use continuous fast polling or interrupts?",
+            prompt:
+              "A temperature sensor reports once each minute while the CPU performs other work. Should the system use continuous fast polling or interrupts?",
             steps: [
               "The event is rare and its exact arrival time is not known.",
               "Continuous fast polling would perform many empty checks.",
@@ -434,23 +591,27 @@ export const pollingAndInterrupts: SubjectTopic = {
           },
           {
             title: "Compare interrupt transfer with DMA",
-            prompt: "Moving a 4096-byte block with one interrupt per byte costs 50 CPU cycles per byte. DMA setup and completion together cost 700 CPU cycles. Compare CPU work.",
+            prompt:
+              "Moving a 4096-byte block with one interrupt per byte costs 50 CPU cycles per byte. DMA setup and completion together cost 700 CPU cycles. Compare CPU work.",
             steps: [
               "Interrupt-per-byte work = 4096 × 50 = 204,800 CPU cycles.",
               "DMA CPU work = 700 cycles; the controller performs the block transfer.",
               "CPU cycles saved = 204,800 - 700 = 204,100.",
             ],
-            answer: "DMA uses 700 CPU cycles instead of 204,800, saving 204,100 CPU cycles.",
+            answer:
+              "DMA uses 700 CPU cycles instead of 204,800, saving 204,100 CPU cycles.",
           },
           {
             title: "Reason about nested priority",
-            prompt: "A low-priority disk ISR is running when a critical timer request arrives. What happens if nesting is enabled and the timer has higher priority?",
+            prompt:
+              "A low-priority disk ISR is running when a critical timer request arrives. What happens if nesting is enabled and the timer has higher priority?",
             steps: [
               "The processor preserves the disk handler's current state.",
               "Control transfers to the higher-priority timer ISR.",
               "After the timer ISR returns, the disk ISR continues.",
             ],
-            answer: "The timer ISR pre-empts the disk ISR, then the disk ISR resumes.",
+            answer:
+              "The timer ISR pre-empts the disk ISR, then the disk ISR resumes.",
           },
         ],
       },
@@ -480,7 +641,15 @@ export const pollingAndInterrupts: SubjectTopic = {
     sections: [
       {
         title: "Interrupt Flow",
-        flow: ["Request", "Accept", "Save context", "Run ISR", "Acknowledge", "Restore", "Resume"],
+        flow: [
+          "Request",
+          "Accept",
+          "Save context",
+          "Run ISR",
+          "Acknowledge",
+          "Restore",
+          "Resume",
+        ],
       },
       {
         title: "Fast Comparison",
@@ -513,10 +682,12 @@ export const pollingAndInterrupts: SubjectTopic = {
       "An ISR must acknowledge or clear its interrupt source.",
       "An interrupt may return to the same process; it is not automatically a process switch.",
     ],
-    followUp: "Why can an interrupt be more efficient than polling for a device that rarely becomes ready?",
+    followUp:
+      "Why can an interrupt be more efficient than polling for a device that rarely becomes ready?",
   },
   lastMinute: {
-    definition: "Polling asks repeatedly; interrupts notify only when service is needed.",
+    definition:
+      "Polling asks repeatedly; interrupts notify only when service is needed.",
     sections: [
       {
         title: "ISR Checklist",
@@ -579,7 +750,15 @@ export const stackFunctionCallsAndRecursion: SubjectTopic = {
           "In classic MIPS assembly, jal target jumps to a function and places the return address in $ra. The function returns with jr $ra.",
           "A leaf function calls no other function and may not need to save $ra. A non-leaf function normally saves $ra before another jal overwrites it.",
         ],
-        flow: ["Place arguments", "jal function", "Save required state", "Run function body", "Place return value", "Restore state", "jr $ra"],
+        flow: [
+          "Place arguments",
+          "jal function",
+          "Save required state",
+          "Run function body",
+          "Place return value",
+          "Restore state",
+          "jr $ra",
+        ],
       },
       {
         title: "A Typical Stack Frame",
@@ -592,7 +771,8 @@ export const stackFunctionCallsAndRecursion: SubjectTopic = {
           alt: "Downward-growing MIPS call stack with a caller frame above arguments, saved return address, saved registers, local variables, and the stack pointer.",
           width: 1536,
           height: 1024,
-          caption: "Each active call owns a frame; the common MIPS stack grows toward lower addresses.",
+          caption:
+            "Each active call owns a frame; the common MIPS stack grows toward lower addresses.",
         },
       },
       {
@@ -608,7 +788,11 @@ export const stackFunctionCallsAndRecursion: SubjectTopic = {
             ["$t0-$t9", "Temporary values", "Caller-saved"],
             ["$s0-$s7", "Saved values", "Callee-saved"],
             ["$sp", "Stack pointer", "Restored before return"],
-            ["$ra", "Return address", "Save when another call may overwrite it"],
+            [
+              "$ra",
+              "Return address",
+              "Save when another call may overwrite it",
+            ],
           ],
         },
       },
@@ -660,7 +844,14 @@ export const stackFunctionCallsAndRecursion: SubjectTopic = {
           "A recursive function calls itself. Every unfinished call needs its own return address and local state, so each call creates another stack frame.",
           "Recursion must have a base case. Deep or unbounded recursion may use all available stack memory and cause stack overflow.",
         ],
-        flow: ["factorial(3)", "factorial(2)", "factorial(1): base case", "return 1", "return 2", "return 6"],
+        flow: [
+          "factorial(3)",
+          "factorial(2)",
+          "factorial(1): base case",
+          "return 1",
+          "return 2",
+          "return 6",
+        ],
       },
       {
         title: "Recursive Factorial Pattern",
@@ -668,10 +859,25 @@ export const stackFunctionCallsAndRecursion: SubjectTopic = {
           "This classic MIPS pattern returns factorial(n) in $v0 for non-negative n. Every call saves its own $ra and n. mult writes the product to HI and LO, and mflo reads the low 32 result bits.",
         ],
         flow: [
-          "fact: addiu $sp,$sp,-8", "sw $ra,4($sp)", "sw $a0,0($sp)", "slti $t0,$a0,2",
-          "bne $t0,$zero,BASE", "nop", "addiu $a0,$a0,-1", "jal fact", "nop", "lw $a0,0($sp)",
-          "mult $v0,$a0", "mflo $v0", "j DONE", "nop", "BASE: addiu $v0,$zero,1",
-          "DONE: lw $ra,4($sp)", "addiu $sp,$sp,8", "jr $ra", "nop",
+          "fact: addiu $sp,$sp,-8",
+          "sw $ra,4($sp)",
+          "sw $a0,0($sp)",
+          "slti $t0,$a0,2",
+          "bne $t0,$zero,BASE",
+          "nop",
+          "addiu $a0,$a0,-1",
+          "jal fact",
+          "nop",
+          "lw $a0,0($sp)",
+          "mult $v0,$a0",
+          "mflo $v0",
+          "j DONE",
+          "nop",
+          "BASE: addiu $v0,$zero,1",
+          "DONE: lw $ra,4($sp)",
+          "addiu $sp,$sp,8",
+          "jr $ra",
+          "nop",
         ],
       },
       {
@@ -687,7 +893,8 @@ export const stackFunctionCallsAndRecursion: SubjectTopic = {
         problems: [
           {
             title: "Allocate a stack frame",
-            prompt: "The stack pointer is 0x7FFFEFFC. A function allocates a 12-byte frame. Find the new $sp.",
+            prompt:
+              "The stack pointer is 0x7FFFEFFC. A function allocates a 12-byte frame. Find the new $sp.",
             steps: [
               "The MIPS stack grows toward lower addresses.",
               "12 decimal = 0xC.",
@@ -697,7 +904,8 @@ export const stackFunctionCallsAndRecursion: SubjectTopic = {
           },
           {
             title: "Restore the stack pointer",
-            prompt: "A function used addiu $sp, $sp, -16 in its prologue. What must it do before returning?",
+            prompt:
+              "A function used addiu $sp, $sp, -16 in its prologue. What must it do before returning?",
             steps: [
               "The prologue reserved 16 bytes by subtracting 16.",
               "The epilogue must release exactly the same space.",
@@ -706,7 +914,8 @@ export const stackFunctionCallsAndRecursion: SubjectTopic = {
           },
           {
             title: "Choose which register to save",
-            prompt: "A caller needs the value in $t0 after jal calculate. Can it assume $t0 is unchanged?",
+            prompt:
+              "A caller needs the value in $t0 after jal calculate. Can it assume $t0 is unchanged?",
             steps: [
               "$t0 is a caller-saved temporary register.",
               "The called function is allowed to overwrite it.",
@@ -716,7 +925,8 @@ export const stackFunctionCallsAndRecursion: SubjectTopic = {
           },
           {
             title: "Count recursive frames",
-            prompt: "factorial(4) calls factorial(3), factorial(2), and factorial(1), where factorial(1) is the base case. How many active frames exist at maximum depth?",
+            prompt:
+              "factorial(4) calls factorial(3), factorial(2), and factorial(1), where factorial(1) is the base case. How many active frames exist at maximum depth?",
             steps: [
               "The unfinished calls are factorial(4), factorial(3), and factorial(2).",
               "The base-case call factorial(1) also has an active frame.",
@@ -725,7 +935,8 @@ export const stackFunctionCallsAndRecursion: SubjectTopic = {
           },
           {
             title: "Find total stack use",
-            prompt: "If each of the four active recursive frames uses 24 bytes, how much stack memory is used?",
+            prompt:
+              "If each of the four active recursive frames uses 24 bytes, how much stack memory is used?",
             steps: [
               "Stack use = number of frames × bytes per frame.",
               "Stack use = 4 × 24.",
@@ -734,22 +945,26 @@ export const stackFunctionCallsAndRecursion: SubjectTopic = {
           },
           {
             title: "Pass a fifth argument",
-            prompt: "A function using the classic o32 convention already uses $a0-$a3 for four integer arguments. Where is a fifth integer argument passed?",
+            prompt:
+              "A function using the classic o32 convention already uses $a0-$a3 for four integer arguments. Where is a fifth integer argument passed?",
             steps: [
               "The four dedicated integer argument registers are already occupied.",
               "The calling convention uses the caller's stack argument area for additional arguments.",
             ],
-            answer: "The fifth argument is passed in the stack argument area according to the ABI.",
+            answer:
+              "The fifth argument is passed in the stack argument area according to the ABI.",
           },
           {
             title: "Check frame alignment",
-            prompt: "$sp is 0x1000 and an o32 classroom example requires 8-byte alignment. Is a 12-byte frame valid without padding?",
+            prompt:
+              "$sp is 0x1000 and an o32 classroom example requires 8-byte alignment. Is a 12-byte frame valid without padding?",
             steps: [
               "After subtracting 12, $sp would be 0x0FF4.",
               "0x0FF4 is divisible by 4 but not by 8.",
               "Rounding the frame to 16 bytes gives new $sp = 0x0FF0, which is divisible by 8.",
             ],
-            answer: "No. Use padding; a 16-byte frame preserves 8-byte alignment.",
+            answer:
+              "No. Use padding; a 16-byte frame preserves 8-byte alignment.",
           },
         ],
       },
@@ -779,7 +994,15 @@ export const stackFunctionCallsAndRecursion: SubjectTopic = {
     sections: [
       {
         title: "Call Flow",
-        flow: ["Arguments", "jal", "Prologue", "Body", "Return value", "Epilogue", "jr $ra"],
+        flow: [
+          "Arguments",
+          "jal",
+          "Prologue",
+          "Body",
+          "Return value",
+          "Epilogue",
+          "jr $ra",
+        ],
       },
       {
         title: "Register Recall",
@@ -802,10 +1025,12 @@ export const stackFunctionCallsAndRecursion: SubjectTopic = {
       "Each recursive call needs a separate frame.",
       "The stack pointer must be restored before return.",
     ],
-    followUp: "Why must a non-leaf function usually save $ra before executing another jal?",
+    followUp:
+      "Why must a non-leaf function usually save $ra before executing another jal?",
   },
   lastMinute: {
-    definition: "A frame protects one active call's return address, saved registers, and local state.",
+    definition:
+      "A frame protects one active call's return address, saved registers, and local state.",
     sections: [
       {
         title: "Prologue and Epilogue",
@@ -848,8 +1073,14 @@ export const riscCiscAndIsa: SubjectTopic = {
             ["Instruction encodings", "Pipeline depth and execution units"],
             ["Visible registers", "Internal physical registers"],
             ["Data types and addressing modes", "Cache sizes and predictors"],
-            ["Memory and exception behaviour", "How instructions are scheduled internally"],
-            ["Endianness and atomic operations", "Cache coherence implementation"],
+            [
+              "Memory and exception behaviour",
+              "How instructions are scheduled internally",
+            ],
+            [
+              "Endianness and atomic operations",
+              "Cache coherence implementation",
+            ],
           ],
         },
       },
@@ -861,9 +1092,18 @@ export const riscCiscAndIsa: SubjectTopic = {
         dataTable: {
           headers: ["Layer", "Examples"],
           rows: [
-            ["ISA", "Opcodes, visible registers, memory and exception behaviour"],
-            ["ABI", "Calling convention, stack alignment, binary and object-file rules"],
-            ["Microarchitecture", "Pipeline, cache sizes, predictors, execution units"],
+            [
+              "ISA",
+              "Opcodes, visible registers, memory and exception behaviour",
+            ],
+            [
+              "ABI",
+              "Calling convention, stack alignment, binary and object-file rules",
+            ],
+            [
+              "Microarchitecture",
+              "Pipeline, cache sizes, predictors, execution units",
+            ],
           ],
         },
       },
@@ -878,16 +1118,25 @@ export const riscCiscAndIsa: SubjectTopic = {
           alt: "ISA shown between software and hardware, with typical RISC traits on one side and typical CISC traits on the other.",
           width: 1536,
           height: 1024,
-          caption: "RISC and CISC describe common design directions, not absolute rules about every processor.",
+          caption:
+            "RISC and CISC describe common design directions, not absolute rules about every processor.",
         },
         dataTable: {
           headers: ["Feature", "Typical RISC", "Typical CISC"],
           rows: [
             ["Operations", "Small and regular", "Richer and more varied"],
-            ["Memory access", "Explicit load and store", "Some operations can use memory operands"],
+            [
+              "Memory access",
+              "Explicit load and store",
+              "Some operations can use memory operands",
+            ],
             ["Encoding", "Often fixed or regular", "Variable length is common"],
             ["Addressing modes", "Usually fewer", "Usually more"],
-            ["Code size", "May need more instructions", "May encode work in fewer bytes"],
+            [
+              "Code size",
+              "May need more instructions",
+              "May encode work in fewer bytes",
+            ],
             ["Decode", "Usually simpler", "Usually more complex"],
           ],
         },
@@ -925,7 +1174,10 @@ export const riscCiscAndIsa: SubjectTopic = {
           "Dense code can fit more instructions in an instruction-cache line and reduce instruction-memory traffic. Regular encodings can simplify decode and make it easier for hardware to find instruction boundaries.",
         ],
         formulas: [
-          { label: "Code size", expression: "Code bytes = Σ(instruction countᵢ × bytesᵢ)" },
+          {
+            label: "Code size",
+            expression: "Code bytes = Σ(instruction countᵢ × bytesᵢ)",
+          },
         ],
       },
       {
@@ -941,16 +1193,19 @@ export const riscCiscAndIsa: SubjectTopic = {
         problems: [
           {
             title: "Separate ISA from microarchitecture",
-            prompt: "Is cache size part of the ISA or the microarchitecture? Is the visible register set part of the ISA or microarchitecture?",
+            prompt:
+              "Is cache size part of the ISA or the microarchitecture? Is the visible register set part of the ISA or microarchitecture?",
             steps: [
               "Software normally does not require one exact cache size to execute the ISA.",
               "Machine instructions directly name programmer-visible registers.",
             ],
-            answer: "Cache size is microarchitecture; the visible register set is ISA.",
+            answer:
+              "Cache size is microarchitecture; the visible register set is ISA.",
           },
           {
             title: "Recognize load-store code",
-            prompt: "A machine requires LOAD R1,[A], LOAD R2,[B], ADD R3,R1,R2, STORE [C],R3. Which design idea does this show?",
+            prompt:
+              "A machine requires LOAD R1,[A], LOAD R2,[B], ADD R3,R1,R2, STORE [C],R3. Which design idea does this show?",
             steps: [
               "Memory is accessed only by LOAD and STORE.",
               "ADD uses register operands and produces a register result.",
@@ -959,7 +1214,8 @@ export const riscCiscAndIsa: SubjectTopic = {
           },
           {
             title: "Compare code size",
-            prompt: "A RISC sequence uses five 4-byte instructions. A CISC sequence for the same task uses three instructions averaging 3 bytes. Find both code sizes.",
+            prompt:
+              "A RISC sequence uses five 4-byte instructions. A CISC sequence for the same task uses three instructions averaging 3 bytes. Find both code sizes.",
             steps: [
               "RISC size = 5 × 4 = 20 bytes.",
               "CISC size = 3 × 3 = 9 bytes.",
@@ -968,7 +1224,8 @@ export const riscCiscAndIsa: SubjectTopic = {
           },
           {
             title: "Avoid the clock-rate myth",
-            prompt: "Machine R uses 10 instructions at CPI 1. Machine C uses 6 instructions at CPI 2. Both have the same clock rate. Which uses fewer cycles?",
+            prompt:
+              "Machine R uses 10 instructions at CPI 1. Machine C uses 6 instructions at CPI 2. Both have the same clock rate. Which uses fewer cycles?",
             steps: [
               "R cycles = 10 × 1 = 10.",
               "C cycles = 6 × 2 = 12.",
@@ -978,21 +1235,25 @@ export const riscCiscAndIsa: SubjectTopic = {
           },
           {
             title: "Classify an ABI rule",
-            prompt: "A platform requires function arguments in selected registers and requires a 16-byte-aligned stack. Are these ISA or ABI rules?",
+            prompt:
+              "A platform requires function arguments in selected registers and requires a 16-byte-aligned stack. Are these ISA or ABI rules?",
             steps: [
               "The machine instructions and registers come from the ISA.",
               "The software agreement about argument registers and stack alignment belongs to binary compatibility.",
             ],
-            answer: "They are ABI and calling-convention rules built on top of the ISA.",
+            answer:
+              "They are ABI and calling-convention rules built on top of the ISA.",
           },
           {
             title: "Relate code density to an instruction cache",
-            prompt: "A 64-byte instruction-cache line holds fixed 4-byte instructions. How many complete instructions fit? What if each instruction were exactly 2 bytes?",
+            prompt:
+              "A 64-byte instruction-cache line holds fixed 4-byte instructions. How many complete instructions fit? What if each instruction were exactly 2 bytes?",
             steps: [
               "At 4 bytes each: 64 ÷ 4 = 16 instructions.",
               "At 2 bytes each: 64 ÷ 2 = 32 instructions.",
             ],
-            answer: "The line holds 16 four-byte instructions or 32 two-byte instructions.",
+            answer:
+              "The line holds 16 four-byte instructions or 32 two-byte instructions.",
           },
         ],
       },
@@ -1024,7 +1285,10 @@ export const riscCiscAndIsa: SubjectTopic = {
         table: {
           headers: ["Typical RISC", "Typical CISC"],
           rows: [
-            ["Regular operations and encoding", "Richer operations and addressing"],
+            [
+              "Regular operations and encoding",
+              "Richer operations and addressing",
+            ],
             ["Load-store memory access", "Memory operands may be supported"],
             ["Simpler decode", "More complex decode"],
           ],
@@ -1032,7 +1296,13 @@ export const riscCiscAndIsa: SubjectTopic = {
       },
       {
         title: "Layer Recall",
-        flow: ["Source", "Compiler + ABI", "ISA instructions", "Microarchitecture", "Hardware result"],
+        flow: [
+          "Source",
+          "Compiler + ABI",
+          "ISA instructions",
+          "Microarchitecture",
+          "Hardware result",
+        ],
       },
     ],
     essentialsStyle: "plain",
@@ -1044,10 +1314,12 @@ export const riscCiscAndIsa: SubjectTopic = {
       "MIPS and RISC-V are RISC examples; x86 is a CISC example.",
       "Use CPU time, not the RISC or CISC label, to compare performance.",
     ],
-    followUp: "How can two processors with different pipelines execute the same machine-code program?",
+    followUp:
+      "How can two processors with different pipelines execute the same machine-code program?",
   },
   lastMinute: {
-    definition: "ISA tells software what the processor does; microarchitecture decides how the hardware does it.",
+    definition:
+      "ISA tells software what the processor does; microarchitecture decides how the hardware does it.",
     sections: [
       {
         title: "RISC and CISC Recall",
@@ -1061,7 +1333,14 @@ export const riscCiscAndIsa: SubjectTopic = {
       },
     ],
     memoryLine: "The ISA is the bridge between software and hardware.",
-    cues: ["ISA", "ABI", "Microarchitecture", "Load-store", "Microcode", "Code density"],
+    cues: [
+      "ISA",
+      "ABI",
+      "Microarchitecture",
+      "Load-store",
+      "Microcode",
+      "Code density",
+    ],
     trap: "Do not say RISC is always faster or that every RISC instruction takes one cycle.",
   },
 };
@@ -1089,7 +1368,11 @@ export const mipsArchitectureAndAssembly: SubjectTopic = {
             ["Instruction width", "16 bits", "32 bits"],
             ["General data registers", "A and D", "32 integer registers"],
             ["Memory model", "M means RAM[A]", "Explicit load and store"],
-            ["Function call", "Built from software patterns", "jal and jr support calls and returns"],
+            [
+              "Function call",
+              "Built from software patterns",
+              "jal and jr support calls and returns",
+            ],
             ["Instruction formats", "A and C", "R, I, and J"],
           ],
         },
@@ -1112,7 +1395,11 @@ export const mipsArchitectureAndAssembly: SubjectTopic = {
             ["$k0-$k1", "26-27", "Reserved for operating-system kernel"],
             ["$gp", "28", "Global pointer"],
             ["$sp", "29", "Stack pointer"],
-            ["$fp or $s8", "30", "Frame pointer when used, otherwise saved register"],
+            [
+              "$fp or $s8",
+              "30",
+              "Frame pointer when used, otherwise saved register",
+            ],
             ["$ra", "31", "Return address"],
           ],
         },
@@ -1127,11 +1414,19 @@ export const mipsArchitectureAndAssembly: SubjectTopic = {
           alt: "Exact classic MIPS 32-bit R-type, I-type, and J-type field layouts with field widths.",
           width: 1536,
           height: 1024,
-          caption: "The opcode starts every format; the remaining fields depend on the instruction class.",
+          caption:
+            "The opcode starts every format; the remaining fields depend on the instruction class.",
         },
         formulas: [
-          { label: "R-type", expression: "opcode[6] | rs[5] | rt[5] | rd[5] | shamt[5] | funct[6]" },
-          { label: "I-type", expression: "opcode[6] | rs[5] | rt[5] | immediate[16]" },
+          {
+            label: "R-type",
+            expression:
+              "opcode[6] | rs[5] | rt[5] | rd[5] | shamt[5] | funct[6]",
+          },
+          {
+            label: "I-type",
+            expression: "opcode[6] | rs[5] | rt[5] | immediate[16]",
+          },
           { label: "J-type", expression: "opcode[6] | target[26]" },
         ],
       },
@@ -1184,10 +1479,22 @@ export const mipsArchitectureAndAssembly: SubjectTopic = {
           "In the classic teaching model used here, the instruction immediately after a branch or jump is a delay slot and executes before control transfers. Therefore jal saves PC + 8 in $ra. The examples place nop in the slot unless they explicitly show useful work there.",
         ],
         formulas: [
-          { label: "Effective address", expression: "EA = Register[rs] + signExtend(immediate₁₆)" },
-          { label: "Branch target", expression: "Target = PC + 4 + (signExtend(offset₁₆) << 2)" },
-          { label: "Branch offset", expression: "offset = (Target - (PC + 4)) ÷ 4" },
-          { label: "Jump target", expression: "{(PC + 4)[31:28], target₂₆, 00}" },
+          {
+            label: "Effective address",
+            expression: "EA = Register[rs] + signExtend(immediate₁₆)",
+          },
+          {
+            label: "Branch target",
+            expression: "Target = PC + 4 + (signExtend(offset₁₆) << 2)",
+          },
+          {
+            label: "Branch offset",
+            expression: "offset = (Target - (PC + 4)) ÷ 4",
+          },
+          {
+            label: "Jump target",
+            expression: "{(PC + 4)[31:28], target₂₆, 00}",
+          },
           { label: "Signed immediate range", expression: "-32768 to 32767" },
         ],
       },
@@ -1242,8 +1549,14 @@ export const mipsArchitectureAndAssembly: SubjectTopic = {
           "Assume $t0 and $t1 contain two signed integers. This sequence places the larger value in $v0.",
         ],
         flow: [
-          "slt $t2, $t0, $t1", "bne $t2, $zero, SECOND", "nop", "add $v0, $t0, $zero", "j DONE", "nop",
-          "SECOND: add $v0, $t1, $zero", "DONE",
+          "slt $t2, $t0, $t1",
+          "bne $t2, $zero, SECOND",
+          "nop",
+          "add $v0, $t0, $zero",
+          "j DONE",
+          "nop",
+          "SECOND: add $v0, $t1, $zero",
+          "DONE",
         ],
       },
       {
@@ -1252,8 +1565,16 @@ export const mipsArchitectureAndAssembly: SubjectTopic = {
           "This runnable SPIM-style program prints a string and exits. li and la are assembler pseudoinstructions, while the service numbers are SPIM conventions rather than MIPS ISA rules.",
         ],
         flow: [
-          ".data", "msg: .asciiz \"Hello\"", ".text", ".globl main", "main:", "li $v0, 4", "la $a0, msg",
-          "syscall", "li $v0, 10", "syscall",
+          ".data",
+          'msg: .asciiz "Hello"',
+          ".text",
+          ".globl main",
+          "main:",
+          "li $v0, 4",
+          "la $a0, msg",
+          "syscall",
+          "li $v0, 10",
+          "syscall",
         ],
       },
       {
@@ -1262,14 +1583,16 @@ export const mipsArchitectureAndAssembly: SubjectTopic = {
         problems: [
           {
             title: "Encode an R-type add",
-            prompt: "Encode add $t0, $t1, $t2. Use $t0=8, $t1=9, $t2=10, opcode=0, shamt=0, and add funct=32.",
+            prompt:
+              "Encode add $t0, $t1, $t2. Use $t0=8, $t1=9, $t2=10, opcode=0, shamt=0, and add funct=32.",
             steps: [
               "rs = $t1 = 9 = 01001 and rt = $t2 = 10 = 01010.",
               "rd = $t0 = 8 = 01000 and shamt = 00000.",
               "funct 32 = 100000.",
               "Join: 000000 | 01001 | 01010 | 01000 | 00000 | 100000.",
             ],
-            answer: "Binary = 00000001001010100100000000100000; hexadecimal = 0x012A4020.",
+            answer:
+              "Binary = 00000001001010100100000000100000; hexadecimal = 0x012A4020.",
           },
           {
             title: "Encode an I-type addi",
@@ -1280,11 +1603,13 @@ export const mipsArchitectureAndAssembly: SubjectTopic = {
               "Immediate 5 in 16 bits is 0000000000000101.",
               "Join the four fields in I-type order.",
             ],
-            answer: "Binary = 00100001001010000000000000000101; hexadecimal = 0x21280005.",
+            answer:
+              "Binary = 00100001001010000000000000000101; hexadecimal = 0x21280005.",
           },
           {
             title: "Calculate a load address",
-            prompt: "$sp = 0x7FFFEFF0. What effective address is used by lw $t0, 12($sp)?",
+            prompt:
+              "$sp = 0x7FFFEFF0. What effective address is used by lw $t0, 12($sp)?",
             steps: [
               "The base register is $sp.",
               "12 decimal = 0xC.",
@@ -1294,7 +1619,8 @@ export const mipsArchitectureAndAssembly: SubjectTopic = {
           },
           {
             title: "Calculate a branch offset",
-            prompt: "A beq instruction is at PC 0x00400020 and its target is 0x00400030. Find the 16-bit branch offset in words.",
+            prompt:
+              "A beq instruction is at PC 0x00400020 and its target is 0x00400030. Find the 16-bit branch offset in words.",
             steps: [
               "PC + 4 = 0x00400024.",
               "Byte difference = 0x00400030 - 0x00400024 = 0xC = 12 bytes.",
@@ -1304,7 +1630,8 @@ export const mipsArchitectureAndAssembly: SubjectTopic = {
           },
           {
             title: "Trace a short program",
-            prompt: "$t0 = 7 and $t1 = 11. Trace slt $t2,$t0,$t1 followed by beq $t2,$zero,SKIP.",
+            prompt:
+              "$t0 = 7 and $t1 = 11. Trace slt $t2,$t0,$t1 followed by beq $t2,$zero,SKIP.",
             steps: [
               "7 is less than 11, so slt writes 1 into $t2.",
               "beq compares $t2 = 1 with $zero = 0.",
@@ -1314,17 +1641,20 @@ export const mipsArchitectureAndAssembly: SubjectTopic = {
           },
           {
             title: "Encode a negative immediate",
-            prompt: "Encode addi $t0, $zero, -3. The addi opcode is 8 and $t0 is register 8.",
+            prompt:
+              "Encode addi $t0, $zero, -3. The addi opcode is 8 and $t0 is register 8.",
             steps: [
               "Opcode 8 = 001000; rs = $zero = 00000; rt = $t0 = 01000.",
               "-3 in 16-bit two's complement is 1111111111111101.",
               "Join: 001000 | 00000 | 01000 | 1111111111111101.",
             ],
-            answer: "Binary = 00100000000010001111111111111101; hexadecimal = 0x2008FFFD.",
+            answer:
+              "Binary = 00100000000010001111111111111101; hexadecimal = 0x2008FFFD.",
           },
           {
             title: "Compare sign and zero extension",
-            prompt: "The immediate field is 0xFFFF. What 32-bit value is used by addi and by ori?",
+            prompt:
+              "The immediate field is 0xFFFF. What 32-bit value is used by addi and by ori?",
             steps: [
               "addi sign-extends bit 15, which is 1, producing 0xFFFFFFFF.",
               "ori fills the upper 16 bits with zeros, producing 0x0000FFFF.",
@@ -1333,7 +1663,8 @@ export const mipsArchitectureAndAssembly: SubjectTopic = {
           },
           {
             title: "Encode a J-type target",
-            prompt: "A j instruction at PC 0x00400020 targets 0x00401000. Find the 26-bit target field and complete hexadecimal instruction. The j opcode is 2.",
+            prompt:
+              "A j instruction at PC 0x00400020 targets 0x00401000. Find the 26-bit target field and complete hexadecimal instruction. The j opcode is 2.",
             steps: [
               "The target is word aligned, so remove the two low zero bits: 0x00401000 ÷ 4 = 0x00100400.",
               "This value fits in the 26-bit target field and shares the required upper PC region.",
@@ -1344,23 +1675,27 @@ export const mipsArchitectureAndAssembly: SubjectTopic = {
           },
           {
             title: "Detect a misaligned load",
-            prompt: "Can lw $t0, 2($s0) perform a normal aligned word load when $s0 = 0x1000?",
+            prompt:
+              "Can lw $t0, 2($s0) perform a normal aligned word load when $s0 = 0x1000?",
             steps: [
               "Effective address = 0x1000 + 2 = 0x1002.",
               "A 32-bit word address must be divisible by 4.",
               "0x1002 is not divisible by 4.",
             ],
-            answer: "No. A normal lw is misaligned and can raise an address exception.",
+            answer:
+              "No. A normal lw is misaligned and can raise an address exception.",
           },
           {
             title: "Read a classic multiplication result",
-            prompt: "After mult $t0,$t1, where are the 64 product bits stored and how is the low half copied to $s0?",
+            prompt:
+              "After mult $t0,$t1, where are the 64 product bits stored and how is the low half copied to $s0?",
             steps: [
               "mult writes the high 32 product bits to HI.",
               "It writes the low 32 product bits to LO.",
               "mflo moves LO into a general-purpose register.",
             ],
-            answer: "The product is in HI:LO; execute mflo $s0 for the low 32 bits.",
+            answer:
+              "The product is in HI:LO; execute mflo $s0 for the low 32 bits.",
           },
         ],
       },
@@ -1434,7 +1769,8 @@ export const mipsArchitectureAndAssembly: SubjectTopic = {
     followUp: "Why does every MIPS register field need exactly five bits?",
   },
   lastMinute: {
-    definition: "MIPS uses 32 registers, 32-bit instructions, and explicit load-store memory access.",
+    definition:
+      "MIPS uses 32 registers, 32-bit instructions, and explicit load-store memory access.",
     sections: [
       {
         title: "Encoding Checklist",
@@ -1449,7 +1785,8 @@ export const mipsArchitectureAndAssembly: SubjectTopic = {
         ],
       },
     ],
-    memoryLine: "R computes, I uses an immediate or offset, J carries a target.",
+    memoryLine:
+      "R computes, I uses an immediate or offset, J carries a target.",
     cues: ["R I J", "Sign extension", "Alignment", "Branch offset", "jal / jr"],
     trap: "Do not use the byte difference directly as a branch offset; divide it by four.",
   },

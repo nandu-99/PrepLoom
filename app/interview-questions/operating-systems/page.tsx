@@ -45,7 +45,8 @@ export default function OperatingSystemInterviewQuestionsPage() {
                 Operating system interview questions
               </h1>
               <p className="mt-6 max-w-[56ch] text-[15px] leading-7 text-[#555] dark:text-[#b3b3b3] sm:text-[17px] sm:leading-8">
-                Practise answering common OS questions clearly, like you would in a real interview.
+                Practise answering common OS questions clearly, like you would
+                in a real interview.
               </p>
             </div>
 

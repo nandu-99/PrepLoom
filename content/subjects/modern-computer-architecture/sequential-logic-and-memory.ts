@@ -21,9 +21,15 @@ export const sequentialLogicAndState: SubjectTopic = {
         table: {
           headers: ["Combinational logic", "Sequential logic"],
           rows: [
-            ["Uses current inputs only", "Uses stored state; may also use current inputs"],
+            [
+              "Uses current inputs only",
+              "Uses stored state; may also use current inputs",
+            ],
             ["No memory element", "Contains latches, flip-flops, or registers"],
-            ["Examples: adder, MUX, decoder", "Examples: register, counter, RAM"],
+            [
+              "Examples: adder, MUX, decoder",
+              "Examples: register, counter, RAM",
+            ],
             ["No clock is required", "Often coordinated by a clock"],
           ],
         },
@@ -61,9 +67,15 @@ export const sequentialLogicAndState: SubjectTopic = {
         table: {
           headers: ["Synchronous", "Asynchronous"],
           rows: [
-            ["State changes at controlled clock events", "State can change when inputs change"],
+            [
+              "State changes at controlled clock events",
+              "State can change when inputs change",
+            ],
             ["Easier timing model", "Timing depends strongly on signal delays"],
-            ["Common in CPUs and registers", "Used in specialized control and interfaces"],
+            [
+              "Common in CPUs and registers",
+              "Used in specialized control and interfaces",
+            ],
           ],
         },
       },
@@ -75,7 +87,10 @@ export const sequentialLogicAndState: SubjectTopic = {
         ],
         formulas: [
           { label: "Moore output", expression: "Output = g(State(current))" },
-          { label: "Mealy output", expression: "Output = g(State(current), Inputs)" },
+          {
+            label: "Mealy output",
+            expression: "Output = g(State(current), Inputs)",
+          },
         ],
       },
       {
@@ -84,7 +99,13 @@ export const sequentialLogicAndState: SubjectTopic = {
           "Feedback sends a stored output back toward the circuit input. Because an earlier output participates in the next calculation, the circuit can keep information after an external input changes.",
           "Feedback must be controlled carefully. A clocked storage element provides a clear moment for accepting a new state and prevents uncontrolled repeated changes.",
         ],
-        flow: ["Stored output", "Feedback path", "Next-state logic", "Clock event", "New stored output"],
+        flow: [
+          "Stored output",
+          "Feedback path",
+          "Next-state logic",
+          "Clock event",
+          "New stored output",
+        ],
       },
       {
         title: "Clock and Timing Terms",
@@ -97,7 +118,8 @@ export const sequentialLogicAndState: SubjectTopic = {
           alt: "Aligned clock, D, and Q waveforms showing setup time before a rising edge, hold time after it, and clock-to-Q delay.",
           width: 1536,
           height: 1024,
-          caption: "A D flip-flop needs stable input around the active clock edge.",
+          caption:
+            "A D flip-flop needs stable input around the active clock edge.",
         },
         dataTable: {
           headers: ["Term", "Simple meaning"],
@@ -148,7 +170,8 @@ export const sequentialLogicAndState: SubjectTopic = {
           },
           {
             title: "Trace a next-state rule",
-            prompt: "A one-bit state follows State(next) = State(current) ⊕ X. The current state is 0. Trace X = 1, 0, 1 across three clock edges.",
+            prompt:
+              "A one-bit state follows State(next) = State(current) ⊕ X. The current state is 0. Trace X = 1, 0, 1 across three clock edges.",
             steps: [
               "Edge 1: 0 ⊕ 1 = 1, so the new state is 1.",
               "Edge 2: 1 ⊕ 0 = 1, so the state remains 1.",
@@ -158,7 +181,8 @@ export const sequentialLogicAndState: SubjectTopic = {
           },
           {
             title: "Find a safe maximum clock frequency",
-            prompt: "A path has clock-to-Q delay 1 ns, combinational delay 6 ns, and setup time 1 ns. Ignore clock uncertainty. Find the minimum period and maximum frequency.",
+            prompt:
+              "A path has clock-to-Q delay 1 ns, combinational delay 6 ns, and setup time 1 ns. Ignore clock uncertainty. Find the minimum period and maximum frequency.",
             steps: [
               "T(min) = 1 ns + 6 ns + 1 ns = 8 ns.",
               "f(max) = 1 / T(min).",
@@ -193,7 +217,12 @@ export const sequentialLogicAndState: SubjectTopic = {
     sections: [
       {
         title: "Core Model",
-        flow: ["Current state + inputs", "Next-state logic", "Storage at clock edge", "New state"],
+        flow: [
+          "Current state + inputs",
+          "Next-state logic",
+          "Storage at clock edge",
+          "New state",
+        ],
         formulas: [
           { expression: "State(next) = f(State(current), Inputs)" },
           { expression: "f = 1 / T" },
@@ -221,10 +250,12 @@ export const sequentialLogicAndState: SubjectTopic = {
       "Frequency and period are reciprocals.",
       "The current state becomes the next cycle's stored starting point.",
     ],
-    followUp: "Why does a sequential circuit need both next-state logic and a storage element?",
+    followUp:
+      "Why does a sequential circuit need both next-state logic and a storage element?",
   },
   lastMinute: {
-    definition: "Sequential logic remembers state; an output may use state alone or state plus input.",
+    definition:
+      "Sequential logic remembers state; an output may use state alone or state plus input.",
     sections: [
       {
         title: "Timing Recall",
@@ -237,7 +268,13 @@ export const sequentialLogicAndState: SubjectTopic = {
       },
     ],
     memoryLine: "Logic decides the next state; the clock stores it.",
-    cues: ["Input + state", "Feedback", "Clock edge", "Setup before", "Hold after"],
+    cues: [
+      "Input + state",
+      "Feedback",
+      "Clock edge",
+      "Setup before",
+      "Hold after",
+    ],
     trap: "Do not describe a register as combinational logic. It stores state.",
   },
 };
@@ -264,7 +301,10 @@ export const latchesAndFlipFlops: SubjectTopic = {
           headers: ["Latch", "Flip-flop"],
           rows: [
             ["Level-sensitive", "Edge-triggered"],
-            ["May change throughout an active enable level", "Changes only near the active clock edge"],
+            [
+              "May change throughout an active enable level",
+              "Changes only near the active clock edge",
+            ],
             ["Often simpler", "Common in synchronous registers"],
           ],
         },
@@ -298,9 +338,7 @@ export const latchesAndFlipFlops: SubjectTopic = {
           "The D input removes the invalid SR combination. An active-high D latch follows D while Enable = 1 and holds its earlier output while Enable = 0.",
           "A D flip-flop is different: the value present at D at the active clock edge becomes the new Q. Between active edges, Q keeps its stored value.",
         ],
-        formulas: [
-          { label: "D flip-flop", expression: "Q(next) = D" },
-        ],
+        formulas: [{ label: "D flip-flop", expression: "Q(next) = D" }],
         dataTable: {
           headers: ["Device", "Control", "D", "Q(next)"],
           rows: [
@@ -322,7 +360,12 @@ export const latchesAndFlipFlops: SubjectTopic = {
         dataTable: {
           headers: ["Preset", "Clear", "Q", "Meaning"],
           rows: [
-            ["0", "0", "Normal clocked behavior", "Neither active in this active-high example"],
+            [
+              "0",
+              "0",
+              "Normal clocked behavior",
+              "Neither active in this active-high example",
+            ],
             ["1", "0", "1", "Asynchronous set"],
             ["0", "1", "0", "Asynchronous reset"],
             ["1", "1", "Invalid", "Do not request both"],
@@ -359,8 +402,14 @@ export const latchesAndFlipFlops: SubjectTopic = {
         table: {
           headers: ["Problem", "Common solution"],
           rows: [
-            ["Repeated toggling while clock level is active", "Use edge-triggered JK"],
-            ["Input and output active in the same level", "Use master-slave stages"],
+            [
+              "Repeated toggling while clock level is active",
+              "Use edge-triggered JK",
+            ],
+            [
+              "Input and output active in the same level",
+              "Use master-slave stages",
+            ],
           ],
         },
       },
@@ -371,8 +420,14 @@ export const latchesAndFlipFlops: SubjectTopic = {
           "Because it can divide a clock frequency by two, the T flip-flop is useful in counters.",
         ],
         formulas: [
-          { label: "T characteristic equation", expression: "Q(next) = T ⊕ Q(current)" },
-          { label: "Frequency division", expression: "f(Q) = f(clock) / 2 when T = 1" },
+          {
+            label: "T characteristic equation",
+            expression: "Q(next) = T ⊕ Q(current)",
+          },
+          {
+            label: "Frequency division",
+            expression: "f(Q) = f(clock) / 2 when T = 1",
+          },
         ],
         dataTable: {
           headers: ["T", "Q(next)", "Action"],
@@ -403,7 +458,8 @@ export const latchesAndFlipFlops: SubjectTopic = {
         problems: [
           {
             title: "Trace a JK flip-flop",
-            prompt: "A JK flip-flop starts with Q = 0. Trace input pairs JK = 10, 11, 01, 00 across four active edges.",
+            prompt:
+              "A JK flip-flop starts with Q = 0. Trace input pairs JK = 10, 11, 01, 00 across four active edges.",
             steps: [
               "Edge 1, JK = 10: set, so Q = 1.",
               "Edge 2, JK = 11: toggle, so Q = 0.",
@@ -414,7 +470,8 @@ export const latchesAndFlipFlops: SubjectTopic = {
           },
           {
             title: "Find required flip-flop inputs",
-            prompt: "A stored bit must change from 1 to 0. Find suitable D, T, and JK inputs.",
+            prompt:
+              "A stored bit must change from 1 to 0. Find suitable D, T, and JK inputs.",
             steps: [
               "For D, Q(next) = D, so choose D = 0.",
               "For T, a change requires toggle, so choose T = 1.",
@@ -424,7 +481,8 @@ export const latchesAndFlipFlops: SubjectTopic = {
           },
           {
             title: "Use a T flip-flop as a divider",
-            prompt: "A T flip-flop has T = 1 and receives a 20 MHz clock. What is the Q frequency?",
+            prompt:
+              "A T flip-flop has T = 1 and receives a 20 MHz clock. What is the Q frequency?",
             steps: [
               "With T = 1, Q toggles at every active clock edge.",
               "One complete Q cycle needs two clock edges.",
@@ -434,7 +492,8 @@ export const latchesAndFlipFlops: SubjectTopic = {
           },
           {
             title: "Read D from a timing sequence",
-            prompt: "A rising-edge D flip-flop starts at Q = 0. D is 1 at the first rising edge, changes to 0 between edges, and is 0 at the second rising edge. Find Q after each rising edge.",
+            prompt:
+              "A rising-edge D flip-flop starts at Q = 0. D is 1 at the first rising edge, changes to 0 between edges, and is 0 at the second rising edge. Find Q after each rising edge.",
             steps: [
               "At the first rising edge, D = 1, so Q becomes 1 after clock-to-Q delay.",
               "D changes between edges, but the edge-triggered Q holds its stored value.",
@@ -495,7 +554,8 @@ export const latchesAndFlipFlops: SubjectTopic = {
       "T = 1 toggles and can divide frequency by two.",
       "A D latch follows D while enabled; a D flip-flop samples D at an edge.",
     ],
-    followUp: "Why does a JK flip-flop not have the same forbidden combination as an SR latch?",
+    followUp:
+      "Why does a JK flip-flop not have the same forbidden combination as an SR latch?",
   },
   lastMinute: {
     definition: "One flip-flop stores one bit at a clock edge.",
@@ -511,7 +571,13 @@ export const latchesAndFlipFlops: SubjectTopic = {
       },
     ],
     memoryLine: "D copies, JK controls, T toggles.",
-    cues: ["One stored bit", "Active edge", "D next equals D", "JK 11 toggle", "T divide by 2"],
+    cues: [
+      "One stored bit",
+      "Active edge",
+      "D next equals D",
+      "JK 11 toggle",
+      "T divide by 2",
+    ],
     trap: "Do not update an edge-triggered output every time an input changes between clock edges.",
   },
 };
@@ -535,7 +601,10 @@ export const registersAndShiftRegisters: SubjectTopic = {
           "A load or enable signal chooses whether the register accepts new data or keeps its current value. A clear or reset input places the register in a known starting state, commonly all 0s.",
         ],
         formulas: [
-          { label: "Storage elements", expression: "D flip-flops required = register width" },
+          {
+            label: "Storage elements",
+            expression: "D flip-flops required = register width",
+          },
           {
             label: "Register with load control",
             expression: "Q(next) = Load ? D : Q(current)",
@@ -639,7 +708,8 @@ export const registersAndShiftRegisters: SubjectTopic = {
         problems: [
           {
             title: "Trace a right shift",
-            prompt: "A 4-bit register starts at 1011. It shifts right twice with serial inputs 0 and then 1. Find the state after each edge.",
+            prompt:
+              "A 4-bit register starts at 1011. It shifts right twice with serial inputs 0 and then 1. Find the state after each edge.",
             steps: [
               "Start: Q₃Q₂Q₁Q₀ = 1011.",
               "Edge 1 inserts 0 on the left and shifts right: 0101.",
@@ -649,7 +719,8 @@ export const registersAndShiftRegisters: SubjectTopic = {
           },
           {
             title: "Count storage elements",
-            prompt: "How many D flip-flops are needed for twelve 16-bit registers?",
+            prompt:
+              "How many D flip-flops are needed for twelve 16-bit registers?",
             steps: [
               "Each 16-bit register needs 16 D flip-flops.",
               "There are 12 registers.",
@@ -659,7 +730,8 @@ export const registersAndShiftRegisters: SubjectTopic = {
           },
           {
             title: "Trace load and hold",
-            prompt: "A 4-bit register contains 0110. At the next edge D = 1101 and Load = 0. At the following edge Load becomes 1 with the same D. Find both states.",
+            prompt:
+              "A 4-bit register contains 0110. At the next edge D = 1101 and Load = 0. At the following edge Load becomes 1 with the same D. Find both states.",
             steps: [
               "First edge: Load = 0, so the register holds 0110.",
               "Second edge: Load = 1, so the register stores D = 1101.",
@@ -668,7 +740,8 @@ export const registersAndShiftRegisters: SubjectTopic = {
           },
           {
             title: "Trace bidirectional shifting",
-            prompt: "A 4-bit universal register starts at 1010. First shift left with serial input 1, then shift right with serial input 0. Find both states.",
+            prompt:
+              "A 4-bit universal register starts at 1010. First shift left with serial input 1, then shift right with serial input 0. Find both states.",
             steps: [
               "Left shift moves Q₂Q₁Q₀ toward Q₃Q₂Q₁ and inserts 1 at Q₀.",
               "1010 shifted left with input 1 becomes 0101.",
@@ -739,7 +812,8 @@ export const registersAndShiftRegisters: SubjectTopic = {
       "Multiplexers choose the source for each next bit.",
       "Clear normally places every bit in a known reset state.",
     ],
-    followUp: "Why does an eight-bit parallel register need eight flip-flops but only one shared clock?",
+    followUp:
+      "Why does an eight-bit parallel register need eight flip-flops but only one shared clock?",
   },
   lastMinute: {
     definition: "Register stores a word; shift register stores and moves it.",
@@ -784,12 +858,22 @@ export const memoryOrganization: SubjectTopic = {
           alt: "Three address lines enter a 3-to-8 decoder to select one row of an eight-word by four-bit memory.",
           width: 1536,
           height: 1024,
-          caption: "Address width selects a word; data width selects the number of bits in that word.",
+          caption:
+            "Address width selects a word; data width selects the number of bits in that word.",
         },
         formulas: [
-          { label: "Address bits", expression: "Address bits = ⌈log₂(number of words)⌉" },
-          { label: "Capacity", expression: "Capacity in bits = words × bits per word" },
-          { label: "Bytes", expression: "Capacity in bytes = capacity in bits / 8" },
+          {
+            label: "Address bits",
+            expression: "Address bits = ⌈log₂(number of words)⌉",
+          },
+          {
+            label: "Capacity",
+            expression: "Capacity in bits = words × bits per word",
+          },
+          {
+            label: "Bytes",
+            expression: "Capacity in bytes = capacity in bits / 8",
+          },
         ],
       },
       {
@@ -801,11 +885,26 @@ export const memoryOrganization: SubjectTopic = {
         dataTable: {
           headers: ["Operation", "Address", "Data bus", "Control"],
           rows: [
-            ["Read", "Selects source word", "Memory drives output data", "Read enabled"],
-            ["Write", "Selects destination word", "External circuit provides input data", "Write enabled"],
+            [
+              "Read",
+              "Selects source word",
+              "Memory drives output data",
+              "Read enabled",
+            ],
+            [
+              "Write",
+              "Selects destination word",
+              "External circuit provides input data",
+              "Write enabled",
+            ],
           ],
         },
-        flow: ["Address selects word", "Control chooses read or write", "Data moves", "Memory or receiver accepts result"],
+        flow: [
+          "Address selects word",
+          "Control chooses read or write",
+          "Data moves",
+          "Memory or receiver accepts result",
+        ],
       },
       {
         title: "Common Memory Control Signals",
@@ -831,7 +930,10 @@ export const memoryOrganization: SubjectTopic = {
         table: {
           headers: ["RAM", "ROM"],
           rows: [
-            ["Read and write during normal operation", "Mainly read during normal operation"],
+            [
+              "Read and write during normal operation",
+              "Mainly read during normal operation",
+            ],
             ["Usually volatile", "Non-volatile"],
             ["Working data and active programs", "Firmware and fixed tables"],
           ],
@@ -848,7 +950,10 @@ export const memoryOrganization: SubjectTopic = {
           rows: [
             ["Faster", "Slower than SRAM"],
             ["No refresh while powered", "Requires periodic refresh"],
-            ["Lower density and higher cost per bit", "Higher density and lower cost per bit"],
+            [
+              "Lower density and higher cost per bit",
+              "Higher density and lower cost per bit",
+            ],
             ["Commonly used for cache", "Commonly used for main memory"],
           ],
         },
@@ -879,7 +984,10 @@ export const memoryOrganization: SubjectTopic = {
           headers: ["Byte-addressable", "Word-addressable"],
           rows: [
             ["One address selects one byte", "One address selects one word"],
-            ["32-bit word uses four byte addresses", "32-bit word uses one word address"],
+            [
+              "32-bit word uses four byte addresses",
+              "32-bit word uses one word address",
+            ],
           ],
         },
       },
@@ -894,7 +1002,8 @@ export const memoryOrganization: SubjectTopic = {
           alt: "Four banks containing two 1K by 8 chips each combine depth and width to create a 4K by 16 memory.",
           width: 1536,
           height: 1024,
-          caption: "Four banks increase depth; two parallel chips increase word width.",
+          caption:
+            "Four banks increase depth; two parallel chips increase word width.",
         },
         formulas: [
           {
@@ -903,7 +1012,8 @@ export const memoryOrganization: SubjectTopic = {
           },
           {
             label: "Expansion factors",
-            expression: "Depth factor = required words / chip words; width factor = required width / chip width",
+            expression:
+              "Depth factor = required words / chip words; width factor = required width / chip width",
           },
         ],
       },
@@ -913,7 +1023,8 @@ export const memoryOrganization: SubjectTopic = {
         problems: [
           {
             title: "Find address lines and capacity",
-            prompt: "A memory is organized as 512 × 8. Find its address lines and total capacity.",
+            prompt:
+              "A memory is organized as 512 × 8. Find its address lines and total capacity.",
             steps: [
               "512 = 2⁹, so nine address bits select 512 words.",
               "Capacity = 512 words × 8 bits per word = 4096 bits.",
@@ -923,7 +1034,8 @@ export const memoryOrganization: SubjectTopic = {
           },
           {
             title: "Build a larger memory from chips",
-            prompt: "How many 1K × 8 chips are required to build a 4K × 16 memory?",
+            prompt:
+              "How many 1K × 8 chips are required to build a 4K × 16 memory?",
             steps: [
               "Depth factor = 4K / 1K = 4.",
               "Width factor = 16 / 8 = 2.",
@@ -934,7 +1046,8 @@ export const memoryOrganization: SubjectTopic = {
           },
           {
             title: "Find the address range",
-            prompt: "A word-addressable memory has 12 address lines. How many word locations and what address range does it have?",
+            prompt:
+              "A word-addressable memory has 12 address lines. How many word locations and what address range does it have?",
             steps: [
               "Twelve address bits create 2¹² = 4096 addresses.",
               "Counting starts at 0, so the decimal range is 0 to 4095.",
@@ -944,7 +1057,8 @@ export const memoryOrganization: SubjectTopic = {
           },
           {
             title: "Count ideal register storage",
-            prompt: "If a teaching design builds a 32 × 16 memory entirely from D flip-flops, how many flip-flops are required?",
+            prompt:
+              "If a teaching design builds a 32 × 16 memory entirely from D flip-flops, how many flip-flops are required?",
             steps: [
               "The memory has 32 words.",
               "Each word contains 16 bits.",
@@ -955,7 +1069,8 @@ export const memoryOrganization: SubjectTopic = {
           },
           {
             title: "Address a non-power-of-two memory",
-            prompt: "What is the minimum number of address bits for 1000 words, and how many address patterns remain unused?",
+            prompt:
+              "What is the minimum number of address bits for 1000 words, and how many address patterns remain unused?",
             steps: [
               "2⁹ = 512, which is not enough for 1000 words.",
               "2¹⁰ = 1024, so ten address bits are required.",
@@ -1016,7 +1131,8 @@ export const memoryOrganization: SubjectTopic = {
       "Increase width in parallel and depth through selection.",
       "CS selects the chip, OE controls read output, and WE controls writing.",
     ],
-    followUp: "Why does a 2K × 16 memory need eleven address lines but sixteen data lines?",
+    followUp:
+      "Why does a 2K × 16 memory need eleven address lines but sixteen data lines?",
   },
   lastMinute: {
     definition: "N × M means N words, M bits per word.",
@@ -1032,7 +1148,13 @@ export const memoryOrganization: SubjectTopic = {
       },
     ],
     memoryLine: "Address chooses the word; data lines carry the word.",
-    cues: ["Words × width", "Ceiling log₂", "CS OE WE", "Width in parallel", "Depth by selection"],
+    cues: [
+      "Words × width",
+      "Ceiling log₂",
+      "CS OE WE",
+      "Width in parallel",
+      "Depth by selection",
+    ],
     trap: "Do not use total capacity to find address lines. Address lines select words, not individual bits, unless the memory is bit-addressable.",
   },
 };
@@ -1061,9 +1183,16 @@ export const programCounter: SubjectTopic = {
           alt: "Program counter with load value, reset, load, increment, clock, and current instruction-address output.",
           width: 1536,
           height: 1024,
-          caption: "Control selects whether the PC resets, loads, increments, or holds.",
+          caption:
+            "Control selects whether the PC resets, loads, increments, or holds.",
         },
-        flow: ["PC address", "Instruction memory", "Fetched instruction", "Control decision", "Next PC value"],
+        flow: [
+          "PC address",
+          "Instruction memory",
+          "Fetched instruction",
+          "Control decision",
+          "Next PC value",
+        ],
       },
       {
         title: "PC Operations",
@@ -1098,7 +1227,8 @@ export const programCounter: SubjectTopic = {
           alt: "A next-PC multiplexer selecting between sequential, branch, jump, and reset addresses before the program-counter register.",
           width: 1536,
           height: 1024,
-          caption: "PC control selects one candidate address for the next clock edge.",
+          caption:
+            "PC control selects one candidate address for the next clock edge.",
         },
         formulas: [
           {
@@ -1107,7 +1237,8 @@ export const programCounter: SubjectTopic = {
           },
           {
             label: "PC-relative branch",
-            expression: "Branch target = PC(current) + instruction size + signed offset",
+            expression:
+              "Branch target = PC(current) + instruction size + signed offset",
           },
         ],
       },
@@ -1134,7 +1265,13 @@ export const programCounter: SubjectTopic = {
           "Several control inputs can accidentally be 1 together. A priority rule gives one clear next value. In this module's teaching PC, reset has highest priority, then load, then increment, and hold is the default.",
           "A real processor may use different signal names or internal logic, but its PC must still choose exactly one next address.",
         ],
-        flow: ["Reset?", "Else load?", "Else increment?", "Else hold", "Store at clock edge"],
+        flow: [
+          "Reset?",
+          "Else load?",
+          "Else increment?",
+          "Else hold",
+          "Store at clock edge",
+        ],
       },
       {
         title: "PC Width and Address Range",
@@ -1152,7 +1289,8 @@ export const programCounter: SubjectTopic = {
         problems: [
           {
             title: "Trace PC controls",
-            prompt: "A PC starts at 20. Across four clock edges the controls are: increment; load 80; increment; reset. Find the PC after each edge.",
+            prompt:
+              "A PC starts at 20. Across four clock edges the controls are: increment; load 80; increment; reset. Find the PC after each edge.",
             steps: [
               "Edge 1, increment: 20 + 1 = 21.",
               "Edge 2, load: PC becomes 80.",
@@ -1163,7 +1301,8 @@ export const programCounter: SubjectTopic = {
           },
           {
             title: "Apply control priority",
-            prompt: "PC = 45, input address = 120, and Reset = 0, Load = 1, Increment = 1. Find PC(next).",
+            prompt:
+              "PC = 45, input address = 120, and Reset = 0, Load = 1, Increment = 1. Find PC(next).",
             steps: [
               "Reset is 0, so reset is not selected.",
               "Load is 1 and has priority over increment.",
@@ -1173,7 +1312,8 @@ export const programCounter: SubjectTopic = {
           },
           {
             title: "Find PC width",
-            prompt: "A processor can address 64K instruction locations. What is the minimum PC width?",
+            prompt:
+              "A processor can address 64K instruction locations. What is the minimum PC width?",
             steps: [
               "64K = 64 × 1024 = 65,536 locations.",
               "65,536 = 2¹⁶.",
@@ -1183,17 +1323,20 @@ export const programCounter: SubjectTopic = {
           },
           {
             title: "Trace wraparound",
-            prompt: "An 8-bit PC contains 11111111 and receives Increment = 1. What is the next value?",
+            prompt:
+              "An 8-bit PC contains 11111111 and receives Increment = 1. What is the next value?",
             steps: [
               "11111111₂ is the maximum 8-bit value, 255.",
               "Adding 1 gives 1 00000000.",
               "The PC keeps eight bits, so the carry is discarded.",
             ],
-            answer: "PC(next) = 00000000₂, assuming normal fixed-width wraparound",
+            answer:
+              "PC(next) = 00000000₂, assuming normal fixed-width wraparound",
           },
           {
             title: "Calculate a PC-relative branch target",
-            prompt: "A byte-addressed processor uses four-byte instructions. The current PC is 1000 and a taken branch has signed offset -24. Find the branch target.",
+            prompt:
+              "A byte-addressed processor uses four-byte instructions. The current PC is 1000 and a taken branch has signed offset -24. Find the branch target.",
             steps: [
               "Find the sequential address: 1000 + 4 = 1004.",
               "Add the signed offset: 1004 + (-24).",
@@ -1203,7 +1346,8 @@ export const programCounter: SubjectTopic = {
           },
           {
             title: "Find a function return address",
-            prompt: "A four-byte call instruction is fetched at address 400. Which return address should be saved?",
+            prompt:
+              "A four-byte call instruction is fetched at address 400. Which return address should be saved?",
             steps: [
               "The return should continue after the call instruction.",
               "Sequential address = current PC + instruction size.",
@@ -1243,7 +1387,10 @@ export const programCounter: SubjectTopic = {
           rows: [
             ["Reset", "0"],
             ["Load", "Target address"],
-            ["Increment", "PC + instruction size; PC + 1 in this teaching design"],
+            [
+              "Increment",
+              "PC + instruction size; PC + 1 in this teaching design",
+            ],
             ["None", "Hold PC"],
           ],
         },
@@ -1264,10 +1411,12 @@ export const programCounter: SubjectTopic = {
       "Reset returns to the defined start address.",
       "Only the chosen value is stored at the clock edge.",
     ],
-    followUp: "Why must load have priority over increment when a jump is taken?",
+    followUp:
+      "Why must load have priority over increment when a jump is taken?",
   },
   lastMinute: {
-    definition: "During fetch, PC holds the current instruction address; after update, it holds the next fetch address.",
+    definition:
+      "During fetch, PC holds the current instruction address; after update, it holds the next fetch address.",
     sections: [
       {
         title: "Action Order",
@@ -1280,7 +1429,13 @@ export const programCounter: SubjectTopic = {
       },
     ],
     memoryLine: "Reset, load, increment, hold: first true action wins.",
-    cues: ["Instruction address", "PC + instruction size", "Load a target", "Reset to start", "k bits give 2ᵏ addresses"],
+    cues: [
+      "Instruction address",
+      "PC + instruction size",
+      "Load a target",
+      "Reset to start",
+      "k bits give 2ᵏ addresses",
+    ],
     trap: "Do not say the PC stores the current instruction data. It stores an address.",
   },
 };

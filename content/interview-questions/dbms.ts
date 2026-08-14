@@ -18,7 +18,8 @@ export const dbmsInterviewQuestions: DbmsQuestion[] = [
   {
     id: "schema-vs-instance",
     category: "DBMS foundations and architecture",
-    question: "What is the difference between a database schema and a database instance?",
+    question:
+      "What is the difference between a database schema and a database instance?",
     answer:
       "The schema is the database structure: tables, columns, relationships, constraints, and other definitions. An instance is the actual data stored at a particular moment. The schema changes occasionally through migrations, while the instance changes whenever rows are inserted, updated, or deleted.",
   },
@@ -40,7 +41,8 @@ export const dbmsInterviewQuestions: DbmsQuestion[] = [
   {
     id: "relation-tuple-attribute-domain",
     category: "Relational model, keys and constraints",
-    question: "What do relation, tuple, attribute, and domain mean in the relational model?",
+    question:
+      "What do relation, tuple, attribute, and domain mean in the relational model?",
     answer:
       "A relation is a table-like set of records. A tuple is one row, an attribute is one named column, and a domain defines the valid kind of values for that attribute. These terms describe the logical relational model rather than a database's physical storage format.",
   },
@@ -54,7 +56,8 @@ export const dbmsInterviewQuestions: DbmsQuestion[] = [
   {
     id: "primary-key-vs-unique",
     category: "Relational model, keys and constraints",
-    question: "What is the difference between a primary key and a UNIQUE constraint?",
+    question:
+      "What is the difference between a primary key and a UNIQUE constraint?",
     answer:
       "Both enforce uniqueness, but a table has one primary key and it also rejects NULL values. A table can have multiple UNIQUE constraints. NULL behaviour under UNIQUE can vary by database, so I check the engine's rules rather than assuming every system treats NULLs identically.",
   },
@@ -68,7 +71,8 @@ export const dbmsInterviewQuestions: DbmsQuestion[] = [
   {
     id: "database-constraints",
     category: "Relational model, keys and constraints",
-    question: "Why should important validation also exist as database constraints?",
+    question:
+      "Why should important validation also exist as database constraints?",
     answer:
       "Application validation improves the user experience, but it can be bypassed by another service, script, or race condition. Database constraints protect the rule for every writer. I use NOT NULL, CHECK, UNIQUE, and foreign keys for invariants that must always hold.",
   },
@@ -83,7 +87,8 @@ export const dbmsInterviewQuestions: DbmsQuestion[] = [
   {
     id: "er-model-basics",
     category: "ER modelling and schema design",
-    question: "What are entities, attributes, and relationships in an ER model?",
+    question:
+      "What are entities, attributes, and relationships in an ER model?",
     answer:
       "An entity represents a distinguishable business object, such as a customer. Attributes describe it, such as name or email. Relationships show how entities are associated, such as a customer placing an order. The model helps clarify the domain before tables are created.",
   },
@@ -104,7 +109,8 @@ export const dbmsInterviewQuestions: DbmsQuestion[] = [
   {
     id: "many-to-many-mapping",
     category: "ER modelling and schema design",
-    question: "How do you represent a many-to-many relationship in a relational database?",
+    question:
+      "How do you represent a many-to-many relationship in a relational database?",
     answer:
       "I introduce a junction table containing foreign keys to both related tables. Those keys can form its primary key, or it can use a separate identifier with a UNIQUE constraint on the pair. Relationship-specific data, such as quantity or enrollment date, also belongs there.",
   },
@@ -179,7 +185,8 @@ export const dbmsInterviewQuestions: DbmsQuestion[] = [
   {
     id: "outer-join-on-vs-where",
     category: "Joins, subqueries, views and CTEs",
-    question: "Why can moving a condition from ON to WHERE change a LEFT JOIN result?",
+    question:
+      "Why can moving a condition from ON to WHERE change a LEFT JOIN result?",
     answer:
       "A condition in ON controls which right-side rows match while still preserving every left row. A WHERE condition runs after the join and may reject rows whose right-side values are NULL. That can unintentionally make the result behave like an inner join.",
   },
@@ -216,7 +223,8 @@ export const dbmsInterviewQuestions: DbmsQuestion[] = [
   {
     id: "employees-above-department-average",
     category: "Joins, subqueries, views and CTEs",
-    question: "How would you find employees earning above their department average?",
+    question:
+      "How would you find employees earning above their department average?",
     answer:
       "A correlated subquery can calculate the average for the current employee's department and compare the employee's salary with it. On a large dataset, I would also consider pre-aggregating department averages and joining them, then compare both plans with the database's optimizer output.",
     code: "SELECT e.id, e.name, e.salary\nFROM employees AS e\nWHERE e.salary > (\n  SELECT AVG(d.salary)\n  FROM employees AS d\n  WHERE d.department_id = e.department_id\n);",
@@ -346,7 +354,8 @@ export const dbmsInterviewQuestions: DbmsQuestion[] = [
   {
     id: "database-deadlock",
     category: "Concurrency, locking and deadlocks",
-    question: "How does a database deadlock happen, and how should an application handle it?",
+    question:
+      "How does a database deadlock happen, and how should an application handle it?",
     answer:
       "A deadlock happens when transactions wait on each other's locks in a cycle. The database usually detects it and aborts one transaction. I reduce the risk by locking resources in a consistent order, keeping transactions short, and retrying the chosen victim safely.",
   },
@@ -360,7 +369,8 @@ export const dbmsInterviewQuestions: DbmsQuestion[] = [
   {
     id: "prevent-lost-update",
     category: "Concurrency, locking and deadlocks",
-    question: "How would you prevent two requests from overwriting each other's update?",
+    question:
+      "How would you prevent two requests from overwriting each other's update?",
     answer:
       "I could use an atomic SQL update, lock the row inside a transaction, or include a version in the UPDATE condition. The best option depends on the invariant and contention. I also check the affected row count so an optimistic conflict is detected instead of silently ignored.",
     code: "UPDATE products\nSET stock = stock - 1, version = version + 1\nWHERE id = 42 AND stock > 0 AND version = 7;",
@@ -383,7 +393,8 @@ export const dbmsInterviewQuestions: DbmsQuestion[] = [
   {
     id: "clustered-vs-nonclustered-index",
     category: "Indexing, storage and query optimization",
-    question: "What is the difference between clustered and nonclustered indexes?",
+    question:
+      "What is the difference between clustered and nonclustered indexes?",
     answer:
       "A clustered organization determines or closely controls how table rows are stored around an index order, so a table typically has only one. A nonclustered index is a separate structure that points to rows. These terms differ across database engines, so I explain them using the specific system.",
   },
@@ -412,14 +423,16 @@ export const dbmsInterviewQuestions: DbmsQuestion[] = [
   {
     id: "debug-slow-query",
     category: "Recovery and practical scenarios",
-    question: "A query became slow in production. How would you investigate it?",
+    question:
+      "A query became slow in production. How would you investigate it?",
     answer:
       "I would capture the exact query and parameters, compare timing and row volume, inspect its execution plan, and check locks, resource pressure, statistics, and recent schema or data changes. I would reproduce safely, fix the measured bottleneck, and verify the improvement under realistic load.",
   },
   {
     id: "partial-order-workflow",
     category: "Recovery and practical scenarios",
-    question: "An order was created but inventory was not reserved. How would you prevent that state?",
+    question:
+      "An order was created but inventory was not reserved. How would you prevent that state?",
     answer:
       "If both changes are in one database, I would place them in a single transaction with the required constraints and rollback on failure. Across services, I would use an idempotent workflow such as a saga or transactional outbox, with explicit compensation and monitoring for incomplete steps.",
   },

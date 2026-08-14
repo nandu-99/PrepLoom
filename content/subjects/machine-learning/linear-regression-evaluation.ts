@@ -57,16 +57,33 @@ export const ridgeAndLassoRegularization: SubjectTopic = {
           alt: "Side-by-side coefficient paths for Ridge and Lasso as regularization strength increases",
           width: 1536,
           height: 1024,
-          caption: "Ridge smoothly shrinks coefficients; Lasso can shrink some coefficients exactly to zero.",
+          caption:
+            "Ridge smoothly shrinks coefficients; Lasso can shrink some coefficients exactly to zero.",
         },
         dataTable: {
           headers: ["Property", "Ridge (L2)", "Lasso (L1)"],
           rows: [
             ["Penalty", "Σβⱼ²", "Σ|βⱼ|"],
-            ["Coefficient result", "Shrinks toward zero", "Can become exactly zero"],
-            ["Feature selection", "No automatic removal", "Possible automatic selection"],
-            ["Correlated features", "Often shares weight among them", "May choose one and suppress others"],
-            ["Useful when", "Many features have small effects", "A smaller set of features may be enough"],
+            [
+              "Coefficient result",
+              "Shrinks toward zero",
+              "Can become exactly zero",
+            ],
+            [
+              "Feature selection",
+              "No automatic removal",
+              "Possible automatic selection",
+            ],
+            [
+              "Correlated features",
+              "Often shares weight among them",
+              "May choose one and suppress others",
+            ],
+            [
+              "Useful when",
+              "Many features have small effects",
+              "A smaller set of features may be enough",
+            ],
           ],
         },
       },
@@ -104,7 +121,8 @@ export const ridgeAndLassoRegularization: SubjectTopic = {
         problems: [
           {
             title: "Compare L1 and L2 penalties",
-            prompt: "For β = [3, −2, 1], λ = 0.5, and MSE = 4, find the Ridge and Lasso objective values.",
+            prompt:
+              "For β = [3, −2, 1], λ = 0.5, and MSE = 4, find the Ridge and Lasso objective values.",
             steps: [
               "L2 sum = 3² + (−2)² + 1² = 9 + 4 + 1 = 14.",
               "Ridge penalty = λ(L2 sum) = 0.5(14) = 7.",
@@ -113,7 +131,8 @@ export const ridgeAndLassoRegularization: SubjectTopic = {
               "Lasso penalty = λ(L1 sum) = 0.5(6) = 3.",
               "Lasso objective = MSE + penalty = 4 + 3 = 7.",
             ],
-            answer: "The Ridge objective is 11 and the Lasso objective is 7. These are separate objectives, so 7 versus 11 does not prove that Lasso is the better predictive model.",
+            answer:
+              "The Ridge objective is 11 and the Lasso objective is 7. These are separate objectives, so 7 versus 11 does not prove that Lasso is the better predictive model.",
           },
         ],
       },
@@ -170,15 +189,26 @@ export const ridgeAndLassoRegularization: SubjectTopic = {
     followUp: "Why should features be standardized before Ridge or Lasso?",
   },
   lastMinute: {
-    definition: "Ridge uses squared coefficients; Lasso uses absolute coefficients.",
+    definition:
+      "Ridge uses squared coefficients; Lasso uses absolute coefficients.",
     sections: [
       {
         title: "Ridge",
-        points: ["L2 penalty", "Smooth shrinkage", "Usually no exact zeros", "Good with overlapping predictors"],
+        points: [
+          "L2 penalty",
+          "Smooth shrinkage",
+          "Usually no exact zeros",
+          "Good with overlapping predictors",
+        ],
       },
       {
         title: "Lasso",
-        points: ["L1 penalty", "Can create exact zeros", "Can select features", "May choose among correlated features"],
+        points: [
+          "L1 penalty",
+          "Can create exact zeros",
+          "Can select features",
+          "May choose among correlated features",
+        ],
       },
     ],
     memoryLine: "Ridge reduces; Lasso can remove.",
@@ -223,9 +253,24 @@ export const regressionEvaluation: SubjectTopic = {
         dataTable: {
           headers: ["Metric", "Units", "Effect of large errors", "Best use"],
           rows: [
-            ["MAE", "Same as target", "Linear penalty", "Clear average error size; more robust to outliers"],
-            ["MSE", "Squared target units", "Strong squared penalty", "Training and tasks where large misses are very costly"],
-            ["RMSE", "Same as target", "Strong squared penalty", "Readable error size while emphasizing large misses"],
+            [
+              "MAE",
+              "Same as target",
+              "Linear penalty",
+              "Clear average error size; more robust to outliers",
+            ],
+            [
+              "MSE",
+              "Squared target units",
+              "Strong squared penalty",
+              "Training and tasks where large misses are very costly",
+            ],
+            [
+              "RMSE",
+              "Same as target",
+              "Strong squared penalty",
+              "Readable error size while emphasizing large misses",
+            ],
           ],
         },
         visual: {
@@ -233,7 +278,8 @@ export const regressionEvaluation: SubjectTopic = {
           alt: "Common residuals feeding MAE, MSE, RMSE, and R-squared evaluation summaries",
           width: 1536,
           height: 1024,
-          caption: "The same prediction errors are summarized differently by each regression metric.",
+          caption:
+            "The same prediction errors are summarized differently by each regression metric.",
         },
       },
       {
@@ -245,7 +291,10 @@ export const regressionEvaluation: SubjectTopic = {
         formulas: [
           { label: "Residual sum of squares", expression: "SSE = Σ(yᵢ − ŷᵢ)²" },
           { label: "Total sum of squares", expression: "TSS = Σ(yᵢ − ȳ)²" },
-          { label: "Coefficient of determination", expression: "R² = 1 − SSE/TSS" },
+          {
+            label: "Coefficient of determination",
+            expression: "R² = 1 − SSE/TSS",
+          },
         ],
       },
       {
@@ -266,7 +315,8 @@ export const regressionEvaluation: SubjectTopic = {
         problems: [
           {
             title: "Find all main metrics",
-            prompt: "For y = [2, 4, 6] and ŷ = [3, 4, 5], find MAE, MSE, RMSE, and R².",
+            prompt:
+              "For y = [2, 4, 6] and ŷ = [3, 4, 5], find MAE, MSE, RMSE, and R².",
             steps: [
               "MAE = (1 + 0 + 1) / 3 = 2/3 ≈ 0.67.",
               "MSE = (1 + 0 + 1) / 3 = 2/3 ≈ 0.67.",
@@ -295,7 +345,8 @@ export const regressionEvaluation: SubjectTopic = {
         problems: [
           {
             title: "Calculate adjusted R²",
-            prompt: "A model has R² = 0.80, n = 20 observations, and p = 3 predictors. Find adjusted R².",
+            prompt:
+              "A model has R² = 0.80, n = 20 observations, and p = 3 predictors. Find adjusted R².",
             steps: [
               "Adjusted R² = 1 − [(1 − 0.80)(20 − 1)/(20 − 3 − 1)].",
               "Adjusted R² = 1 − [(0.20)(19)/16].",
@@ -350,7 +401,10 @@ export const regressionEvaluation: SubjectTopic = {
           { label: "MSE", expression: "(1/n)Σ(y − ŷ)²" },
           { label: "RMSE", expression: "√MSE" },
           { label: "R²", expression: "1 − SSE/TSS" },
-          { label: "Adjusted R²", expression: "1 − [(1 − R²)(n − 1)/(n − p − 1)]" },
+          {
+            label: "Adjusted R²",
+            expression: "1 − [(1 − R²)(n − 1)/(n − p − 1)]",
+          },
         ],
       },
       {
@@ -375,15 +429,25 @@ export const regressionEvaluation: SubjectTopic = {
     followUp: "When would RMSE be more suitable than MAE?",
   },
   lastMinute: {
-    definition: "Error metrics measure misses; R² compares the model with the mean baseline.",
+    definition:
+      "Error metrics measure misses; R² compares the model with the mean baseline.",
     sections: [
       {
         title: "Error Metrics",
-        points: ["MAE: absolute errors", "MSE: squared errors", "RMSE: square root of MSE", "Lower is better"],
+        points: [
+          "MAE: absolute errors",
+          "MSE: squared errors",
+          "RMSE: square root of MSE",
+          "Lower is better",
+        ],
       },
       {
         title: "Fit Metrics",
-        points: ["R² = 1 − SSE/TSS", "Can be negative", "Adjusted R² penalizes extra predictors"],
+        points: [
+          "R² = 1 − SSE/TSS",
+          "Can be negative",
+          "Adjusted R² penalizes extra predictors",
+        ],
       },
     ],
     memoryLine: "MAE is direct, RMSE punishes large misses, R² beats the mean.",

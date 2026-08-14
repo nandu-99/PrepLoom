@@ -33,14 +33,44 @@ export const applicationProtocols: SubjectTopic = {
         dataTable: {
           headers: ["Service", "Protocol", "Main purpose", "Common port"],
           rows: [
-            ["Web", "HTTP / HTTPS", "Transfer web resources and API messages", "80 / 443"],
-            ["Send email", "SMTP", "Submit and relay outgoing mail", "25, 587, or 465"],
-            ["Read email", "IMAP", "Synchronize mail stored on a server", "143 or 993"],
-            ["Download email", "POP3", "Retrieve mail, traditionally to one client", "110 or 995"],
-            ["File transfer", "FTP", "Transfer and manage remote files", "21 control"],
+            [
+              "Web",
+              "HTTP / HTTPS",
+              "Transfer web resources and API messages",
+              "80 / 443",
+            ],
+            [
+              "Send email",
+              "SMTP",
+              "Submit and relay outgoing mail",
+              "25, 587, or 465",
+            ],
+            [
+              "Read email",
+              "IMAP",
+              "Synchronize mail stored on a server",
+              "143 or 993",
+            ],
+            [
+              "Download email",
+              "POP3",
+              "Retrieve mail, traditionally to one client",
+              "110 or 995",
+            ],
+            [
+              "File transfer",
+              "FTP",
+              "Transfer and manage remote files",
+              "21 control",
+            ],
             ["Secure file transfer", "SFTP", "File transfer over SSH", "22"],
             ["Remote login", "SSH", "Secure command-line access", "22"],
-            ["Name resolution", "DNS", "Translate names and publish service data", "53"],
+            [
+              "Name resolution",
+              "DNS",
+              "Translate names and publish service data",
+              "53",
+            ],
           ],
         },
       },
@@ -124,18 +154,28 @@ export const applicationProtocols: SubjectTopic = {
     comparison: {
       left: {
         label: "IMAP",
-        points: ["Server mailbox is central", "Synchronizes multiple devices", "Keeps folders and state"],
+        points: [
+          "Server mailbox is central",
+          "Synchronizes multiple devices",
+          "Keeps folders and state",
+        ],
       },
       right: {
         label: "POP3",
-        points: ["Primarily retrieves mail", "Simpler access model", "Traditionally downloads locally"],
+        points: [
+          "Primarily retrieves mail",
+          "Simpler access model",
+          "Traditionally downloads locally",
+        ],
       },
     },
     followUp: "Why are SFTP and FTPS not two names for the same protocol?",
   },
   lastMinute: {
-    definition: "Application protocol = rules understood by communicating network programs.",
-    memoryLine: "SMTP sends, IMAP syncs, POP3 retrieves, SSH logs in, DNS resolves.",
+    definition:
+      "Application protocol = rules understood by communicating network programs.",
+    memoryLine:
+      "SMTP sends, IMAP syncs, POP3 retrieves, SSH logs in, DNS resolves.",
     cues: [
       "HTTPS: 443. DNS: 53. SSH and SFTP: 22.",
       "SMTP moves outgoing mail between clients and servers.",
@@ -175,15 +215,25 @@ export const domainNameSystem: SubjectTopic = {
           alt: "DNS lookup from a client through a recursive resolver, root, TLD, and authoritative servers",
           width: 1536,
           height: 1024,
-          caption: "The resolver follows referrals through the hierarchy and returns the final answer to the client.",
+          caption:
+            "The resolver follows referrals through the hierarchy and returns the final answer to the client.",
         },
         dataTable: {
           headers: ["Component", "Main job"],
           rows: [
-            ["Stub resolver", "Client-side code that asks a recursive resolver"],
-            ["Recursive resolver", "Finds the answer for the client and caches results"],
+            [
+              "Stub resolver",
+              "Client-side code that asks a recursive resolver",
+            ],
+            [
+              "Recursive resolver",
+              "Finds the answer for the client and caches results",
+            ],
             ["Root server", "Refers the resolver to the correct TLD servers"],
-            ["TLD server", "Refers the resolver to the domain's authoritative servers"],
+            [
+              "TLD server",
+              "Refers the resolver to the domain's authoritative servers",
+            ],
             ["Authoritative server", "Provides records for the zone it serves"],
           ],
         },
@@ -209,13 +259,41 @@ export const domainNameSystem: SubjectTopic = {
         dataTable: {
           headers: ["Record", "Purpose", "Example meaning"],
           rows: [
-            ["A", "Maps a name to an IPv4 address", "example.com to 192.0.2.10"],
-            ["AAAA", "Maps a name to an IPv6 address", "example.com to an IPv6 address"],
-            ["CNAME", "Aliases one name to another name", "www to a canonical hostname"],
-            ["MX", "Names mail servers for a domain", "Where incoming email should go"],
-            ["NS", "Names authoritative servers for a zone", "Who serves the domain"],
-            ["TXT", "Stores text used by policies and verification", "Email policy or ownership proof"],
-            ["PTR", "Supports reverse address-to-name lookup", "IP address to hostname"],
+            [
+              "A",
+              "Maps a name to an IPv4 address",
+              "example.com to 192.0.2.10",
+            ],
+            [
+              "AAAA",
+              "Maps a name to an IPv6 address",
+              "example.com to an IPv6 address",
+            ],
+            [
+              "CNAME",
+              "Aliases one name to another name",
+              "www to a canonical hostname",
+            ],
+            [
+              "MX",
+              "Names mail servers for a domain",
+              "Where incoming email should go",
+            ],
+            [
+              "NS",
+              "Names authoritative servers for a zone",
+              "Who serves the domain",
+            ],
+            [
+              "TXT",
+              "Stores text used by policies and verification",
+              "Email policy or ownership proof",
+            ],
+            [
+              "PTR",
+              "Supports reverse address-to-name lookup",
+              "IP address to hostname",
+            ],
           ],
         },
       },
@@ -257,11 +335,25 @@ export const domainNameSystem: SubjectTopic = {
     sections: [
       {
         title: "Lookup Order",
-        flow: ["Client", "Recursive resolver", "Root", "TLD", "Authoritative server", "Answer"],
+        flow: [
+          "Client",
+          "Recursive resolver",
+          "Root",
+          "TLD",
+          "Authoritative server",
+          "Answer",
+        ],
       },
       {
         title: "Record Recall",
-        points: ["A: IPv4", "AAAA: IPv6", "CNAME: alias", "MX: mail", "NS: name server", "PTR: reverse lookup"],
+        points: [
+          "A: IPv4",
+          "AAAA: IPv6",
+          "CNAME: alias",
+          "MX: mail",
+          "NS: name server",
+          "PTR: reverse lookup",
+        ],
       },
     ],
     essentials: [
@@ -279,13 +371,18 @@ export const domainNameSystem: SubjectTopic = {
       },
       right: {
         label: "Authoritative",
-        points: ["Serves a zone", "Holds original zone records", "Returns authoritative answers"],
+        points: [
+          "Serves a zone",
+          "Holds original zone records",
+          "Returns authoritative answers",
+        ],
       },
     },
     followUp: "Why can a DNS change take time to become visible to every user?",
   },
   lastMinute: {
-    definition: "DNS turns names into records through a cached, delegated hierarchy.",
+    definition:
+      "DNS turns names into records through a cached, delegated hierarchy.",
     memoryLine: "Resolver asks Root, then TLD, then Authoritative.",
     cues: [
       "A: IPv4. AAAA: IPv6. MX: mail. CNAME: alias.",
@@ -318,8 +415,16 @@ export const httpMessagesAndSemantics: SubjectTopic = {
           headers: ["Message part", "Request example", "Response example"],
           rows: [
             ["Start line", "GET /notes HTTP/1.1", "HTTP/1.1 200 OK"],
-            ["Headers", "Host, Accept, Authorization", "Content-Type, Cache-Control, Set-Cookie"],
-            ["Body", "Optional submitted data", "HTML, JSON, image, or error details"],
+            [
+              "Headers",
+              "Host, Accept, Authorization",
+              "Content-Type, Cache-Control, Set-Cookie",
+            ],
+            [
+              "Body",
+              "Optional submitted data",
+              "HTML, JSON, image, or error details",
+            ],
           ],
         },
       },
@@ -329,12 +434,36 @@ export const httpMessagesAndSemantics: SubjectTopic = {
           headers: ["Method", "Typical purpose", "Important property"],
           rows: [
             ["GET", "Retrieve a representation", "Safe and idempotent"],
-            ["HEAD", "Retrieve headers without the response body", "Safe and idempotent"],
-            ["POST", "Submit data or start an action", "Not necessarily idempotent"],
-            ["PUT", "Create or replace a resource at a known URI", "Idempotent"],
-            ["PATCH", "Apply a partial modification", "Not necessarily idempotent"],
-            ["DELETE", "Request resource removal", "Idempotent in intended effect"],
-            ["OPTIONS", "Discover communication options", "Safe and idempotent"],
+            [
+              "HEAD",
+              "Retrieve headers without the response body",
+              "Safe and idempotent",
+            ],
+            [
+              "POST",
+              "Submit data or start an action",
+              "Not necessarily idempotent",
+            ],
+            [
+              "PUT",
+              "Create or replace a resource at a known URI",
+              "Idempotent",
+            ],
+            [
+              "PATCH",
+              "Apply a partial modification",
+              "Not necessarily idempotent",
+            ],
+            [
+              "DELETE",
+              "Request resource removal",
+              "Idempotent in intended effect",
+            ],
+            [
+              "OPTIONS",
+              "Discover communication options",
+              "Safe and idempotent",
+            ],
           ],
         },
         paragraphs: [
@@ -401,11 +530,23 @@ export const httpMessagesAndSemantics: SubjectTopic = {
     sections: [
       {
         title: "Method Recall",
-        points: ["GET reads", "POST submits", "PUT replaces", "PATCH partially changes", "DELETE removes", "HEAD returns headers"],
+        points: [
+          "GET reads",
+          "POST submits",
+          "PUT replaces",
+          "PATCH partially changes",
+          "DELETE removes",
+          "HEAD returns headers",
+        ],
       },
       {
         title: "Status Recall",
-        points: ["2xx success", "3xx redirect or validation", "4xx client issue", "5xx server issue"],
+        points: [
+          "2xx success",
+          "3xx redirect or validation",
+          "4xx client issue",
+          "5xx server issue",
+        ],
       },
     ],
     essentials: [
@@ -419,17 +560,27 @@ export const httpMessagesAndSemantics: SubjectTopic = {
     comparison: {
       left: {
         label: "PUT",
-        points: ["Create or replace", "Complete representation is common", "Idempotent"],
+        points: [
+          "Create or replace",
+          "Complete representation is common",
+          "Idempotent",
+        ],
       },
       right: {
         label: "PATCH",
-        points: ["Partial modification", "Sends a change document", "Not always idempotent"],
+        points: [
+          "Partial modification",
+          "Sends a change document",
+          "Not always idempotent",
+        ],
       },
     },
-    followUp: "Why can repeating a POST request be more dangerous than repeating a PUT request?",
+    followUp:
+      "Why can repeating a POST request be more dangerous than repeating a PUT request?",
   },
   lastMinute: {
-    definition: "HTTP request asks; HTTP response reports a status and may return content.",
+    definition:
+      "HTTP request asks; HTTP response reports a status and may return content.",
     memoryLine: "2 success, 3 redirect, 4 client issue, 5 server issue.",
     cues: [
       "GET and HEAD are safe and idempotent.",
@@ -460,7 +611,8 @@ export const httpsAndHttpEvolution: SubjectTopic = {
           alt: "Plain HTTP request and response compared with a TLS handshake followed by encrypted HTTP",
           width: 1536,
           height: 1024,
-          caption: "HTTPS performs a TLS handshake before protected HTTP application data is exchanged.",
+          caption:
+            "HTTPS performs a TLS handshake before protected HTTP application data is exchanged.",
         },
         points: [
           "Confidentiality: outsiders cannot easily read protected application data.",
@@ -479,8 +631,14 @@ export const httpsAndHttpEvolution: SubjectTopic = {
         table: {
           headers: ["Method", "Main TLS role"],
           rows: [
-            ["Asymmetric and certificate mechanisms", "Authenticate and help establish shared secrets"],
-            ["Symmetric session keys", "Efficiently protect HTTP application data"],
+            [
+              "Asymmetric and certificate mechanisms",
+              "Authenticate and help establish shared secrets",
+            ],
+            [
+              "Symmetric session keys",
+              "Efficiently protect HTTP application data",
+            ],
           ],
         },
       },
@@ -500,12 +658,37 @@ export const httpsAndHttpEvolution: SubjectTopic = {
       {
         title: "HTTP Versions",
         dataTable: {
-          headers: ["Version", "Transport", "Important improvement", "Remaining issue"],
+          headers: [
+            "Version",
+            "Transport",
+            "Important improvement",
+            "Remaining issue",
+          ],
           rows: [
-            ["HTTP/1.0", "Usually TCP", "Simple request-response", "Often one connection per object"],
-            ["HTTP/1.1", "TCP", "Persistent connections and required Host header", "Responses on one connection remain ordered"],
-            ["HTTP/2", "TCP", "Binary framing, multiplexing, HPACK header compression", "TCP loss can delay all streams on that connection"],
-            ["HTTP/3", "QUIC over UDP", "Multiplexed QUIC streams and integrated TLS", "Newer transport and deployment complexity"],
+            [
+              "HTTP/1.0",
+              "Usually TCP",
+              "Simple request-response",
+              "Often one connection per object",
+            ],
+            [
+              "HTTP/1.1",
+              "TCP",
+              "Persistent connections and required Host header",
+              "Responses on one connection remain ordered",
+            ],
+            [
+              "HTTP/2",
+              "TCP",
+              "Binary framing, multiplexing, HPACK header compression",
+              "TCP loss can delay all streams on that connection",
+            ],
+            [
+              "HTTP/3",
+              "QUIC over UDP",
+              "Multiplexed QUIC streams and integrated TLS",
+              "Newer transport and deployment complexity",
+            ],
           ],
         },
         paragraphs: [
@@ -550,11 +733,20 @@ export const httpsAndHttpEvolution: SubjectTopic = {
     sections: [
       {
         title: "Version Progression",
-        flow: ["HTTP/1.0: new connections", "HTTP/1.1: reuse", "HTTP/2: multiplex", "HTTP/3: QUIC streams"],
+        flow: [
+          "HTTP/1.0: new connections",
+          "HTTP/1.1: reuse",
+          "HTTP/2: multiplex",
+          "HTTP/3: QUIC streams",
+        ],
       },
       {
         title: "Simplified RTT Result",
-        points: ["Five sequential HTTP/1.0 objects at 40 ms RTT: 400 ms", "Persistent HTTP/1.1: 240 ms", "Simplified HTTP/2 multiplexing: 120 ms"],
+        points: [
+          "Five sequential HTTP/1.0 objects at 40 ms RTT: 400 ms",
+          "Persistent HTTP/1.1: 240 ms",
+          "Simplified HTTP/2 multiplexing: 120 ms",
+        ],
       },
     ],
     essentials: [
@@ -569,14 +761,23 @@ export const httpsAndHttpEvolution: SubjectTopic = {
     comparison: {
       left: {
         label: "HTTP/2",
-        points: ["Runs over TCP", "Multiplexed HTTP streams", "TCP loss can delay all streams"],
+        points: [
+          "Runs over TCP",
+          "Multiplexed HTTP streams",
+          "TCP loss can delay all streams",
+        ],
       },
       right: {
         label: "HTTP/3",
-        points: ["Runs over QUIC and UDP", "Independent QUIC streams", "TLS is integrated into QUIC"],
+        points: [
+          "Runs over QUIC and UDP",
+          "Independent QUIC streams",
+          "TLS is integrated into QUIC",
+        ],
       },
     },
-    followUp: "Why does TLS use symmetric keys for application data after using public-key mechanisms during setup?",
+    followUp:
+      "Why does TLS use symmetric keys for application data after using public-key mechanisms during setup?",
   },
   lastMinute: {
     definition: "HTTPS = HTTP semantics carried through TLS protection.",
@@ -610,7 +811,8 @@ export const cdnAndWebCaching: SubjectTopic = {
           alt: "A user receiving a cache hit from a CDN edge while a cache miss reaches the origin server",
           width: 1536,
           height: 1024,
-          caption: "A hit is served at the edge. A miss reaches the origin and can populate the edge cache for later requests.",
+          caption:
+            "A hit is served at the edge. A miss reaches the origin and can populate the edge cache for later requests.",
         },
         paragraphs: [
           "A CDN chooses an edge using factors such as network routing, measured performance, availability, and location. The geographically nearest server is not always the network-fastest server.",
@@ -631,11 +833,31 @@ export const cdnAndWebCaching: SubjectTopic = {
         dataTable: {
           headers: ["Cache", "Location", "Main benefit"],
           rows: [
-            ["Private browser cache", "One user's browser", "Avoids repeat network transfers"],
-            ["Shared forward-proxy cache", "Between a group of users and servers", "Reuses responses across users"],
-            ["Reverse-proxy cache", "In front of an origin", "Reduces origin work"],
-            ["CDN edge cache", "Distributed edge location", "Reduces global latency and origin traffic"],
-            ["Application or origin cache", "Inside the service", "Avoids repeated computation or storage access"],
+            [
+              "Private browser cache",
+              "One user's browser",
+              "Avoids repeat network transfers",
+            ],
+            [
+              "Shared forward-proxy cache",
+              "Between a group of users and servers",
+              "Reuses responses across users",
+            ],
+            [
+              "Reverse-proxy cache",
+              "In front of an origin",
+              "Reduces origin work",
+            ],
+            [
+              "CDN edge cache",
+              "Distributed edge location",
+              "Reduces global latency and origin traffic",
+            ],
+            [
+              "Application or origin cache",
+              "Inside the service",
+              "Avoids repeated computation or storage access",
+            ],
           ],
         },
       },
@@ -644,12 +866,24 @@ export const cdnAndWebCaching: SubjectTopic = {
         dataTable: {
           headers: ["Directive", "Meaning"],
           rows: [
-            ["max-age=N", "Response is fresh for N seconds after its response time"],
-            ["public", "Shared caches may store the response when other rules allow"],
-            ["private", "Response is intended for a private cache, not a shared cache"],
+            [
+              "max-age=N",
+              "Response is fresh for N seconds after its response time",
+            ],
+            [
+              "public",
+              "Shared caches may store the response when other rules allow",
+            ],
+            [
+              "private",
+              "Response is intended for a private cache, not a shared cache",
+            ],
             ["no-cache", "May be stored, but must be validated before reuse"],
             ["no-store", "Cache must not store the response"],
-            ["must-revalidate", "A stale response must be successfully validated before reuse"],
+            [
+              "must-revalidate",
+              "A stale response must be successfully validated before reuse",
+            ],
           ],
         },
         paragraphs: [
@@ -736,18 +970,29 @@ export const cdnAndWebCaching: SubjectTopic = {
     comparison: {
       left: {
         label: "Freshness",
-        points: ["Uses max-age or Expires", "Reuse without contacting origin", "Ends when response becomes stale"],
+        points: [
+          "Uses max-age or Expires",
+          "Reuse without contacting origin",
+          "Ends when response becomes stale",
+        ],
       },
       right: {
         label: "Validation",
-        points: ["Uses ETag or Last-Modified", "Asks whether stored copy changed", "May receive 304 without a body"],
+        points: [
+          "Uses ETag or Last-Modified",
+          "Asks whether stored copy changed",
+          "May receive 304 without a body",
+        ],
       },
     },
-    followUp: "Why can no-cache still reduce bandwidth even though it requires validation?",
+    followUp:
+      "Why can no-cache still reduce bandwidth even though it requires validation?",
   },
   lastMinute: {
-    definition: "Cache stores reusable responses; CDN moves those responses closer to users.",
-    memoryLine: "Hit returns nearby; miss reaches origin; stale content validates.",
+    definition:
+      "Cache stores reusable responses; CDN moves those responses closer to users.",
+    memoryLine:
+      "Hit returns nearby; miss reaches origin; stale content validates.",
     cues: [
       "Miss ratio = 1 - hit ratio.",
       "Average = H x hit time + (1 - H) x miss time.",

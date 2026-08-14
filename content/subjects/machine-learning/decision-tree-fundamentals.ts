@@ -23,16 +23,25 @@ export const decisionTreeFundamentals: SubjectTopic = {
           alt: "Decision tree showing root node, internal nodes, branches, and leaf predictions",
           width: 1536,
           height: 1024,
-          caption: "A prediction follows one path from the root to exactly one leaf.",
+          caption:
+            "A prediction follows one path from the root to exactly one leaf.",
         },
         dataTable: {
           headers: ["Part", "Meaning", "Example"],
           rows: [
-            ["Root", "First node containing all training rows", "Income ≤ 50k?"],
+            [
+              "Root",
+              "First node containing all training rows",
+              "Income ≤ 50k?",
+            ],
             ["Internal node", "Another feature test", "Age ≤ 30?"],
             ["Branch", "Outcome of a test", "Yes or No"],
             ["Leaf", "Final output", "Approve"],
-            ["Depth", "Number of split levels on a path", "Root split has depth 1"],
+            [
+              "Depth",
+              "Number of split levels on a path",
+              "Root split has depth 1",
+            ],
           ],
         },
       },
@@ -42,7 +51,13 @@ export const decisionTreeFundamentals: SubjectTopic = {
           "Training considers candidate feature splits and selects one that makes the child groups purer than the parent. The same process is repeated inside each child, so tree construction is recursive.",
           "Classification trees prefer leaves dominated by one class. Regression trees prefer leaves whose numerical targets are close to their leaf mean.",
         ],
-        flow: ["Start with all rows", "Try candidate splits", "Choose best impurity reduction", "Repeat in each child", "Stop and create leaves"],
+        flow: [
+          "Start with all rows",
+          "Try candidate splits",
+          "Choose best impurity reduction",
+          "Repeat in each child",
+          "Stop and create leaves",
+        ],
       },
       {
         title: "Numerical and Categorical Splits",
@@ -68,7 +83,8 @@ export const decisionTreeFundamentals: SubjectTopic = {
         problems: [
           {
             title: "Follow a classification path",
-            prompt: "A tree asks Income ≤ 50k. If Yes, it asks Credit score ≤ 650. The leaves are: No → Approve; Yes and score ≤ 650 → Reject; Yes and score > 650 → Approve. Predict for income 45k and score 700.",
+            prompt:
+              "A tree asks Income ≤ 50k. If Yes, it asks Credit score ≤ 650. The leaves are: No → Approve; Yes and score ≤ 650 → Reject; Yes and score > 650 → Approve. Predict for income 45k and score 700.",
             steps: [
               "45k ≤ 50k, so follow the Yes branch.",
               "700 ≤ 650 is false, so follow the score > 650 branch.",
@@ -84,7 +100,10 @@ export const decisionTreeFundamentals: SubjectTopic = {
           "For a leaf with 8 positive and 2 negative rows, the class prediction is positive and the training proportion for the positive class is 8/10 = 0.8.",
         ],
         formulas: [
-          { label: "Leaf class probability", expression: "P̂(class k | leaf) = rows of class k / rows in leaf" },
+          {
+            label: "Leaf class probability",
+            expression: "P̂(class k | leaf) = rows of class k / rows in leaf",
+          },
         ],
       },
       {
@@ -137,11 +156,23 @@ export const decisionTreeFundamentals: SubjectTopic = {
     sections: [
       {
         title: "Tree Parts",
-        points: ["Root: first split", "Internal node: another test", "Branch: test outcome", "Leaf: prediction", "Depth: split levels"],
+        points: [
+          "Root: first split",
+          "Internal node: another test",
+          "Branch: test outcome",
+          "Leaf: prediction",
+          "Depth: split levels",
+        ],
       },
       {
         title: "Training Flow",
-        flow: ["Try splits", "Measure child purity", "Choose best split", "Repeat", "Stop at leaves"],
+        flow: [
+          "Try splits",
+          "Measure child purity",
+          "Choose best split",
+          "Repeat",
+          "Stop at leaves",
+        ],
       },
     ],
     essentialsStyle: "plain",
@@ -152,16 +183,34 @@ export const decisionTreeFundamentals: SubjectTopic = {
       "Deep trees can overfit.",
       "Greedy construction finds a strong local split, not guaranteed global optimum.",
     ],
-    followUp: "Why can two similar training samples produce different tree structures?",
+    followUp:
+      "Why can two similar training samples produce different tree structures?",
   },
   lastMinute: {
-    definition: "Ask feature questions from root to leaf; the leaf gives the prediction.",
+    definition:
+      "Ask feature questions from root to leaf; the leaf gives the prediction.",
     sections: [
-      { title: "Path", flow: ["Root", "Condition", "Branch", "Next node", "Leaf"], wide: true },
-      { title: "Remember", points: ["No scaling usually needed", "Handles interactions", "Deep tree can overfit", "Greedy splits"] },
+      {
+        title: "Path",
+        flow: ["Root", "Condition", "Branch", "Next node", "Leaf"],
+        wide: true,
+      },
+      {
+        title: "Remember",
+        points: [
+          "No scaling usually needed",
+          "Handles interactions",
+          "Deep tree can overfit",
+          "Greedy splits",
+        ],
+      },
     ],
     memoryLine: "Root asks first; branch chooses direction; leaf answers.",
-    cues: ["One prediction follows one path.", "Leaf probability comes from class proportions.", "Depth counts split levels."],
+    cues: [
+      "One prediction follows one path.",
+      "Leaf probability comes from class proportions.",
+      "Depth counts split levels.",
+    ],
     trap: "Do not call every node a leaf; only terminal nodes are leaves.",
   },
 };
@@ -186,7 +235,10 @@ export const entropyAndInformationGain: SubjectTopic = {
         ],
         formulas: [
           { label: "Entropy", expression: "H(S) = −Σₖ pₖ log₂(pₖ)" },
-          { label: "Binary entropy", expression: "H(S) = −p log₂p − (1−p)log₂(1−p)" },
+          {
+            label: "Binary entropy",
+            expression: "H(S) = −p log₂p − (1−p)log₂(1−p)",
+          },
         ],
         dataTable: {
           headers: ["Binary class proportions", "Entropy", "Meaning"],
@@ -203,7 +255,10 @@ export const entropyAndInformationGain: SubjectTopic = {
           "A split may create children of different sizes. Therefore, child entropy must be weighted by the fraction of parent rows entering each child.",
         ],
         formulas: [
-          { label: "Weighted child entropy", expression: "Hchildren = Σⱼ (|Sⱼ|/|S|)H(Sⱼ)" },
+          {
+            label: "Weighted child entropy",
+            expression: "Hchildren = Σⱼ (|Sⱼ|/|S|)H(Sⱼ)",
+          },
         ],
       },
       {
@@ -212,7 +267,10 @@ export const entropyAndInformationGain: SubjectTopic = {
           "Information gain is parent entropy minus weighted child entropy. A larger value means the split makes the children purer.",
         ],
         formulas: [
-          { label: "Information gain", expression: "IG = H(parent) − Hchildren" },
+          {
+            label: "Information gain",
+            expression: "IG = H(parent) − Hchildren",
+          },
         ],
         visual: {
           src: "/notes/machine-learning/entropy-information-gain.png",
@@ -230,7 +288,8 @@ export const entropyAndInformationGain: SubjectTopic = {
         problems: [
           {
             title: "Calculate information gain",
-            prompt: "Find the parent entropy, weighted child entropy, and information gain for the split.",
+            prompt:
+              "Find the parent entropy, weighted child entropy, and information gain for the split.",
             steps: [
               "H(parent) = −0.6log₂0.6 − 0.4log₂0.4 ≈ 0.971.",
               "H(left) = 0 because the left child is pure.",
@@ -304,16 +363,39 @@ export const entropyAndInformationGain: SubjectTopic = {
       "Weight children by size.",
       "Larger information gain is better.",
     ],
-    followUp: "Why can an unweighted average of child entropies select the wrong split?",
+    followUp:
+      "Why can an unweighted average of child entropies select the wrong split?",
   },
   lastMinute: {
-    definition: "Information gain = uncertainty before split − weighted uncertainty after split.",
+    definition:
+      "Information gain = uncertainty before split − weighted uncertainty after split.",
     sections: [
-      { title: "Order", flow: ["Parent H", "Child H values", "Weight children", "Subtract", "Choose largest IG"], wide: true },
-      { title: "Anchors", points: ["Pure → H = 0", "50–50 binary → H = 1", "IG ≥ 0 for an accepted useful split"] },
+      {
+        title: "Order",
+        flow: [
+          "Parent H",
+          "Child H values",
+          "Weight children",
+          "Subtract",
+          "Choose largest IG",
+        ],
+        wide: true,
+      },
+      {
+        title: "Anchors",
+        points: [
+          "Pure → H = 0",
+          "50–50 binary → H = 1",
+          "IG ≥ 0 for an accepted useful split",
+        ],
+      },
     ],
     memoryLine: "Parent minus weighted children gives information gain.",
-    cues: ["Use log base 2 for bits.", "0 log 0 contributes 0.", "Greedy means best current split."],
+    cues: [
+      "Use log base 2 for bits.",
+      "0 log 0 contributes 0.",
+      "Greedy means best current split.",
+    ],
     trap: "Do not forget the child-size weights.",
   },
 };

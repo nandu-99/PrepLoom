@@ -40,7 +40,10 @@ export const oddsLogOddsAndCoefficients: SubjectTopic = {
         ],
         formulas: [
           { label: "Logit", expression: "logit(p) = ln[p/(1 − p)]" },
-          { label: "Logistic-regression model", expression: "ln[p/(1 − p)] = β₀ + β₁x₁ + … + βₚxₚ" },
+          {
+            label: "Logistic-regression model",
+            expression: "ln[p/(1 − p)] = β₀ + β₁x₁ + … + βₚxₚ",
+          },
         ],
       },
       {
@@ -56,7 +59,8 @@ export const oddsLogOddsAndCoefficients: SubjectTopic = {
               "Odds = 0.80/(1 − 0.80) = 0.80/0.20 = 4.",
               "Log-odds = ln(4) ≈ 1.386.",
             ],
-            answer: "The odds are 4 to 1 in favour, and the log-odds are approximately 1.386.",
+            answer:
+              "The odds are 4 to 1 in favour, and the log-odds are approximately 1.386.",
           },
         ],
       },
@@ -73,13 +77,15 @@ export const oddsLogOddsAndCoefficients: SubjectTopic = {
         problems: [
           {
             title: "Interpret an odds ratio",
-            prompt: "A logistic model has β₁ = 0.40 for years of experience. Interpret it.",
+            prompt:
+              "A logistic model has β₁ = 0.40 for years of experience. Interpret it.",
             steps: [
               "OR = e⁰·⁴⁰ ≈ 1.492.",
               "A one-year increase multiplies the odds by about 1.492.",
               "Percentage change in odds = (1.492 − 1) × 100 ≈ 49.2%.",
             ],
-            answer: "Holding other features fixed, each extra year is associated with about 49.2% higher odds of class 1.",
+            answer:
+              "Holding other features fixed, each extra year is associated with about 49.2% higher odds of class 1.",
           },
         ],
       },
@@ -91,14 +97,16 @@ export const oddsLogOddsAndCoefficients: SubjectTopic = {
         problems: [
           {
             title: "Compare two starting probabilities",
-            prompt: "An odds ratio is 2. Compare its effect when the starting probability is 0.10 and when it is 0.50.",
+            prompt:
+              "An odds ratio is 2. Compare its effect when the starting probability is 0.10 and when it is 0.50.",
             steps: [
               "From p = 0.10: starting odds = 0.10/0.90 = 1/9.",
               "New odds = 2/9, so new p = (2/9)/(1 + 2/9) = 2/11 ≈ 0.182. Increase ≈ 8.2 percentage points.",
               "From p = 0.50: starting odds = 1.",
               "New odds = 2, so new p = 2/(1 + 2) ≈ 0.667. Increase ≈ 16.7 percentage points.",
             ],
-            answer: "The same OR = 2 produces different probability increases: about 8.2 and 16.7 percentage points.",
+            answer:
+              "The same OR = 2 produces different probability increases: about 8.2 and 16.7 percentage points.",
           },
         ],
       },
@@ -110,13 +118,15 @@ export const oddsLogOddsAndCoefficients: SubjectTopic = {
         problems: [
           {
             title: "Interpret a negative coefficient",
-            prompt: "A coefficient is β = −0.70. Find and interpret its odds ratio.",
+            prompt:
+              "A coefficient is β = −0.70. Find and interpret its odds ratio.",
             steps: [
               "OR = e⁻⁰·⁷⁰ ≈ 0.497.",
               "The odds are multiplied by about 0.497.",
               "Percentage decrease = (1 − 0.497) × 100 ≈ 50.3%.",
             ],
-            answer: "A one-unit increase is associated with approximately 50.3% lower odds, holding other features fixed.",
+            answer:
+              "A one-unit increase is associated with approximately 50.3% lower odds, holding other features fixed.",
           },
         ],
       },
@@ -175,7 +185,11 @@ export const oddsLogOddsAndCoefficients: SubjectTopic = {
       },
       {
         title: "Reading OR",
-        points: ["OR > 1: higher odds", "OR = 1: unchanged odds", "OR < 1: lower odds"],
+        points: [
+          "OR > 1: higher odds",
+          "OR = 1: unchanged odds",
+          "OR < 1: lower odds",
+        ],
       },
     ],
     essentialsStyle: "plain",
@@ -193,7 +207,12 @@ export const oddsLogOddsAndCoefficients: SubjectTopic = {
     sections: [
       {
         title: "Coefficient Rule",
-        flow: ["Coefficient β", "Calculate eᵝ", "Read odds multiplier", "State held-fixed condition"],
+        flow: [
+          "Coefficient β",
+          "Calculate eᵝ",
+          "Read odds multiplier",
+          "State held-fixed condition",
+        ],
         wide: true,
       },
       {
@@ -201,8 +220,13 @@ export const oddsLogOddsAndCoefficients: SubjectTopic = {
         points: ["β > 0 → OR > 1", "β = 0 → OR = 1", "β < 0 → OR < 1"],
       },
     ],
-    memoryLine: "Exponentiate beta to move from log-odds change to odds multiplier.",
-    cues: ["Odds = p/(1−p).", "Logit = ln(odds).", "State the feature unit and reference."],
+    memoryLine:
+      "Exponentiate beta to move from log-odds change to odds multiplier.",
+    cues: [
+      "Odds = p/(1−p).",
+      "Logit = ln(odds).",
+      "State the feature unit and reference.",
+    ],
     trap: "Do not say OR = 1.5 means probability rises by 50 percentage points.",
   },
 };
@@ -225,7 +249,10 @@ export const thresholdAndDecisionBoundary: SubjectTopic = {
           "At threshold t, predict class 1 when p̂ ≥ t. The common value 0.5 is convenient but not always suitable.",
         ],
         formulas: [
-          { label: "Class rule", expression: "ŷclass = 1 if p̂ ≥ t; otherwise 0" },
+          {
+            label: "Class rule",
+            expression: "ŷclass = 1 if p̂ ≥ t; otherwise 0",
+          },
         ],
         dataTable: {
           headers: ["p̂", "Prediction at t = 0.5", "Prediction at t = 0.3"],
@@ -247,13 +274,22 @@ export const thresholdAndDecisionBoundary: SubjectTopic = {
           alt: "Probability axis showing how low and high thresholds change false-positive and false-negative trade-offs",
           width: 1536,
           height: 1024,
-          caption: "Threshold choice changes the predicted labels without retraining the probability model.",
+          caption:
+            "Threshold choice changes the predicted labels without retraining the probability model.",
         },
         dataTable: {
           headers: ["Change", "Usually increases", "Usually decreases"],
           rows: [
-            ["Lower threshold", "Predicted positives and recall", "False negatives and specificity"],
-            ["Higher threshold", "Predicted negatives and specificity", "False positives and recall"],
+            [
+              "Lower threshold",
+              "Predicted positives and recall",
+              "False negatives and specificity",
+            ],
+            [
+              "Higher threshold",
+              "Predicted negatives and specificity",
+              "False positives and recall",
+            ],
           ],
         },
       },
@@ -282,14 +318,16 @@ export const thresholdAndDecisionBoundary: SubjectTopic = {
         problems: [
           {
             title: "Find and use the boundary",
-            prompt: "For z = −4 + x₁ + 2x₂, find the t = 0.5 boundary and classify (x₁, x₂) = (3, 1).",
+            prompt:
+              "For z = −4 + x₁ + 2x₂, find the t = 0.5 boundary and classify (x₁, x₂) = (3, 1).",
             steps: [
               "At t = 0.5, set z = 0: −4 + x₁ + 2x₂ = 0.",
               "Solve for x₂: x₂ = 2 − 0.5x₁.",
               "For (3,1), z = −4 + 3 + 2(1) = 1.",
               "p̂ = σ(1) ≈ 0.731, so predict class 1.",
             ],
-            answer: "The boundary is x₂ = 2 − 0.5x₁, and point (3,1) is predicted as class 1.",
+            answer:
+              "The boundary is x₂ = 2 − 0.5x₁, and point (3,1) is predicted as class 1.",
           },
         ],
       },
@@ -299,12 +337,16 @@ export const thresholdAndDecisionBoundary: SubjectTopic = {
           "For threshold t, the probability boundary p̂ = t corresponds to a log-odds score of ln[t/(1−t)]. Changing t shifts the boundary but keeps it linear for basic logistic regression.",
         ],
         formulas: [
-          { label: "Boundary at threshold t", expression: "βᵀx = ln[t/(1 − t)]" },
+          {
+            label: "Boundary at threshold t",
+            expression: "βᵀx = ln[t/(1 − t)]",
+          },
         ],
         problems: [
           {
             title: "Score boundary for t = 0.8",
-            prompt: "What linear score is required at a probability threshold of 0.8?",
+            prompt:
+              "What linear score is required at a probability threshold of 0.8?",
             steps: ["z = ln[t/(1 − t)]", "z = ln(0.8/0.2) = ln(4)"],
             answer: "The boundary score is z ≈ 1.386.",
           },
@@ -325,7 +367,8 @@ export const thresholdAndDecisionBoundary: SubjectTopic = {
         problems: [
           {
             title: "Choose a threshold from error costs",
-            prompt: "A false positive costs 1 unit and a false negative costs 4 units. Find the basic cost threshold.",
+            prompt:
+              "A false positive costs 1 unit and a false negative costs 4 units. Find the basic cost threshold.",
             steps: [
               "t = C_FP/(C_FP + C_FN).",
               "t = 1/(1 + 4) = 0.20.",
@@ -396,19 +439,33 @@ export const thresholdAndDecisionBoundary: SubjectTopic = {
     followUp: "What happens to false negatives when the threshold is lowered?",
   },
   lastMinute: {
-    definition: "Lower threshold finds more positives; higher threshold demands stronger evidence.",
+    definition:
+      "Lower threshold finds more positives; higher threshold demands stronger evidence.",
     sections: [
       {
         title: "Threshold Direction",
-        points: ["Lower t → recall usually rises", "Higher t → specificity usually rises", "Costs decide the useful trade-off"],
+        points: [
+          "Lower t → recall usually rises",
+          "Higher t → specificity usually rises",
+          "Costs decide the useful trade-off",
+        ],
       },
       {
         title: "Boundary",
-        points: ["t = 0.5 → z = 0", "Any t → z = ln[t/(1−t)]", "Linear score gives a linear boundary"],
+        points: [
+          "t = 0.5 → z = 0",
+          "Any t → z = ln[t/(1−t)]",
+          "Linear score gives a linear boundary",
+        ],
       },
     ],
-    memoryLine: "Threshold moves the decision, not the learned probability curve.",
-    cues: ["Use validation data.", "State the positive class.", "Consider FP and FN costs."],
+    memoryLine:
+      "Threshold moves the decision, not the learned probability curve.",
+    cues: [
+      "Use validation data.",
+      "State the positive class.",
+      "Consider FP and FN costs.",
+    ],
     trap: "Do not assume 0.5 is always the best threshold.",
   },
 };

@@ -36,9 +36,21 @@ export const introductionToDeepLearning: SubjectTopic = {
         dataTable: {
           headers: ["Area", "Main idea", "Example"],
           rows: [
-            ["Artificial Intelligence", "Broad field of intelligent computer behaviour", "A system that plans a route"],
-            ["Machine Learning", "Learns a pattern from examples", "A model that predicts house prices"],
-            ["Deep Learning", "Uses layered neural networks", "A network that recognizes objects in images"],
+            [
+              "Artificial Intelligence",
+              "Broad field of intelligent computer behaviour",
+              "A system that plans a route",
+            ],
+            [
+              "Machine Learning",
+              "Learns a pattern from examples",
+              "A model that predicts house prices",
+            ],
+            [
+              "Deep Learning",
+              "Uses layered neural networks",
+              "A network that recognizes objects in images",
+            ],
           ],
         },
       },
@@ -51,9 +63,21 @@ export const introductionToDeepLearning: SubjectTopic = {
         dataTable: {
           headers: ["Question", "Traditional ML", "Deep Learning"],
           rows: [
-            ["Features", "Often designed or selected by people", "Many features learned through layers"],
-            ["Common data", "Structured tables", "Images, text, audio, and other complex data"],
-            ["Model depth", "Usually fewer learned transformations", "Usually several learned transformations"],
+            [
+              "Features",
+              "Often designed or selected by people",
+              "Many features learned through layers",
+            ],
+            [
+              "Common data",
+              "Structured tables",
+              "Images, text, audio, and other complex data",
+            ],
+            [
+              "Model depth",
+              "Usually fewer learned transformations",
+              "Usually several learned transformations",
+            ],
           ],
         },
       },
@@ -72,11 +96,20 @@ export const introductionToDeepLearning: SubjectTopic = {
           "It is not automatically the best choice. A small structured table may be handled well by linear models or tree-based models. These models can train faster and may be easier to explain.",
         ],
         table: {
-          headers: ["Deep learning is often useful", "A simpler model may be better"],
+          headers: [
+            "Deep learning is often useful",
+            "A simpler model may be better",
+          ],
           rows: [
             ["Large image, audio, or text dataset", "Small tabular dataset"],
-            ["Complex patterns must be learned", "A clear simple relationship is enough"],
-            ["Compute and training time are available", "Fast training and explanation are priorities"],
+            [
+              "Complex patterns must be learned",
+              "A clear simple relationship is enough",
+            ],
+            [
+              "Compute and training time are available",
+              "Fast training and explanation are priorities",
+            ],
           ],
         },
       },
@@ -89,9 +122,18 @@ export const introductionToDeepLearning: SubjectTopic = {
         table: {
           headers: ["Training", "Inference"],
           rows: [
-            ["Uses labelled or otherwise prepared examples", "Uses a new input"],
-            ["Calculates error and updates parameters", "Does not normally update parameters"],
-            ["Can take many repeated passes", "Usually produces one requested result"],
+            [
+              "Uses labelled or otherwise prepared examples",
+              "Uses a new input",
+            ],
+            [
+              "Calculates error and updates parameters",
+              "Does not normally update parameters",
+            ],
+            [
+              "Can take many repeated passes",
+              "Usually produces one requested result",
+            ],
           ],
         },
       },
@@ -221,8 +263,7 @@ export const introductionToDeepLearning: SubjectTopic = {
       "Training learns parameters and representations.",
       "Validation checks whether learning transfers to unseen examples.",
     ],
-    trap:
-      "Do not write that every machine-learning problem needs deep learning or that a deep network understands like a human.",
+    trap: "Do not write that every machine-learning problem needs deep learning or that a deep network understands like a human.",
   },
 };
 
@@ -319,16 +360,27 @@ export const tensorsShapesAndBatches: SubjectTopic = {
         ],
         formulas: [
           { label: "Embedding parameters", expression: "parameters = V × E" },
-          { label: "Embedding lookup", expression: "IDs:(B, T) → vectors:(B, T, E)" },
+          {
+            label: "Embedding lookup",
+            expression: "IDs:(B, T) → vectors:(B, T, E)",
+          },
         ],
         dataTable: {
           headers: ["Data", "Typical batch shape", "Axis meaning"],
           rows: [
             ["Tabular", "(B, F)", "batch, features"],
-            ["Grayscale images", "(B, H, W, 1)", "batch, height, width, channel"],
+            [
+              "Grayscale images",
+              "(B, H, W, 1)",
+              "batch, height, width, channel",
+            ],
             ["RGB images", "(B, H, W, 3)", "batch, height, width, channels"],
             ["Token sequences", "(B, T)", "batch, time or token position"],
-            ["Token embeddings", "(B, T, E)", "batch, position, embedding size"],
+            [
+              "Token embeddings",
+              "(B, T, E)",
+              "batch, position, embedding size",
+            ],
           ],
         },
       },
@@ -415,7 +467,8 @@ export const tensorsShapesAndBatches: SubjectTopic = {
               "Broadcasting adds b to every row of Z.",
               "The operation changes values but not the tensor shape.",
             ],
-            answer: "Yes. The bias broadcasts across all 32 rows; the result remains (32, 4).",
+            answer:
+              "Yes. The bias broadcasts across all 32 rows; the result remains (32, 4).",
           },
         ],
       },
@@ -477,8 +530,7 @@ export const tensorsShapesAndBatches: SubjectTopic = {
       "What is the difference between the rank of a tensor and its shape?",
   },
   lastMinute: {
-    definition:
-      "Rank = number of axes. Shape = size of each axis.",
+    definition: "Rank = number of axes. Shape = size of each axis.",
     sections: [
       {
         title: "Common Shapes",
@@ -491,7 +543,12 @@ export const tensorsShapesAndBatches: SubjectTopic = {
       },
       {
         title: "Fast Numerical Rule",
-        flow: ["Name axes", "Apply operation", "Check element count", "Verify meaning"],
+        flow: [
+          "Name axes",
+          "Apply operation",
+          "Check element count",
+          "Verify meaning",
+        ],
         wide: true,
       },
     ],
@@ -501,8 +558,7 @@ export const tensorsShapesAndBatches: SubjectTopic = {
       "Reshape keeps element count; transpose changes axis order.",
       "Dense layer: only the final feature size becomes the number of units.",
     ],
-    trap:
-      "Do not call shape (32, 64) a 64-dimensional tensor. Its rank is 2; 64 is only one axis size.",
+    trap: "Do not call shape (32, 64) a 64-dimensional tensor. Its rank is 2; 64 is only one axis size.",
   },
 };
 
@@ -712,10 +768,7 @@ export const artificialNeuronWeightsAndBias: SubjectTopic = {
     sections: [
       {
         title: "Two-Step Calculation",
-        formulas: [
-          { expression: "z = wᵀx + b" },
-          { expression: "a = f(z)" },
-        ],
+        formulas: [{ expression: "z = wᵀx + b" }, { expression: "a = f(z)" }],
       },
       {
         title: "Jobs of the Parts",
@@ -766,7 +819,6 @@ export const artificialNeuronWeightsAndBias: SubjectTopic = {
       "a is after activation.",
       "wᵀx means the dot product.",
     ],
-    trap:
-      "Do not apply the activation before adding the bias, and do not forget negative signs in the weighted sum.",
+    trap: "Do not apply the activation before adding the bias, and do not forget negative signs in the weighted sum.",
   },
 };

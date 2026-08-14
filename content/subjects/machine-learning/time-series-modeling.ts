@@ -48,7 +48,9 @@ export const autocorrelationAcfAndPacf: SubjectTopic = {
       },
       {
         title: "Lag-Pair Numerical",
-        paragraphs: ["At lag k, the first k observations have no aligned earlier partner."],
+        paragraphs: [
+          "At lag k, the first k observations have no aligned earlier partner.",
+        ],
         problems: [
           {
             title: "Count usable pairs",
@@ -89,7 +91,11 @@ export const autocorrelationAcfAndPacf: SubjectTopic = {
     sections: [
       {
         title: "Read",
-        points: ["Slow ACF decay: check stationarity", "Seasonal peaks: repeating dependence", "PACF: direct lag effect"],
+        points: [
+          "Slow ACF decay: check stationarity",
+          "Seasonal peaks: repeating dependence",
+          "PACF: direct lag effect",
+        ],
       },
     ],
     essentialsStyle: "plain",
@@ -102,11 +108,19 @@ export const autocorrelationAcfAndPacf: SubjectTopic = {
     followUp: "How does PACF differ from ACF at lag k?",
   },
   lastMinute: {
-    definition: "ACF shows total lag correlation; PACF isolates direct lag correlation.",
+    definition:
+      "ACF shows total lag correlation; PACF isolates direct lag correlation.",
     sections: [
-      { title: "Signals", points: ["Slow decay → non-stationarity warning", "Repeated peaks → seasonal pattern"] },
+      {
+        title: "Signals",
+        points: [
+          "Slow decay → non-stationarity warning",
+          "Repeated peaks → seasonal pattern",
+        ],
+      },
     ],
-    memoryLine: "ACF sees the full lag relationship; PACF removes the shorter paths.",
+    memoryLine:
+      "ACF sees the full lag relationship; PACF removes the shorter paths.",
     cues: ["Lag 0 correlation is 1.", "Inspect residual ACF after fitting."],
     trap: "Do not choose an order from one noisy spike alone.",
   },
@@ -170,7 +184,10 @@ export const arMaArimaAndSeasonalModels: SubjectTopic = {
           headers: ["Model", "Use"],
           rows: [
             ["SARIMA", "Adds seasonal AR, differencing, and MA terms"],
-            ["ARIMAX or SARIMAX", "Adds external predictors such as price or weather"],
+            [
+              "ARIMAX or SARIMAX",
+              "Adds external predictors such as price or weather",
+            ],
             ["VAR", "Models several related time series together"],
           ],
         },
@@ -180,12 +197,13 @@ export const arMaArimaAndSeasonalModels: SubjectTopic = {
       },
       {
         title: "AR Numerical",
-        paragraphs: ["Substitute the known lagged values and preserve the sign of every coefficient."],
+        paragraphs: [
+          "Substitute the known lagged values and preserve the sign of every coefficient.",
+        ],
         problems: [
           {
             title: "Make one AR(2) prediction",
-            prompt:
-              "Use ŷₜ=2+0.6yₜ₋₁−0.2yₜ₋₂ with yₜ₋₁=10 and yₜ₋₂=8.",
+            prompt: "Use ŷₜ=2+0.6yₜ₋₁−0.2yₜ₋₂ with yₜ₋₁=10 and yₜ₋₂=8.",
             steps: ["ŷₜ=2+0.6(10)−0.2(8)", "ŷₜ=2+6−1.6"],
             answer: "The one-step prediction is 6.4.",
           },
@@ -221,7 +239,11 @@ export const arMaArimaAndSeasonalModels: SubjectTopic = {
       },
       {
         title: "Extensions",
-        points: ["SARIMA: seasonal terms", "SARIMAX: seasonal plus external inputs", "VAR: several series"],
+        points: [
+          "SARIMA: seasonal terms",
+          "SARIMAX: seasonal plus external inputs",
+          "VAR: several series",
+        ],
       },
     ],
     essentialsStyle: "plain",
@@ -283,11 +305,14 @@ export const timeSeriesValidationAndForecastEvaluation: SubjectTopic = {
       },
       {
         title: "Complete Forecast Numerical",
-        paragraphs: ["Use the same forecast errors for every metric so the comparison remains consistent."],
+        paragraphs: [
+          "Use the same forecast errors for every metric so the comparison remains consistent.",
+        ],
         problems: [
           {
             title: "Calculate MAE and RMSE",
-            prompt: "For actual values [10,12,14] and forecasts [9,13,12], find MAE and RMSE.",
+            prompt:
+              "For actual values [10,12,14] and forecasts [9,13,12], find MAE and RMSE.",
             steps: [
               "Errors are [1,−1,2] using actual minus forecast.",
               "MAE=(1+1+2)/3=4/3≈1.33.",
@@ -361,10 +386,12 @@ export const timeSeriesValidationAndForecastEvaluation: SubjectTopic = {
       "Residual autocorrelation means structure remains.",
       "ANOVA group differences do not replace a forecasting model.",
     ],
-    followUp: "Why is random K-fold validation unsafe for ordinary forecasting?",
+    followUp:
+      "Why is random K-fold validation unsafe for ordinary forecasting?",
   },
   lastMinute: {
-    definition: "Past trains; later windows validate; latest untouched period tests.",
+    definition:
+      "Past trains; later windows validate; latest untouched period tests.",
     sections: [
       {
         title: "Checklist",

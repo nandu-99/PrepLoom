@@ -147,11 +147,19 @@ export const dataLinkLayerAndEthernetFrames: SubjectTopic = {
     comparison: {
       left: {
         label: "IP packet",
-        points: ["Layer 3 unit", "Carries IP addresses", "Crosses routed networks"],
+        points: [
+          "Layer 3 unit",
+          "Carries IP addresses",
+          "Crosses routed networks",
+        ],
       },
       right: {
         label: "Ethernet frame",
-        points: ["Layer 2 unit", "Carries MAC addresses", "Valid on one link or LAN"],
+        points: [
+          "Layer 2 unit",
+          "Carries MAC addresses",
+          "Valid on one link or LAN",
+        ],
       },
     },
     followUp:
@@ -192,8 +200,16 @@ export const macAddressingAndLanSwitching: SubjectTopic = {
         dataTable: {
           headers: ["Bit in first octet", "0", "1"],
           rows: [
-            ["Least significant bit", "Individual or unicast", "Group or multicast"],
-            ["Next least significant bit", "Universally administered", "Locally administered"],
+            [
+              "Least significant bit",
+              "Individual or unicast",
+              "Group or multicast",
+            ],
+            [
+              "Next least significant bit",
+              "Universally administered",
+              "Locally administered",
+            ],
           ],
         },
         points: [
@@ -209,9 +225,21 @@ export const macAddressingAndLanSwitching: SubjectTopic = {
         dataTable: {
           headers: ["Delivery", "Example", "Switch behavior"],
           rows: [
-            ["Unicast", "00:1A:2B:3C:4D:5E", "Forward to known destination port"],
-            ["IPv4 multicast mapping", "01:00:5E:xx:xx:xx", "Deliver or flood within multicast controls"],
-            ["Broadcast", "FF:FF:FF:FF:FF:FF", "Flood through the VLAN except incoming port"],
+            [
+              "Unicast",
+              "00:1A:2B:3C:4D:5E",
+              "Forward to known destination port",
+            ],
+            [
+              "IPv4 multicast mapping",
+              "01:00:5E:xx:xx:xx",
+              "Deliver or flood within multicast controls",
+            ],
+            [
+              "Broadcast",
+              "FF:FF:FF:FF:FF:FF",
+              "Flood through the VLAN except incoming port",
+            ],
           ],
         },
       },
@@ -268,9 +296,17 @@ export const macAddressingAndLanSwitching: SubjectTopic = {
         dataTable: {
           headers: ["Port type", "Normal role", "Frame treatment"],
           rows: [
-            ["Access", "Connect one endpoint VLAN", "Normally untagged to endpoint"],
+            [
+              "Access",
+              "Connect one endpoint VLAN",
+              "Normally untagged to endpoint",
+            ],
             ["Trunk", "Carry several VLANs", "802.1Q tagged for most VLANs"],
-            ["Native VLAN on trunk", "Configured untagged VLAN", "Must match at both ends"],
+            [
+              "Native VLAN on trunk",
+              "Configured untagged VLAN",
+              "Must match at both ends",
+            ],
           ],
         },
       },
@@ -319,11 +355,19 @@ export const macAddressingAndLanSwitching: SubjectTopic = {
     comparison: {
       left: {
         label: "Collision domain",
-        points: ["Contention region", "One per switch port", "Hub ports share one"],
+        points: [
+          "Contention region",
+          "One per switch port",
+          "Hub ports share one",
+        ],
       },
       right: {
         label: "Broadcast domain",
-        points: ["Reach of Layer 2 broadcast", "One per VLAN", "Router separates domains"],
+        points: [
+          "Reach of Layer 2 broadcast",
+          "One per VLAN",
+          "Router separates domains",
+        ],
       },
     },
     followUp:
@@ -386,10 +430,18 @@ export const arpAndLocalAddressResolution: SubjectTopic = {
           rows: [
             ["Hardware type", "1", "Ethernet link type"],
             ["Protocol type", "0x0800", "IPv4 being resolved"],
-            ["Hardware / protocol length", "6 / 4", "MAC and IPv4 byte lengths"],
+            [
+              "Hardware / protocol length",
+              "6 / 4",
+              "MAC and IPv4 byte lengths",
+            ],
             ["Opcode", "1 request, 2 reply", "ARP operation"],
             ["Sender addresses", "Sender MAC and IPv4", "Identity of sender"],
-            ["Target addresses", "Target MAC and IPv4", "Identity being queried or answered"],
+            [
+              "Target addresses",
+              "Target MAC and IPv4",
+              "Identity being queried or answered",
+            ],
           ],
         },
       },
@@ -399,7 +451,11 @@ export const arpAndLocalAddressResolution: SubjectTopic = {
           headers: ["Destination", "IP packet destination", "MAC to resolve"],
           rows: [
             ["192.168.1.20 on local /24", "192.168.1.20", "Host 192.168.1.20"],
-            ["8.8.8.8 outside local /24", "8.8.8.8", "Default gateway 192.168.1.1"],
+            [
+              "8.8.8.8 outside local /24",
+              "8.8.8.8",
+              "Default gateway 192.168.1.1",
+            ],
           ],
         },
         paragraphs: [
@@ -425,7 +481,10 @@ export const arpAndLocalAddressResolution: SubjectTopic = {
           rows: [
             ["IPv4 -> MAC", "MAC + VLAN -> switch port"],
             ["Used to build local frame", "Used to choose forwarding port"],
-            ["Maintained by endpoint or router", "Maintained by Layer 2 switch"],
+            [
+              "Maintained by endpoint or router",
+              "Maintained by Layer 2 switch",
+            ],
           ],
         },
       },
@@ -500,11 +559,19 @@ export const arpAndLocalAddressResolution: SubjectTopic = {
     comparison: {
       left: {
         label: "Request",
-        points: ["Asks for target MAC", "Normally broadcast", "Target MAC is unknown"],
+        points: [
+          "Asks for target MAC",
+          "Normally broadcast",
+          "Target MAC is unknown",
+        ],
       },
       right: {
         label: "Reply",
-        points: ["Provides the mapping", "Normally unicast", "Populates neighbor cache"],
+        points: [
+          "Provides the mapping",
+          "Normally unicast",
+          "Populates neighbor cache",
+        ],
       },
     },
     followUp:
@@ -602,9 +669,15 @@ export const dhcpAndAutomaticConfiguration: SubjectTopic = {
           headers: ["Message", "Meaning"],
           rows: [
             ["DHCPNAK", "Server rejects requested address or configuration"],
-            ["DHCPDECLINE", "Client reports that offered address appears in use"],
+            [
+              "DHCPDECLINE",
+              "Client reports that offered address appears in use",
+            ],
             ["DHCPRELEASE", "Client voluntarily returns its lease"],
-            ["DHCPINFORM", "Configured client requests options without a new address"],
+            [
+              "DHCPINFORM",
+              "Configured client requests options without a new address",
+            ],
           ],
         },
       },
@@ -701,11 +774,19 @@ export const dhcpAndAutomaticConfiguration: SubjectTopic = {
     comparison: {
       left: {
         label: "Renewal at T1",
-        points: ["Usually unicast", "Contact original server", "Commonly at 50 percent"],
+        points: [
+          "Usually unicast",
+          "Contact original server",
+          "Commonly at 50 percent",
+        ],
       },
       right: {
         label: "Rebinding at T2",
-        points: ["Normally broadcast", "Any server may answer", "Commonly at 87.5 percent"],
+        points: [
+          "Normally broadcast",
+          "Any server may answer",
+          "Commonly at 87.5 percent",
+        ],
       },
     },
     followUp: "For a 24-hour lease, when do default T1 and T2 occur?",
@@ -740,10 +821,26 @@ export const framingStuffingAndCrc: SubjectTopic = {
         dataTable: {
           headers: ["Method", "Boundary rule", "Main risk or solution"],
           rows: [
-            ["Length or count", "Header states frame length", "Corrupt count can lose synchronization"],
-            ["Byte-oriented", "Special flag bytes", "Escape reserved bytes with byte stuffing"],
-            ["Bit-oriented", "Special flag bit pattern", "Insert zero bits with bit stuffing"],
-            ["Physical coding", "Reserved signal violations", "Needs suitable line-code symbols"],
+            [
+              "Length or count",
+              "Header states frame length",
+              "Corrupt count can lose synchronization",
+            ],
+            [
+              "Byte-oriented",
+              "Special flag bytes",
+              "Escape reserved bytes with byte stuffing",
+            ],
+            [
+              "Bit-oriented",
+              "Special flag bit pattern",
+              "Insert zero bits with bit stuffing",
+            ],
+            [
+              "Physical coding",
+              "Reserved signal violations",
+              "Needs suitable line-code symbols",
+            ],
           ],
         },
         paragraphs: [
@@ -803,11 +900,31 @@ export const framingStuffingAndCrc: SubjectTopic = {
         dataTable: {
           headers: ["Method", "Core operation", "Typical ability"],
           rows: [
-            ["Single parity", "Count odd or even 1 bits", "Detect every odd number of bit errors"],
-            ["Two-dimensional parity", "Parity across rows and columns", "Locate one flipped bit in a block"],
-            ["Internet checksum", "One's-complement word sum", "Simple corruption detection"],
-            ["CRC", "Polynomial division using XOR", "Strong burst-error detection"],
-            ["Hamming code", "Parity at selected bit positions", "Correct one-bit error in basic SEC form"],
+            [
+              "Single parity",
+              "Count odd or even 1 bits",
+              "Detect every odd number of bit errors",
+            ],
+            [
+              "Two-dimensional parity",
+              "Parity across rows and columns",
+              "Locate one flipped bit in a block",
+            ],
+            [
+              "Internet checksum",
+              "One's-complement word sum",
+              "Simple corruption detection",
+            ],
+            [
+              "CRC",
+              "Polynomial division using XOR",
+              "Strong burst-error detection",
+            ],
+            [
+              "Hamming code",
+              "Parity at selected bit positions",
+              "Correct one-bit error in basic SEC form",
+            ],
           ],
         },
       },
@@ -819,9 +936,18 @@ export const framingStuffingAndCrc: SubjectTopic = {
         table: {
           headers: ["Error detection", "Error correction"],
           rows: [
-            ["Finds that data is likely damaged", "Locates or reconstructs damaged data"],
-            ["CRC and checksum are examples", "Hamming code is a common study example"],
-            ["Often followed by discard or retry", "Adds enough redundancy to repair selected errors"],
+            [
+              "Finds that data is likely damaged",
+              "Locates or reconstructs damaged data",
+            ],
+            [
+              "CRC and checksum are examples",
+              "Hamming code is a common study example",
+            ],
+            [
+              "Often followed by discard or retry",
+              "Adds enough redundancy to repair selected errors",
+            ],
           ],
         },
       },
@@ -870,18 +996,27 @@ export const framingStuffingAndCrc: SubjectTopic = {
     comparison: {
       left: {
         label: "Byte stuffing",
-        points: ["Character-oriented", "Escape reserved bytes", "Works on whole-byte symbols"],
+        points: [
+          "Character-oriented",
+          "Escape reserved bytes",
+          "Works on whole-byte symbols",
+        ],
       },
       right: {
         label: "Bit stuffing",
-        points: ["Bit-oriented", "Insert zero after five 1s", "Protects flag bit pattern"],
+        points: [
+          "Bit-oriented",
+          "Insert zero after five 1s",
+          "Protects flag bit pattern",
+        ],
       },
     },
     followUp:
       "For data 1010 and generator 1101, how many zeros are appended before division?",
   },
   lastMinute: {
-    definition: "Stuffing preserves frame boundaries; CRC detects corrupted bit patterns.",
+    definition:
+      "Stuffing preserves frame boundaries; CRC detects corrupted bit patterns.",
     memoryLine: "Protect the flag, divide with XOR, send the remainder.",
     cues: [
       "Flag example: 01111110.",

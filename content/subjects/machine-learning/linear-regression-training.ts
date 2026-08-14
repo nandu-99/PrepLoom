@@ -20,8 +20,14 @@ export const lossFunctionAndGradientDescent: SubjectTopic = {
         ],
         formulas: [
           { label: "Residual", expression: "eᵢ = yᵢ − ŷᵢ" },
-          { label: "Sum of squared errors", expression: "SSE = Σᵢ₌₁ⁿ (yᵢ − ŷᵢ)²" },
-          { label: "Mean squared error", expression: "MSE = (1/n) Σᵢ₌₁ⁿ (yᵢ − ŷᵢ)²" },
+          {
+            label: "Sum of squared errors",
+            expression: "SSE = Σᵢ₌₁ⁿ (yᵢ − ŷᵢ)²",
+          },
+          {
+            label: "Mean squared error",
+            expression: "MSE = (1/n) Σᵢ₌₁ⁿ (yᵢ − ŷᵢ)²",
+          },
         ],
       },
       {
@@ -47,7 +53,8 @@ export const lossFunctionAndGradientDescent: SubjectTopic = {
           alt: "Gradient descent steps moving down a convex loss surface toward its minimum",
           width: 1536,
           height: 1024,
-          caption: "Each update follows the negative gradient toward a lower value of the cost function.",
+          caption:
+            "Each update follows the negative gradient toward a lower value of the cost function.",
         },
       },
       {
@@ -56,8 +63,14 @@ export const lossFunctionAndGradientDescent: SubjectTopic = {
           "Calculate each derivative using the current predictions, then update all parameters together. The same idea extends to multiple regression: each coefficient receives its own gradient.",
         ],
         formulas: [
-          { label: "Intercept gradient", expression: "∂J/∂β₀ = (1/n) Σᵢ₌₁ⁿ (ŷᵢ − yᵢ)" },
-          { label: "Slope gradient", expression: "∂J/∂β₁ = (1/n) Σᵢ₌₁ⁿ (ŷᵢ − yᵢ)xᵢ" },
+          {
+            label: "Intercept gradient",
+            expression: "∂J/∂β₀ = (1/n) Σᵢ₌₁ⁿ (ŷᵢ − yᵢ)",
+          },
+          {
+            label: "Slope gradient",
+            expression: "∂J/∂β₁ = (1/n) Σᵢ₌₁ⁿ (ŷᵢ − yᵢ)xᵢ",
+          },
           { label: "Update rule", expression: "βⱼ := βⱼ − α(∂J/∂βⱼ)" },
           {
             label: "Multiple-regression matrix gradient",
@@ -125,10 +138,19 @@ export const lossFunctionAndGradientDescent: SubjectTopic = {
         table: {
           headers: ["Closed-form OLS", "Gradient descent"],
           rows: [
-            ["Directly calculates the optimum", "Approaches the optimum through repeated updates"],
-            ["Convenient for smaller feature sets", "Useful when direct matrix operations are expensive"],
+            [
+              "Directly calculates the optimum",
+              "Approaches the optimum through repeated updates",
+            ],
+            [
+              "Convenient for smaller feature sets",
+              "Useful when direct matrix operations are expensive",
+            ],
             ["No learning rate", "Needs a learning rate and stopping rule"],
-            ["Can struggle with a singular matrix", "Works without inverting XᵀX"],
+            [
+              "Can struggle with a singular matrix",
+              "Works without inverting XᵀX",
+            ],
           ],
         },
       },
@@ -160,7 +182,10 @@ export const lossFunctionAndGradientDescent: SubjectTopic = {
         title: "Essential Formulas",
         formulas: [
           { label: "Cost", expression: "J = (1/2n)Σ(ŷᵢ − yᵢ)²" },
-          { label: "Intercept gradient", expression: "∂J/∂β₀ = (1/n)Σ(ŷᵢ − yᵢ)" },
+          {
+            label: "Intercept gradient",
+            expression: "∂J/∂β₀ = (1/n)Σ(ŷᵢ − yᵢ)",
+          },
           { label: "Slope gradient", expression: "∂J/∂β₁ = (1/n)Σ(ŷᵢ − yᵢ)xᵢ" },
           { label: "Matrix gradient", expression: "∇J(β) = (1/n)Xᵀ(Xβ − y)" },
           { label: "Update", expression: "βⱼ := βⱼ − α(∂J/∂βⱼ)" },
@@ -186,16 +211,28 @@ export const lossFunctionAndGradientDescent: SubjectTopic = {
     followUp: "Why can a large learning rate make the cost increase?",
   },
   lastMinute: {
-    definition: "Predict, find gradients, update against the gradient, and repeat.",
+    definition:
+      "Predict, find gradients, update against the gradient, and repeat.",
     sections: [
       {
         title: "Training Loop",
-        flow: ["Initialize β", "Predict ŷ", "Calculate cost", "Find gradients", "Update β", "Repeat"],
+        flow: [
+          "Initialize β",
+          "Predict ŷ",
+          "Calculate cost",
+          "Find gradients",
+          "Update β",
+          "Repeat",
+        ],
         wide: true,
       },
       {
         title: "Learning Rate Check",
-        points: ["Slow fall: α may be small", "Oscillation or rising cost: α may be large", "Different feature scales: standardize"],
+        points: [
+          "Slow fall: α may be small",
+          "Oscillation or rising cost: α may be large",
+          "Different feature scales: standardize",
+        ],
       },
     ],
     memoryLine: "Gradient points uphill, so gradient descent subtracts it.",
@@ -228,12 +265,36 @@ export const regressionAssumptionsAndDiagnostics: SubjectTopic = {
         dataTable: {
           headers: ["Assumption", "Simple meaning", "Why it matters"],
           rows: [
-            ["Linearity", "The expected target is a linear combination of the features", "A missed curve leaves a pattern in residuals"],
-            ["Independent errors", "One error does not predict another", "Related errors distort uncertainty estimates"],
-            ["Constant error variance", "Residual spread is roughly constant", "Changing spread makes standard errors unreliable"],
-            ["Zero conditional mean", "After the features are fixed, the average error is zero", "Omitted relevant factors can bias coefficients"],
-            ["No perfect multicollinearity", "No feature is an exact linear copy of others", "Separate coefficients must be identifiable"],
-            ["Approximately normal errors", "Errors are roughly normal when formal small-sample inference needs it", "Helps confidence intervals and hypothesis tests"],
+            [
+              "Linearity",
+              "The expected target is a linear combination of the features",
+              "A missed curve leaves a pattern in residuals",
+            ],
+            [
+              "Independent errors",
+              "One error does not predict another",
+              "Related errors distort uncertainty estimates",
+            ],
+            [
+              "Constant error variance",
+              "Residual spread is roughly constant",
+              "Changing spread makes standard errors unreliable",
+            ],
+            [
+              "Zero conditional mean",
+              "After the features are fixed, the average error is zero",
+              "Omitted relevant factors can bias coefficients",
+            ],
+            [
+              "No perfect multicollinearity",
+              "No feature is an exact linear copy of others",
+              "Separate coefficients must be identifiable",
+            ],
+            [
+              "Approximately normal errors",
+              "Errors are roughly normal when formal small-sample inference needs it",
+              "Helps confidence intervals and hypothesis tests",
+            ],
           ],
         },
       },
@@ -255,15 +316,32 @@ export const regressionAssumptionsAndDiagnostics: SubjectTopic = {
           alt: "Regression diagnostic panels showing random residuals, curvature, a funnel, an influential point, and a normal Q-Q plot",
           width: 1536,
           height: 1024,
-          caption: "Residual patterns reveal model problems, while a Q–Q plot checks approximate residual normality.",
+          caption:
+            "Residual patterns reveal model problems, while a Q–Q plot checks approximate residual normality.",
         },
         dataTable: {
           headers: ["Residual pattern", "Possible problem", "Useful response"],
           rows: [
-            ["Random cloud around zero", "No obvious pattern", "Continue checking other assumptions"],
-            ["Curve", "Relationship is not adequately linear", "Reconsider features or the model form"],
-            ["Funnel shape", "Heteroscedasticity: error variance changes", "Transform the target or use suitable robust inference"],
-            ["Separated extreme point", "Outlier or influential observation", "Verify the record and compare results with care"],
+            [
+              "Random cloud around zero",
+              "No obvious pattern",
+              "Continue checking other assumptions",
+            ],
+            [
+              "Curve",
+              "Relationship is not adequately linear",
+              "Reconsider features or the model form",
+            ],
+            [
+              "Funnel shape",
+              "Heteroscedasticity: error variance changes",
+              "Transform the target or use suitable robust inference",
+            ],
+            [
+              "Separated extreme point",
+              "Outlier or influential observation",
+              "Verify the record and compare results with care",
+            ],
           ],
         },
       },
@@ -281,18 +359,23 @@ export const regressionAssumptionsAndDiagnostics: SubjectTopic = {
           "For feature j, regress it on the other features and call that result Rⱼ². Variance Inflation Factor measures how much its coefficient variance is inflated. A large VIF is a warning to investigate, not an automatic delete rule.",
         ],
         formulas: [
-          { label: "Variance Inflation Factor", expression: "VIFⱼ = 1 / (1 − Rⱼ²)" },
+          {
+            label: "Variance Inflation Factor",
+            expression: "VIFⱼ = 1 / (1 − Rⱼ²)",
+          },
         ],
         problems: [
           {
             title: "Calculate VIF",
-            prompt: "A feature can be predicted from the other features with Rⱼ² = 0.80. Find its VIF.",
+            prompt:
+              "A feature can be predicted from the other features with Rⱼ² = 0.80. Find its VIF.",
             steps: [
               "VIFⱼ = 1 / (1 − Rⱼ²)",
               "VIFⱼ = 1 / (1 − 0.80)",
               "VIFⱼ = 1 / 0.20 = 5",
             ],
-            answer: "VIF = 5. The coefficient variance is inflated, so inspect the overlapping predictors.",
+            answer:
+              "VIF = 5. The coefficient variance is inflated, so inspect the overlapping predictors.",
           },
         ],
       },
@@ -304,11 +387,31 @@ export const regressionAssumptionsAndDiagnostics: SubjectTopic = {
         dataTable: {
           headers: ["Problem", "Main consequence", "What to inspect"],
           rows: [
-            ["Nonlinearity", "Biased pattern and weak predictions", "Residuals against fitted values and features"],
-            ["Dependent errors", "Unreliable standard errors and repeated patterns", "Residual order, time, and groups"],
-            ["Heteroscedasticity", "Unreliable usual standard errors", "Residual spread and robust inference"],
-            ["Omitted relevant variables", "Potentially biased coefficients", "Study design and domain knowledge"],
-            ["Multicollinearity", "Unstable individual coefficients", "Predictor relationships and VIF"],
+            [
+              "Nonlinearity",
+              "Biased pattern and weak predictions",
+              "Residuals against fitted values and features",
+            ],
+            [
+              "Dependent errors",
+              "Unreliable standard errors and repeated patterns",
+              "Residual order, time, and groups",
+            ],
+            [
+              "Heteroscedasticity",
+              "Unreliable usual standard errors",
+              "Residual spread and robust inference",
+            ],
+            [
+              "Omitted relevant variables",
+              "Potentially biased coefficients",
+              "Study design and domain knowledge",
+            ],
+            [
+              "Multicollinearity",
+              "Unstable individual coefficients",
+              "Predictor relationships and VIF",
+            ],
           ],
         },
       },
@@ -319,7 +422,10 @@ export const regressionAssumptionsAndDiagnostics: SubjectTopic = {
           rows: [
             ["Outlier", "An observation with an unusually large residual"],
             ["High leverage", "An observation with unusual feature values"],
-            ["Influential point", "An observation that noticeably changes the fitted model"],
+            [
+              "Influential point",
+              "An observation that noticeably changes the fitted model",
+            ],
           ],
         },
         paragraphs: [
@@ -375,7 +481,9 @@ export const regressionAssumptionsAndDiagnostics: SubjectTopic = {
       },
       {
         title: "VIF",
-        formulas: [{ label: "For predictor j", expression: "VIFⱼ = 1/(1 − Rⱼ²)" }],
+        formulas: [
+          { label: "For predictor j", expression: "VIFⱼ = 1/(1 − Rⱼ²)" },
+        ],
       },
     ],
     essentialsStyle: "plain",
@@ -391,18 +499,29 @@ export const regressionAssumptionsAndDiagnostics: SubjectTopic = {
     followUp: "What does a funnel shape in a residual plot suggest?",
   },
   lastMinute: {
-    definition: "Good regression needs more than a fitted line: check the errors and predictors.",
+    definition:
+      "Good regression needs more than a fitted line: check the errors and predictors.",
     sections: [
       {
         title: "Residual Plot",
-        points: ["Random around zero: good sign", "Curve: nonlinearity", "Funnel: unequal variance", "Pattern over time: dependence"],
+        points: [
+          "Random around zero: good sign",
+          "Curve: nonlinearity",
+          "Funnel: unequal variance",
+          "Pattern over time: dependence",
+        ],
       },
       {
         title: "Unusual Data",
-        points: ["Outlier: unusual y error", "Leverage: unusual x values", "Influence: changes the fit"],
+        points: [
+          "Outlier: unusual y error",
+          "Leverage: unusual x values",
+          "Influence: changes the fit",
+        ],
       },
     ],
-    memoryLine: "Curve, funnel, cycle, or dominant point: investigate before trusting the fit.",
+    memoryLine:
+      "Curve, funnel, cycle, or dominant point: investigate before trusting the fit.",
     cues: [
       "VIF = 1/(1 − R² from predicting one feature with the others).",
       "Normal residuals matter mainly for formal inference.",

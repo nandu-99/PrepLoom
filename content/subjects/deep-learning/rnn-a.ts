@@ -68,7 +68,10 @@ export const sequentialDataAndRnnIntuition: SubjectTopic = {
             ["One-to-many", "Generate a sequence from one context vector"],
             ["Many-to-one", "Classify an entire sentence or time series"],
             ["Many-to-many, aligned", "Label every word or time step"],
-            ["Many-to-many, different lengths", "Map one sequence to another sequence"],
+            [
+              "Many-to-many, different lengths",
+              "Map one sequence to another sequence",
+            ],
           ],
         },
       },
@@ -106,7 +109,8 @@ export const sequentialDataAndRnnIntuition: SubjectTopic = {
               "The same weights are reused at every time step.",
               "A longer sequence causes more cell applications, not new weights.",
             ],
-            answer: "No. The parameter count stays the same, but computation and activation memory increase.",
+            answer:
+              "No. The parameter count stays the same, but computation and activation memory increase.",
           },
         ],
       },
@@ -135,7 +139,11 @@ export const sequentialDataAndRnnIntuition: SubjectTopic = {
     sections: [
       {
         title: "Main Shapes",
-        points: ["One sequence: T × D", "Batch first: B × T × D", "Hidden state: B × H"],
+        points: [
+          "One sequence: T × D",
+          "Batch first: B × T × D",
+          "Hidden state: B × H",
+        ],
       },
       {
         title: "Sequence Flow",
@@ -157,7 +165,12 @@ export const sequentialDataAndRnnIntuition: SubjectTopic = {
     sections: [
       {
         title: "Symbols",
-        points: ["T: time steps", "D: input features", "H: hidden size", "B: batch size"],
+        points: [
+          "T: time steps",
+          "D: input features",
+          "H: hidden size",
+          "B: batch size",
+        ],
       },
       {
         title: "Core Flow",
@@ -241,8 +254,14 @@ export const rnnForwardPropagation: SubjectTopic = {
           "Consider a scalar RNN with x₁ = 1, x₂ = 0, h₀ = 0, Wₓₕ = 0.5, Wₕₕ = 0.8, bₕ = 0, Wₕᵧ = 2, and bᵧ = 0.",
         ],
         formulas: [
-          { label: "First hidden state", expression: "h₁ = tanh(0.5×1 + 0.8×0) = tanh(0.5) ≈ 0.462" },
-          { label: "Second hidden state", expression: "h₂ = tanh(0.5×0 + 0.8×0.462) = tanh(0.370) ≈ 0.354" },
+          {
+            label: "First hidden state",
+            expression: "h₁ = tanh(0.5×1 + 0.8×0) = tanh(0.5) ≈ 0.462",
+          },
+          {
+            label: "Second hidden state",
+            expression: "h₂ = tanh(0.5×0 + 0.8×0.462) = tanh(0.370) ≈ 0.354",
+          },
           { label: "Second linear output", expression: "z₂ = 2×0.354 = 0.708" },
         ],
       },
@@ -253,9 +272,18 @@ export const rnnForwardPropagation: SubjectTopic = {
           "The formula below uses one effective hidden-bias vector. Some libraries store separate input and recurrent bias vectors, so always follow the convention stated by the framework or exam question.",
         ],
         formulas: [
-          { label: "RNN cell", expression: "cell parameters = HD + H² + H = H(D + H + 1)" },
-          { label: "Output layer", expression: "output parameters = OH + O = O(H + 1)" },
-          { label: "Total with output layer", expression: "H(D + H + 1) + O(H + 1)" },
+          {
+            label: "RNN cell",
+            expression: "cell parameters = HD + H² + H = H(D + H + 1)",
+          },
+          {
+            label: "Output layer",
+            expression: "output parameters = OH + O = O(H + 1)",
+          },
+          {
+            label: "Total with output layer",
+            expression: "H(D + H + 1) + O(H + 1)",
+          },
         ],
       },
       {
@@ -351,7 +379,8 @@ export const rnnForwardPropagation: SubjectTopic = {
     followUp: "Why is Wₕₕ square in a basic RNN?",
   },
   lastMinute: {
-    definition: "Hidden = tanh(input contribution + previous-state contribution + bias).",
+    definition:
+      "Hidden = tanh(input contribution + previous-state contribution + bias).",
     sections: [
       {
         title: "Shapes",
@@ -362,8 +391,13 @@ export const rnnForwardPropagation: SubjectTopic = {
         points: ["Cell: H(D+H+1)", "Output: O(H+1)", "Never multiply by T"],
       },
     ],
-    memoryLine: "Current input and previous state meet inside the same shared cell.",
-    cues: ["h₀ is commonly zero.", "tanh output lies between −1 and 1.", "Final state shape is B × H."],
+    memoryLine:
+      "Current input and previous state meet inside the same shared cell.",
+    cues: [
+      "h₀ is commonly zero.",
+      "tanh output lies between −1 and 1.",
+      "Final state shape is B × H.",
+    ],
     trap: "Do not forget the recurrent matrix Wₕₕ or count it once per time step.",
   },
 };
@@ -388,7 +422,10 @@ export const backpropagationThroughTime: SubjectTopic = {
         ],
         formulas: [
           { label: "Sum of time-step losses", expression: "L = Σₜ Lₜ" },
-          { label: "Mean over valid steps", expression: "L = (1/Nvalid) Σvalid t Lₜ" },
+          {
+            label: "Mean over valid steps",
+            expression: "L = (1/Nvalid) Σvalid t Lₜ",
+          },
         ],
         visual: {
           src: "/notes/deep-learning/bptt-gradient-flow.png",
@@ -419,7 +456,10 @@ export const backpropagationThroughTime: SubjectTopic = {
           "This is similar to a convolution filter receiving gradient contributions from every spatial position where it was reused.",
         ],
         formulas: [
-          { label: "Shared-parameter gradient", expression: "∂L/∂Wₕₕ = Σₜ (gradient contribution from step t)" },
+          {
+            label: "Shared-parameter gradient",
+            expression: "∂L/∂Wₕₕ = Σₜ (gradient contribution from step t)",
+          },
         ],
       },
       {
@@ -431,9 +471,15 @@ export const backpropagationThroughTime: SubjectTopic = {
         table: {
           headers: ["Full BPTT", "Truncated BPTT"],
           rows: [
-            ["Backpropagates through the complete sequence", "Backpropagates through limited windows"],
+            [
+              "Backpropagates through the complete sequence",
+              "Backpropagates through limited windows",
+            ],
             ["Higher memory cost", "Lower memory cost"],
-            ["Keeps every direct temporal gradient path", "Cuts direct paths at window boundaries"],
+            [
+              "Keeps every direct temporal gradient path",
+              "Cuts direct paths at window boundaries",
+            ],
           ],
         },
       },
@@ -450,7 +496,9 @@ export const backpropagationThroughTime: SubjectTopic = {
       },
       {
         title: "Practice",
-        paragraphs: ["Count recurrent transitions, not just visible state boxes."],
+        paragraphs: [
+          "Count recurrent transitions, not just visible state boxes.",
+        ],
         problems: [
           {
             title: "Repeated gradient factor",
@@ -461,7 +509,8 @@ export const backpropagationThroughTime: SubjectTopic = {
               "Temporal multiplier = 0.8⁶.",
               "0.8⁶ = 0.262144.",
             ],
-            answer: "The multiplier is approximately 0.262, so the gradient becomes smaller along this path.",
+            answer:
+              "The multiplier is approximately 0.262, so the gradient becomes smaller along this path.",
           },
           {
             title: "Shared gradient contributions",
@@ -481,7 +530,8 @@ export const backpropagationThroughTime: SubjectTopic = {
               "Number of windows = 100 ÷ 20 = 5.",
               "Detaching the state removes the older computation graph.",
             ],
-            answer: "Five windows are processed. No direct gradient crosses a detached boundary.",
+            answer:
+              "Five windows are processed. No direct gradient crosses a detached boundary.",
           },
         ],
       },
@@ -510,11 +560,19 @@ export const backpropagationThroughTime: SubjectTopic = {
     sections: [
       {
         title: "Training Flow",
-        flow: ["Forward through time", "Calculate loss", "Backward through time", "Sum shared gradients", "Update"],
+        flow: [
+          "Forward through time",
+          "Calculate loss",
+          "Backward through time",
+          "Sum shared gradients",
+          "Update",
+        ],
       },
       {
         title: "Repeated Product",
-        formulas: [{ expression: "temporal gradient contains products of ∂hⱼ/∂hⱼ₋₁" }],
+        formulas: [
+          { expression: "temporal gradient contains products of ∂hⱼ/∂hⱼ₋₁" },
+        ],
       },
     ],
     essentialsStyle: "plain",
@@ -537,11 +595,21 @@ export const backpropagationThroughTime: SubjectTopic = {
       },
       {
         title: "Truncation",
-        points: ["Shorter graph", "Lower memory", "Detached boundaries", "Less long-range gradient"],
+        points: [
+          "Shorter graph",
+          "Lower memory",
+          "Detached boundaries",
+          "Less long-range gradient",
+        ],
       },
     ],
-    memoryLine: "Forward carries state; backward carries credit through the same time chain.",
-    cues: ["Losses may be summed or averaged.", "Masks remove padded loss.", "Repeated derivatives control gradient size."],
+    memoryLine:
+      "Forward carries state; backward carries credit through the same time chain.",
+    cues: [
+      "Losses may be summed or averaged.",
+      "Masks remove padded loss.",
+      "Repeated derivatives control gradient size.",
+    ],
     trap: "Do not create separate parameter updates for separate time steps.",
   },
 };

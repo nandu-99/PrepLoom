@@ -29,9 +29,21 @@ export const trainingValidationAndTestSets: SubjectTopic = {
         dataTable: {
           headers: ["Subset", "Used for", "Must not be used for"],
           rows: [
-            ["Training", "Gradients and parameter learning", "Final unbiased reporting"],
-            ["Validation", "Tuning, comparison, early stopping", "Gradient-based parameter updates"],
-            ["Test", "One final evaluation", "Repeated tuning or model selection"],
+            [
+              "Training",
+              "Gradients and parameter learning",
+              "Final unbiased reporting",
+            ],
+            [
+              "Validation",
+              "Tuning, comparison, early stopping",
+              "Gradient-based parameter updates",
+            ],
+            [
+              "Test",
+              "One final evaluation",
+              "Repeated tuning or model selection",
+            ],
           ],
         },
       },
@@ -42,7 +54,10 @@ export const trainingValidationAndTestSets: SubjectTopic = {
           "Very large datasets may use a smaller percentage for validation and test while still providing many examples. Each subset must remain representative of the real task.",
         ],
         formulas: [
-          { label: "Subset count", expression: "count = total examples × split fraction" },
+          {
+            label: "Subset count",
+            expression: "count = total examples × split fraction",
+          },
         ],
       },
       {
@@ -108,7 +123,8 @@ export const trainingValidationAndTestSets: SubjectTopic = {
               "Test positives = 200 × 0.20 = 40.",
               "Both subsets keep the original 20% positive proportion.",
             ],
-            answer: "Approximately 160 training positives and 40 test positives.",
+            answer:
+              "Approximately 160 training positives and 40 test positives.",
           },
           {
             title: "Find the leakage",
@@ -182,12 +198,22 @@ export const trainingValidationAndTestSets: SubjectTopic = {
     sections: [
       {
         title: "Safe Order",
-        flow: ["Split", "Fit preprocessing on train", "Train", "Tune on validation", "Test once"],
+        flow: [
+          "Split",
+          "Fit preprocessing on train",
+          "Train",
+          "Tune on validation",
+          "Test once",
+        ],
         wide: true,
       },
       {
         title: "Special Splits",
-        points: ["Class imbalance: stratify", "Shared identity: group", "Time data: chronological"],
+        points: [
+          "Class imbalance: stratify",
+          "Shared identity: group",
+          "Time data: chronological",
+        ],
       },
     ],
     memoryLine: "The test set must not help build the model it judges.",
@@ -196,8 +222,7 @@ export const trainingValidationAndTestSets: SubjectTopic = {
       "Preprocessing can leak information.",
       "A seed gives repeatability, not correctness.",
     ],
-    trap:
-      "Do not call validation and test sets interchangeable; model selection uses validation, not test.",
+    trap: "Do not call validation and test sets interchangeable; model selection uses validation, not test.",
   },
 };
 
@@ -220,7 +245,10 @@ export const underfittingOverfittingAndLearningCurves: SubjectTopic = {
           "The generalization gap is the difference between validation and training performance. A small gap is desirable only when both performances are good; two poor scores with a small gap still indicate a weak model.",
         ],
         formulas: [
-          { label: "Loss-based generalization gap", expression: "gap = validation loss − training loss" },
+          {
+            label: "Loss-based generalization gap",
+            expression: "gap = validation loss − training loss",
+          },
         ],
       },
       {
@@ -269,8 +297,14 @@ export const underfittingOverfittingAndLearningCurves: SubjectTopic = {
           headers: ["High bias", "High variance"],
           rows: [
             ["Often underfits", "Often overfits"],
-            ["Training performance is weak", "Training is strong but validation is weaker"],
-            ["May need more capacity or better optimization", "May need more data or regularization"],
+            [
+              "Training performance is weak",
+              "Training is strong but validation is weaker",
+            ],
+            [
+              "May need more capacity or better optimization",
+              "May need more data or regularization",
+            ],
           ],
         },
       },
@@ -283,10 +317,16 @@ export const underfittingOverfittingAndLearningCurves: SubjectTopic = {
         dataTable: {
           headers: ["Diagnosis", "Common useful response"],
           rows: [
-            ["Underfitting", "Improve optimization or increase useful capacity"],
+            [
+              "Underfitting",
+              "Improve optimization or increase useful capacity",
+            ],
             ["Overfitting", "More data or stronger regularization"],
             ["Distribution mismatch", "Make evaluation data match deployment"],
-            ["Unstable optimization", "Fix learning rate or numerical instability"],
+            [
+              "Unstable optimization",
+              "Fix learning rate or numerical instability",
+            ],
           ],
         },
       },
@@ -383,7 +423,8 @@ export const underfittingOverfittingAndLearningCurves: SubjectTopic = {
       "Why can a model with a very small generalization gap still be unsuitable?",
   },
   lastMinute: {
-    definition: "Compare training and validation; never diagnose from training alone.",
+    definition:
+      "Compare training and validation; never diagnose from training alone.",
     sections: [
       {
         title: "Patterns",
@@ -401,7 +442,8 @@ export const underfittingOverfittingAndLearningCurves: SubjectTopic = {
         ],
       },
     ],
-    memoryLine: "Bias fails to learn enough; variance learns training details too closely.",
+    memoryLine:
+      "Bias fails to learn enough; variance learns training details too closely.",
     cues: [
       "Lowest validation loss suggests the checkpoint.",
       "A widening gap signals overfitting.",
@@ -449,7 +491,10 @@ export const l1L2AndWeightDecay: SubjectTopic = {
         ],
         formulas: [
           { label: "L1 objective", expression: "Jtotal = Jdata + λΣⱼ|wⱼ|" },
-          { label: "L1 contribution for w ≠ 0", expression: "∂Jreg/∂w = λ sign(w)" },
+          {
+            label: "L1 contribution for w ≠ 0",
+            expression: "∂Jreg/∂w = λ sign(w)",
+          },
         ],
       },
       {
@@ -459,7 +504,10 @@ export const l1L2AndWeightDecay: SubjectTopic = {
           "The factor ½ is a mathematical convenience: it cancels the 2 produced by differentiation. Always use the derivative that matches the stated objective.",
         ],
         formulas: [
-          { label: "L2 objective used here", expression: "Jtotal = Jdata + (λ/2)Σⱼwⱼ²" },
+          {
+            label: "L2 objective used here",
+            expression: "Jtotal = Jdata + (λ/2)Σⱼwⱼ²",
+          },
           { label: "L2 gradient", expression: "∂Jtotal/∂W = ∂Jdata/∂W + λW" },
         ],
       },
@@ -516,7 +564,8 @@ export const l1L2AndWeightDecay: SubjectTopic = {
               "Total gradient = 0.4 + 0.2 = 0.6.",
               "wnew = 2 − 0.01(0.6) = 1.994.",
             ],
-            answer: "The total gradient is 0.6 and the updated weight is 1.994.",
+            answer:
+              "The total gradient is 0.6 and the updated weight is 1.994.",
           },
           {
             title: "L1 contribution",

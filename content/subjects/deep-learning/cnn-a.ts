@@ -67,7 +67,10 @@ export const imageTensorsAndCnnIntuition: SubjectTopic = {
           headers: ["Equivariance", "Invariance"],
           rows: [
             ["Output moves when input moves", "Output stays unchanged"],
-            ["Convolution approximately provides it", "Requires aggregation or learned robustness"],
+            [
+              "Convolution approximately provides it",
+              "Requires aggregation or learned robustness",
+            ],
           ],
         },
       },
@@ -86,11 +89,13 @@ export const imageTensorsAndCnnIntuition: SubjectTopic = {
               "Channels-last order is B × H × W × C.",
               "Channels-first order is B × C × H × W.",
             ],
-            answer: "Channels-last: 64 × 128 × 96 × 3. Channels-first: 64 × 3 × 128 × 96.",
+            answer:
+              "Channels-last: 64 × 128 × 96 × 3. Channels-first: 64 × 3 × 128 × 96.",
           },
           {
             title: "Number of image values",
-            prompt: "How many scalar pixel-channel values are in one 32 × 32 RGB image?",
+            prompt:
+              "How many scalar pixel-channel values are in one 32 × 32 RGB image?",
             steps: ["RGB gives C = 3.", "Values = H × W × C = 32 × 32 × 3."],
             answer: "The image contains 3,072 scalar values.",
           },
@@ -131,11 +136,20 @@ export const imageTensorsAndCnnIntuition: SubjectTopic = {
     sections: [
       {
         title: "Shapes",
-        points: ["Image: H × W × C", "NHWC: B × H × W × C", "NCHW: B × C × H × W"],
+        points: [
+          "Image: H × W × C",
+          "NHWC: B × H × W × C",
+          "NCHW: B × C × H × W",
+        ],
       },
       {
         title: "Core Ideas",
-        flow: ["Local window", "Shared filter", "Feature map", "Deeper features"],
+        flow: [
+          "Local window",
+          "Shared filter",
+          "Feature map",
+          "Deeper features",
+        ],
       },
     ],
     essentialsStyle: "plain",
@@ -194,7 +208,8 @@ export const convolutionOperationAndFeatureMaps: SubjectTopic = {
         formulas: [
           {
             label: "One output position",
-            expression: "Z[i,j,f] = ΣᵤΣᵥΣ꜀ Xpad[iSₕ+uDₕ, jS𝓌+vD𝓌, c]W[u,v,c,f] + b[f]",
+            expression:
+              "Z[i,j,f] = ΣᵤΣᵥΣ꜀ Xpad[iSₕ+uDₕ, jS𝓌+vD𝓌, c]W[u,v,c,f] + b[f]",
           },
         ],
         visual: {
@@ -229,12 +244,21 @@ export const convolutionOperationAndFeatureMaps: SubjectTopic = {
           "Use cross-correlation, stride 1, no padding, and bias 0. The 3 × 3 input and 2 × 2 kernel produce a 2 × 2 feature map.",
         ],
         formulas: [
-          { label: "Input", expression: "X = [[1, 2, 0], [3, 1, 2], [0, 1, 3]]" },
+          {
+            label: "Input",
+            expression: "X = [[1, 2, 0], [3, 1, 2], [0, 1, 3]]",
+          },
           { label: "Kernel", expression: "K = [[1, 0], [0, −1]]" },
           { label: "Top-left", expression: "1(1) + 2(0) + 3(0) + 1(−1) = 0" },
           { label: "Top-right", expression: "2(1) + 0(0) + 1(0) + 2(−1) = 0" },
-          { label: "Bottom-left", expression: "3(1) + 1(0) + 0(0) + 1(−1) = 2" },
-          { label: "Bottom-right", expression: "1(1) + 2(0) + 1(0) + 3(−1) = −2" },
+          {
+            label: "Bottom-left",
+            expression: "3(1) + 1(0) + 0(0) + 1(−1) = 2",
+          },
+          {
+            label: "Bottom-right",
+            expression: "1(1) + 2(0) + 1(0) + 3(−1) = −2",
+          },
           { label: "Feature map", expression: "Z = [[0, 0], [2, −2]]" },
         ],
       },
@@ -264,8 +288,12 @@ export const convolutionOperationAndFeatureMaps: SubjectTopic = {
           },
           {
             title: "Apply ReLU",
-            prompt: "A pre-activation feature map is Z = [[−2, 0], [3, −1]]. Find ReLU(Z).",
-            steps: ["Replace negative values with zero.", "Keep zero and positive values unchanged."],
+            prompt:
+              "A pre-activation feature map is Z = [[−2, 0], [3, −1]]. Find ReLU(Z).",
+            steps: [
+              "Replace negative values with zero.",
+              "Keep zero and positive values unchanged.",
+            ],
             answer: "ReLU(Z) = [[0, 0], [3, 0]].",
           },
           {
@@ -306,7 +334,13 @@ export const convolutionOperationAndFeatureMaps: SubjectTopic = {
     sections: [
       {
         title: "One Position",
-        flow: ["Local patch", "Elementwise multiply", "Sum", "Add bias", "Output value"],
+        flow: [
+          "Local patch",
+          "Elementwise multiply",
+          "Sum",
+          "Add bias",
+          "Output value",
+        ],
       },
       {
         title: "Convention",
@@ -332,12 +366,21 @@ export const convolutionOperationAndFeatureMaps: SubjectTopic = {
     sections: [
       {
         title: "Map Construction",
-        flow: ["Calculate one position", "Move filter", "Repeat", "Apply activation"],
+        flow: [
+          "Calculate one position",
+          "Move filter",
+          "Repeat",
+          "Apply activation",
+        ],
         wide: true,
       },
       {
         title: "Remember",
-        points: ["Libraries usually do not flip the kernel", "Filter is learned", "Bias is one per filter"],
+        points: [
+          "Libraries usually do not flip the kernel",
+          "Filter is learned",
+          "Bias is one per filter",
+        ],
       },
     ],
     memoryLine: "One shared local dot product fills a spatial response map.",
@@ -412,8 +455,14 @@ export const paddingStrideAndOutputSize: SubjectTopic = {
           "The number of output channels is not decided by this spatial formula. It equals the number of filters and is covered in the next topic.",
         ],
         formulas: [
-          { label: "Output height", expression: "Hout = ⌊(H + 2Pₕ − Dₕ(Kₕ − 1) − 1)/Sₕ⌋ + 1" },
-          { label: "Output width", expression: "Wout = ⌊(W + 2P𝓌 − D𝓌(K𝓌 − 1) − 1)/S𝓌⌋ + 1" },
+          {
+            label: "Output height",
+            expression: "Hout = ⌊(H + 2Pₕ − Dₕ(Kₕ − 1) − 1)/Sₕ⌋ + 1",
+          },
+          {
+            label: "Output width",
+            expression: "Wout = ⌊(W + 2P𝓌 − D𝓌(K𝓌 − 1) − 1)/S𝓌⌋ + 1",
+          },
         ],
       },
       {
@@ -434,16 +483,15 @@ export const paddingStrideAndOutputSize: SubjectTopic = {
         problems: [
           {
             title: "Same spatial size",
-            prompt: "Input N = 32, kernel K = 5, padding P = 2, stride S = 1, dilation D = 1. Find Nout.",
-            steps: [
-              "Nout = ⌊(32 + 2(2) − 5)/1⌋ + 1.",
-              "Nout = 31 + 1 = 32.",
-            ],
+            prompt:
+              "Input N = 32, kernel K = 5, padding P = 2, stride S = 1, dilation D = 1. Find Nout.",
+            steps: ["Nout = ⌊(32 + 2(2) − 5)/1⌋ + 1.", "Nout = 31 + 1 = 32."],
             answer: "The output size is 32.",
           },
           {
             title: "Floor with stride",
-            prompt: "Input N = 28, kernel K = 3, padding P = 0, and stride S = 2. Find Nout.",
+            prompt:
+              "Input N = 28, kernel K = 3, padding P = 0, and stride S = 2. Find Nout.",
             steps: [
               "Nout = ⌊(28 − 3)/2⌋ + 1.",
               "25/2 = 12.5, so floor gives 12.",
@@ -455,19 +503,14 @@ export const paddingStrideAndOutputSize: SubjectTopic = {
             title: "Rectangular output",
             prompt:
               "An input is 20 × 30. A 3 × 5 kernel uses no padding and stride 1. Find Hout × Wout.",
-            steps: [
-              "Hout = (20 − 3) + 1 = 18.",
-              "Wout = (30 − 5) + 1 = 26.",
-            ],
+            steps: ["Hout = (20 − 3) + 1 = 18.", "Wout = (30 − 5) + 1 = 26."],
             answer: "The spatial output is 18 × 26.",
           },
           {
             title: "Dilated kernel",
-            prompt: "Input N = 15, kernel K = 3, dilation D = 2, padding P = 0, and stride S = 1. Find the effective kernel and output size.",
-            steps: [
-              "Keff = 2(3 − 1) + 1 = 5.",
-              "Nout = (15 − 5)/1 + 1 = 11.",
-            ],
+            prompt:
+              "Input N = 15, kernel K = 3, dilation D = 2, padding P = 0, and stride S = 1. Find the effective kernel and output size.",
+            steps: ["Keff = 2(3 − 1) + 1 = 5.", "Nout = (15 − 5)/1 + 1 = 11."],
             answer: "Effective kernel size is 5 and output size is 11.",
           },
         ],
@@ -526,7 +569,8 @@ export const paddingStrideAndOutputSize: SubjectTopic = {
       "Why can same padding require different amounts on the two sides when stride is greater than one?",
   },
   lastMinute: {
-    definition: "Output size comes from input, effective kernel, padding, and stride.",
+    definition:
+      "Output size comes from input, effective kernel, padding, and stride.",
     sections: [
       {
         title: "Formula",
@@ -534,10 +578,15 @@ export const paddingStrideAndOutputSize: SubjectTopic = {
       },
       {
         title: "Fast Effects",
-        points: ["Padding preserves", "Stride downsamples", "Dilation expands coverage"],
+        points: [
+          "Padding preserves",
+          "Stride downsamples",
+          "Dilation expands coverage",
+        ],
       },
     ],
-    memoryLine: "Effective input space minus effective kernel, step by stride, then add one.",
+    memoryLine:
+      "Effective input space minus effective kernel, step by stride, then add one.",
     cues: [
       "Use floor.",
       "Solve H and W independently.",

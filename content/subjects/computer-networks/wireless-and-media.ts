@@ -28,10 +28,19 @@ export const wifiFoundationsArchitectureAndGenerations: SubjectTopic = {
           headers: ["Component", "Role"],
           rows: [
             ["Station or STA", "Wireless client such as a laptop or phone"],
-            ["Access Point or AP", "Connects associated stations to a distribution system"],
-            ["BSS", "One basic wireless cell, commonly one AP and its stations"],
+            [
+              "Access Point or AP",
+              "Connects associated stations to a distribution system",
+            ],
+            [
+              "BSS",
+              "One basic wireless cell, commonly one AP and its stations",
+            ],
             ["ESS", "Several connected BSS cells presenting one larger WLAN"],
-            ["Distribution system", "Backhaul connecting APs, often switched Ethernet"],
+            [
+              "Distribution system",
+              "Backhaul connecting APs, often switched Ethernet",
+            ],
             ["Router", "Routes traffic between the WLAN and other IP networks"],
           ],
         },
@@ -58,8 +67,16 @@ export const wifiFoundationsArchitectureAndGenerations: SubjectTopic = {
         dataTable: {
           headers: ["Category", "Examples", "Main job"],
           rows: [
-            ["Management", "Beacon, Probe, Authentication, Association", "Discover and manage WLAN membership"],
-            ["Control", "ACK, RTS, CTS", "Coordinate access and confirm delivery"],
+            [
+              "Management",
+              "Beacon, Probe, Authentication, Association",
+              "Discover and manage WLAN membership",
+            ],
+            [
+              "Control",
+              "ACK, RTS, CTS",
+              "Coordinate access and confirm delivery",
+            ],
             ["Data", "Data and QoS Data", "Carry upper-layer payloads"],
           ],
         },
@@ -76,9 +93,21 @@ export const wifiFoundationsArchitectureAndGenerations: SubjectTopic = {
         dataTable: {
           headers: ["Device", "Main role", "Does not necessarily provide"],
           rows: [
-            ["Access point", "Bridges wireless clients into a LAN", "IP routing or ISP conversion"],
-            ["Wireless router", "Combines routing, switching, firewalling, and an AP", "The ISP physical link by itself"],
-            ["Modem or ONT", "Terminates the ISP access technology", "Wi-Fi unless combined with a router/AP"],
+            [
+              "Access point",
+              "Bridges wireless clients into a LAN",
+              "IP routing or ISP conversion",
+            ],
+            [
+              "Wireless router",
+              "Combines routing, switching, firewalling, and an AP",
+              "The ISP physical link by itself",
+            ],
+            [
+              "Modem or ONT",
+              "Terminates the ISP access technology",
+              "Wi-Fi unless combined with a router/AP",
+            ],
           ],
         },
         paragraphs: [
@@ -98,15 +127,40 @@ export const wifiFoundationsArchitectureAndGenerations: SubjectTopic = {
           "The Wi-Fi Alliance's simple generation naming is commonly applied from Wi-Fi 4 onward. Older 802.11b, 802.11a, and 802.11g are clearer when named by their IEEE amendment rather than unofficial Wi-Fi 1, 2, or 3 labels.",
         ],
         dataTable: {
-          headers: ["Generation", "IEEE amendment", "Main bands", "Key improvement"],
+          headers: [
+            "Generation",
+            "IEEE amendment",
+            "Main bands",
+            "Key improvement",
+          ],
           rows: [
             ["Legacy", "802.11b", "2.4 GHz", "Up to 11 Mbit/s PHY"],
             ["Legacy", "802.11a / g", "5 / 2.4 GHz", "Up to 54 Mbit/s PHY"],
             ["Wi-Fi 4", "802.11n", "2.4 and 5 GHz", "MIMO and channel bonding"],
-            ["Wi-Fi 5", "802.11ac", "5 GHz", "Wider channels and downlink MU-MIMO"],
-            ["Wi-Fi 6", "802.11ax", "2.4 and 5 GHz", "OFDMA, efficiency, and uplink/downlink MU-MIMO"],
-            ["Wi-Fi 6E", "802.11ax", "Adds 6 GHz", "More clean spectrum, not a new PHY generation"],
-            ["Wi-Fi 7", "802.11be", "2.4, 5, and 6 GHz", "320 MHz, Multi-Link Operation, and 4096-QAM"],
+            [
+              "Wi-Fi 5",
+              "802.11ac",
+              "5 GHz",
+              "Wider channels and downlink MU-MIMO",
+            ],
+            [
+              "Wi-Fi 6",
+              "802.11ax",
+              "2.4 and 5 GHz",
+              "OFDMA, efficiency, and uplink/downlink MU-MIMO",
+            ],
+            [
+              "Wi-Fi 6E",
+              "802.11ax",
+              "Adds 6 GHz",
+              "More clean spectrum, not a new PHY generation",
+            ],
+            [
+              "Wi-Fi 7",
+              "802.11be",
+              "2.4, 5, and 6 GHz",
+              "320 MHz, Multi-Link Operation, and 4096-QAM",
+            ],
           ],
         },
       },
@@ -161,11 +215,19 @@ export const wifiFoundationsArchitectureAndGenerations: SubjectTopic = {
     comparison: {
       left: {
         label: "SSID",
-        points: ["Logical network name", "Can be shared by several APs", "Chosen by the user or profile"],
+        points: [
+          "Logical network name",
+          "Can be shared by several APs",
+          "Chosen by the user or profile",
+        ],
       },
       right: {
         label: "BSSID",
-        points: ["Identifies one BSS", "Usually tied to an AP radio", "Changes when client roams"],
+        points: [
+          "Identifies one BSS",
+          "Usually tied to an AP radio",
+          "Changes when client roams",
+        ],
       },
     },
     followUp: "Why can two APs have the same SSID but different BSSIDs?",
@@ -225,10 +287,26 @@ export const wirelessCapacityTechniques: SubjectTopic = {
         dataTable: {
           headers: ["Technique", "Main goal", "How it helps"],
           rows: [
-            ["Spatial multiplexing", "Throughput", "Parallel independent streams"],
-            ["Transmit/receive diversity", "Reliability", "Combine or choose signal copies"],
-            ["Beamforming", "Signal quality", "Coordinate antennas to direct energy"],
-            ["MU-MIMO", "Multi-user capacity", "Spatially separate compatible clients"],
+            [
+              "Spatial multiplexing",
+              "Throughput",
+              "Parallel independent streams",
+            ],
+            [
+              "Transmit/receive diversity",
+              "Reliability",
+              "Combine or choose signal copies",
+            ],
+            [
+              "Beamforming",
+              "Signal quality",
+              "Coordinate antennas to direct energy",
+            ],
+            [
+              "MU-MIMO",
+              "Multi-user capacity",
+              "Spatially separate compatible clients",
+            ],
           ],
         },
       },
@@ -339,18 +417,28 @@ export const wirelessCapacityTechniques: SubjectTopic = {
     comparison: {
       left: {
         label: "OFDM",
-        points: ["Many orthogonal subcarriers", "One scheduled user uses channel", "Parallel symbols resist multipath"],
+        points: [
+          "Many orthogonal subcarriers",
+          "One scheduled user uses channel",
+          "Parallel symbols resist multipath",
+        ],
       },
       right: {
         label: "OFDMA",
-        points: ["Groups subcarriers into resource units", "Several users can share opportunity", "Efficient for dense mixed traffic"],
+        points: [
+          "Groups subcarriers into resource units",
+          "Several users can share opportunity",
+          "Efficient for dense mixed traffic",
+        ],
       },
     },
     followUp: "Why does higher-order QAM normally require a higher SNR?",
   },
   lastMinute: {
-    definition: "Capacity grows by using radio resources efficiently across space, time, and frequency.",
-    memoryLine: "MIMO separates space; OFDMA divides frequency resources among users.",
+    definition:
+      "Capacity grows by using radio resources efficiently across space, time, and frequency.",
+    memoryLine:
+      "MIMO separates space; OFDMA divides frequency resources among users.",
     cues: [
       "SISO: one stream. SU-MIMO: several streams to one client.",
       "MU-MIMO: spatial streams to multiple clients.",
@@ -417,9 +505,21 @@ export const wifiAccessBandsAndPerformance: SubjectTopic = {
         dataTable: {
           headers: ["Band", "Typical advantage", "Typical limitation"],
           rows: [
-            ["2.4 GHz", "Longer reach and broad compatibility", "Few non-overlapping wide channels and heavy interference"],
-            ["5 GHz", "More channels and high throughput", "More wall loss than 2.4 GHz"],
-            ["6 GHz", "Large clean spectrum and wide channels", "Newer clients and shorter practical reach"],
+            [
+              "2.4 GHz",
+              "Longer reach and broad compatibility",
+              "Few non-overlapping wide channels and heavy interference",
+            ],
+            [
+              "5 GHz",
+              "More channels and high throughput",
+              "More wall loss than 2.4 GHz",
+            ],
+            [
+              "6 GHz",
+              "Large clean spectrum and wide channels",
+              "Newer clients and shorter practical reach",
+            ],
           ],
         },
       },
@@ -435,9 +535,21 @@ export const wifiAccessBandsAndPerformance: SubjectTopic = {
         dataTable: {
           headers: ["Condition", "What happens", "Typical response"],
           rows: [
-            ["Co-channel contention", "WLANs share one channel and defer to detected frames", "Plan reuse and reduce excess cell overlap"],
-            ["Adjacent-channel interference", "Partly overlapping channels corrupt one another without clean coordination", "Use non-overlapping channel plans"],
-            ["Non-Wi-Fi interference", "Other radio sources consume or disturb spectrum", "Locate source or change band/channel"],
+            [
+              "Co-channel contention",
+              "WLANs share one channel and defer to detected frames",
+              "Plan reuse and reduce excess cell overlap",
+            ],
+            [
+              "Adjacent-channel interference",
+              "Partly overlapping channels corrupt one another without clean coordination",
+              "Use non-overlapping channel plans",
+            ],
+            [
+              "Non-Wi-Fi interference",
+              "Other radio sources consume or disturb spectrum",
+              "Locate source or change band/channel",
+            ],
           ],
         },
         paragraphs: [
@@ -469,11 +581,31 @@ export const wifiAccessBandsAndPerformance: SubjectTopic = {
         dataTable: {
           headers: ["Metric", "Meaning", "Diagnostic clue"],
           rows: [
-            ["RSSI", "Received signal strength indicator", "Strong signal alone does not prove clean channel"],
-            ["Noise floor", "Measured background energy", "Higher noise reduces usable margin"],
-            ["SNR", "Signal level relative to noise", "Higher SNR supports stronger MCS"],
-            ["Retry percentage", "Frames requiring retransmission", "High value suggests loss or contention"],
-            ["Channel utilization", "Fraction of sensed busy airtime", "High value leaves little transmission opportunity"],
+            [
+              "RSSI",
+              "Received signal strength indicator",
+              "Strong signal alone does not prove clean channel",
+            ],
+            [
+              "Noise floor",
+              "Measured background energy",
+              "Higher noise reduces usable margin",
+            ],
+            [
+              "SNR",
+              "Signal level relative to noise",
+              "Higher SNR supports stronger MCS",
+            ],
+            [
+              "Retry percentage",
+              "Frames requiring retransmission",
+              "High value suggests loss or contention",
+            ],
+            [
+              "Channel utilization",
+              "Fraction of sensed busy airtime",
+              "High value leaves little transmission opportunity",
+            ],
           ],
         },
         paragraphs: [
@@ -545,17 +677,27 @@ export const wifiAccessBandsAndPerformance: SubjectTopic = {
     comparison: {
       left: {
         label: "CSMA/CD",
-        points: ["Classic shared Ethernet", "Detect collision while sending", "Jam and back off"],
+        points: [
+          "Classic shared Ethernet",
+          "Detect collision while sending",
+          "Jam and back off",
+        ],
       },
       right: {
         label: "CSMA/CA",
-        points: ["Wi-Fi contention", "Avoid through sensing and backoff", "Uses ACK and optional RTS/CTS"],
+        points: [
+          "Wi-Fi contention",
+          "Avoid through sensing and backoff",
+          "Uses ACK and optional RTS/CTS",
+        ],
       },
     },
-    followUp: "Why does the Wi-Fi backoff counter freeze when another station transmits?",
+    followUp:
+      "Why does the Wi-Fi backoff counter freeze when another station transmits?",
   },
   lastMinute: {
-    definition: "CSMA/CA shares Wi-Fi airtime through sensing, random backoff, and ACKs.",
+    definition:
+      "CSMA/CA shares Wi-Fi airtime through sensing, random backoff, and ACKs.",
     memoryLine: "Listen, wait, count down, send, confirm.",
     cues: [
       "Hidden nodes can reach the AP but not hear each other.",
@@ -586,8 +728,16 @@ export const wifiSecurityEvolution: SubjectTopic = {
           rows: [
             ["WEP", "RC4 with short IV design", "Broken and must not be used"],
             ["WPA", "TKIP transitional protection", "Obsolete"],
-            ["WPA2", "AES-CCMP", "Secure when configured and patched correctly"],
-            ["WPA3", "SAE and stronger requirements", "Preferred for capable modern devices"],
+            [
+              "WPA2",
+              "AES-CCMP",
+              "Secure when configured and patched correctly",
+            ],
+            [
+              "WPA3",
+              "SAE and stronger requirements",
+              "Preferred for capable modern devices",
+            ],
           ],
         },
         paragraphs: [
@@ -599,8 +749,14 @@ export const wifiSecurityEvolution: SubjectTopic = {
         table: {
           headers: ["Personal mode", "Enterprise mode"],
           rows: [
-            ["Shared network password or SAE credential", "Per-user or device authentication"],
-            ["Suitable for homes and small networks", "Uses 802.1X and an authentication server"],
+            [
+              "Shared network password or SAE credential",
+              "Per-user or device authentication",
+            ],
+            [
+              "Suitable for homes and small networks",
+              "Uses 802.1X and an authentication server",
+            ],
             ["Simple management", "Central policy and revocation"],
           ],
         },
@@ -616,9 +772,21 @@ export const wifiSecurityEvolution: SubjectTopic = {
         dataTable: {
           headers: ["Role", "Typical device", "Job"],
           rows: [
-            ["Supplicant", "Wireless client", "Requests access and supplies EAP identity or proof"],
-            ["Authenticator", "Access point or controller", "Controls the network port and relays authentication"],
-            ["Authentication server", "RADIUS server", "Validates credentials and returns authorization"],
+            [
+              "Supplicant",
+              "Wireless client",
+              "Requests access and supplies EAP identity or proof",
+            ],
+            [
+              "Authenticator",
+              "Access point or controller",
+              "Controls the network port and relays authentication",
+            ],
+            [
+              "Authentication server",
+              "RADIUS server",
+              "Validates credentials and returns authorization",
+            ],
           ],
         },
       },
@@ -630,9 +798,21 @@ export const wifiSecurityEvolution: SubjectTopic = {
         dataTable: {
           headers: ["Key material", "Scope", "Simple meaning"],
           rows: [
-            ["PMK", "Authentication result", "Root key material known to client and WLAN infrastructure"],
-            ["PTK", "One client-AP relationship", "Derived unicast session keys"],
-            ["GTK", "WLAN group", "Key used for protected broadcast and multicast traffic"],
+            [
+              "PMK",
+              "Authentication result",
+              "Root key material known to client and WLAN infrastructure",
+            ],
+            [
+              "PTK",
+              "One client-AP relationship",
+              "Derived unicast session keys",
+            ],
+            [
+              "GTK",
+              "WLAN group",
+              "Key used for protected broadcast and multicast traffic",
+            ],
           ],
         },
       },
@@ -676,11 +856,31 @@ export const wifiSecurityEvolution: SubjectTopic = {
         dataTable: {
           headers: ["Threat", "Risk", "Useful defense"],
           rows: [
-            ["Weak password", "Offline guessing or account sharing", "Long unique credential or Enterprise authentication"],
-            ["Evil twin", "Fake AP impersonates trusted SSID", "Validate certificates and use trusted profiles"],
-            ["Deauthentication abuse", "Forces clients off network", "Protected Management Frames"],
-            ["WPS PIN attack", "Recovers access despite good WPA password", "Disable vulnerable WPS methods"],
-            ["Open hotspot snooping", "Unprotected local radio traffic", "HTTPS, trusted VPN when needed, or Enhanced Open"],
+            [
+              "Weak password",
+              "Offline guessing or account sharing",
+              "Long unique credential or Enterprise authentication",
+            ],
+            [
+              "Evil twin",
+              "Fake AP impersonates trusted SSID",
+              "Validate certificates and use trusted profiles",
+            ],
+            [
+              "Deauthentication abuse",
+              "Forces clients off network",
+              "Protected Management Frames",
+            ],
+            [
+              "WPS PIN attack",
+              "Recovers access despite good WPA password",
+              "Disable vulnerable WPS methods",
+            ],
+            [
+              "Open hotspot snooping",
+              "Unprotected local radio traffic",
+              "HTTPS, trusted VPN when needed, or Enhanced Open",
+            ],
           ],
         },
       },
@@ -693,10 +893,22 @@ export const wifiSecurityEvolution: SubjectTopic = {
           headers: ["Mode", "Network authentication", "Wireless encryption"],
           rows: [
             ["Open", "None", "None"],
-            ["Enhanced Open / OWE", "Does not prove venue identity", "Per-user over-the-air encryption"],
+            [
+              "Enhanced Open / OWE",
+              "Does not prove venue identity",
+              "Per-user over-the-air encryption",
+            ],
             ["WPA2-Personal", "Shared PSK", "AES-CCMP"],
-            ["WPA3-Personal", "SAE shared credential", "Modern WPA3 protection"],
-            ["WPA2/3-Enterprise", "802.1X/EAP identity", "Per-session enterprise keys"],
+            [
+              "WPA3-Personal",
+              "SAE shared credential",
+              "Modern WPA3 protection",
+            ],
+            [
+              "WPA2/3-Enterprise",
+              "802.1X/EAP identity",
+              "Per-session enterprise keys",
+            ],
           ],
         },
         points: [
@@ -750,17 +962,26 @@ export const wifiSecurityEvolution: SubjectTopic = {
     comparison: {
       left: {
         label: "WPA2-Personal",
-        points: ["PSK-based authentication", "AES-CCMP", "Weak passwords enable offline guesses"],
+        points: [
+          "PSK-based authentication",
+          "AES-CCMP",
+          "Weak passwords enable offline guesses",
+        ],
       },
       right: {
         label: "WPA3-Personal",
-        points: ["SAE authentication", "Forward secrecy", "Better password-guessing resistance"],
+        points: [
+          "SAE authentication",
+          "Forward secrecy",
+          "Better password-guessing resistance",
+        ],
       },
     },
     followUp: "Why is hiding the SSID not a replacement for WPA2 or WPA3?",
   },
   lastMinute: {
-    definition: "WPA protects access and wireless frame confidentiality and integrity.",
+    definition:
+      "WPA protects access and wireless frame confidentiality and integrity.",
     memoryLine: "WEP broken, WPA temporary, WPA2 AES, WPA3 SAE.",
     cues: [
       "Avoid WEP and TKIP-only configurations.",
@@ -806,9 +1027,24 @@ export const transmissionMediaNoiseAndCapacity: SubjectTopic = {
         dataTable: {
           headers: ["Medium", "Signal", "Strength", "Limitation"],
           rows: [
-            ["Twisted pair", "Electrical", "Low cost and common Ethernet installation", "Distance and electromagnetic interference"],
-            ["Coaxial", "Electrical", "Shielding and useful RF bandwidth", "Bulkier and less common for switched LAN access"],
-            ["Fiber optic", "Light", "High capacity, long reach, and immunity to EMI", "Optics, termination, and bend sensitivity"],
+            [
+              "Twisted pair",
+              "Electrical",
+              "Low cost and common Ethernet installation",
+              "Distance and electromagnetic interference",
+            ],
+            [
+              "Coaxial",
+              "Electrical",
+              "Shielding and useful RF bandwidth",
+              "Bulkier and less common for switched LAN access",
+            ],
+            [
+              "Fiber optic",
+              "Light",
+              "High capacity, long reach, and immunity to EMI",
+              "Optics, termination, and bend sensitivity",
+            ],
           ],
         },
       },
@@ -820,9 +1056,18 @@ export const transmissionMediaNoiseAndCapacity: SubjectTopic = {
         table: {
           headers: ["UTP", "STP"],
           rows: [
-            ["No added metallic pair or cable shield", "Adds shielding around pairs or cable"],
-            ["Lower cost and easier installation", "Better control of electromagnetic interference"],
-            ["Common in offices and homes", "Needs correct grounding and installation"],
+            [
+              "No added metallic pair or cable shield",
+              "Adds shielding around pairs or cable",
+            ],
+            [
+              "Lower cost and easier installation",
+              "Better control of electromagnetic interference",
+            ],
+            [
+              "Common in offices and homes",
+              "Needs correct grounding and installation",
+            ],
           ],
         },
       },
@@ -835,9 +1080,21 @@ export const transmissionMediaNoiseAndCapacity: SubjectTopic = {
           headers: ["Category", "Common Ethernet capability", "Typical note"],
           rows: [
             ["Cat5", "100BASE-TX", "Legacy; Cat5e replaced it for new work"],
-            ["Cat5e", "1000BASE-T to 100 m", "Often supports faster rates at shorter lengths"],
-            ["Cat6", "1 Gbit/s to 100 m; 10 Gbit/s at shorter reach", "Better crosstalk performance"],
-            ["Cat6A", "10GBASE-T to 100 m", "Designed for full 10-gigabit channel reach"],
+            [
+              "Cat5e",
+              "1000BASE-T to 100 m",
+              "Often supports faster rates at shorter lengths",
+            ],
+            [
+              "Cat6",
+              "1 Gbit/s to 100 m; 10 Gbit/s at shorter reach",
+              "Better crosstalk performance",
+            ],
+            [
+              "Cat6A",
+              "10GBASE-T to 100 m",
+              "Designed for full 10-gigabit channel reach",
+            ],
             ["Cat8", "25/40GBASE-T to about 30 m", "Data-center short reach"],
           ],
         },
@@ -947,17 +1204,26 @@ export const transmissionMediaNoiseAndCapacity: SubjectTopic = {
     comparison: {
       left: {
         label: "Nyquist",
-        points: ["Ideal noiseless channel", "Uses signal levels L", "C = 2B log2(L)"],
+        points: [
+          "Ideal noiseless channel",
+          "Uses signal levels L",
+          "C = 2B log2(L)",
+        ],
       },
       right: {
         label: "Shannon",
-        points: ["Noisy channel limit", "Uses linear S/N", "C = B log2(1 + S/N)"],
+        points: [
+          "Noisy channel limit",
+          "Uses linear S/N",
+          "C = B log2(1 + S/N)",
+        ],
       },
     },
     followUp: "What is the linear SNR corresponding to 40 dB?",
   },
   lastMinute: {
-    definition: "Channel capacity grows with bandwidth and usable signal quality.",
+    definition:
+      "Channel capacity grows with bandwidth and usable signal quality.",
     memoryLine: "Convert dB first, then place linear SNR inside Shannon.",
     cues: [
       "10 dB power ratio = 10; 20 dB = 100; 30 dB = 1,000.",

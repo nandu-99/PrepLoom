@@ -18,9 +18,7 @@ export const channelsFiltersAndParameterCounting: SubjectTopic = {
           "If an input has Cᵢₙ channels, every standard convolution filter has depth Cᵢₙ. A 3 × 3 filter on an RGB input therefore contains 3 × 3 × 3 weights before its bias.",
           "The filter combines information across all input channels at every spatial position. It does not independently create three outputs from the three RGB channels.",
         ],
-        formulas: [
-          { label: "One filter shape", expression: "Kₕ × K𝓌 × Cᵢₙ" },
-        ],
+        formulas: [{ label: "One filter shape", expression: "Kₕ × K𝓌 × Cᵢₙ" }],
         visual: {
           src: "/notes/deep-learning/multi-channel-convolution.png",
           alt: "Three-channel input processed by depth-matching filters to produce multiple output feature maps",
@@ -65,13 +63,19 @@ export const channelsFiltersAndParameterCounting: SubjectTopic = {
           "A layer can have few parameters but many activation values when it processes a large image. Training memory also stores values needed for backpropagation.",
         ],
         formulas: [
-          { label: "One-example output activations", expression: "activations = HoutWoutCout" },
+          {
+            label: "One-example output activations",
+            expression: "activations = HoutWoutCout",
+          },
         ],
         table: {
           headers: ["Parameters", "Activations"],
           rows: [
             ["Learned and saved", "Produced from an input"],
-            ["Independent of batch and spatial positions", "Grow with batch and output size"],
+            [
+              "Independent of batch and spatial positions",
+              "Grow with batch and output size",
+            ],
           ],
         },
       },
@@ -81,7 +85,10 @@ export const channelsFiltersAndParameterCounting: SubjectTopic = {
           "An input 32 × 32 × 3 uses sixteen 3 × 3 filters, stride 1, valid padding, and one bias per filter.",
         ],
         formulas: [
-          { label: "Spatial output", expression: "Hout = Wout = (32 − 3) + 1 = 30" },
+          {
+            label: "Spatial output",
+            expression: "Hout = Wout = (32 − 3) + 1 = 30",
+          },
           { label: "Output tensor", expression: "30 × 30 × 16" },
           { label: "Parameters", expression: "(3×3×3 + 1)×16 = 448" },
           { label: "Output activations", expression: "30×30×16 = 14,400" },
@@ -167,7 +174,12 @@ export const channelsFiltersAndParameterCounting: SubjectTopic = {
       },
       {
         title: "Shape Rule",
-        flow: ["Input depth Cᵢₙ", "Filter depth Cᵢₙ", "Cₒᵤₜ filters", "Output depth Cₒᵤₜ"],
+        flow: [
+          "Input depth Cᵢₙ",
+          "Filter depth Cᵢₙ",
+          "Cₒᵤₜ filters",
+          "Output depth Cₒᵤₜ",
+        ],
       },
     ],
     essentialsStyle: "plain",
@@ -193,7 +205,8 @@ export const channelsFiltersAndParameterCounting: SubjectTopic = {
         points: ["Batch size", "Output H", "Output W"],
       },
     ],
-    memoryLine: "Count values inside one filter, then multiply by the number of filters.",
+    memoryLine:
+      "Count values inside one filter, then multiply by the number of filters.",
     cues: [
       "Output channels = number of filters.",
       "Bias can be disabled.",
@@ -233,7 +246,10 @@ export const poolingAndReceptiveFields: SubjectTopic = {
           headers: ["Max pooling", "Average pooling"],
           rows: [
             ["Keeps strongest local value", "Keeps local mean"],
-            ["Gradient returns through selected maximum", "Gradient is shared across the window"],
+            [
+              "Gradient returns through selected maximum",
+              "Gradient is shared across the window",
+            ],
           ],
         },
       },
@@ -244,7 +260,10 @@ export const poolingAndReceptiveFields: SubjectTopic = {
         ],
         formulas: [
           { label: "Effective pool window", expression: "Keff = D(K − 1) + 1" },
-          { label: "One dimension", expression: "Nout = ⌊(N + 2P − Keff)/S⌋ + 1" },
+          {
+            label: "One dimension",
+            expression: "Nout = ⌊(N + 2P − Keff)/S⌋ + 1",
+          },
         ],
       },
       {
@@ -261,7 +280,10 @@ export const poolingAndReceptiveFields: SubjectTopic = {
           "Start at the input with r₀ = 1 and j₀ = 1. For layer ℓ, let Kℓ,eff = Dℓ(Kℓ − 1) + 1. Update receptive field using this effective kernel and the previous jump, then update the jump.",
         ],
         formulas: [
-          { label: "Receptive field", expression: "rℓ = rℓ₋₁ + (Kℓ,eff − 1)jℓ₋₁" },
+          {
+            label: "Receptive field",
+            expression: "rℓ = rℓ₋₁ + (Kℓ,eff − 1)jℓ₋₁",
+          },
           { label: "Jump", expression: "jℓ = jℓ₋₁Sℓ" },
         ],
       },
@@ -272,9 +294,18 @@ export const poolingAndReceptiveFields: SubjectTopic = {
         ],
         formulas: [
           { label: "Start", expression: "r₀ = 1, j₀ = 1" },
-          { label: "After conv 3, S1", expression: "r₁ = 1 + 2(1) = 3, j₁ = 1" },
-          { label: "After pool 2, S2", expression: "r₂ = 3 + 1(1) = 4, j₂ = 2" },
-          { label: "After conv 3, S1", expression: "r₃ = 4 + 2(2) = 8, j₃ = 2" },
+          {
+            label: "After conv 3, S1",
+            expression: "r₁ = 1 + 2(1) = 3, j₁ = 1",
+          },
+          {
+            label: "After pool 2, S2",
+            expression: "r₂ = 3 + 1(1) = 4, j₂ = 2",
+          },
+          {
+            label: "After conv 3, S1",
+            expression: "r₃ = 4 + 2(2) = 8, j₃ = 2",
+          },
         ],
       },
       {
@@ -387,14 +418,18 @@ export const poolingAndReceptiveFields: SubjectTopic = {
     sections: [
       {
         title: "Backward",
-        points: ["Max: gradient to argmax", "Average: divide gradient across window"],
+        points: [
+          "Max: gradient to argmax",
+          "Average: divide gradient across window",
+        ],
       },
       {
         title: "Receptive Field",
         points: ["rnew = rold + (Keff − 1)jold", "jnew = joldS"],
       },
     ],
-    memoryLine: "Stride spreads neighbouring outputs apart and makes later coverage grow faster.",
+    memoryLine:
+      "Stride spreads neighbouring outputs apart and makes later coverage grow faster.",
     cues: [
       "Pool per channel.",
       "No trainable pool weights.",
@@ -456,7 +491,10 @@ export const cnnArchitectureAndTransferLearning: SubjectTopic = {
           rows: [
             ["Vector length HWC", "Vector length C"],
             ["May create a large dense head", "Usually creates a smaller head"],
-            ["Keeps every location as a separate value", "Averages spatial positions"],
+            [
+              "Keeps every location as a separate value",
+              "Averages spatial positions",
+            ],
           ],
         },
       },
@@ -471,7 +509,11 @@ export const cnnArchitectureAndTransferLearning: SubjectTopic = {
           rows: [
             ["Binary", "1 logit", "BCE from logits"],
             ["Single-label C-class", "C logits", "Cross-entropy from logits"],
-            ["Multi-label with C labels", "C independent logits", "BCE from logits"],
+            [
+              "Multi-label with C labels",
+              "C independent logits",
+              "BCE from logits",
+            ],
           ],
         },
       },
@@ -492,7 +534,10 @@ export const cnnArchitectureAndTransferLearning: SubjectTopic = {
           ],
         },
         formulas: [
-          { label: "Total trainable parameters", expression: "448 + 4,640 + 330 = 5,418" },
+          {
+            label: "Total trainable parameters",
+            expression: "448 + 4,640 + 330 = 5,418",
+          },
         ],
       },
       {
@@ -544,7 +589,8 @@ export const cnnArchitectureAndTransferLearning: SubjectTopic = {
               "GAP head = 512 × 10 + 10 = 5,130.",
               "GAP greatly reduces the dense-head parameter count.",
             ],
-            answer: "Flatten head: 250,890 parameters. GAP head: 5,130 parameters.",
+            answer:
+              "Flatten head: 250,890 parameters. GAP head: 5,130 parameters.",
           },
           {
             title: "Frozen trainable count",
@@ -555,7 +601,8 @@ export const cnnArchitectureAndTransferLearning: SubjectTopic = {
               "Head-only training has 5,130 trainable parameters.",
               "After unfreezing: 200,000 + 5,130 = 205,130.",
             ],
-            answer: "Initially 5,130; after unfreezing the block, 205,130 trainable parameters.",
+            answer:
+              "Initially 5,130; after unfreezing the block, 205,130 trainable parameters.",
           },
           {
             title: "Choose the output",
@@ -566,7 +613,8 @@ export const cnnArchitectureAndTransferLearning: SubjectTopic = {
               "Use one independent output logit for every tag.",
               "Train with BCE from logits across the 12 labels.",
             ],
-            answer: "Use 12 sigmoid-style logits and multi-label BCE from logits.",
+            answer:
+              "Use 12 sigmoid-style logits and multi-label BCE from logits.",
           },
         ],
       },
@@ -595,11 +643,22 @@ export const cnnArchitectureAndTransferLearning: SubjectTopic = {
     sections: [
       {
         title: "Architecture",
-        flow: ["Image", "Conv blocks", "Downsample", "GAP/flatten", "Dense logits"],
+        flow: [
+          "Image",
+          "Conv blocks",
+          "Downsample",
+          "GAP/flatten",
+          "Dense logits",
+        ],
       },
       {
         title: "Transfer",
-        flow: ["Load pretrained backbone", "Replace head", "Freeze and train head", "Fine-tune upper layers"],
+        flow: [
+          "Load pretrained backbone",
+          "Replace head",
+          "Freeze and train head",
+          "Fine-tune upper layers",
+        ],
       },
     ],
     essentialsStyle: "plain",
@@ -623,10 +682,17 @@ export const cnnArchitectureAndTransferLearning: SubjectTopic = {
       },
       {
         title: "Transfer Order",
-        points: ["Match preprocessing", "Freeze backbone", "Train head", "Unfreeze upper layers", "Use small η"],
+        points: [
+          "Match preprocessing",
+          "Freeze backbone",
+          "Train head",
+          "Unfreeze upper layers",
+          "Use small η",
+        ],
       },
     ],
-    memoryLine: "Reuse general visual features, then adapt only as much as the target needs.",
+    memoryLine:
+      "Reuse general visual features, then adapt only as much as the target needs.",
     cues: [
       "Single-label → softmax-style logits and CE.",
       "Multi-label → independent logits and BCE.",

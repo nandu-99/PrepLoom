@@ -81,11 +81,26 @@ export const ipv4AddressingAndSubnetting: SubjectTopic = {
           "One valid allocation is 10.0.0.0/25, 10.0.0.128/26, and 10.0.0.192/27. The remaining 10.0.0.224/27 can be reserved or divided further.",
         ],
         dataTable: {
-          headers: ["LAN need", "Allocated subnet", "Usable range", "Broadcast"],
+          headers: [
+            "LAN need",
+            "Allocated subnet",
+            "Usable range",
+            "Broadcast",
+          ],
           rows: [
             ["100 hosts", "10.0.0.0/25", "10.0.0.1-10.0.0.126", "10.0.0.127"],
-            ["50 hosts", "10.0.0.128/26", "10.0.0.129-10.0.0.190", "10.0.0.191"],
-            ["20 hosts", "10.0.0.192/27", "10.0.0.193-10.0.0.222", "10.0.0.223"],
+            [
+              "50 hosts",
+              "10.0.0.128/26",
+              "10.0.0.129-10.0.0.190",
+              "10.0.0.191",
+            ],
+            [
+              "20 hosts",
+              "10.0.0.192/27",
+              "10.0.0.193-10.0.0.222",
+              "10.0.0.223",
+            ],
             ["Unused", "10.0.0.224/27", "10.0.0.225-10.0.0.254", "10.0.0.255"],
           ],
         },
@@ -238,7 +253,10 @@ export const ipv6NatAndAddressDelivery: SubjectTopic = {
           rows: [
             ["Global unicast", "Publicly routable unicast addressing"],
             ["fe80::/10", "Link-local communication"],
-            ["fc00::/7", "Unique local range; locally assigned addresses normally use fd00::/8"],
+            [
+              "fc00::/7",
+              "Unique local range; locally assigned addresses normally use fd00::/8",
+            ],
             ["ff00::/8", "Multicast"],
             ["::1/128", "Loopback"],
             ["::/128", "Unspecified address"],
@@ -306,7 +324,10 @@ export const ipv6NatAndAddressDelivery: SubjectTopic = {
           headers: ["Method", "Main idea"],
           rows: [
             ["Dual stack", "Run IPv4 and IPv6 together"],
-            ["Tunnelling", "Encapsulate traffic across an incompatible network"],
+            [
+              "Tunnelling",
+              "Encapsulate traffic across an incompatible network",
+            ],
             ["Translation", "Convert between IPv4 and IPv6 communication"],
           ],
         },

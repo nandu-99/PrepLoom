@@ -142,98 +142,196 @@ const searchGroups: SearchGroup[] = [
         title: "Latches and Flip-Flops",
         description: "SR, D, JK, and T storage elements",
         href: "/subjects/modern-computer-architecture#workspace",
-        keywords: ["latch", "flip flop", "sr", "d flip flop", "jk", "t flip flop"],
+        keywords: [
+          "latch",
+          "flip flop",
+          "sr",
+          "d flip flop",
+          "jk",
+          "t flip flop",
+        ],
         icon: BookOpen,
       },
       {
         title: "Registers and Shift Registers",
         description: "Parallel storage, loading, and serial shifting",
         href: "/subjects/modern-computer-architecture#workspace",
-        keywords: ["register", "shift register", "siso", "sipo", "piso", "pipo"],
+        keywords: [
+          "register",
+          "shift register",
+          "siso",
+          "sipo",
+          "piso",
+          "pipo",
+        ],
         icon: BookOpen,
       },
       {
         title: "Memory Organization",
         description: "RAM, ROM, addressing, capacity, and chip expansion",
         href: "/subjects/modern-computer-architecture#workspace",
-        keywords: ["memory", "ram", "rom", "address line", "memory chip", "capacity"],
+        keywords: [
+          "memory",
+          "ram",
+          "rom",
+          "address line",
+          "memory chip",
+          "capacity",
+        ],
         icon: BookOpen,
       },
       {
         title: "Program Counter",
         description: "Instruction address, increment, load, and reset",
         href: "/subjects/modern-computer-architecture#workspace",
-        keywords: ["program counter", "pc", "instruction fetch", "increment", "jump"],
+        keywords: [
+          "program counter",
+          "pc",
+          "instruction fetch",
+          "increment",
+          "jump",
+        ],
         icon: BookOpen,
       },
       {
         title: "Stored-Program Model and Hack Computer",
         description: "Hack platform, separate memories, and memory-mapped I/O",
         href: "/subjects/modern-computer-architecture#workspace",
-        keywords: ["hack computer", "stored program", "harvard", "rom32k", "screen", "keyboard"],
+        keywords: [
+          "hack computer",
+          "stored program",
+          "harvard",
+          "rom32k",
+          "screen",
+          "keyboard",
+        ],
         icon: BookOpen,
       },
       {
         title: "Hack CPU Datapath",
         description: "A, D, M, ALU, memory interface, and PC",
         href: "/subjects/modern-computer-architecture#workspace",
-        keywords: ["hack cpu", "datapath", "a register", "d register", "ram a", "outm", "writem"],
+        keywords: [
+          "hack cpu",
+          "datapath",
+          "a register",
+          "d register",
+          "ram a",
+          "outm",
+          "writem",
+        ],
         icon: BookOpen,
       },
       {
         title: "Hack Instruction Formats",
         description: "A-instruction and C-instruction machine-code formats",
         href: "/subjects/modern-computer-architecture#workspace",
-        keywords: ["hack instruction", "a instruction", "c instruction", "machine code", "111"],
+        keywords: [
+          "hack instruction",
+          "a instruction",
+          "c instruction",
+          "machine code",
+          "111",
+        ],
         icon: BookOpen,
       },
       {
         title: "C-Instruction Control and Execution",
         description: "ALU controls, destinations, flags, and jump codes",
         href: "/subjects/modern-computer-architecture#workspace",
-        keywords: ["comp bits", "dest bits", "jump bits", "zx", "nx", "zr", "ng"],
+        keywords: [
+          "comp bits",
+          "dest bits",
+          "jump bits",
+          "zx",
+          "nx",
+          "zr",
+          "ng",
+        ],
         icon: BookOpen,
       },
       {
         title: "Hack Assembly Programming",
         description: "Symbols, RAM access, branches, and loops",
         href: "/subjects/modern-computer-architecture#workspace",
-        keywords: ["hack assembly", "assembler", "labels", "variables", "loop", "r0"],
+        keywords: [
+          "hack assembly",
+          "assembler",
+          "labels",
+          "variables",
+          "loop",
+          "r0",
+        ],
         icon: BookOpen,
       },
       {
         title: "CPU Limitations and Performance",
         description: "CPU time, CPI, latency, throughput, and speedup",
         href: "/subjects/modern-computer-architecture#workspace",
-        keywords: ["cpu performance", "cpi", "clock rate", "latency", "throughput", "speedup"],
+        keywords: [
+          "cpu performance",
+          "cpi",
+          "clock rate",
+          "latency",
+          "throughput",
+          "speedup",
+        ],
         icon: BookOpen,
       },
       {
         title: "Polling, Interrupts, and I/O Handling",
         description: "Polling cost, interrupt flow, context, and ISR",
         href: "/subjects/modern-computer-architecture#workspace",
-        keywords: ["polling", "interrupt", "isr", "context switch", "interrupt latency", "io"],
+        keywords: [
+          "polling",
+          "interrupt",
+          "isr",
+          "context switch",
+          "interrupt latency",
+          "io",
+        ],
         icon: BookOpen,
       },
       {
         title: "Stack, Function Calls, and Recursion",
         description: "Stack frames, calling conventions, and recursive calls",
         href: "/subjects/modern-computer-architecture#workspace",
-        keywords: ["call stack", "stack frame", "function call", "recursion", "sp", "ra"],
+        keywords: [
+          "call stack",
+          "stack frame",
+          "function call",
+          "recursion",
+          "sp",
+          "ra",
+        ],
         icon: BookOpen,
       },
       {
         title: "Instruction Set Architecture: RISC and CISC",
         description: "ISA contract, load-store design, RISC, and CISC",
         href: "/subjects/modern-computer-architecture#workspace",
-        keywords: ["isa", "risc", "cisc", "load store", "microarchitecture", "risc v"],
+        keywords: [
+          "isa",
+          "risc",
+          "cisc",
+          "load store",
+          "microarchitecture",
+          "risc v",
+        ],
         icon: BookOpen,
       },
       {
         title: "MIPS Architecture and Basic Assembly",
         description: "MIPS registers, R-I-J formats, assembly, and encoding",
         href: "/subjects/modern-computer-architecture#workspace",
-        keywords: ["mips", "r type", "i type", "j type", "mips assembly", "branch offset"],
+        keywords: [
+          "mips",
+          "r type",
+          "i type",
+          "j type",
+          "mips assembly",
+          "branch offset",
+        ],
         icon: BookOpen,
       },
       {
@@ -254,35 +352,73 @@ const searchGroups: SearchGroup[] = [
         title: "Data Hazards and Forwarding",
         description: "RAW, WAR, WAW, bypassing, bubbles, and load-use stalls",
         href: "/subjects/modern-computer-architecture#workspace",
-        keywords: ["data hazard", "forwarding", "raw", "war", "waw", "load use"],
+        keywords: [
+          "data hazard",
+          "forwarding",
+          "raw",
+          "war",
+          "waw",
+          "load use",
+        ],
         icon: BookOpen,
       },
       {
         title: "Control and Structural Hazards",
-        description: "Branch prediction, flushing, penalties, and resource conflicts",
+        description:
+          "Branch prediction, flushing, penalties, and resource conflicts",
         href: "/subjects/modern-computer-architecture#workspace",
-        keywords: ["control hazard", "structural hazard", "branch prediction", "flush"],
+        keywords: [
+          "control hazard",
+          "structural hazard",
+          "branch prediction",
+          "flush",
+        ],
         icon: BookOpen,
       },
       {
         title: "Superscalar and Out-of-Order Execution",
         description: "Multiple issue, register renaming, ROB, and retirement",
         href: "/subjects/modern-computer-architecture#workspace",
-        keywords: ["superscalar", "out of order", "register renaming", "reorder buffer", "rob"],
+        keywords: [
+          "superscalar",
+          "out of order",
+          "register renaming",
+          "reorder buffer",
+          "rob",
+        ],
         icon: BookOpen,
       },
       {
         title: "Memory Hierarchy, Cache, and Virtual Memory",
-        description: "Locality, cache mapping, AMAT, TLBs, pages, and page faults",
+        description:
+          "Locality, cache mapping, AMAT, TLBs, pages, and page faults",
         href: "/subjects/modern-computer-architecture#workspace",
-        keywords: ["cache", "memory hierarchy", "amat", "tag index offset", "locality", "virtual memory", "tlb", "page fault"],
+        keywords: [
+          "cache",
+          "memory hierarchy",
+          "amat",
+          "tag index offset",
+          "locality",
+          "virtual memory",
+          "tlb",
+          "page fault",
+        ],
         icon: BookOpen,
       },
       {
         title: "SIMD, SIMT, and GPU Architecture",
         description: "Warps, divergence, coalescing, and CPU-GPU comparison",
         href: "/subjects/modern-computer-architecture#workspace",
-        keywords: ["simd", "simt", "gpu", "warp", "divergence", "coalescing", "vector alu", "arithmetic intensity"],
+        keywords: [
+          "simd",
+          "simt",
+          "gpu",
+          "warp",
+          "divergence",
+          "coalescing",
+          "vector alu",
+          "arithmetic intensity",
+        ],
         icon: BookOpen,
       },
     ],
@@ -455,7 +591,8 @@ const searchGroups: SearchGroup[] = [
       },
       {
         title: "Wi-Fi Architecture and Generations",
-        description: "802.11, access points, BSS, ESS, roaming, and Wi-Fi generations",
+        description:
+          "802.11, access points, BSS, ESS, roaming, and Wi-Fi generations",
         href: "/subjects/computer-networks#workspace",
         keywords: [
           "wifi",
@@ -471,7 +608,8 @@ const searchGroups: SearchGroup[] = [
       },
       {
         title: "MIMO, OFDM, and OFDMA",
-        description: "Spatial streams, beamforming, subcarriers, and wireless capacity",
+        description:
+          "Spatial streams, beamforming, subcarriers, and wireless capacity",
         href: "/subjects/computer-networks#workspace",
         keywords: [
           "siso",
@@ -486,7 +624,8 @@ const searchGroups: SearchGroup[] = [
       },
       {
         title: "Wi-Fi Channels and Security",
-        description: "CSMA/CA, bands, channels, WPA2, WPA3, and wireless threats",
+        description:
+          "CSMA/CA, bands, channels, WPA2, WPA3, and wireless threats",
         href: "/subjects/computer-networks#workspace",
         keywords: [
           "csma ca",
@@ -503,7 +642,8 @@ const searchGroups: SearchGroup[] = [
       },
       {
         title: "Transmission Media and Channel Capacity",
-        description: "Copper, fiber, noise, decibels, Nyquist, and Shannon numericals",
+        description:
+          "Copper, fiber, noise, decibels, Nyquist, and Shannon numericals",
         href: "/subjects/computer-networks#workspace",
         keywords: [
           "transmission media",
@@ -519,7 +659,8 @@ const searchGroups: SearchGroup[] = [
       },
       {
         title: "Network Security and Firewalls",
-        description: "Defense in depth, DMZs, ACL rules, stateful inspection, proxies, and NGFW",
+        description:
+          "Defense in depth, DMZs, ACL rules, stateful inspection, proxies, and NGFW",
         href: "/subjects/computer-networks#workspace",
         keywords: [
           "network security",
@@ -536,7 +677,8 @@ const searchGroups: SearchGroup[] = [
       },
       {
         title: "IDS and IPS",
-        description: "Detection methods, sensor placement, false positives, precision, and recall",
+        description:
+          "Detection methods, sensor placement, false positives, precision, and recall",
         href: "/subjects/computer-networks#workspace",
         keywords: [
           "ids",
@@ -552,7 +694,8 @@ const searchGroups: SearchGroup[] = [
       },
       {
         title: "VPN Tunneling and Deployment",
-        description: "Remote access, site-to-site, split tunneling, routes, DNS, and MTU",
+        description:
+          "Remote access, site-to-site, split tunneling, routes, DNS, and MTU",
         href: "/subjects/computer-networks#workspace",
         keywords: [
           "vpn",
@@ -567,7 +710,8 @@ const searchGroups: SearchGroup[] = [
       },
       {
         title: "IPsec, OpenVPN, and WireGuard",
-        description: "IKEv2, ESP, NAT traversal, tunnel modes, and modern VPN protocols",
+        description:
+          "IKEv2, ESP, NAT traversal, tunnel modes, and modern VPN protocols",
         href: "/subjects/computer-networks#workspace",
         keywords: [
           "ipsec",
@@ -629,7 +773,8 @@ const searchGroups: SearchGroup[] = [
     items: [
       {
         title: "Behavioral interview questions",
-        description: "Build natural answers from real software engineering experience",
+        description:
+          "Build natural answers from real software engineering experience",
         href: "/interview-questions/behavioral",
         keywords: [
           "behavioral",
@@ -643,7 +788,8 @@ const searchGroups: SearchGroup[] = [
       },
       {
         title: "Operating system interview questions",
-        description: "Review OS fundamentals with concise interview-style answers",
+        description:
+          "Review OS fundamentals with concise interview-style answers",
         href: "/interview-questions/operating-systems",
         keywords: [
           "operating system",
@@ -658,7 +804,8 @@ const searchGroups: SearchGroup[] = [
       },
       {
         title: "Computer networks interview questions",
-        description: "Review networking concepts with concise interview-style answers",
+        description:
+          "Review networking concepts with concise interview-style answers",
         href: "/interview-questions/computer-networks",
         keywords: [
           "computer networks",
@@ -674,7 +821,8 @@ const searchGroups: SearchGroup[] = [
       },
       {
         title: "OOP interview questions",
-        description: "Review object-oriented design with concise interview-style answers",
+        description:
+          "Review object-oriented design with concise interview-style answers",
         href: "/interview-questions/oop",
         keywords: [
           "oop",
@@ -689,7 +837,8 @@ const searchGroups: SearchGroup[] = [
       },
       {
         title: "DBMS interview questions",
-        description: "Review databases and SQL with concise interview-style answers",
+        description:
+          "Review databases and SQL with concise interview-style answers",
         href: "/interview-questions/dbms",
         keywords: [
           "dbms",
@@ -830,10 +979,7 @@ export function CommandSearch({
       )
     : [];
   const visibleGroups = matchedSubjectShortcuts.length
-    ? [
-        ...searchGroups,
-        { label: "Subjects", items: matchedSubjectShortcuts },
-      ]
+    ? [...searchGroups, { label: "Subjects", items: matchedSubjectShortcuts }]
     : searchGroups;
 
   const handleOpenChange = (nextOpen: boolean) => {

@@ -147,7 +147,13 @@ export const dropoutAndEarlyStopping: SubjectTopic = {
       },
       {
         title: "Early Stopping Flow",
-        flow: ["Evaluate validation", "Save improvement", "Count no-improvement", "Stop", "Restore best"],
+        flow: [
+          "Evaluate validation",
+          "Save improvement",
+          "Count no-improvement",
+          "Stop",
+          "Restore best",
+        ],
       },
     ],
     essentialsStyle: "plain",
@@ -166,14 +172,24 @@ export const dropoutAndEarlyStopping: SubjectTopic = {
     sections: [
       {
         title: "Dropout",
-        points: ["q = 1 − p", "Training: mask and divide by q", "Inference: no mask"],
+        points: [
+          "q = 1 − p",
+          "Training: mask and divide by q",
+          "Inference: no mask",
+        ],
       },
       {
         title: "Early Stop",
-        flow: ["Monitor validation", "Save best", "Wait patience", "Restore best"],
+        flow: [
+          "Monitor validation",
+          "Save best",
+          "Wait patience",
+          "Restore best",
+        ],
       },
     ],
-    memoryLine: "Dropout changes training passes; early stopping chooses training duration.",
+    memoryLine:
+      "Dropout changes training passes; early stopping chooses training duration.",
     cues: [
       "More dropout is not always better.",
       "Best epoch can be earlier than stop epoch.",
@@ -202,7 +218,10 @@ export const normalization: SubjectTopic = {
           "Fit μ and σ using training data only. Reuse those fixed training statistics for validation, test, and inference to avoid leakage and keep the transformation consistent.",
         ],
         formulas: [
-          { label: "Standardization", expression: "xstandard = (x − μtrain)/√(σtrain² + ε)" },
+          {
+            label: "Standardization",
+            expression: "xstandard = (x − μtrain)/√(σtrain² + ε)",
+          },
         ],
       },
       {
@@ -249,7 +268,10 @@ export const normalization: SubjectTopic = {
           "A BatchNorm layer with d normalized features has d trainable γ values and d trainable β values, giving 2d trainable parameters. Running mean and variance are stored state, not trainable parameters.",
         ],
         formulas: [
-          { label: "Trainable BatchNorm parameters", expression: "parameters = d γ-values + d β-values = 2d" },
+          {
+            label: "Trainable BatchNorm parameters",
+            expression: "parameters = d γ-values + d β-values = 2d",
+          },
         ],
       },
       {
@@ -269,7 +291,10 @@ export const normalization: SubjectTopic = {
             title: "Input standardization",
             prompt:
               "A feature has training mean μ = 50 and standard deviation σ = 10. Standardize x = 65, ignoring ε.",
-            steps: ["xstandard = (x − μ)/σ.", "xstandard = (65 − 50)/10 = 1.5."],
+            steps: [
+              "xstandard = (x − μ)/σ.",
+              "xstandard = (65 − 50)/10 = 1.5.",
+            ],
             answer: "The standardized value is 1.5.",
           },
           {
@@ -282,7 +307,8 @@ export const normalization: SubjectTopic = {
               "Normalized values x̂ = [−1, 1].",
               "Output y = 2x̂ + 0.5 = [−1.5, 2.5].",
             ],
-            answer: "BatchNorm output is [−1.5, 2.5]. Real implementations use positive ε.",
+            answer:
+              "BatchNorm output is [−1.5, 2.5]. Real implementations use positive ε.",
           },
           {
             title: "Parameter count",
@@ -331,7 +357,10 @@ export const normalization: SubjectTopic = {
         title: "Modes",
         table: {
           headers: ["Train", "Inference"],
-          rows: [["Batch statistics", "Running statistics"], ["Update running state", "Fixed running state"]],
+          rows: [
+            ["Batch statistics", "Running statistics"],
+            ["Update running state", "Fixed running state"],
+          ],
         },
       },
     ],
@@ -356,7 +385,11 @@ export const normalization: SubjectTopic = {
       },
       {
         title: "Modes",
-        points: ["Training → batch stats", "Inference → running stats", "Parameters → 2d"],
+        points: [
+          "Training → batch stats",
+          "Inference → running stats",
+          "Parameters → 2d",
+        ],
       },
     ],
     memoryLine: "Batch statistics train; running statistics serve.",
@@ -392,7 +425,10 @@ export const stableTrainingAndHyperparameterTuning: SubjectTopic = {
           rows: [
             ["Vanishing", "Early-layer gradient norms near zero"],
             ["Exploding", "Very large gradient norms or loss spikes"],
-            ["Numerical failure", "NaN or infinity in loss, activations, or parameters"],
+            [
+              "Numerical failure",
+              "NaN or infinity in loss, activations, or parameters",
+            ],
           ],
         },
       },
@@ -435,9 +471,18 @@ export const stableTrainingAndHyperparameterTuning: SubjectTopic = {
           headers: ["Observation", "First checks"],
           rows: [
             ["Loss never improves", "Data, labels, gradients, learning rate"],
-            ["Loss becomes NaN", "Learning rate, division/log inputs, gradient norm"],
-            ["Train improves; validation worsens", "Overfitting and data mismatch"],
-            ["Both improve very slowly", "Learning rate, normalization, capacity"],
+            [
+              "Loss becomes NaN",
+              "Learning rate, division/log inputs, gradient norm",
+            ],
+            [
+              "Train improves; validation worsens",
+              "Overfitting and data mismatch",
+            ],
+            [
+              "Both improve very slowly",
+              "Learning rate, normalization, capacity",
+            ],
           ],
         },
       },
@@ -493,7 +538,11 @@ export const stableTrainingAndHyperparameterTuning: SubjectTopic = {
             title: "No clipping needed",
             prompt:
               "A gradient has global norm 2.4 and threshold c = 5. What scale factor is used?",
-            steps: ["c/‖g‖ = 5/2.4 > 1.", "min(1, 5/2.4) = 1.", "The gradient remains unchanged."],
+            steps: [
+              "c/‖g‖ = 5/2.4 > 1.",
+              "min(1, 5/2.4) = 1.",
+              "The gradient remains unchanged.",
+            ],
             answer: "Scale factor 1; no clipping is applied.",
           },
           {
@@ -505,7 +554,8 @@ export const stableTrainingAndHyperparameterTuning: SubjectTopic = {
               "Inspect gradient norms and parameter or activation values for explosion.",
               "Return to a stable learning rate and confirm that the loss remains finite.",
             ],
-            answer: "Check for exploding updates caused by the new learning rate before changing model capacity or regularization.",
+            answer:
+              "Check for exploding updates caused by the new learning rate before changing model capacity or regularization.",
           },
           {
             title: "Parameter or hyperparameter",
@@ -551,7 +601,14 @@ export const stableTrainingAndHyperparameterTuning: SubjectTopic = {
       },
       {
         title: "Tuning Order",
-        flow: ["Data", "Tiny subset", "Learning rate", "Batch size", "Capacity", "Regularization"],
+        flow: [
+          "Data",
+          "Tiny subset",
+          "Learning rate",
+          "Batch size",
+          "Capacity",
+          "Regularization",
+        ],
       },
     ],
     essentialsStyle: "plain",
@@ -566,19 +623,32 @@ export const stableTrainingAndHyperparameterTuning: SubjectTopic = {
       "Why does global-norm clipping preserve gradient direction when the threshold is exceeded?",
   },
   lastMinute: {
-    definition: "Measure first, identify the failure, then tune the relevant choice.",
+    definition:
+      "Measure first, identify the failure, then tune the relevant choice.",
     sections: [
       {
         title: "Gradient Evidence",
-        points: ["Near zero → vanishing", "Huge or NaN → exploding", "Clip norm before update"],
+        points: [
+          "Near zero → vanishing",
+          "Huge or NaN → exploding",
+          "Clip norm before update",
+        ],
       },
       {
         title: "Order",
-        flow: ["Data", "Tiny-set test", "η", "Batch", "Capacity", "Regularization"],
+        flow: [
+          "Data",
+          "Tiny-set test",
+          "η",
+          "Batch",
+          "Capacity",
+          "Regularization",
+        ],
         wide: true,
       },
     ],
-    memoryLine: "Diagnostics choose the fix; tuning measures whether it worked.",
+    memoryLine:
+      "Diagnostics choose the fix; tuning measures whether it worked.",
     cues: [
       "Clipping rescales, not repairs.",
       "Track validation and gradient norms.",

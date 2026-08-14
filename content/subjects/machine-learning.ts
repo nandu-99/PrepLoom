@@ -153,11 +153,7 @@ export const machineLearningContent: SubjectContent = {
       title: "Ensemble Learning",
       description:
         "Bagging, Random Forest, boosting, variance reduction, model diversity, and worked prediction numericals.",
-      topics: [
-        ensembleLearningAndBagging,
-        randomForest,
-        boostingFundamentals,
-      ],
+      topics: [ensembleLearningAndBagging, randomForest, boostingFundamentals],
     },
     {
       order: "06",

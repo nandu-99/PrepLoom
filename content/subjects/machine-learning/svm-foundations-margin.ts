@@ -35,16 +35,20 @@ export const svmFundamentalsAndHyperplanes: SubjectTopic = {
           alt: "Two SVM classes separated by a hyperplane with positive and negative decision regions",
           width: 1536,
           height: 1024,
-          caption: "The sign of wᵀx+b selects the side of the hyperplane and therefore the predicted class.",
+          caption:
+            "The sign of wᵀx+b selects the side of the hyperplane and therefore the predicted class.",
         },
       },
       {
         title: "Prediction Numerical",
-        paragraphs: ["Apply the learned score directly to a new, already transformed input."],
+        paragraphs: [
+          "Apply the learned score directly to a new, already transformed input.",
+        ],
         problems: [
           {
             title: "Calculate the SVM class",
-            prompt: "An SVM has w = [2,−1], b = −1, and input x = [3,2]. Find the decision score and predicted class.",
+            prompt:
+              "An SVM has w = [2,−1], b = −1, and input x = [3,2]. Find the decision score and predicted class.",
             steps: [
               "f(x) = wᵀx + b.",
               "f(x) = 2(3) + (−1)(2) − 1 = 6 − 2 − 1 = 3.",
@@ -79,13 +83,18 @@ export const svmFundamentalsAndHyperplanes: SubjectTopic = {
           rows: [
             ["Income: 0 to 1,000,000", "Comparable numerical range"],
             ["Debt ratio: 0 to 1", "Comparable numerical range"],
-            ["Income can dominate geometry", "Both features can influence the boundary"],
+            [
+              "Income can dominate geometry",
+              "Both features can influence the boundary",
+            ],
           ],
         },
       },
       {
         title: "SVM Terminology",
-        paragraphs: ["These terms describe the same classifier from algebraic and geometric viewpoints."],
+        paragraphs: [
+          "These terms describe the same classifier from algebraic and geometric viewpoints.",
+        ],
         dataTable: {
           headers: ["Term", "Meaning"],
           rows: [
@@ -137,16 +146,28 @@ export const svmFundamentalsAndHyperplanes: SubjectTopic = {
       "The raw score is not a probability.",
       "Scale features using training-data statistics.",
     ],
-    followUp: "Why does changing the scale of one feature change an SVM boundary?",
+    followUp:
+      "Why does changing the scale of one feature change an SVM boundary?",
   },
   lastMinute: {
     definition: "SVM uses the sign of a hyperplane score to classify a point.",
     sections: [
-      { title: "Prediction", flow: ["Scale x", "Compute wᵀx+b", "Check sign", "Return class"], wide: true },
-      { title: "Signs", points: ["Positive → +1", "Negative → −1", "Zero → boundary"] },
+      {
+        title: "Prediction",
+        flow: ["Scale x", "Compute wᵀx+b", "Check sign", "Return class"],
+        wide: true,
+      },
+      {
+        title: "Signs",
+        points: ["Positive → +1", "Negative → −1", "Zero → boundary"],
+      },
     ],
     memoryLine: "Score gives the side; the side gives the class.",
-    cues: ["Boundary score is zero.", "w is normal to the hyperplane.", "Score is not probability."],
+    cues: [
+      "Boundary score is zero.",
+      "w is normal to the hyperplane.",
+      "Score is not probability.",
+    ],
     trap: "Do not skip feature scaling for distance-based SVM geometry.",
   },
 };
@@ -174,7 +195,8 @@ export const maximumMarginAndSupportVectors: SubjectTopic = {
           alt: "Maximum-margin SVM showing decision boundary, two margin boundaries, and support vectors",
           width: 1536,
           height: 1024,
-          caption: "Support vectors touch the margin boundaries and determine the maximum-margin separator.",
+          caption:
+            "Support vectors touch the margin boundaries and determine the maximum-margin separator.",
         },
       },
       {
@@ -199,21 +221,30 @@ export const maximumMarginAndSupportVectors: SubjectTopic = {
       },
       {
         title: "Margin and Distance Numerical",
-        paragraphs: ["The norm of w converts functional scores into geometric distances."],
+        paragraphs: [
+          "The norm of w converts functional scores into geometric distances.",
+        ],
         problems: [
           {
             title: "Calculate margin width and point distance",
-            prompt: "For w=[3,4] and b=−10, find ||w||, the canonical full margin width, and the distance of x=[2,2] from the decision boundary.",
+            prompt:
+              "For w=[3,4] and b=−10, find ||w||, the canonical full margin width, and the distance of x=[2,2] from the decision boundary.",
             steps: [
               "||w|| = √(3²+4²) = 5.",
               "Full canonical margin width = 2/||w|| = 2/5 = 0.4.",
               "f(x) = 3(2)+4(2)−10 = 4.",
               "Distance to the hyperplane = |f(x)|/||w|| = 4/5 = 0.8.",
             ],
-            answer: "The norm is 5, the full margin width is 0.4, and the point is 0.8 units from the boundary.",
+            answer:
+              "The norm is 5, the full margin width is 0.4, and the point is 0.8 units from the boundary.",
           },
         ],
-        formulas: [{ label: "Point-to-hyperplane distance", expression: "distance = |wᵀx+b|/||w||" }],
+        formulas: [
+          {
+            label: "Point-to-hyperplane distance",
+            expression: "distance = |wᵀx+b|/||w||",
+          },
+        ],
       },
       {
         title: "Hard-Margin Optimization",
@@ -273,16 +304,33 @@ export const maximumMarginAndSupportVectors: SubjectTopic = {
       "Smaller ||w|| means a wider canonical margin.",
       "Hard margin requires perfect linear separation.",
     ],
-    followUp: "Why do distant training points usually not determine the SVM boundary?",
+    followUp:
+      "Why do distant training points usually not determine the SVM boundary?",
   },
   lastMinute: {
-    definition: "Choose the separating hyperplane with the widest nearest-point gap.",
+    definition:
+      "Choose the separating hyperplane with the widest nearest-point gap.",
     sections: [
-      { title: "Geometry", flow: ["−1 margin", "Boundary 0", "+1 margin"], wide: true },
-      { title: "Anchors", points: ["Width = 2/||w||", "Support vectors touch margins", "Hard margin: no violations"] },
+      {
+        title: "Geometry",
+        flow: ["−1 margin", "Boundary 0", "+1 margin"],
+        wide: true,
+      },
+      {
+        title: "Anchors",
+        points: [
+          "Width = 2/||w||",
+          "Support vectors touch margins",
+          "Hard margin: no violations",
+        ],
+      },
     ],
     memoryLine: "Nearest points support the widest safe boundary.",
-    cues: ["w is perpendicular.", "Minimize ||w||².", "Distance divides by ||w||."],
+    cues: [
+      "w is perpendicular.",
+      "Minimize ||w||².",
+      "Distance divides by ||w||.",
+    ],
     trap: "Do not call every training point a support vector.",
   },
 };

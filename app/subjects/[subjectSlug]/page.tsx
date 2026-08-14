@@ -70,7 +70,10 @@ export default async function SubjectPage({ params }: SubjectPageProps) {
     return <ComputerNetworksPage />;
   }
 
-  if (subject.slug === "machine-learning" && isAvailable(subject.availability)) {
+  if (
+    subject.slug === "machine-learning" &&
+    isAvailable(subject.availability)
+  ) {
     return <MachineLearningPage />;
   }
 

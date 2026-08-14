@@ -109,10 +109,22 @@ const introductionToOop: SubjectTopic = {
         table: {
           headers: ["Without clear object structure", "With OOP structure"],
           rows: [
-            ["Data and functions may be scattered", "Related data and actions stay together"],
-            ["Many parts may change the same data", "An object controls how its data is used"],
-            ["Responsibilities can become unclear", "Each object has a clear job"],
-            ["Large code can be harder to change", "Changes are easier to keep in one place"],
+            [
+              "Data and functions may be scattered",
+              "Related data and actions stay together",
+            ],
+            [
+              "Many parts may change the same data",
+              "An object controls how its data is used",
+            ],
+            [
+              "Responsibilities can become unclear",
+              "Each object has a clear job",
+            ],
+            [
+              "Large code can be harder to change",
+              "Changes are easier to keep in one place",
+            ],
           ],
         },
       },
@@ -125,8 +137,14 @@ const introductionToOop: SubjectTopic = {
           headers: ["Separate data and functions", "Object-oriented grouping"],
           rows: [
             ["cartItems stores the data", "A Cart object stores the items"],
-            ["addItem(cartItems, product) changes it", "cart.addItem(product) asks the Cart to change itself"],
-            ["calculateTotal(cartItems) reads it", "cart.calculateTotal() asks the Cart for its total"],
+            [
+              "addItem(cartItems, product) changes it",
+              "cart.addItem(product) asks the Cart to change itself",
+            ],
+            [
+              "calculateTotal(cartItems) reads it",
+              "cart.calculateTotal() asks the Cart for its total",
+            ],
           ],
         },
       },
@@ -201,7 +219,10 @@ const introductionToOop: SubjectTopic = {
         table: {
           headers: ["Without clear structure", "With OOP"],
           rows: [
-            ["Data and functions may be scattered", "Related data and actions stay together"],
+            [
+              "Data and functions may be scattered",
+              "Related data and actions stay together",
+            ],
             ["Responsibilities can be unclear", "Each object has a clear job"],
           ],
         },
@@ -214,23 +235,35 @@ const introductionToOop: SubjectTopic = {
       "OOP helps organize large programs into smaller responsibilities.",
       "OOP is useful for many large systems, but it is not needed for every small task.",
     ],
-    followUp: "Why does keeping related data and actions together make a program easier to manage?",
+    followUp:
+      "Why does keeping related data and actions together make a program easier to manage?",
   },
   lastMinute: {
-    definition:
-      "OOP keeps related data and actions together inside objects.",
+    definition: "OOP keeps related data and actions together inside objects.",
     sections: [
       {
         title: "Why We Need It",
-        points: ["Organizes growing code", "Separates responsibilities", "Makes changes easier to manage"],
+        points: [
+          "Organizes growing code",
+          "Separates responsibilities",
+          "Makes changes easier to manage",
+        ],
       },
       {
         title: "Two Basic Words",
-        points: ["Class: definition", "Object: actual item created from a class"],
+        points: [
+          "Class: definition",
+          "Object: actual item created from a class",
+        ],
       },
       {
         title: "Basic Flow",
-        flow: ["Find a thing", "Group its data and actions", "Create an object", "Objects work together"],
+        flow: [
+          "Find a thing",
+          "Group its data and actions",
+          "Create an object",
+          "Objects work together",
+        ],
         wide: true,
       },
     ],
@@ -240,8 +273,7 @@ const introductionToOop: SubjectTopic = {
       "Objects divide the program into clear parts.",
       "Example: one Contact object keeps contact details and contact actions.",
     ],
-    trap:
-      "OOP is not required for every program. Small tasks may be clearer with simple variables and functions.",
+    trap: "OOP is not required for every program. Small tasks may be clearer with simple variables and functions.",
   },
 };
 
@@ -342,8 +374,8 @@ const classesAndObjects: SubjectTopic = {
           "The new keyword asks the program to create an object from the Contact class. Each variable then refers to a different Contact object.",
         ],
         points: [
-          "Contact vivek = new Contact(\"Vivek\", \"9876\");",
-          "Contact anu = new Contact(\"Anu\", \"6543\");",
+          'Contact vivek = new Contact("Vivek", "9876");',
+          'Contact anu = new Contact("Anu", "6543");',
           "vivek and anu use the same Contact class but store different values.",
         ],
       },
@@ -431,7 +463,8 @@ const classesAndObjects: SubjectTopic = {
       "Static fields and shared referenced objects are exceptions to completely separate state.",
       "In Java, a reference gives the program a way to reach an object.",
     ],
-    followUp: "How can many objects use one class but still keep different values?",
+    followUp:
+      "How can many objects use one class but still keep different values?",
   },
   lastMinute: {
     definition:
@@ -443,7 +476,11 @@ const classesAndObjects: SubjectTopic = {
       },
       {
         title: "Object",
-        points: ["Has actual values", "Has separate identity", "Follows the class definition"],
+        points: [
+          "Has actual values",
+          "Has separate identity",
+          "Follows the class definition",
+        ],
       },
       {
         title: "Creation Flow",
@@ -457,8 +494,7 @@ const classesAndObjects: SubjectTopic = {
       "Many objects can be created from one class.",
       "Each object normally keeps its own values.",
     ],
-    trap:
-      "Do not use class and object as if they mean the same thing.",
+    trap: "Do not use class and object as if they mean the same thing.",
   },
 };
 
@@ -511,7 +547,10 @@ const fieldsMethodsAndInteraction: SubjectTopic = {
           rows: [
             ["Belongs to an object or class", "Belongs to a method or block"],
             ["Stores object or class state", "Stores temporary working data"],
-            ["Usually lives with its object or class", "Exists only while its scope is active"],
+            [
+              "Usually lives with its object or class",
+              "Exists only while its scope is active",
+            ],
           ],
         },
       },
@@ -538,7 +577,12 @@ const fieldsMethodsAndInteraction: SubjectTopic = {
           "In account.withdraw(500), 500 is the argument.",
           "The method can return success, failure, a balance, or another result.",
         ],
-        flow: ["Call withdraw", "Pass amount: 500", "Method checks and updates balance", "Return success or failure"],
+        flow: [
+          "Call withdraw",
+          "Pass amount: 500",
+          "Method checks and updates balance",
+          "Return success or failure",
+        ],
       },
       {
         title: "Instance and Static Members",
@@ -582,7 +626,10 @@ const fieldsMethodsAndInteraction: SubjectTopic = {
         table: {
           headers: ["Command", "Query"],
           rows: [
-            ["Asks the object to do something and may change state", "Returns information without changing observable state"],
+            [
+              "Asks the object to do something and may change state",
+              "Returns information without changing observable state",
+            ],
             ["Example: cart.addItem(product)", "Example: cart.getTotal()"],
           ],
         },
@@ -649,7 +696,12 @@ const fieldsMethodsAndInteraction: SubjectTopic = {
       },
       {
         title: "Object Interaction",
-        flow: ["Object A", "Calls a method", "Object B does the work", "Result returns"],
+        flow: [
+          "Object A",
+          "Calls a method",
+          "Object B does the work",
+          "Result returns",
+        ],
       },
       {
         title: "Command vs Query",
@@ -677,7 +729,8 @@ const fieldsMethodsAndInteraction: SubjectTopic = {
       "Methods can check rules before changing fields.",
       "Objects collaborate through method calls.",
     ],
-    followUp: "Why is changing an object's fields through methods safer than changing them directly?",
+    followUp:
+      "Why is changing an object's fields through methods safer than changing them directly?",
   },
   lastMinute: {
     definition:
@@ -685,7 +738,13 @@ const fieldsMethodsAndInteraction: SubjectTopic = {
     sections: [
       {
         title: "Remember",
-        points: ["Field: stored state", "Local variable: temporary data", "Parameter: declared input", "Argument: supplied value", "Return value: method result"],
+        points: [
+          "Field: stored state",
+          "Local variable: temporary data",
+          "Parameter: declared input",
+          "Argument: supplied value",
+          "Return value: method result",
+        ],
       },
       {
         title: "Interaction",
@@ -699,8 +758,7 @@ const fieldsMethodsAndInteraction: SubjectTopic = {
       "Commands change; queries answer.",
       "A method can enforce rules before changing state.",
     ],
-    trap:
-      "Do not say every method changes object state. Some methods only return information.",
+    trap: "Do not say every method changes object state. Some methods only return information.",
   },
 };
 
@@ -746,7 +804,10 @@ const constructorsAndLifecycle: SubjectTopic = {
           rows: [
             ["Takes no arguments", "Takes one or more arguments"],
             ["Uses prepared default values", "Uses values given by the caller"],
-            ["Example: Cart starts empty", "Example: User starts with a name and email"],
+            [
+              "Example: Cart starts empty",
+              "Example: User starts with a name and email",
+            ],
           ],
         },
       },
@@ -886,7 +947,13 @@ const constructorsAndLifecycle: SubjectTopic = {
       },
       {
         title: "Lifecycle",
-        flow: ["Create", "Constructor setup", "Use", "No longer needed", "Clean up"],
+        flow: [
+          "Create",
+          "Constructor setup",
+          "Use",
+          "No longer needed",
+          "Clean up",
+        ],
       },
       {
         title: "Language Difference",
@@ -906,7 +973,8 @@ const constructorsAndLifecycle: SubjectTopic = {
       "Java constructors chain to another constructor in the same class or to a superclass constructor.",
       "Garbage collection handles memory, but external resources may need explicit closing.",
     ],
-    followUp: "What problem can happen if a constructor allows an invalid object to be created?",
+    followUp:
+      "What problem can happen if a constructor allows an invalid object to be created?",
   },
   lastMinute: {
     definition:
@@ -914,11 +982,21 @@ const constructorsAndLifecycle: SubjectTopic = {
     sections: [
       {
         title: "Constructor",
-        points: ["Runs during creation", "Checks starting data", "Initializes fields"],
+        points: [
+          "Runs during creation",
+          "Checks starting data",
+          "Initializes fields",
+        ],
       },
       {
         title: "Important Rules",
-        points: ["No declared return type", "Can be overloaded", "Cannot be overridden", "Java constructors are not inherited", "Java adds a default constructor only when none is written"],
+        points: [
+          "No declared return type",
+          "Can be overloaded",
+          "Cannot be overridden",
+          "Java constructors are not inherited",
+          "Java adds a default constructor only when none is written",
+        ],
       },
       {
         title: "Lifecycle",
@@ -941,8 +1019,7 @@ const constructorsAndLifecycle: SubjectTopic = {
       "Parameterized constructor: caller provides values.",
       "Overloading: several constructor parameter lists.",
     ],
-    trap:
-      "Do not say garbage collection automatically closes every file, socket, or database connection.",
+    trap: "Do not say garbage collection automatically closes every file, socket, or database connection.",
   },
 };
 

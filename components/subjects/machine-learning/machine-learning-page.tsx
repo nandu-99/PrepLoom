@@ -30,7 +30,11 @@ export default function MachineLearningPage() {
               href="/subjects"
               className="inline-flex items-center gap-2 text-[13px] text-[#606060] transition-colors hover:text-[#151515] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/40 dark:text-[#a8a8a8] dark:hover:text-white dark:focus-visible:ring-white/50"
             >
-              <ArrowLeft className="size-4" strokeWidth={1.7} aria-hidden="true" />
+              <ArrowLeft
+                className="size-4"
+                strokeWidth={1.7}
+                aria-hidden="true"
+              />
               All subjects
             </Link>
 
@@ -60,7 +64,9 @@ export default function MachineLearningPage() {
                     <dt className="text-[12px] text-[#606060] dark:text-[#a8a8a8]">
                       Topics
                     </dt>
-                    <dd className="mt-1 text-[20px] font-medium">{topicCount}</dd>
+                    <dd className="mt-1 text-[20px] font-medium">
+                      {topicCount}
+                    </dd>
                   </div>
                 </dl>
               </div>

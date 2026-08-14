@@ -30,8 +30,16 @@ export const predictionsTargetsAndLoss: SubjectTopic = {
           headers: ["Task", "Prediction ŷ", "Target y"],
           rows: [
             ["House-price regression", "Predicted price", "Observed price"],
-            ["Binary classification", "Probability of positive class", "0 or 1"],
-            ["Single-label multiclass", "One probability per class", "Correct class"],
+            [
+              "Binary classification",
+              "Probability of positive class",
+              "0 or 1",
+            ],
+            [
+              "Single-label multiclass",
+              "One probability per class",
+              "Correct class",
+            ],
           ],
         },
       },
@@ -89,8 +97,14 @@ export const predictionsTargetsAndLoss: SubjectTopic = {
         table: {
           headers: ["Training loss", "Evaluation metric"],
           rows: [
-            ["Must guide parameter updates", "Must communicate useful performance"],
-            ["Usually differentiable almost everywhere", "Does not have to be differentiable"],
+            [
+              "Must guide parameter updates",
+              "Must communicate useful performance",
+            ],
+            [
+              "Usually differentiable almost everywhere",
+              "Does not have to be differentiable",
+            ],
             ["Example: cross-entropy", "Example: accuracy"],
           ],
         },
@@ -170,13 +184,18 @@ export const predictionsTargetsAndLoss: SubjectTopic = {
     sections: [
       {
         title: "Core Flow",
-        flow: ["Input X", "Prediction ŷ", "Compare with target y", "Loss J", "Gradients", "Update"],
+        flow: [
+          "Input X",
+          "Prediction ŷ",
+          "Compare with target y",
+          "Loss J",
+          "Gradients",
+          "Update",
+        ],
       },
       {
         title: "Batch Formula",
-        formulas: [
-          { expression: "J = (1/B) Σᵢ ℓ(ŷᵢ, yᵢ)" },
-        ],
+        formulas: [{ expression: "J = (1/B) Σᵢ ℓ(ŷᵢ, yᵢ)" }],
       },
       {
         title: "Loss vs Metric",
@@ -205,11 +224,21 @@ export const predictionsTargetsAndLoss: SubjectTopic = {
     sections: [
       {
         title: "Symbols",
-        points: ["X: input", "ŷ: prediction", "y: target", "J: batch objective"],
+        points: [
+          "X: input",
+          "ŷ: prediction",
+          "y: target",
+          "J: batch objective",
+        ],
       },
       {
         title: "Training Path",
-        flow: ["Predict", "Measure loss", "Calculate gradients", "Update parameters"],
+        flow: [
+          "Predict",
+          "Measure loss",
+          "Calculate gradients",
+          "Update parameters",
+        ],
         wide: true,
       },
     ],
@@ -219,8 +248,7 @@ export const predictionsTargetsAndLoss: SubjectTopic = {
       "Loss guides updates; metric reports performance.",
       "Lower loss is better only according to the selected rule.",
     ],
-    trap:
-      "Do not say that accuracy is normally differentiated to train a classifier or that the target enters the deployed model.",
+    trap: "Do not say that accuracy is normally differentiated to train a classifier or that the target enters the deployed model.",
   },
 };
 
@@ -253,9 +281,21 @@ export const mseAndCrossEntropyLoss: SubjectTopic = {
           headers: ["Task", "Output", "Common loss"],
           rows: [
             ["Regression", "Linear numerical value", "Mean Squared Error"],
-            ["Binary classification", "One sigmoid probability", "Binary Cross-Entropy"],
-            ["Multi-label classification", "One sigmoid per label", "Binary Cross-Entropy per label"],
-            ["Single-label multiclass", "Softmax distribution", "Categorical Cross-Entropy"],
+            [
+              "Binary classification",
+              "One sigmoid probability",
+              "Binary Cross-Entropy",
+            ],
+            [
+              "Multi-label classification",
+              "One sigmoid per label",
+              "Binary Cross-Entropy per label",
+            ],
+            [
+              "Single-label multiclass",
+              "Softmax distribution",
+              "Categorical Cross-Entropy",
+            ],
           ],
         },
       },
@@ -398,7 +438,8 @@ export const mseAndCrossEntropyLoss: SubjectTopic = {
               "1 − p = 0.2.",
               "BCE = −log(0.2) ≈ 1.609.",
             ],
-            answer: "BCE ≈ 1.609, much larger because the prediction is confidently wrong.",
+            answer:
+              "BCE ≈ 1.609, much larger because the prediction is confidently wrong.",
           },
           {
             title: "Categorical Cross-Entropy",
@@ -495,7 +536,11 @@ export const mseAndCrossEntropyLoss: SubjectTopic = {
     sections: [
       {
         title: "Fast Choice",
-        points: ["Number → MSE", "Binary or multi-label → BCE", "One of many classes → CCE"],
+        points: [
+          "Number → MSE",
+          "Binary or multi-label → BCE",
+          "One of many classes → CCE",
+        ],
       },
       {
         title: "Cross-Entropy Shortcut",
@@ -506,14 +551,14 @@ export const mseAndCrossEntropyLoss: SubjectTopic = {
         ],
       },
     ],
-    memoryLine: "MSE measures distance; cross-entropy measures misplaced confidence.",
+    memoryLine:
+      "MSE measures distance; cross-entropy measures misplaced confidence.",
     cues: [
       "Natural log is normally used.",
       "Mean reduction divides by the number of examples.",
       "Use stable loss-from-logits operations when available.",
     ],
-    trap:
-      "Do not apply sigmoid or softmax before a loss function that already expects raw logits.",
+    trap: "Do not apply sigmoid or softmax before a loss function that already expects raw logits.",
   },
 };
 
@@ -599,9 +644,18 @@ export const gradientsAndChainRule: SubjectTopic = {
           headers: ["Quantity", "Meaning"],
           rows: [
             ["Forward value", "Result produced by an operation"],
-            ["Local derivative", "Sensitivity of that operation's output to one input"],
-            ["Upstream gradient", "Sensitivity of final loss to the operation's output"],
-            ["Gradient passed backward", "Upstream gradient × local derivative"],
+            [
+              "Local derivative",
+              "Sensitivity of that operation's output to one input",
+            ],
+            [
+              "Upstream gradient",
+              "Sensitivity of final loss to the operation's output",
+            ],
+            [
+              "Gradient passed backward",
+              "Upstream gradient × local derivative",
+            ],
           ],
         },
       },
@@ -647,8 +701,7 @@ export const gradientsAndChainRule: SubjectTopic = {
         problems: [
           {
             title: "One chain",
-            prompt:
-              "Let u = 2x, v = u², and L = 3v. Find dL/dx at x = 2.",
+            prompt: "Let u = 2x, v = u², and L = 3v. Find dL/dx at x = 2.",
             steps: [
               "Forward: x = 2, u = 4, v = 16, L = 48.",
               "Local derivatives: dL/dv = 3, dv/du = 2u = 8, du/dx = 2.",
@@ -670,8 +723,7 @@ export const gradientsAndChainRule: SubjectTopic = {
           },
           {
             title: "Two gradient paths",
-            prompt:
-              "Let u = 2x, v = x², and L = u + v. Find dL/dx at x = 3.",
+            prompt: "Let u = 2x, v = x², and L = u + v. Find dL/dx at x = 3.",
             steps: [
               "Path through u: dL/du × du/dx = 1 × 2 = 2.",
               "Path through v: dL/dv × dv/dx = 1 × 2x = 6.",
@@ -718,13 +770,17 @@ export const gradientsAndChainRule: SubjectTopic = {
     sections: [
       {
         title: "Chain Rule",
-        formulas: [
-          { expression: "dL/dx = (dL/dv)(dv/du)(du/dx)" },
-        ],
+        formulas: [{ expression: "dL/dx = (dL/dv)(dv/du)(du/dx)" }],
       },
       {
         title: "Backward Rule",
-        flow: ["Receive upstream gradient", "Find local derivative", "Multiply", "Send backward", "Add branch contributions"],
+        flow: [
+          "Receive upstream gradient",
+          "Find local derivative",
+          "Multiply",
+          "Send backward",
+          "Add branch contributions",
+        ],
       },
       {
         title: "Interpretation",
@@ -748,16 +804,25 @@ export const gradientsAndChainRule: SubjectTopic = {
       "Why are gradient contributions added when one value affects the loss through two branches?",
   },
   lastMinute: {
-    definition: "Backpropagation is repeated chain rule over a computational graph.",
+    definition:
+      "Backpropagation is repeated chain rule over a computational graph.",
     sections: [
       {
         title: "Backward Pattern",
-        flow: ["Start at loss with 1", "Upstream × local", "Move backward", "Add branches"],
+        flow: [
+          "Start at loss with 1",
+          "Upstream × local",
+          "Move backward",
+          "Add branches",
+        ],
         wide: true,
       },
       {
         title: "Signs",
-        points: ["Positive gradient → increasing value raises loss", "Negative gradient → increasing value lowers loss"],
+        points: [
+          "Positive gradient → increasing value raises loss",
+          "Negative gradient → increasing value lowers loss",
+        ],
       },
     ],
     memoryLine: "Along a path multiply; where paths meet add.",
@@ -766,7 +831,6 @@ export const gradientsAndChainRule: SubjectTopic = {
       "Gradient shape matches the differentiated tensor's shape.",
       "Optimizer uses the gradient; gradient alone is not the update.",
     ],
-    trap:
-      "Do not add derivatives along one chain or multiply independent branch contributions together.",
+    trap: "Do not add derivatives along one chain or multiply independent branch contributions together.",
   },
 };

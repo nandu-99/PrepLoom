@@ -35,11 +35,31 @@ export const timeSeriesComponentsAndDecomposition: SubjectTopic = {
         dataTable: {
           headers: ["Component", "Meaning", "Example"],
           rows: [
-            ["Level", "Typical value around which the series varies", "Average daily demand"],
-            ["Trend", "Long-term increase or decrease", "Demand growing each year"],
-            ["Seasonality", "Pattern repeating at a known period", "Higher weekend traffic"],
-            ["Cycle", "Broad rise and fall without a fixed seasonal period", "Multi-year business cycle"],
-            ["Remainder", "Variation not explained by the other components", "Unexpected event"],
+            [
+              "Level",
+              "Typical value around which the series varies",
+              "Average daily demand",
+            ],
+            [
+              "Trend",
+              "Long-term increase or decrease",
+              "Demand growing each year",
+            ],
+            [
+              "Seasonality",
+              "Pattern repeating at a known period",
+              "Higher weekend traffic",
+            ],
+            [
+              "Cycle",
+              "Broad rise and fall without a fixed seasonal period",
+              "Multi-year business cycle",
+            ],
+            [
+              "Remainder",
+              "Variation not explained by the other components",
+              "Unexpected event",
+            ],
           ],
         },
       },
@@ -55,14 +75,19 @@ export const timeSeriesComponentsAndDecomposition: SubjectTopic = {
         table: {
           headers: ["Additive", "Multiplicative"],
           rows: [
-            ["Seasonal size roughly constant", "Seasonal size proportional to level"],
+            [
+              "Seasonal size roughly constant",
+              "Seasonal size proportional to level",
+            ],
             ["Components add", "Components multiply"],
           ],
         },
       },
       {
         title: "Identify the Components",
-        paragraphs: ["Use the time plot and the scale of recurring variation before selecting a decomposition."],
+        paragraphs: [
+          "Use the time plot and the scale of recurring variation before selecting a decomposition.",
+        ],
         problems: [
           {
             title: "Choose a decomposition",
@@ -72,7 +97,8 @@ export const timeSeriesComponentsAndDecomposition: SubjectTopic = {
               "The seasonal variation does not remain constant.",
               "Its size grows with the series level.",
             ],
-            answer: "A multiplicative decomposition is the more suitable starting point.",
+            answer:
+              "A multiplicative decomposition is the more suitable starting point.",
           },
         ],
       },
@@ -116,14 +142,19 @@ export const timeSeriesComponentsAndDecomposition: SubjectTopic = {
       "A cycle is broader and has no fixed seasonal period.",
       "Use multiplicative decomposition when seasonal size changes with level.",
     ],
-    followUp: "How does seasonal amplitude distinguish additive and multiplicative decomposition?",
+    followUp:
+      "How does seasonal amplitude distinguish additive and multiplicative decomposition?",
   },
   lastMinute: {
-    definition: "Time order can contain trend, repeating seasonality, and remainder.",
+    definition:
+      "Time order can contain trend, repeating seasonality, and remainder.",
     sections: [
       {
         title: "Choose",
-        points: ["Constant seasonal size → additive", "Proportional seasonal size → multiplicative"],
+        points: [
+          "Constant seasonal size → additive",
+          "Proportional seasonal size → multiplicative",
+        ],
       },
     ],
     memoryLine: "Plot in time order before choosing a model.",
@@ -173,7 +204,9 @@ export const stationarityAndTransformations: SubjectTopic = {
           "First differencing replaces each value with its change from the previous value. It can remove a changing level or a simple trend.",
           "Differencing too many times can create unnecessary noise and dependence. Use only the amount supported by the data and model checks.",
         ],
-        formulas: [{ label: "First difference", expression: "Δyₜ = yₜ − yₜ₋₁" }],
+        formulas: [
+          { label: "First difference", expression: "Δyₜ = yₜ − yₜ₋₁" },
+        ],
         problems: [
           {
             title: "Calculate first differences",
@@ -188,7 +221,9 @@ export const stationarityAndTransformations: SubjectTopic = {
         paragraphs: [
           "Seasonal differencing subtracts the value from the same position in the previous cycle. Use it only when a repeating seasonal pattern remains.",
         ],
-        formulas: [{ label: "Seasonal difference", expression: "Δₛyₜ = yₜ − yₜ₋ₛ" }],
+        formulas: [
+          { label: "Seasonal difference", expression: "Δₛyₜ = yₜ − yₜ₋ₛ" },
+        ],
       },
       {
         title: "Log Transformation",
@@ -203,7 +238,12 @@ export const stationarityAndTransformations: SubjectTopic = {
         paragraphs: [
           "A common workflow is to stabilize changing variance first and then difference if a trend remains. The correct transformation depends on the observed series; it is not a compulsory fixed recipe.",
         ],
-        flow: ["Plot series", "Stabilize variance if needed", "Difference if needed", "Recheck behaviour"],
+        flow: [
+          "Plot series",
+          "Stabilize variance if needed",
+          "Difference if needed",
+          "Recheck behaviour",
+        ],
       },
     ],
     mechanism: {
@@ -230,7 +270,11 @@ export const stationarityAndTransformations: SubjectTopic = {
     sections: [
       {
         title: "Transforms",
-        points: ["Difference: remove changing level", "Seasonal difference: remove a repeating seasonal mean", "Log: stabilize growing spread"],
+        points: [
+          "Difference: remove changing level",
+          "Seasonal difference: remove a repeating seasonal mean",
+          "Log: stabilize growing spread",
+        ],
         formulas: [
           { label: "Difference", expression: "Δyₜ=yₜ−yₜ₋₁" },
           { label: "Seasonal difference", expression: "Δₛyₜ=yₜ−yₜ₋ₛ" },
@@ -247,11 +291,16 @@ export const stationarityAndTransformations: SubjectTopic = {
     followUp: "What problem does first differencing try to remove?",
   },
   lastMinute: {
-    definition: "Stationary behaviour is stable over time, not flat or motionless.",
+    definition:
+      "Stationary behaviour is stable over time, not flat or motionless.",
     sections: [
       {
         title: "Tools",
-        points: ["Δyₜ=yₜ−yₜ₋₁", "Δₛyₜ=yₜ−yₜ₋ₛ", "Log for spread that grows with level"],
+        points: [
+          "Δyₜ=yₜ−yₜ₋₁",
+          "Δₛyₜ=yₜ−yₜ₋ₛ",
+          "Log for spread that grows with level",
+        ],
       },
     ],
     memoryLine: "Transform only when the series shows a reason.",

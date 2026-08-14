@@ -104,9 +104,21 @@ export const relationalAlgebraFundamentals: SubjectTopic = {
         dataTable: {
           headers: ["Expression", "Result", "Reason"],
           rows: [
-            ["σDepartment = 'CSE'(STUDENT)", "(1, Asha, CSE), (3, Asha, CSE)", "Keeps matching tuples"],
-            ["πName(STUDENT)", "(Asha), (Ravi)", "Keeps Name and removes duplicate Asha"],
-            ["πName(σDepartment = 'ECE'(STUDENT))", "(Ravi)", "Selects first, then projects"],
+            [
+              "σDepartment = 'CSE'(STUDENT)",
+              "(1, Asha, CSE), (3, Asha, CSE)",
+              "Keeps matching tuples",
+            ],
+            [
+              "πName(STUDENT)",
+              "(Asha), (Ravi)",
+              "Keeps Name and removes duplicate Asha",
+            ],
+            [
+              "πName(σDepartment = 'ECE'(STUDENT))",
+              "(Ravi)",
+              "Selects first, then projects",
+            ],
           ],
         },
       },
@@ -172,11 +184,12 @@ export const relationalAlgebraFundamentals: SubjectTopic = {
     essentials: [
       "Every operation returns a relation.",
       "Selection keeps attributes; projection may reduce attributes and tuples.",
-          "Union, intersection, and difference need union-compatible relations.",
-          "Basic operators can be combined to express joins, intersection, and division.",
+      "Union, intersection, and difference need union-compatible relations.",
+      "Basic operators can be combined to express joins, intersection, and division.",
       "Evaluate nested expressions from the inside outward.",
     ],
-    followUp: "Why can projection reduce cardinality even though it mainly chooses columns?",
+    followUp:
+      "Why can projection reduce cardinality even though it mainly chooses columns?",
   },
   lastMinute: {
     definition:
@@ -226,9 +239,15 @@ export const joinsAndDivisionInRelationalAlgebra: SubjectTopic = {
         table: {
           headers: ["Equi join", "Natural join"],
           rows: [
-            ["Condition is written explicitly", "Uses all same-named attributes automatically"],
+            [
+              "Condition is written explicitly",
+              "Uses all same-named attributes automatically",
+            ],
             ["Keeps both join columns", "Keeps one copy of common columns"],
-            ["Safer when names differ or several names match", "Shorter when names match correctly"],
+            [
+              "Safer when names differ or several names match",
+              "Shorter when names match correctly",
+            ],
           ],
         },
       },
@@ -344,7 +363,8 @@ export const joinsAndDivisionInRelationalAlgebra: SubjectTopic = {
       "Division is the common operator for all/every questions.",
       "Natural join keeps one copy of each common join attribute.",
     ],
-    followUp: "Why can a natural join produce the wrong result when two unrelated attributes share a name?",
+    followUp:
+      "Why can a natural join produce the wrong result when two unrelated attributes share a name?",
   },
   lastMinute: {
     definition:
@@ -429,7 +449,10 @@ export const sqlFoundations: SubjectTopic = {
         dataTable: {
           headers: ["Task", "Example"],
           rows: [
-            ["Insert", "INSERT INTO DEPARTMENT (DeptId, DeptName) VALUES (10, 'CSE');"],
+            [
+              "Insert",
+              "INSERT INTO DEPARTMENT (DeptId, DeptName) VALUES (10, 'CSE');",
+            ],
             ["Update", "UPDATE EMPLOYEE SET Salary = 60000 WHERE EmpId = 1;"],
             ["Delete", "DELETE FROM EMPLOYEE WHERE EmpId = 1;"],
           ],
@@ -441,7 +464,12 @@ export const sqlFoundations: SubjectTopic = {
       {
         title: "DELETE vs TRUNCATE vs DROP",
         dataTable: {
-          headers: ["Command", "Removes", "Structure remains?", "WHERE allowed?"],
+          headers: [
+            "Command",
+            "Removes",
+            "Structure remains?",
+            "WHERE allowed?",
+          ],
           rows: [
             ["DELETE", "Selected or all rows", "Yes", "Yes"],
             ["TRUNCATE", "All rows", "Yes", "No"],
@@ -485,7 +513,11 @@ export const sqlFoundations: SubjectTopic = {
             ["Another row with EmpId 1", "Reject", "Duplicate primary key"],
             ["(2, NULL, 50000, 10)", "Reject", "Name is NOT NULL"],
             ["(3, 'Ravi', -100, 10)", "Reject", "CHECK fails"],
-            ["(4, 'Mina', 45000, 99)", "Reject", "Department 99 does not exist"],
+            [
+              "(4, 'Mina', 45000, 99)",
+              "Reject",
+              "Department 99 does not exist",
+            ],
           ],
         },
       },
@@ -626,7 +658,11 @@ export const sqlFilteringSortingAndAggregation: SubjectTopic = {
         dataTable: {
           headers: ["Function", "Purpose", "NULL behavior"],
           rows: [
-            ["COUNT(*)", "Counts rows", "Counts rows even when columns contain NULL"],
+            [
+              "COUNT(*)",
+              "Counts rows",
+              "Counts rows even when columns contain NULL",
+            ],
             ["COUNT(column)", "Counts non-NULL values", "Ignores NULL"],
             ["SUM(column)", "Adds values", "Ignores NULL"],
             ["AVG(column)", "Averages non-NULL values", "Ignores NULL"],
@@ -739,7 +775,8 @@ export const sqlFilteringSortingAndAggregation: SubjectTopic = {
       "Several NULL grouping values form one group.",
       "Without ORDER BY, result order is not guaranteed.",
     ],
-    followUp: "Why must an aggregate condition normally be placed in HAVING instead of WHERE?",
+    followUp:
+      "Why must an aggregate condition normally be placed in HAVING instead of WHERE?",
   },
   lastMinute: {
     definition:
@@ -785,7 +822,10 @@ export const sqlJoinsSubqueriesSetOperationsAndViews: SubjectTopic = {
             ["INNER JOIN", "Only rows satisfying ON"],
             ["LEFT JOIN", "All left rows plus right matches"],
             ["RIGHT JOIN", "All right rows plus left matches"],
-            ["FULL OUTER JOIN", "All matched and unmatched rows from both sides"],
+            [
+              "FULL OUTER JOIN",
+              "All matched and unmatched rows from both sides",
+            ],
             ["CROSS JOIN", "Every left-right row pair"],
           ],
         },
@@ -815,7 +855,11 @@ export const sqlJoinsSubqueriesSetOperationsAndViews: SubjectTopic = {
             ["Scalar", "One value", "Salary > (SELECT AVG(Salary) ...)"],
             ["Single-row", "One row", "Comparison with one known result"],
             ["Multi-row", "Several rows", "IN, ANY, ALL, or EXISTS"],
-            ["Correlated", "Depends on the outer row", "Per-row existence or comparison"],
+            [
+              "Correlated",
+              "Depends on the outer row",
+              "Per-row existence or comparison",
+            ],
           ],
         },
       },
@@ -939,7 +983,8 @@ export const sqlJoinsSubqueriesSetOperationsAndViews: SubjectTopic = {
       "Set-operation inputs need compatible columns.",
       "View updatability depends on its definition and DBMS rules.",
     ],
-    followUp: "How can a WHERE condition accidentally change the effect of a LEFT JOIN?",
+    followUp:
+      "How can a WHERE condition accidentally change the effect of a LEFT JOIN?",
   },
   lastMinute: {
     definition:
@@ -980,9 +1025,15 @@ export const sqlQueryPractice: SubjectTopic = {
           headers: ["Relation", "Attributes"],
           rows: [
             ["DEPARTMENT", "DeptId (PK), DeptName"],
-            ["EMPLOYEE", "EmpId (PK), Name, Salary, DeptId (FK), ManagerId (FK), Status"],
+            [
+              "EMPLOYEE",
+              "EmpId (PK), Name, Salary, DeptId (FK), ManagerId (FK), Status",
+            ],
             ["PROJECT", "ProjectId (PK), ProjectName, DeptId (FK)"],
-            ["WORKS_ON", "EmpId (FK), ProjectId (FK), Hours; PK(EmpId, ProjectId)"],
+            [
+              "WORKS_ON",
+              "EmpId (FK), ProjectId (FK), Hours; PK(EmpId, ProjectId)",
+            ],
           ],
         },
       },
@@ -995,8 +1046,14 @@ export const sqlQueryPractice: SubjectTopic = {
           headers: ["Relation", "Rows"],
           rows: [
             ["DEPARTMENT", "(10, CSE), (20, ECE), (30, ME)"],
-            ["EMPLOYEE", "(1, Asha, 70000, 10, NULL, Active), (2, Ravi, 50000, 10, 1, Active), (3, Mina, 60000, 20, NULL, Active), (4, Kiran, NULL, 20, 3, Left), (5, Noor, 70000, NULL, 1, Active)"],
-            ["PROJECT", "(101, DB Core, 10), (102, OS Lab, 10), (103, Circuits, 20)"],
+            [
+              "EMPLOYEE",
+              "(1, Asha, 70000, 10, NULL, Active), (2, Ravi, 50000, 10, 1, Active), (3, Mina, 60000, 20, NULL, Active), (4, Kiran, NULL, 20, 3, Left), (5, Noor, 70000, NULL, 1, Active)",
+            ],
+            [
+              "PROJECT",
+              "(101, DB Core, 10), (102, OS Lab, 10), (103, Circuits, 20)",
+            ],
             ["WORKS_ON", "(1, 101, 5), (1, 102, 4), (2, 101, 3), (3, 103, 6)"],
           ],
         },
@@ -1064,13 +1121,41 @@ export const sqlQueryPractice: SubjectTopic = {
         dataTable: {
           headers: ["Question", "Answer pattern", "Expected result"],
           rows: [
-            ["Department 10 salaries", "SELECT Name, Salary FROM EMPLOYEE WHERE DeptId = 10 ORDER BY Salary DESC;", "Asha 70000, Ravi 50000"],
-            ["Departments with no employees", "SELECT D.DeptName FROM DEPARTMENT D WHERE NOT EXISTS (SELECT 1 FROM EMPLOYEE E WHERE E.DeptId = D.DeptId);", "ME"],
-            ["Employees on no project", "SELECT E.Name FROM EMPLOYEE E WHERE NOT EXISTS (SELECT 1 FROM WORKS_ON W WHERE W.EmpId = E.EmpId);", "Kiran, Noor"],
-            ["Project count including zero", "SELECT D.DeptName, COUNT(P.ProjectId) FROM DEPARTMENT D LEFT JOIN PROJECT P ON P.DeptId = D.DeptId GROUP BY D.DeptId, D.DeptName;", "CSE 2, ECE 1, ME 0"],
-            ["Above own department average", "SELECT E.Name FROM EMPLOYEE E WHERE E.Salary > (SELECT AVG(E2.Salary) FROM EMPLOYEE E2 WHERE E2.DeptId = E.DeptId);", "Asha"],
-            ["Second-highest distinct salary", "SELECT MAX(Salary) FROM EMPLOYEE WHERE Salary < (SELECT MAX(Salary) FROM EMPLOYEE);", "60000"],
-            ["Works on every department 10 project", "Use the double NOT EXISTS pattern explained above.", "Asha"],
+            [
+              "Department 10 salaries",
+              "SELECT Name, Salary FROM EMPLOYEE WHERE DeptId = 10 ORDER BY Salary DESC;",
+              "Asha 70000, Ravi 50000",
+            ],
+            [
+              "Departments with no employees",
+              "SELECT D.DeptName FROM DEPARTMENT D WHERE NOT EXISTS (SELECT 1 FROM EMPLOYEE E WHERE E.DeptId = D.DeptId);",
+              "ME",
+            ],
+            [
+              "Employees on no project",
+              "SELECT E.Name FROM EMPLOYEE E WHERE NOT EXISTS (SELECT 1 FROM WORKS_ON W WHERE W.EmpId = E.EmpId);",
+              "Kiran, Noor",
+            ],
+            [
+              "Project count including zero",
+              "SELECT D.DeptName, COUNT(P.ProjectId) FROM DEPARTMENT D LEFT JOIN PROJECT P ON P.DeptId = D.DeptId GROUP BY D.DeptId, D.DeptName;",
+              "CSE 2, ECE 1, ME 0",
+            ],
+            [
+              "Above own department average",
+              "SELECT E.Name FROM EMPLOYEE E WHERE E.Salary > (SELECT AVG(E2.Salary) FROM EMPLOYEE E2 WHERE E2.DeptId = E.DeptId);",
+              "Asha",
+            ],
+            [
+              "Second-highest distinct salary",
+              "SELECT MAX(Salary) FROM EMPLOYEE WHERE Salary < (SELECT MAX(Salary) FROM EMPLOYEE);",
+              "60000",
+            ],
+            [
+              "Works on every department 10 project",
+              "Use the double NOT EXISTS pattern explained above.",
+              "Asha",
+            ],
           ],
         },
       },
@@ -1084,8 +1169,16 @@ export const sqlQueryPractice: SubjectTopic = {
           rows: [
             ["COUNT(*)", "4", "Counts every row"],
             ["COUNT(Salary)", "3", "Ignores the NULL salary"],
-            ["COUNT(DISTINCT Salary)", "2", "Distinct non-NULL values are 50000 and 70000"],
-            ["AVG(Salary)", "63333.33...", "190000 divided by 3 non-NULL values"],
+            [
+              "COUNT(DISTINCT Salary)",
+              "2",
+              "Distinct non-NULL values are 50000 and 70000",
+            ],
+            [
+              "AVG(Salary)",
+              "63333.33...",
+              "190000 divided by 3 non-NULL values",
+            ],
             ["MAX(Salary)", "70000", "Largest non-NULL value"],
           ],
         },
@@ -1151,7 +1244,8 @@ export const sqlQueryPractice: SubjectTopic = {
       "Qualify columns in multi-table queries.",
       "Use window functions when rows need ranks without being grouped away.",
     ],
-    followUp: "How would you test whether a second-highest-salary query handles duplicate highest salaries correctly?",
+    followUp:
+      "How would you test whether a second-highest-salary query handles duplicate highest salaries correctly?",
   },
   lastMinute: {
     definition:

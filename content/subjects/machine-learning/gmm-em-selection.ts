@@ -22,7 +22,8 @@ export const expectationMaximizationAlgorithm: SubjectTopic = {
           alt: "Expectation-Maximization cycle showing initialization, E-step, M-step, likelihood check, and convergence",
           width: 1536,
           height: 1024,
-          caption: "E-step estimates soft assignments; M-step updates parameters; the cycle repeats until convergence.",
+          caption:
+            "E-step estimates soft assignments; M-step updates parameters; the cycle repeats until convergence.",
         },
       },
       {
@@ -36,7 +37,12 @@ export const expectationMaximizationAlgorithm: SubjectTopic = {
         paragraphs: [
           "Keep the current parameters fixed and calculate every responsibility γᵢₖ. This produces a soft assignment table with one row per example and one column per component.",
         ],
-        formulas: [{ label: "E-step", expression: "γᵢₖ = πₖN(xᵢ|μₖ,Σₖ) / ΣⱼπⱼN(xᵢ|μⱼ,Σⱼ)" }],
+        formulas: [
+          {
+            label: "E-step",
+            expression: "γᵢₖ = πₖN(xᵢ|μₖ,Σₖ) / ΣⱼπⱼN(xᵢ|μⱼ,Σⱼ)",
+          },
+        ],
       },
       {
         title: "M-Step: Maximization",
@@ -52,7 +58,9 @@ export const expectationMaximizationAlgorithm: SubjectTopic = {
       },
       {
         title: "Complete M-Step Numerical",
-        paragraphs: ["Use fixed responsibilities to perform one complete one-dimensional M-step."],
+        paragraphs: [
+          "Use fixed responsibilities to perform one complete one-dimensional M-step.",
+        ],
         dataTable: {
           headers: ["xᵢ", "γᵢ1", "γᵢ2"],
           rows: [
@@ -65,7 +73,8 @@ export const expectationMaximizationAlgorithm: SubjectTopic = {
         problems: [
           {
             title: "Update weights, means, and variances",
-            prompt: "Using the table, calculate N₁, N₂, π₁, π₂, μ₁, μ₂, and the one-dimensional component variances.",
+            prompt:
+              "Using the table, calculate N₁, N₂, π₁, π₂, μ₁, μ₂, and the one-dimensional component variances.",
             steps: [
               "N₁=0.9+0.8+0.2+0.1=2 and N₂=0.1+0.2+0.8+0.9=2.",
               "π₁=N₁/4=0.5 and π₂=N₂/4=0.5.",
@@ -74,7 +83,8 @@ export const expectationMaximizationAlgorithm: SubjectTopic = {
               "Variance 1=[0.9(1−2.5)²+0.8(2−2.5)²+0.2(8−2.5)²+0.1(9−2.5)²]/2=12.5/2=6.25.",
               "Variance 2 is symmetric and also equals 6.25.",
             ],
-            answer: "The updated weights are 0.5 and 0.5, means are 2.5 and 7.5, and both variances are 6.25.",
+            answer:
+              "The updated weights are 0.5 and 0.5, means are 2.5 and 7.5, and both variances are 6.25.",
           },
         ],
       },
@@ -109,7 +119,10 @@ export const expectationMaximizationAlgorithm: SubjectTopic = {
     definition:
       "EM alternates soft-assignment estimation with weighted parameter updates to increase GMM likelihood.",
     sections: [
-      { title: "Cycle", flow: ["Initialize", "E-step", "M-step", "Log-likelihood", "Repeat"] },
+      {
+        title: "Cycle",
+        flow: ["Initialize", "E-step", "M-step", "Log-likelihood", "Repeat"],
+      },
       {
         title: "M-Step",
         formulas: [
@@ -136,7 +149,11 @@ export const expectationMaximizationAlgorithm: SubjectTopic = {
       { title: "M-Step", points: ["γ fixed", "Update π, μ, Σ"] },
     ],
     memoryLine: "E estimates hidden membership; M maximizes parameter fit.",
-    cues: ["Responsibilities first.", "Weighted summaries second.", "Check log-likelihood."],
+    cues: [
+      "Responsibilities first.",
+      "Weighted summaries second.",
+      "Check log-likelihood.",
+    ],
     trap: "Do not update a component mean using unweighted examples.",
   },
 };
@@ -174,7 +191,8 @@ export const selectingComponentsAndGmmLimitations: SubjectTopic = {
           alt: "GMM candidates with different component counts compared using AIC and BIC",
           width: 1536,
           height: 1024,
-          caption: "AIC and BIC prefer a strong fit only when its added complexity is justified.",
+          caption:
+            "AIC and BIC prefer a strong fit only when its added complexity is justified.",
         },
       },
       {
@@ -194,7 +212,8 @@ export const selectingComponentsAndGmmLimitations: SubjectTopic = {
         problems: [
           {
             title: "Select K",
-            prompt: "Verify the criteria and choose among K=2, 3, and 4 using n=100 and the table values.",
+            prompt:
+              "Verify the criteria and choose among K=2, 3, and 4 using n=100 and the table values.",
             steps: [
               "For K=2: AIC=2(5)−2(−140)=290; BIC=5ln100+280≈303.03.",
               "For K=3: AIC=2(8)+260=276; BIC=8ln100+260≈296.84.",
@@ -202,7 +221,8 @@ export const selectingComponentsAndGmmLimitations: SubjectTopic = {
               "AIC ties K=3 and K=4; choose the simpler tied candidate K=3.",
               "BIC is also smallest for K=3.",
             ],
-            answer: "Choose K=3 because it has the lowest BIC and ties for lowest AIC with a simpler model than K=4.",
+            answer:
+              "Choose K=3 because it has the lowest BIC and ties for lowest AIC with a simpler model than K=4.",
           },
         ],
       },
@@ -211,12 +231,17 @@ export const selectingComponentsAndGmmLimitations: SubjectTopic = {
         table: {
           headers: ["Too few components", "Too many components"],
           rows: [
-            ["Distinct groups are merged", "Noise may receive its own component"],
+            [
+              "Distinct groups are merged",
+              "Noise may receive its own component",
+            ],
             ["High bias", "High variance"],
             ["Poor density fit", "Unstable or tiny components"],
           ],
         },
-        paragraphs: ["AIC, BIC, repeated fitting, and domain usefulness should be considered together rather than treating one plotted curve as unquestionable truth."],
+        paragraphs: [
+          "AIC, BIC, repeated fitting, and domain usefulness should be considered together rather than treating one plotted curve as unquestionable truth.",
+        ],
       },
       {
         title: "Initialization and Local Optima",
@@ -287,10 +312,28 @@ export const selectingComponentsAndGmmLimitations: SubjectTopic = {
     followUp: "Why can training likelihood improve while BIC becomes worse?",
   },
   lastMinute: {
-    definition: "Balance likelihood improvement against the number of fitted parameters.",
+    definition:
+      "Balance likelihood improvement against the number of fitted parameters.",
     sections: [
-      { title: "Choose", flow: ["Fit candidates", "Check convergence", "AIC/BIC", "Lower wins", "Inspect stability"], wide: true },
-      { title: "Risks", points: ["Local optimum", "Covariance collapse", "Too many tiny components"] },
+      {
+        title: "Choose",
+        flow: [
+          "Fit candidates",
+          "Check convergence",
+          "AIC/BIC",
+          "Lower wins",
+          "Inspect stability",
+        ],
+        wide: true,
+      },
+      {
+        title: "Risks",
+        points: [
+          "Local optimum",
+          "Covariance collapse",
+          "Too many tiny components",
+        ],
+      },
     ],
     memoryLine: "Better fit must earn its extra parameters.",
     cues: ["AIC=2p−2ℓ.", "BIC=p ln n−2ℓ.", "Labels are arbitrary."],
