@@ -3,20 +3,29 @@
 import { useCommandSearch } from "@/components/command-search-provider";
 import { PrepLoomLogo } from "@/components/preploom-logo";
 import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler";
-import { BookOpen, Braces, Code2, Menu, MessageSquareText, Route, Search, X } from "lucide-react";
+import {
+  BookOpen,
+  Braces,
+  Code2,
+  Menu,
+  MessageSquareText,
+  Route,
+  Search,
+  X,
+} from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useSyncExternalStore } from "react";
 
 const navigation = [
   { label: "Subjects", href: "/subjects" },
+  { label: "Interview Questions", href: "/interview-questions" },
   { label: "Roadmaps", href: "/roadmaps" },
   { label: "WebDev", href: "/webdev" },
   { label: "DSA", href: "/dsa" },
-  { label: "Interview Questions", href: "/interview-questions" },
 ];
 
-const mobileIcons = [BookOpen, Route, Code2, Braces, MessageSquareText];
+const mobileIcons = [BookOpen, MessageSquareText, Route, Code2, Braces];
 
 function SiteThemeToggle() {
   const isDark = useSyncExternalStore(
@@ -102,7 +111,11 @@ export function SiteHeader() {
             aria-controls="preploom-command-search"
             className="group hidden h-10 w-[clamp(220px,22vw,340px)] items-center gap-2.5 rounded-[10px] border border-black/[0.11] bg-black/[0.025] px-3 text-[13px] text-[#606060] transition-colors hover:border-black/25 hover:bg-white hover:text-[#151515] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/40 dark:border-white/[0.12] dark:bg-white/[0.04] dark:text-[#a8a8a8] dark:hover:border-white/25 dark:hover:bg-[#141414] dark:hover:text-white dark:focus-visible:ring-white/50 sm:flex"
           >
-            <Search className="size-4 shrink-0" strokeWidth={1.7} aria-hidden="true" />
+            <Search
+              className="size-4 shrink-0"
+              strokeWidth={1.7}
+              aria-hidden="true"
+            />
             <span className="min-w-0 flex-1 truncate text-left">
               Search topics and subjects
             </span>
@@ -121,7 +134,11 @@ export function SiteHeader() {
             {menuOpen ? (
               <X className="size-[18px]" strokeWidth={1.7} aria-hidden="true" />
             ) : (
-              <Menu className="size-[18px]" strokeWidth={1.7} aria-hidden="true" />
+              <Menu
+                className="size-[18px]"
+                strokeWidth={1.7}
+                aria-hidden="true"
+              />
             )}
             <span className="sr-only">
               {menuOpen ? "Close navigation" : "Open navigation"}

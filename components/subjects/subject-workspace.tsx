@@ -3,7 +3,9 @@
 import type {
   SubjectContent,
   SubjectDataTable,
+  SubjectFormula,
   SubjectGantt,
+  SubjectProblem,
   SubjectStudyMode,
   SubjectTopic,
   SubjectVisual,
@@ -27,7 +29,11 @@ const modeOptions: {
   description: string;
 }[] = [
   { value: "learn", label: "Full note", description: "Learn the full idea" },
-  { value: "revise", label: "Quick review", description: "Read the key points" },
+  {
+    value: "revise",
+    label: "Quick review",
+    description: "Read the key points",
+  },
   {
     value: "last-minute",
     label: "Last check",
@@ -68,7 +74,11 @@ function DataTable({ table }: { table: SubjectDataTable }) {
         <thead className="bg-black/[0.035] dark:bg-white/[0.055]">
           <tr>
             {table.headers.map((header) => (
-              <th key={header} scope="col" className="border-r border-black/[0.08] px-4 py-3.5 font-semibold last:border-r-0 dark:border-white/[0.09]">
+              <th
+                key={header}
+                scope="col"
+                className="border-r border-black/[0.08] px-4 py-3.5 font-semibold last:border-r-0 dark:border-white/[0.09]"
+              >
                 {clean(header)}
               </th>
             ))}
@@ -76,9 +86,15 @@ function DataTable({ table }: { table: SubjectDataTable }) {
         </thead>
         <tbody className="text-[#505050] dark:text-[#b8b8b8]">
           {table.rows.map((row, rowIndex) => (
-            <tr key={`${row.join("-")}-${rowIndex}`} className="border-t border-black/[0.08] dark:border-white/[0.09]">
+            <tr
+              key={`${row.join("-")}-${rowIndex}`}
+              className="border-t border-black/[0.08] dark:border-white/[0.09]"
+            >
               {row.map((cell, cellIndex) => (
-                <td key={`${cell}-${cellIndex}`} className="border-r border-black/[0.08] px-4 py-3.5 last:border-r-0 dark:border-white/[0.09]">
+                <td
+                  key={`${cell}-${cellIndex}`}
+                  className="border-r border-black/[0.08] px-4 py-3.5 last:border-r-0 dark:border-white/[0.09]"
+                >
                   {clean(cell)}
                 </td>
               ))}
@@ -86,6 +102,81 @@ function DataTable({ table }: { table: SubjectDataTable }) {
           ))}
         </tbody>
       </table>
+    </div>
+  );
+}
+
+function FormulaList({ formulas }: { formulas: SubjectFormula[] }) {
+  return (
+    <div className="mt-7 grid gap-3">
+      {formulas.map((formula) => (
+        <div
+          key={`${formula.label ?? "formula"}-${formula.expression}`}
+          className="rounded-[14px] border border-black/[0.1] bg-black/[0.025] px-5 py-4 dark:border-white/[0.11] dark:bg-white/[0.04] sm:px-6"
+        >
+          {formula.label ? (
+            <p className="text-[11px] font-medium uppercase tracking-[0.12em] text-[#707070] dark:text-[#929292]">
+              {clean(formula.label)}
+            </p>
+          ) : null}
+          <p className="mt-2 overflow-x-auto whitespace-nowrap font-[family-name:var(--font-geist-mono)] text-[15px] font-medium leading-8 tracking-[-0.02em] text-[#202020] dark:text-[#ececea] sm:text-[17px]">
+            {formula.expression}
+          </p>
+          {formula.note ? (
+            <p className="mt-2 text-[12px] leading-5 text-[#686868] dark:text-[#999]">
+              {clean(formula.note)}
+            </p>
+          ) : null}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function PracticeProblems({ problems }: { problems: SubjectProblem[] }) {
+  return (
+    <div className="mt-7 space-y-4">
+      {problems.map((problem, problemIndex) => (
+        <article
+          key={problem.title}
+          className="overflow-hidden rounded-[16px] border border-black/[0.1] dark:border-white/[0.11]"
+        >
+          <div className="border-b border-black/[0.08] bg-black/[0.025] px-5 py-4 dark:border-white/[0.09] dark:bg-white/[0.04] sm:px-6">
+            <p className="text-[11px] font-medium uppercase tracking-[0.12em] text-[#707070] dark:text-[#929292]">
+              Problem {String(problemIndex + 1).padStart(2, "0")}
+            </p>
+            <h4 className="mt-2 text-[17px] font-semibold tracking-[-0.025em]">
+              {clean(problem.title)}
+            </h4>
+            <p className="mt-2 text-[14px] leading-7 text-[#505050] dark:text-[#b8b8b8]">
+              {clean(problem.prompt)}
+            </p>
+          </div>
+          <ol className="px-5 py-2 sm:px-6">
+            {problem.steps.map((step, stepIndex) => (
+              <li
+                key={`${problem.title}-${stepIndex}`}
+                className="grid grid-cols-[32px_1fr] gap-3 border-b border-black/[0.07] py-4 text-[13px] leading-7 text-[#505050] last:border-b-0 dark:border-white/[0.08] dark:text-[#b8b8b8]"
+              >
+                <span className="font-[family-name:var(--font-geist-mono)] text-[10px] text-[#777] dark:text-[#888]">
+                  {String(stepIndex + 1).padStart(2, "0")}
+                </span>
+                <span className="font-[family-name:var(--font-geist-mono)]">
+                  {step}
+                </span>
+              </li>
+            ))}
+          </ol>
+          <div className="border-t border-black/[0.08] px-5 py-4 dark:border-white/[0.09] sm:px-6">
+            <p className="text-[11px] font-medium uppercase tracking-[0.12em] text-[#707070] dark:text-[#929292]">
+              Answer
+            </p>
+            <p className="mt-2 font-[family-name:var(--font-geist-mono)] text-[14px] font-medium leading-7 text-[#202020] dark:text-[#ececea]">
+              {problem.answer}
+            </p>
+          </div>
+        </article>
+      ))}
     </div>
   );
 }
@@ -101,7 +192,9 @@ function GanttChart({ gantt }: { gantt: SubjectGantt }) {
             <div
               key={`${segment.label}-${segment.start}-${segment.end}-${index}`}
               className="flex min-h-16 items-center justify-center border-r border-black/[0.12] bg-black/[0.025] px-3 text-[13px] font-semibold last:border-r-0 dark:border-white/[0.13] dark:bg-white/[0.045]"
-              style={{ width: `${((segment.end - segment.start) / total) * 100}%` }}
+              style={{
+                width: `${((segment.end - segment.start) / total) * 100}%`,
+              }}
               title={`${segment.label}: ${segment.start} to ${segment.end}`}
             >
               {clean(segment.label)}
@@ -193,6 +286,12 @@ export function LearnContent({ topic }: { topic: SubjectTopic }) {
             </div>
           ) : null}
           {section.dataTable ? <DataTable table={section.dataTable} /> : null}
+          {section.formulas ? (
+            <FormulaList formulas={section.formulas} />
+          ) : null}
+          {section.problems ? (
+            <PracticeProblems problems={section.problems} />
+          ) : null}
           {section.gantt ? <GanttChart gantt={section.gantt} /> : null}
           {section.flow && (
             <div className="mt-8 grid justify-items-center gap-2">
@@ -354,6 +453,12 @@ export function ReviewContent({ topic }: { topic: SubjectTopic }) {
             </div>
           ) : null}
           {section.dataTable ? <DataTable table={section.dataTable} /> : null}
+          {section.formulas ? (
+            <FormulaList formulas={section.formulas} />
+          ) : null}
+          {section.problems ? (
+            <PracticeProblems problems={section.problems} />
+          ) : null}
           {section.gantt ? <GanttChart gantt={section.gantt} /> : null}
           {section.steps ? (
             <ol className="mt-6 border-t border-black/[0.1] dark:border-white/[0.11]">
@@ -708,7 +813,11 @@ export function RecallContent({ topic }: { topic: SubjectTopic }) {
             className="flex items-start gap-4 rounded-[12px] border border-black/[0.09] p-4 dark:border-white/[0.1] sm:p-5"
           >
             <span className="grid size-7 shrink-0 place-items-center rounded-full bg-[#151515] text-white dark:border dark:border-white/[0.12] dark:bg-[#242424] dark:text-[#f3f3f1]">
-              <Check className="size-3.5" strokeWidth={1.9} aria-hidden="true" />
+              <Check
+                className="size-3.5"
+                strokeWidth={1.9}
+                aria-hidden="true"
+              />
             </span>
             <p className="pt-0.5 text-[15px] leading-7 text-[#505050] dark:text-[#b8b8b8]">
               {clean(cue)}
@@ -733,11 +842,7 @@ export function RecallContent({ topic }: { topic: SubjectTopic }) {
   );
 }
 
-export function SubjectWorkspace({
-  subject,
-}: {
-  subject: SubjectContent;
-}) {
+export function SubjectWorkspace({ subject }: { subject: SubjectContent }) {
   const topics = useMemo(
     () => subject.modules.flatMap((module) => module.topics),
     [subject.modules],
@@ -748,7 +853,9 @@ export function SubjectWorkspace({
   const [saved, setSaved] = useState<string[]>([]);
   const reduceMotion = useReducedMotion();
 
-  const selectedIndex = topics.findIndex((topic) => topic.slug === selectedSlug);
+  const selectedIndex = topics.findIndex(
+    (topic) => topic.slug === selectedSlug,
+  );
   const selectedTopic = topics[selectedIndex] ?? topics[0];
   const isComplete = completed.includes(selectedTopic.slug);
   const isSaved = saved.includes(selectedTopic.slug);
@@ -826,7 +933,11 @@ export function SubjectWorkspace({
         <details className="group mb-8 rounded-[14px] border border-black/[0.1] dark:border-white/[0.11] lg:hidden">
           <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between gap-4 px-4 text-[13px] font-medium">
             <span className="inline-flex items-center gap-2">
-              <ListTree className="size-4" strokeWidth={1.7} aria-hidden="true" />
+              <ListTree
+                className="size-4"
+                strokeWidth={1.7}
+                aria-hidden="true"
+              />
               Choose a topic
             </span>
             <ChevronDown
@@ -854,7 +965,11 @@ export function SubjectWorkspace({
                   >
                     {clean(topic.title)}
                     {completed.includes(topic.slug) && (
-                      <Check className="size-4" strokeWidth={1.8} aria-hidden="true" />
+                      <Check
+                        className="size-4"
+                        strokeWidth={1.8}
+                        aria-hidden="true"
+                      />
                     )}
                   </button>
                 ))}
@@ -987,9 +1102,8 @@ export function SubjectWorkspace({
                       </span>
                       <span className="mt-1 block font-medium">
                         {clean(
-                          topics[
-                            Math.min(topics.length - 1, selectedIndex + 1)
-                          ].title,
+                          topics[Math.min(topics.length - 1, selectedIndex + 1)]
+                            .title,
                         )}
                       </span>
                     </span>
@@ -1018,7 +1132,11 @@ export function SubjectWorkspace({
                     : "border border-black/[0.1] hover:bg-black/[0.04] dark:border-white/[0.11] dark:hover:bg-white/[0.06]"
                 }`}
               >
-                <Check className="size-4" strokeWidth={1.8} aria-hidden="true" />
+                <Check
+                  className="size-4"
+                  strokeWidth={1.8}
+                  aria-hidden="true"
+                />
                 {isComplete ? "Completed" : "Mark complete"}
               </button>
               <button

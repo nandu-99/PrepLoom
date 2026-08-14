@@ -13,12 +13,6 @@ export const metadata: Metadata = {
     "Practice JavaScript interview questions with visible answers or test yourself before revealing each explanation.",
 };
 
-const javascriptPrompts = [
-  "How does the event loop work?",
-  "What makes a closure useful?",
-  "How is this determined?",
-];
-
 export default function JavascriptInterviewQuestionsPage() {
   return (
     <div className="min-h-[100dvh] overflow-x-clip bg-[#f7f7f5] font-[family-name:var(--font-geist-sans)] text-[#151515] selection:bg-[#151515] selection:text-white dark:bg-[#0a0a0a] dark:text-[#f3f3f1] dark:selection:bg-[#f3f3f1] dark:selection:text-[#151515]">
@@ -39,21 +33,23 @@ export default function JavascriptInterviewQuestionsPage() {
                 href="/interview-questions"
                 className="inline-flex items-center gap-2 rounded-[8px] text-[12px] text-[#606060] transition-colors hover:text-[#151515] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/40 dark:text-[#a8a8a8] dark:hover:text-white dark:focus-visible:ring-white/50"
               >
-                <ArrowLeft className="size-4" strokeWidth={1.7} aria-hidden="true" />
+                <ArrowLeft
+                  className="size-4"
+                  strokeWidth={1.7}
+                  aria-hidden="true"
+                />
                 Interview questions
               </Link>
               <h1 className="mt-8 max-w-[760px] break-words text-balance text-[clamp(2.55rem,13vw,5.3rem)] font-semibold leading-[0.98] tracking-[-0.055em] sm:leading-[0.94] sm:tracking-[-0.063em]">
                 JavaScript interview questions
               </h1>
               <p className="mt-6 max-w-[56ch] text-[15px] leading-7 text-[#555] dark:text-[#b3b3b3] sm:text-[17px] sm:leading-8">
-                Learn with visible answers or test yourself before revealing each explanation.
+                Learn with visible answers or test yourself before revealing
+                each explanation.
               </p>
             </div>
 
-            <InterviewHeroAnimation
-              prompts={javascriptPrompts}
-              ariaLabel="JavaScript interview questions appearing one after another"
-            />
+            <InterviewHeroAnimation variant="javascript" />
           </div>
         </section>
 

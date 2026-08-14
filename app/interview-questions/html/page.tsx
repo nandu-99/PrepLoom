@@ -33,18 +33,23 @@ export default function HtmlInterviewQuestionsPage() {
                 href="/interview-questions"
                 className="inline-flex items-center gap-2 rounded-[8px] text-[12px] text-[#606060] transition-colors hover:text-[#151515] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/40 dark:text-[#a8a8a8] dark:hover:text-white dark:focus-visible:ring-white/50"
               >
-                <ArrowLeft className="size-4" strokeWidth={1.7} aria-hidden="true" />
+                <ArrowLeft
+                  className="size-4"
+                  strokeWidth={1.7}
+                  aria-hidden="true"
+                />
                 Interview questions
               </Link>
               <h1 className="mt-8 max-w-[760px] break-words text-balance text-[clamp(2.55rem,13vw,5.3rem)] font-semibold leading-[0.98] tracking-[-0.055em] sm:leading-[0.94] sm:tracking-[-0.063em]">
                 HTML interview questions
               </h1>
               <p className="mt-6 max-w-[56ch] text-[15px] leading-7 text-[#555] dark:text-[#b3b3b3] sm:text-[17px] sm:leading-8">
-                Learn with visible answers or test yourself before revealing each explanation.
+                Learn with visible answers or test yourself before revealing
+                each explanation.
               </p>
             </div>
 
-            <InterviewHeroAnimation />
+            <InterviewHeroAnimation variant="html" />
           </div>
         </section>
 
