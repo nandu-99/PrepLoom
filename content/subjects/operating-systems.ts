@@ -10,7 +10,6 @@ import {
   deadlockFundamentalsDetailed,
   deadlockPreventionAvoidanceDetailed,
 } from "@/content/subjects/operating-systems/deadlocks";
-import { deadlockHandlingDetailed } from "@/content/subjects/operating-systems/deadlock-handling";
 import { deadlockNumericals } from "@/content/subjects/operating-systems/deadlock-numericals";
 import {
   introductionToOperatingSystems,
@@ -147,7 +146,6 @@ export const operatingSystemsContent: SubjectContent = {
           deadlockPreventionAvoidanceDetailed,
           deadlockDetectionRecoveryDetailed,
           deadlockNumericals,
-          deadlockHandlingDetailed,
         ],
       },
     ];

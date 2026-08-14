@@ -215,6 +215,29 @@ const deadlockFundamentalsDetailed: SubjectTopic = {
           "Deadlock detection can add extra work to the system.",
         ],
       },
+      {
+        title: "Choosing a Handling Strategy",
+        paragraphs: [
+          "Real systems may combine prevention, avoidance, detection and recovery, or deliberate acceptance of a low-risk Deadlock instead of applying one strategy everywhere.",
+          "The Ostrich Approach means that a subsystem does not run a general prevention or detection algorithm when Deadlocks are rare and continuous checking would cost more than an occasional timeout, restart, or recovery action.",
+        ],
+        visual: {
+          src: "/notes/operating-systems/deadlock-handling-strategies.png",
+          alt: "Deadlock handling divided into ignore, prevention, avoidance, and detection plus recovery.",
+          width: 1536,
+          height: 1024,
+          caption:
+            "Different resources and subsystems may use different Deadlock strategies.",
+        },
+        dataTable: {
+          headers: ["Situation", "Practical strategy", "Reason"],
+          rows: [
+            ["Kernel locks", "Prevention through lock ordering", "Circular Wait can be blocked by a fixed rule"],
+            ["Database transactions", "Detection and rollback", "A victim transaction can be restarted"],
+            ["Rare, low-impact case", "Ostrich approach, timeout, or restart", "Continuous checking may cost more than recovery"],
+          ],
+        },
+      },
     ],
     mechanism: {
       title: "How a two-process Deadlock forms",
@@ -332,6 +355,7 @@ const deadlockFundamentalsDetailed: SubjectTopic = {
       "One resource instance + cycle = Deadlock.",
       "Multiple resource instances + cycle = Deadlock may exist.",
       "All four Coffman conditions are required for a resource Deadlock.",
+      "Real systems may combine strategies; the Ostrich Approach deliberately accepts selected low-risk cases.",
     ],
     followUp: "Why does a cycle prove Deadlock only when every resource type has one instance?",
   },

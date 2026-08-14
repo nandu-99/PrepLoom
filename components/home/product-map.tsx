@@ -2,10 +2,10 @@ import {
   ArrowRight,
   BookOpen,
   Braces,
-  CircleHelp,
   Code2,
   Cpu,
   Database,
+  MessageSquareText,
   Network,
   Route,
 } from "lucide-react";
@@ -99,10 +99,10 @@ export function ProductMap() {
       />
 
       <ProductTile
-        href="/quizzes/operating-systems-foundations"
-        title="Quick quiz"
-        description="Test what you know and review every answer after you submit."
-        icon={CircleHelp}
+        href="/interview-questions"
+        title="Interview questions"
+        description="Practise behavioral and technical questions with concise answers and recall mode."
+        icon={MessageSquareText}
         className="md:col-span-5"
       />
 

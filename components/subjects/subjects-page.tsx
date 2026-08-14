@@ -6,11 +6,13 @@ import {
   ArrowRight,
   BrainCircuit,
   Braces,
+  ChartScatter,
   Code2,
   Cpu,
   Database,
   GitBranch,
   Layers3,
+  Microchip,
   Network,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
@@ -27,7 +29,9 @@ type DiagramType =
   | "dsa"
   | "system-design"
   | "web"
-  | "aiml";
+  | "computer-architecture"
+  | "machine-learning"
+  | "deep-learning";
 
 const subjectDetails: Record<
   string,
@@ -72,10 +76,20 @@ const subjectDetails: Record<
     category: "development",
     visual: "web",
   },
-  aiml: {
+  "machine-learning": {
+    icon: ChartScatter,
+    category: "advanced",
+    visual: "machine-learning",
+  },
+  "deep-learning": {
     icon: BrainCircuit,
     category: "advanced",
-    visual: "aiml",
+    visual: "deep-learning",
+  },
+  "modern-computer-architecture": {
+    icon: Microchip,
+    category: "core",
+    visual: "computer-architecture",
   },
 };
 
@@ -108,6 +122,45 @@ function SubjectDiagram({ type }: { type: DiagramType }) {
         >
           <Cpu className="size-5 text-foreground/60" strokeWidth={1.5} />
         </motion.div>
+      </div>
+    );
+  }
+
+  if (type === "computer-architecture") {
+    return (
+      <div className="relative flex h-40 w-48 flex-col items-center justify-center" aria-hidden="true">
+        <div className="flex items-center gap-5">
+          {["A", "B"].map((register, index) => (
+            <motion.span
+              key={register}
+              className="grid size-9 place-items-center rounded-lg border border-foreground/20 bg-[#f7f7f5] font-mono text-[9px] text-foreground/65 dark:bg-[#0a0a0a]"
+              animate={reduceMotion ? undefined : { y: [0, index ? 3 : -3, 0] }}
+              transition={{ duration: 2.8, delay: index * 0.2, ease: "easeInOut", repeat }}
+            >
+              R{register}
+            </motion.span>
+          ))}
+        </div>
+        <div className="flex h-6 items-center gap-[35px]">
+          <span className="h-6 w-px -rotate-[24deg] bg-foreground/20" />
+          <span className="h-6 w-px rotate-[24deg] bg-foreground/20" />
+        </div>
+        <motion.div
+          className="grid h-12 w-20 place-items-center rounded-xl border border-foreground/25 bg-foreground/[0.035]"
+          animate={reduceMotion ? undefined : { scale: [1, 1.05, 1] }}
+          transition={{ duration: 2.4, ease: "easeInOut", repeat }}
+        >
+          <div className="text-center">
+            <Microchip className="mx-auto size-4 text-foreground/60" strokeWidth={1.5} />
+            <span className="mt-0.5 block font-mono text-[8px] text-foreground/60">ALU</span>
+          </div>
+        </motion.div>
+        <div className="h-4 w-px bg-foreground/20" />
+        <div className="flex items-center gap-3 font-mono text-[8px] text-foreground/55">
+          <span>OUT</span>
+          <span className="size-1 rounded-full bg-foreground/35" />
+          <span>FLAGS</span>
+        </div>
       </div>
     );
   }
@@ -209,6 +262,74 @@ function SubjectDiagram({ type }: { type: DiagramType }) {
     );
   }
 
+  if (type === "machine-learning") {
+    const points = [
+      [24, 116],
+      [43, 103],
+      [61, 109],
+      [78, 82],
+      [99, 75],
+      [118, 59],
+      [139, 52],
+      [157, 32],
+    ];
+
+    return (
+      <div className="relative h-40 w-48" aria-hidden="true">
+        <span className="absolute bottom-5 left-4 top-4 w-px bg-foreground/25" />
+        <span className="absolute bottom-5 left-4 right-3 h-px bg-foreground/25" />
+        <motion.span
+          className="absolute bottom-[72px] left-[18px] h-px w-[158px] origin-left -rotate-[31deg] bg-foreground/45"
+          initial={reduceMotion ? false : { scaleX: 0 }}
+          animate={{ scaleX: 1 }}
+          transition={{ duration: reduceMotion ? 0 : 0.8, ease: "easeOut" }}
+        />
+        {points.map(([x, y], index) => (
+          <motion.span
+            key={`${x}-${y}`}
+            className="absolute size-2 rounded-full border border-foreground/35 bg-[#f7f7f5] dark:bg-[#0a0a0a]"
+            style={{ left: x, top: y }}
+            animate={reduceMotion ? undefined : { scale: [1, 1.3, 1], opacity: [0.55, 1, 0.55] }}
+            transition={{ duration: 2.6, delay: index * 0.16, ease: "easeInOut", repeat }}
+          />
+        ))}
+        <div className="absolute bottom-0 left-4 right-3 flex justify-between font-mono text-[7px] text-foreground/45">
+          <span>DATA</span>
+          <span>PREDICTION</span>
+        </div>
+      </div>
+    );
+  }
+
+  if (type === "deep-learning") {
+    const layers = [3, 4, 2];
+
+    return (
+      <div className="relative flex h-40 w-48 items-center justify-between px-4" aria-hidden="true">
+        <span className="absolute left-[42px] top-1/2 h-px w-[108px] -translate-y-1/2 bg-foreground/15" />
+        <span className="absolute left-[39px] top-1/2 h-px w-[114px] -translate-y-1/2 rotate-[24deg] bg-foreground/15" />
+        <span className="absolute left-[39px] top-1/2 h-px w-[114px] -translate-y-1/2 -rotate-[24deg] bg-foreground/15" />
+        {layers.map((nodeCount, layerIndex) => (
+          <div key={nodeCount} className="relative z-10 flex flex-col gap-2.5">
+            {Array.from({ length: nodeCount }, (_, nodeIndex) => (
+              <motion.span
+                key={`${layerIndex}-${nodeIndex}`}
+                className="size-5 rounded-full border border-foreground/25 bg-[#f7f7f5] dark:bg-[#0a0a0a]"
+                animate={reduceMotion ? undefined : { scale: [1, 1.16, 1], opacity: [0.58, 1, 0.58] }}
+                transition={{ duration: 2.5, delay: layerIndex * 0.35 + nodeIndex * 0.12, ease: "easeInOut", repeat }}
+              />
+            ))}
+          </div>
+        ))}
+        <div className="absolute inset-x-4 bottom-0 flex justify-between font-mono text-[7px] text-foreground/45">
+          <span>INPUT</span>
+          <span>HIDDEN</span>
+          <span>OUTPUT</span>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="relative flex h-40 w-48 items-center justify-center" aria-hidden="true">
       <span className="absolute left-7 right-7 top-1/2 h-px bg-foreground/15" />
@@ -281,7 +402,7 @@ export function SubjectsPage() {
               {availableSubjectCount}
             </p>
             <p className="mt-1 font-[family-name:var(--font-geist-sans)] text-xs text-[#606060]">
-              structured interview subject
+              structured interview subjects
             </p>
             <div className="mt-4 flex items-center gap-2 font-[family-name:var(--font-geist-sans)] text-[10px] text-[#606060]">
               <span className="size-1.5 rounded-full bg-foreground" />
@@ -401,7 +522,11 @@ export function SubjectsPage() {
                       href={subjectHref}
                       onMouseEnter={() => setActiveSubjectSlug(subject.slug)}
                       onFocus={() => setActiveSubjectSlug(subject.slug)}
-                      className={`group relative flex min-h-[74px] items-center gap-4 px-5 py-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring ${
+                      className={`group relative flex min-h-[74px] items-center gap-4 px-5 py-3 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring ${
+                        available
+                          ? "opacity-100"
+                          : "opacity-45 hover:opacity-65 focus-visible:opacity-100"
+                      } ${
                         index > 0
                           ? "border-t border-black/[0.08] dark:border-white/[0.09]"
                           : ""

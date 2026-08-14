@@ -44,7 +44,7 @@ export default function HtmlInterviewQuestionsPage() {
               </p>
             </div>
 
-            <InterviewHeroAnimation />
+            <InterviewHeroAnimation variant="html" />
           </div>
         </section>
 

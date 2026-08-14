@@ -13,12 +13,6 @@ export const metadata: Metadata = {
     "Practice JavaScript interview questions with visible answers or test yourself before revealing each explanation.",
 };
 
-const javascriptPrompts = [
-  "How does the event loop work?",
-  "What makes a closure useful?",
-  "How is this determined?",
-];
-
 export default function JavascriptInterviewQuestionsPage() {
   return (
     <div className="min-h-[100dvh] overflow-x-clip bg-[#f7f7f5] font-[family-name:var(--font-geist-sans)] text-[#151515] selection:bg-[#151515] selection:text-white dark:bg-[#0a0a0a] dark:text-[#f3f3f1] dark:selection:bg-[#f3f3f1] dark:selection:text-[#151515]">
@@ -50,10 +44,7 @@ export default function JavascriptInterviewQuestionsPage() {
               </p>
             </div>
 
-            <InterviewHeroAnimation
-              prompts={javascriptPrompts}
-              ariaLabel="JavaScript interview questions appearing one after another"
-            />
+            <InterviewHeroAnimation variant="javascript" />
           </div>
         </section>
 

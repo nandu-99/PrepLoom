@@ -1,4 +1,5 @@
 import type { SubjectContent, SubjectTopic } from "@/lib/subject-content";
+import { curateTopicSections } from "@/content/subjects/curation";
 import {
   abstractClassesAndInterfaces,
   abstraction,
@@ -945,8 +946,39 @@ const constructorsAndLifecycle: SubjectTopic = {
   },
 };
 
+const conciseFieldsMethodsAndInteraction = curateTopicSections(
+  fieldsMethodsAndInteraction,
+  {
+    readTime: "9 min",
+    omitLearnSections: ["Method Signature"],
+    omitReviseSections: ["Java Method Signature"],
+  },
+);
+
+const conciseAbstraction = curateTopicSections(abstraction, {
+  readTime: "9 min",
+  omitLearnSections: ["How Abstraction Is Created"],
+  omitReviseSections: ["How It Is Created"],
+});
+
+const conciseIsAAndHasA = curateTopicSections(isAAndHasA, {
+  readTime: "9 min",
+  omitLearnSections: ["Composition Over Inheritance"],
+});
+
+const concisePolymorphism = curateTopicSections(polymorphism, {
+  readTime: "8 min",
+  omitLearnSections: [
+    "Two Common Forms",
+    "Reference Type and Object Type",
+    "What Runtime Dispatch Applies To",
+  ],
+  omitReviseSections: ["Main Forms", "Dispatch Rule", "Java Boundary"],
+  omitLastMinuteSections: ["Two Forms", "Runtime Flow"],
+});
+
 export const oopContent: SubjectContent = {
-  order: "04",
+  order: "03",
   slug: "oop",
   title: "Object-Oriented Programming",
   shortTitle: "OOP",
@@ -963,7 +995,7 @@ export const oopContent: SubjectContent = {
       topics: [
         introductionToOop,
         classesAndObjects,
-        fieldsMethodsAndInteraction,
+        conciseFieldsMethodsAndInteraction,
         constructorsAndLifecycle,
       ],
     },
@@ -975,7 +1007,7 @@ export const oopContent: SubjectContent = {
       topics: [
         encapsulation,
         accessModifiers,
-        abstraction,
+        conciseAbstraction,
         abstractClassesAndInterfaces,
       ],
     },
@@ -987,7 +1019,7 @@ export const oopContent: SubjectContent = {
       topics: [
         inheritance,
         typesOfInheritance,
-        isAAndHasA,
+        conciseIsAAndHasA,
         objectRelationships,
       ],
     },
@@ -997,7 +1029,7 @@ export const oopContent: SubjectContent = {
       description:
         "Common interfaces, compile-time overload selection, runtime dispatch, and safe reference casting.",
       topics: [
-        polymorphism,
+        concisePolymorphism,
         overloadingVsOverriding,
         dynamicBindingAndCasting,
       ],

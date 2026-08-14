@@ -13,12 +13,6 @@ export const metadata: Metadata = {
     "Practice CSS interview questions with visible answers or test yourself before revealing each explanation.",
 };
 
-const cssPrompts = [
-  "How does the cascade work?",
-  "When should you use Grid?",
-  "Why can z-index fail?",
-];
-
 export default function CssInterviewQuestionsPage() {
   return (
     <div className="min-h-[100dvh] overflow-x-clip bg-[#f7f7f5] font-[family-name:var(--font-geist-sans)] text-[#151515] selection:bg-[#151515] selection:text-white dark:bg-[#0a0a0a] dark:text-[#f3f3f1] dark:selection:bg-[#f3f3f1] dark:selection:text-[#151515]">
@@ -50,10 +44,7 @@ export default function CssInterviewQuestionsPage() {
               </p>
             </div>
 
-            <InterviewHeroAnimation
-              prompts={cssPrompts}
-              ariaLabel="CSS interview questions appearing one after another"
-            />
+            <InterviewHeroAnimation variant="css" />
           </div>
         </section>
 

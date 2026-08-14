@@ -3,7 +3,9 @@
 import type {
   SubjectContent,
   SubjectDataTable,
+  SubjectFormula,
   SubjectGantt,
+  SubjectProblem,
   SubjectStudyMode,
   SubjectTopic,
   SubjectVisual,
@@ -86,6 +88,81 @@ function DataTable({ table }: { table: SubjectDataTable }) {
           ))}
         </tbody>
       </table>
+    </div>
+  );
+}
+
+function FormulaList({ formulas }: { formulas: SubjectFormula[] }) {
+  return (
+    <div className="mt-7 grid gap-3">
+      {formulas.map((formula) => (
+        <div
+          key={`${formula.label ?? "formula"}-${formula.expression}`}
+          className="rounded-[14px] border border-black/[0.1] bg-black/[0.025] px-5 py-4 dark:border-white/[0.11] dark:bg-white/[0.04] sm:px-6"
+        >
+          {formula.label ? (
+            <p className="text-[11px] font-medium uppercase tracking-[0.12em] text-[#707070] dark:text-[#929292]">
+              {clean(formula.label)}
+            </p>
+          ) : null}
+          <p className="mt-2 overflow-x-auto whitespace-nowrap font-[family-name:var(--font-geist-mono)] text-[15px] font-medium leading-8 tracking-[-0.02em] text-[#202020] dark:text-[#ececea] sm:text-[17px]">
+            {formula.expression}
+          </p>
+          {formula.note ? (
+            <p className="mt-2 text-[12px] leading-5 text-[#686868] dark:text-[#999]">
+              {clean(formula.note)}
+            </p>
+          ) : null}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function PracticeProblems({ problems }: { problems: SubjectProblem[] }) {
+  return (
+    <div className="mt-7 space-y-4">
+      {problems.map((problem, problemIndex) => (
+        <article
+          key={problem.title}
+          className="overflow-hidden rounded-[16px] border border-black/[0.1] dark:border-white/[0.11]"
+        >
+          <div className="border-b border-black/[0.08] bg-black/[0.025] px-5 py-4 dark:border-white/[0.09] dark:bg-white/[0.04] sm:px-6">
+            <p className="text-[11px] font-medium uppercase tracking-[0.12em] text-[#707070] dark:text-[#929292]">
+              Problem {String(problemIndex + 1).padStart(2, "0")}
+            </p>
+            <h4 className="mt-2 text-[17px] font-semibold tracking-[-0.025em]">
+              {clean(problem.title)}
+            </h4>
+            <p className="mt-2 text-[14px] leading-7 text-[#505050] dark:text-[#b8b8b8]">
+              {clean(problem.prompt)}
+            </p>
+          </div>
+          <ol className="px-5 py-2 sm:px-6">
+            {problem.steps.map((step, stepIndex) => (
+              <li
+                key={`${problem.title}-${stepIndex}`}
+                className="grid grid-cols-[32px_1fr] gap-3 border-b border-black/[0.07] py-4 text-[13px] leading-7 text-[#505050] last:border-b-0 dark:border-white/[0.08] dark:text-[#b8b8b8]"
+              >
+                <span className="font-[family-name:var(--font-geist-mono)] text-[10px] text-[#777] dark:text-[#888]">
+                  {String(stepIndex + 1).padStart(2, "0")}
+                </span>
+                <span className="font-[family-name:var(--font-geist-mono)]">
+                  {step}
+                </span>
+              </li>
+            ))}
+          </ol>
+          <div className="border-t border-black/[0.08] px-5 py-4 dark:border-white/[0.09] sm:px-6">
+            <p className="text-[11px] font-medium uppercase tracking-[0.12em] text-[#707070] dark:text-[#929292]">
+              Answer
+            </p>
+            <p className="mt-2 font-[family-name:var(--font-geist-mono)] text-[14px] font-medium leading-7 text-[#202020] dark:text-[#ececea]">
+              {problem.answer}
+            </p>
+          </div>
+        </article>
+      ))}
     </div>
   );
 }
@@ -193,6 +270,8 @@ export function LearnContent({ topic }: { topic: SubjectTopic }) {
             </div>
           ) : null}
           {section.dataTable ? <DataTable table={section.dataTable} /> : null}
+          {section.formulas ? <FormulaList formulas={section.formulas} /> : null}
+          {section.problems ? <PracticeProblems problems={section.problems} /> : null}
           {section.gantt ? <GanttChart gantt={section.gantt} /> : null}
           {section.flow && (
             <div className="mt-8 grid justify-items-center gap-2">
@@ -354,6 +433,8 @@ export function ReviewContent({ topic }: { topic: SubjectTopic }) {
             </div>
           ) : null}
           {section.dataTable ? <DataTable table={section.dataTable} /> : null}
+          {section.formulas ? <FormulaList formulas={section.formulas} /> : null}
+          {section.problems ? <PracticeProblems problems={section.problems} /> : null}
           {section.gantt ? <GanttChart gantt={section.gantt} /> : null}
           {section.steps ? (
             <ol className="mt-6 border-t border-black/[0.1] dark:border-white/[0.11]">

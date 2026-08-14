@@ -1,15 +1,25 @@
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { InterviewOverviewAnimation } from "@/components/interview-questions/interview-overview-animation";
+import { behavioralInterviewQuestions } from "@/content/interview-questions/behavioral";
+import { computerNetworksInterviewQuestions } from "@/content/interview-questions/computer-networks";
 import { cssInterviewQuestions } from "@/content/interview-questions/css";
+import { dbmsInterviewQuestions } from "@/content/interview-questions/dbms";
 import { htmlInterviewQuestions } from "@/content/interview-questions/html";
 import { javascriptInterviewQuestions } from "@/content/interview-questions/javascript";
+import { operatingSystemInterviewQuestions } from "@/content/interview-questions/operating-systems";
+import { oopInterviewQuestions } from "@/content/interview-questions/oop";
 import { reactInterviewQuestions } from "@/content/interview-questions/react";
 import {
   ArrowRight,
+  Boxes,
   Braces,
   Code2,
+  Cpu,
+  Database,
   FileCode2,
+  MessageSquareText,
+  Network,
   Server,
   Sparkles,
 } from "lucide-react";
@@ -32,6 +42,46 @@ type Topic = {
 };
 
 const topics: Topic[] = [
+  {
+    name: "Behavioral",
+    description:
+      "Ownership, teamwork, leadership, setbacks, and answers grounded in real experience.",
+    icon: MessageSquareText,
+    href: "/interview-questions/behavioral",
+    detail: `${behavioralInterviewQuestions.length} questions`,
+  },
+  {
+    name: "Operating Systems",
+    description:
+      "Processes, scheduling, synchronization, memory, file systems, and practical scenarios.",
+    icon: Cpu,
+    href: "/interview-questions/operating-systems",
+    detail: `${operatingSystemInterviewQuestions.length} questions`,
+  },
+  {
+    name: "Computer Networks",
+    description:
+      "Web protocols, TCP/IP, routing, addressing, security, and troubleshooting.",
+    icon: Network,
+    href: "/interview-questions/computer-networks",
+    detail: `${computerNetworksInterviewQuestions.length} questions`,
+  },
+  {
+    name: "OOP",
+    description:
+      "Objects, inheritance, polymorphism, SOLID principles, and practical design decisions.",
+    icon: Boxes,
+    href: "/interview-questions/oop",
+    detail: `${oopInterviewQuestions.length} questions`,
+  },
+  {
+    name: "DBMS",
+    description:
+      "SQL, normalization, transactions, indexing, concurrency, and practical database decisions.",
+    icon: Database,
+    href: "/interview-questions/dbms",
+    detail: `${dbmsInterviewQuestions.length} questions`,
+  },
   {
     name: "HTML",
     description: "Document structure, semantics, forms, accessibility, and browser behavior.",
@@ -106,11 +156,11 @@ export default function InterviewQuestionsPage() {
         </section>
 
         <section className="px-5 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
-          <div className="mx-auto max-w-[980px]">
+          <div className="mx-auto max-w-[1240px]">
             <h2 className="text-[clamp(1.8rem,3vw,2.7rem)] font-semibold tracking-[-0.045em]">
               Choose a topic
             </h2>
-            <div className="mt-7 grid gap-3 sm:grid-cols-2">
+            <div className="mt-7 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {topics.map((topic) => {
                 const Icon = topic.icon;
                 const content = (

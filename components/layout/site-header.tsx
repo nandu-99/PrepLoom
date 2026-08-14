@@ -10,13 +10,13 @@ import { useState, useSyncExternalStore } from "react";
 
 const navigation = [
   { label: "Subjects", href: "/subjects" },
+  { label: "Interview Questions", href: "/interview-questions" },
   { label: "Roadmaps", href: "/roadmaps" },
   { label: "WebDev", href: "/webdev" },
   { label: "DSA", href: "/dsa" },
-  { label: "Interview Questions", href: "/interview-questions" },
 ];
 
-const mobileIcons = [BookOpen, Route, Code2, Braces, MessageSquareText];
+const mobileIcons = [BookOpen, MessageSquareText, Route, Code2, Braces];
 
 function SiteThemeToggle() {
   const isDark = useSyncExternalStore(
