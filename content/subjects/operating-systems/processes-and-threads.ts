@@ -18,26 +18,26 @@ const processesDetailed: SubjectTopic = {
   tags: ["Process", "PCB", "States"],
   learn: {
     opening:
-      "A Process is a running instance of a program. It includes the program, memory, current state, and resources needed to run.",
+      "A Process is an executing instance of a program that the Operating System manages. It includes an address space, execution state, and resources, even while it is Ready or Waiting rather than currently using a CPU.",
     sections: [
       {
         title: "Overview",
         paragraphs: [
-          "In simple terms, a program is passive and stored on disk, while a process is active and running in memory.",
+          "In simple terms, a program is passive code and data, while a process is the OS-managed execution instance created from that program.",
           "When you open an application, the Operating System loads the program and creates a process for it.",
           "Running the same calculator program twice creates two separate processes. Each process has its own PID, memory, and current state.",
         ],
         points: [
           "Program = Passive (stored on disk)",
-          "Process = Active (running in memory)",
+          "Process = Active execution instance with state and resources",
         ],
         visual: {
           src: "/notes/operating-systems/program-to-process-dark.png",
-          alt: "Diagram showing the Operating System loading and executing a passive program from disk to create an active process in memory.",
+          alt: "Diagram showing the Operating System creating an OS-managed execution instance with an address space, CPU state, and resources from passive program code and data.",
           width: 1536,
           height: 1024,
           caption:
-            "The Operating System loads a stored program and creates the memory and execution state of a running process.",
+            "The Operating System creates a process with an address space, execution state, and resources from a stored program.",
         },
       },
       {
@@ -171,10 +171,26 @@ const processesDetailed: SubjectTopic = {
         dataTable: {
           headers: ["IPC Method", "How It Works", "Common Use"],
           rows: [
-            ["Pipe", "Moves a stream of data between processes", "Parent-child commands and shell pipelines"],
-            ["Message Queue", "Sends separate messages through an OS-managed queue", "Structured task or event communication"],
-            ["Shared Memory", "Maps the same memory area into multiple processes", "Fast exchange of large amounts of data"],
-            ["Socket", "Sends data between processes on one computer or across a network", "Client-server communication"],
+            [
+              "Pipe",
+              "Moves a stream of data between processes",
+              "Parent-child commands and shell pipelines",
+            ],
+            [
+              "Message Queue",
+              "Sends separate messages through an OS-managed queue",
+              "Structured task or event communication",
+            ],
+            [
+              "Shared Memory",
+              "Maps the same memory area into multiple processes",
+              "Fast exchange of large amounts of data",
+            ],
+            [
+              "Socket",
+              "Sends data between processes on one computer or across a network",
+              "Client-server communication",
+            ],
           ],
         },
         points: [
@@ -238,20 +254,20 @@ const processesDetailed: SubjectTopic = {
       body: "Opening the calculator twice creates two separate processes. Both use the same program file, but each process has its own PID, virtual memory, current state, and resources.",
     },
     misconception:
-      "A process is not only program code. It is a running instance with memory, CPU information, open resources, and an OS record called the PCB.",
+      "A process is not only program code. It is an OS-managed execution instance with an address space, CPU state, open resources, and an OS record called the PCB.",
   },
   revise: {
     definitionLabel: "Overview",
     compactDefinition: true,
     definition:
-      "A Process is a running instance of a program. It has its own virtual memory, current state, CPU information, and open resources.",
+      "A Process is an OS-managed execution instance of a program. It has its own virtual memory, current state, CPU information, and open resources.",
     sections: [
       {
         title: "Program vs Process",
         table: {
           headers: ["Program", "Process"],
           rows: [
-            ["Stored on disk", "Running in memory"],
+            ["Passive code and data", "OS-managed execution instance"],
             ["Passive", "Active"],
             ["Has no current CPU state", "Has a current CPU state"],
             ["One program file", "Can create many separate processes"],
@@ -303,7 +319,7 @@ const processesDetailed: SubjectTopic = {
     ],
     essentialsStyle: "plain",
     essentials: [
-      "Process = A running instance of a program.",
+      "Process = An OS-managed execution instance of a program.",
       "PID = A unique number for a process.",
       "Ready waits for CPU time. Waiting waits for an event.",
       "PCB = The OS record that stores process information.",
@@ -315,13 +331,13 @@ const processesDetailed: SubjectTopic = {
     followUp: "",
   },
   lastMinute: {
-    definition: "A Process is a running instance of a program.",
+    definition: "A Process is an OS-managed execution instance of a program.",
     sections: [
       {
         title: "Program vs Process",
         points: [
           "Program: Stored on disk and passive.",
-          "Process: Running in memory and active.",
+          "Process: Active execution instance with state and resources.",
         ],
       },
       {
@@ -368,7 +384,7 @@ const processesDetailed: SubjectTopic = {
     ],
     cuesLabel: "Key Points",
     cues: [
-      "Process = A running instance of a program.",
+      "Process = An OS-managed execution instance of a program.",
       "Ready waits for CPU time. Waiting waits for an event.",
       "PCB stores the PID, State, Program Counter, Registers, Memory Information, and Open Files.",
       "Zombie = Finished but not collected.",
@@ -376,8 +392,7 @@ const processesDetailed: SubjectTopic = {
       "Context switches let many processes share CPU time.",
     ],
     memoryLineLabel: "Remember This",
-    memoryLine:
-      "Process = Running Program + Memory + CPU State + Resources.",
+    memoryLine: "Process = Running Program + Memory + CPU State + Resources.",
     memoryLineAtEnd: true,
     trap: "",
   },
@@ -409,10 +424,7 @@ const threadsDetailed: SubjectTopic = {
           "Threads in the same process share memory and resources. Each thread also keeps its own execution information, so its scheduler can pause and continue it separately.",
           "The Operating System directly schedules Kernel-Level Threads. A runtime or thread library may schedule User-Level Threads before mapping them to Kernel-Level Threads.",
         ],
-        points: [
-          "Process = Container",
-          "Thread = Worker inside the process",
-        ],
+        points: ["Process = Container", "Thread = Worker inside the process"],
       },
       {
         title: "Why it Matters",
@@ -469,8 +481,14 @@ const threadsDetailed: SubjectTopic = {
           rows: [
             ["Has its own virtual memory", "Shares the process memory"],
             ["Has a Process ID (PID)", "Has a Thread ID (TID)"],
-            ["Usually takes more work to create", "Usually takes less work to create"],
-            ["Uses IPC to communicate", "Can communicate through shared memory"],
+            [
+              "Usually takes more work to create",
+              "Usually takes less work to create",
+            ],
+            [
+              "Uses IPC to communicate",
+              "Can communicate through shared memory",
+            ],
             [
               "A failure is usually limited to that process",
               "A serious thread error can affect the whole process",
@@ -529,7 +547,10 @@ const threadsDetailed: SubjectTopic = {
           headers: ["User-Level Threads", "Kernel-Level Threads"],
           rows: [
             ["Managed in user space", "Managed by the OS kernel"],
-            ["Can be faster to create and switch", "Usually needs more OS work"],
+            [
+              "Can be faster to create and switch",
+              "Usually needs more OS work",
+            ],
             ["The runtime schedules them", "The OS schedules them"],
             [
               "Parallelism depends on their mapping",
@@ -726,8 +747,7 @@ const threadsDetailed: SubjectTopic = {
     followUp: "",
   },
   lastMinute: {
-    definition:
-      "A Thread is the smallest unit of execution inside a process.",
+    definition: "A Thread is the smallest unit of execution inside a process.",
     sections: [
       {
         title: "Shared by Threads",
@@ -774,7 +794,4 @@ const threadsDetailed: SubjectTopic = {
   },
 };
 
-export {
-  processesDetailed,
-  threadsDetailed,
-};
+export { processesDetailed, threadsDetailed };

@@ -21,6 +21,19 @@ export type SubjectDataTable = {
   rows: string[][];
 };
 
+export type SubjectFormula = {
+  label?: string;
+  expression: string;
+  note?: string;
+};
+
+export type SubjectProblem = {
+  title: string;
+  prompt: string;
+  steps: string[];
+  answer: string;
+};
+
 export type SubjectTopic = {
   slug: string;
   title: string;
@@ -42,6 +55,8 @@ export type SubjectTopic = {
       visual?: SubjectVisual;
       gantt?: SubjectGantt;
       dataTable?: SubjectDataTable;
+      formulas?: SubjectFormula[];
+      problems?: SubjectProblem[];
     }[];
     mechanism: {
       title: string;
@@ -70,6 +85,8 @@ export type SubjectTopic = {
       visual?: SubjectVisual;
       gantt?: SubjectGantt;
       dataTable?: SubjectDataTable;
+      formulas?: SubjectFormula[];
+      problems?: SubjectProblem[];
     }[];
     essentialsStyle?: "numbered" | "plain";
     essentials: string[];

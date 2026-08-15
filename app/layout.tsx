@@ -2,7 +2,9 @@ import type { Metadata, Viewport } from "next";
 import { CommandSearchProvider } from "@/components/command-search-provider";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { Geist, Geist_Mono, Inter } from "next/font/google";
-import { isProductionEnvironment } from "@/lib/env";
+import { isAnalyticsEnabled, isProductionEnvironment } from "@/lib/env";
+import { buildSearchCatalog } from "@/lib/search-index";
+import "katex/dist/katex.min.css";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -81,6 +83,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const searchCatalog = buildSearchCatalog();
+
   return (
     <html
       lang="en"
@@ -95,11 +99,11 @@ export default function RootLayout({
         />
       </head>
       <body className="flex min-h-full flex-col">
-        <CommandSearchProvider>{children}</CommandSearchProvider>
+        <CommandSearchProvider catalog={searchCatalog}>
+          {children}
+        </CommandSearchProvider>
       </body>
-      {isProductionEnvironment ? (
-        <GoogleAnalytics gaId="G-EL58LD1HMW" />
-      ) : null}
+      {isAnalyticsEnabled ? <GoogleAnalytics gaId="G-EL58LD1HMW" /> : null}
     </html>
   );
 }

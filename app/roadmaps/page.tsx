@@ -52,7 +52,11 @@ export default function RoadmapsPage() {
                 className="mt-7 inline-flex h-11 items-center gap-2 rounded-[10px] bg-[#151515] px-4 text-[13px] font-medium text-white transition-[transform,background-color] hover:bg-black active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/40 focus-visible:ring-offset-2 focus-visible:ring-offset-[#f7f7f5] dark:border dark:border-white/[0.14] dark:bg-[#242424] dark:text-[#f3f3f1] dark:hover:bg-[#2b2b2b] dark:focus-visible:ring-white/50 dark:focus-visible:ring-offset-[#0a0a0a]"
               >
                 Choose a roadmap
-                <ArrowRight className="size-4" strokeWidth={1.7} aria-hidden="true" />
+                <ArrowRight
+                  className="size-4"
+                  strokeWidth={1.7}
+                  aria-hidden="true"
+                />
               </a>
             </div>
 
@@ -66,7 +70,11 @@ export default function RoadmapsPage() {
                     {String(index + 1).padStart(2, "0")}
                   </span>
                   <span className="text-[13px] font-medium">{path}</span>
-                  <Route className="size-4 text-[#777] dark:text-[#858585]" strokeWidth={1.5} aria-hidden="true" />
+                  <Route
+                    className="size-4 text-[#777] dark:text-[#858585]"
+                    strokeWidth={1.5}
+                    aria-hidden="true"
+                  />
                 </div>
               ))}
             </div>
@@ -85,7 +93,11 @@ export default function RoadmapsPage() {
         <section className="px-5 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-28">
           <div className="mx-auto grid max-w-[1240px] gap-8 rounded-[20px] border border-black/[0.1] bg-[#ededeb] p-6 dark:border-white/[0.11] dark:bg-[#121212] sm:p-10 lg:grid-cols-[1fr_auto] lg:items-end lg:p-14">
             <div className="max-w-3xl">
-              <BookOpen className="size-6 text-[#606060] dark:text-[#a8a8a8]" strokeWidth={1.55} aria-hidden="true" />
+              <BookOpen
+                className="size-6 text-[#606060] dark:text-[#a8a8a8]"
+                strokeWidth={1.55}
+                aria-hidden="true"
+              />
               <h2 className="mt-6 text-balance text-[clamp(2.3rem,4.2vw,4.2rem)] font-semibold leading-[0.96] tracking-[-0.057em]">
                 Not sure where to begin?
               </h2>
@@ -99,7 +111,11 @@ export default function RoadmapsPage() {
               className="inline-flex h-12 items-center justify-center gap-2 rounded-[10px] bg-[#151515] px-5 text-[14px] font-medium text-white transition-[transform,background-color] hover:bg-black active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/40 focus-visible:ring-offset-2 focus-visible:ring-offset-[#ededeb] dark:border dark:border-white/[0.14] dark:bg-[#242424] dark:text-[#f3f3f1] dark:hover:bg-[#2b2b2b] dark:focus-visible:ring-white/50 dark:focus-visible:ring-offset-[#121212]"
             >
               Start with Operating Systems
-              <ArrowRight className="size-4" strokeWidth={1.7} aria-hidden="true" />
+              <ArrowRight
+                className="size-4"
+                strokeWidth={1.7}
+                aria-hidden="true"
+              />
             </Link>
           </div>
         </section>

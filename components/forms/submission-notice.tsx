@@ -42,7 +42,10 @@ export function SubmissionNotice({
       block: "nearest",
     });
 
-    const timeout = window.setTimeout(() => onDismissRef.current(), noticeDuration);
+    const timeout = window.setTimeout(
+      () => onDismissRef.current(),
+      noticeDuration,
+    );
 
     return () => window.clearTimeout(timeout);
   }, [isVisible, reduceMotion, status]);
@@ -58,8 +61,13 @@ export function SubmissionNotice({
           tabIndex={-1}
           initial={reduceMotion ? false : { opacity: 0, y: 12, scale: 0.985 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
-          exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: -6, scale: 0.99 }}
-          transition={{ duration: reduceMotion ? 0 : 0.32, ease: [0.16, 1, 0.3, 1] }}
+          exit={
+            reduceMotion ? { opacity: 0 } : { opacity: 0, y: -6, scale: 0.99 }
+          }
+          transition={{
+            duration: reduceMotion ? 0 : 0.32,
+            ease: [0.16, 1, 0.3, 1],
+          }}
           className="grid grid-cols-[44px_1fr] gap-4 rounded-[12px] border border-black/[0.14] bg-black/[0.035] p-4 text-[#151515] shadow-[0_12px_32px_rgba(0,0,0,0.06)] outline-none dark:border-white/[0.14] dark:bg-white/[0.055] dark:text-[#f3f3f1] dark:shadow-[0_14px_36px_rgba(0,0,0,0.22)] sm:p-5"
         >
           <motion.div
@@ -73,9 +81,17 @@ export function SubmissionNotice({
             className="flex size-11 items-center justify-center rounded-[10px] bg-[#151515] text-white dark:bg-[#ededeb] dark:text-[#151515]"
           >
             {isSuccess ? (
-              <CircleCheck className="size-5" strokeWidth={2} aria-hidden="true" />
+              <CircleCheck
+                className="size-5"
+                strokeWidth={2}
+                aria-hidden="true"
+              />
             ) : (
-              <CircleAlert className="size-5" strokeWidth={2} aria-hidden="true" />
+              <CircleAlert
+                className="size-5"
+                strokeWidth={2}
+                aria-hidden="true"
+              />
             )}
           </motion.div>
 

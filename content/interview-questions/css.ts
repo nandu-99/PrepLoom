@@ -6,7 +6,7 @@ export const cssInterviewQuestions: InterviewQuestion[] = [
     question: "What is CSS, and how can it be applied to HTML?",
     answer:
       "CSS stands for Cascading Style Sheets. It controls the presentation and layout of structured documents. Styles can be written in a style attribute, inside a <style> element, or in an external stylesheet. External stylesheets are usually preferred for reuse and maintenance.",
-    code: "<link rel=\"stylesheet\" href=\"styles.css\">\n\n/* styles.css */\np {\n  color: navy;\n}",
+    code: '<link rel="stylesheet" href="styles.css">\n\n/* styles.css */\np {\n  color: navy;\n}',
   },
   {
     id: "cascade-and-inheritance",
@@ -19,7 +19,7 @@ export const cssInterviewQuestions: InterviewQuestion[] = [
     id: "specificity",
     question: "How does CSS specificity work?",
     answer:
-      "Specificity compares selectors only after higher cascade rules such as origin, importance, and layer order are resolved. IDs have more weight than classes, attributes, and pseudo-classes, which have more weight than type selectors and pseudo-elements. :where() always adds zero specificity. If specificity ties, the later declaration wins.",
+      "Specificity compares selectors only after higher cascade rules such as origin, importance, and layer order are resolved. IDs have more weight than classes, attributes, and pseudo-classes, which have more weight than type selectors and pseudo-elements. :where() always adds zero specificity. If specificity ties, scoped declarations are compared by scoping proximity. Source order decides only when the declarations remain tied after that step.",
     code: ".card p { color: navy; }\n#summary { color: maroon; }\n:where(.panel) p { margin: 0; }",
     note: "Avoid increasing specificity to fix every conflict. Prefer clear source order, small selectors, and cascade layers where useful.",
   },
@@ -53,28 +53,32 @@ export const cssInterviewQuestions: InterviewQuestion[] = [
   },
   {
     id: "hiding-elements",
-    question: "How do display: none, visibility: hidden, and opacity: 0 differ?",
+    question:
+      "How do display: none, visibility: hidden, and opacity: 0 differ?",
     answer:
       "display: none removes the element's box from layout. visibility: hidden keeps its layout space but hides it and prevents interaction. opacity: 0 makes the element transparent while it still takes space and can remain interactive and exposed to assistive technology unless handled separately.",
     code: ".removed { display: none; }\n.hidden { visibility: hidden; }\n.transparent { opacity: 0; }",
   },
   {
     id: "position-values",
-    question: "How do static, relative, absolute, fixed, and sticky positioning differ?",
+    question:
+      "How do static, relative, absolute, fixed, and sticky positioning differ?",
     answer:
       "static uses normal layout. relative keeps its original space but can be visually offset. absolute leaves normal flow and uses a containing block. fixed usually attaches to the viewport. sticky behaves like relative until a scroll boundary and inset cause it to stay in view within its scroll container.",
     code: ".toolbar {\n  position: sticky;\n  top: 0;\n}",
   },
   {
     id: "absolute-containing-block",
-    question: "What determines the containing block of an absolutely positioned element?",
+    question:
+      "What determines the containing block of an absolutely positioned element?",
     answer:
       "An absolutely positioned element is placed relative to its containing block. This is commonly established by the nearest ancestor whose position is not static, although transforms and some other properties can also establish one. If no ancestor qualifies, the initial containing block is used.",
     code: ".card { position: relative; }\n.badge {\n  position: absolute;\n  inset: 8px 8px auto auto;\n}",
   },
   {
     id: "z-index-stacking-context",
-    question: "Why does a large z-index sometimes not bring an element to the front?",
+    question:
+      "Why does a large z-index sometimes not bring an element to the front?",
     answer:
       "z-index orders boxes inside a stacking context. A child cannot escape its parent's stacking context, so a very large value can still appear behind an element in another context. Positioning with z-index, opacity below 1, transforms, and several other properties can create stacking contexts.",
     code: ".modal-layer {\n  position: fixed;\n  z-index: 20;\n}",
@@ -88,7 +92,8 @@ export const cssInterviewQuestions: InterviewQuestion[] = [
   },
   {
     id: "min-max-sizing",
-    question: "How do min-width, max-width, min-height, and max-height affect sizing?",
+    question:
+      "How do min-width, max-width, min-height, and max-height affect sizing?",
     answer:
       "The min properties set lower bounds and the max properties set upper bounds on the used size. They are useful for flexible layouts because an element can grow or shrink within limits instead of being locked to one fixed size.",
     code: ".content {\n  width: 100%;\n  max-width: 70rem;\n  min-height: 20rem;\n}",
@@ -116,10 +121,11 @@ export const cssInterviewQuestions: InterviewQuestion[] = [
   },
   {
     id: "pseudo-class-vs-element",
-    question: "What is the difference between a pseudo-class and a pseudo-element?",
+    question:
+      "What is the difference between a pseudo-class and a pseudo-element?",
     answer:
       "A pseudo-class selects an existing element in a state or relationship, such as :hover, :focus-visible, or :nth-child(). A pseudo-element targets a generated or conceptual part of an element, such as ::before, ::after, or ::first-line.",
-    code: "button:focus-visible { outline: 2px solid currentColor; }\n.note::before { content: \"Note: \"; }",
+    code: 'button:focus-visible { outline: 2px solid currentColor; }\n.note::before { content: "Note: "; }',
   },
   {
     id: "nth-child-vs-type",
@@ -158,7 +164,8 @@ export const cssInterviewQuestions: InterviewQuestion[] = [
   },
   {
     id: "responsive-grid",
-    question: "How can Grid create responsive columns without many media queries?",
+    question:
+      "How can Grid create responsive columns without many media queries?",
     answer:
       "repeat(), auto-fit or auto-fill, and minmax() can let the browser create as many columns as fit. auto-fit collapses empty tracks, while auto-fill keeps the track slots. Each item can keep a useful minimum and share remaining space.",
     code: ".cards {\n  display: grid;\n  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));\n  gap: 1rem;\n}",
@@ -172,21 +179,24 @@ export const cssInterviewQuestions: InterviewQuestion[] = [
   },
   {
     id: "media-vs-container-queries",
-    question: "What is the difference between media queries and container queries?",
+    question:
+      "What is the difference between media queries and container queries?",
     answer:
       "Media queries respond to the user agent or viewport, including width and preferences such as reduced motion. Container queries respond to an ancestor container's size or styles, so a reusable component can adapt to the space where it is placed.",
     code: ".card-shell { container-type: inline-size; }\n@container (width > 36rem) {\n  .card { grid-template-columns: 12rem 1fr; }\n}",
   },
   {
     id: "transition-vs-animation",
-    question: "What is the difference between a CSS transition and an animation?",
+    question:
+      "What is the difference between a CSS transition and an animation?",
     answer:
       "A transition interpolates a property when its value changes and needs a before and after state. An animation uses @keyframes and can run through several stages without a state change. Prefer transform and opacity for smooth motion when they achieve the required effect.",
     code: ".button { transition: transform 180ms ease; }\n.button:hover { transform: translateY(-2px); }",
   },
   {
     id: "keyframes-reduced-motion",
-    question: "How do you create a keyframe animation while respecting reduced-motion preferences?",
+    question:
+      "How do you create a keyframe animation while respecting reduced-motion preferences?",
     answer:
       "Define stages with @keyframes and apply them with animation properties. Put non-essential motion inside a prefers-reduced-motion: no-preference query, or provide a reduced version for users who request less motion.",
     code: "@media (prefers-reduced-motion: no-preference) {\n  .notice { animation: enter 300ms ease-out; }\n}\n@keyframes enter {\n  from { opacity: 0; transform: translateY(8px); }\n  to { opacity: 1; transform: translateY(0); }\n}",
@@ -207,7 +217,8 @@ export const cssInterviewQuestions: InterviewQuestion[] = [
   },
   {
     id: "logical-properties",
-    question: "Why use logical properties such as margin-inline and padding-block?",
+    question:
+      "Why use logical properties such as margin-inline and padding-block?",
     answer:
       "Logical properties describe directions using the writing mode instead of fixed physical sides. inline maps to the text direction and block maps to the direction in which lines are stacked. This makes layouts work more naturally across left-to-right, right-to-left, and vertical writing modes.",
     code: ".card {\n  margin-inline: auto;\n  padding-block: 1rem;\n}",

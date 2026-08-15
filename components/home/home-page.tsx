@@ -1,3 +1,4 @@
+import { TrackedLink } from "@/components/analytics/tracked-link";
 import { ProductMap } from "@/components/home/product-map";
 import { HeroSearchTrigger } from "@/components/hero-search-trigger";
 import { TopicFocusIllustration } from "@/components/home/topic-focus-illustration";
@@ -7,7 +8,6 @@ import { GridPattern } from "@/components/ui/grid-pattern";
 import type { Metadata } from "next";
 import { ArrowRight, Check, Command } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "PrepLoom",
@@ -16,10 +16,19 @@ export const metadata: Metadata = {
 };
 
 const popularTopics = [
-  ["Deadlocks", "/subjects/operating-systems#workspace"],
-  ["Process vs Thread", "/subjects/operating-systems#workspace"],
-  ["CPU Scheduling", "/subjects/operating-systems#workspace"],
-  ["Paging", "/subjects/operating-systems#workspace"],
+  [
+    "Deadlocks",
+    "/subjects/operating-systems?topic=deadlock-fundamentals#reading-preview-note",
+  ],
+  ["Polymorphism", "/subjects/oop?topic=polymorphism#reading-preview-note"],
+  [
+    "Normalization",
+    "/subjects/dbms?topic=normalization-and-anomalies#reading-preview-note",
+  ],
+  [
+    "TCP/IP Models",
+    "/subjects/computer-networks?topic=osi-and-tcp-ip-models#reading-preview-note",
+  ],
 ];
 
 const subjects = [
@@ -81,7 +90,9 @@ export default function HomePage() {
               <div className="flex items-center text-[10px] font-medium uppercase tracking-[0.15em] text-[#606060] dark:text-[#a8a8a8] sm:gap-3 sm:text-[11px] sm:tracking-[0.18em]">
                 <span className="hidden h-px w-7 bg-black/25 dark:bg-white/25 sm:block" />
                 <span className="sm:hidden">Technical interview prep</span>
-                <span className="hidden sm:inline">Built for technical interviews</span>
+                <span className="hidden sm:inline">
+                  Built for technical interviews
+                </span>
               </div>
 
               <h1 className="mt-5 max-w-[700px] text-balance text-[clamp(2.3rem,10.8vw,4.55rem)] font-semibold leading-[1.01] tracking-[-0.05em] sm:mt-7 sm:text-[clamp(2.75rem,5vw,4.55rem)] sm:leading-[0.99] sm:tracking-[-0.055em]">
@@ -95,7 +106,8 @@ export default function HomePage() {
 
               <p className="mt-4 max-w-[620px] text-pretty text-[15px] leading-6 text-[#555] dark:text-[#b3b3b3] sm:mt-6 sm:text-[17px] sm:leading-8">
                 <span className="sm:hidden">
-                  Study core concepts with notes, roadmaps, quizzes, interview questions, and trusted resources.
+                  Study core concepts with notes, roadmaps, quizzes, interview
+                  questions, and trusted resources.
                 </span>
                 <span className="hidden sm:inline">
                   Master core concepts with structured notes, curated roadmaps,
@@ -109,20 +121,30 @@ export default function HomePage() {
               </div>
 
               <div className="mt-3 grid grid-cols-[minmax(0,1.25fr)_minmax(0,0.75fr)] items-center gap-2.5 sm:mt-4 sm:flex sm:items-center">
-                <Link
+                <TrackedLink
                   href="/subjects"
+                  eventParameters={{
+                    link_text: "Explore subjects",
+                    destination: "/subjects",
+                    ui_location: "homepage_hero",
+                  }}
                   className="inline-flex h-10 min-w-0 items-center justify-center gap-2 whitespace-nowrap rounded-[10px] bg-[#151515] px-3 text-[13px] font-medium text-white transition-[opacity,transform] hover:-translate-y-px hover:opacity-85 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/40 focus-visible:ring-offset-2 focus-visible:ring-offset-[#f7f7f5] dark:border dark:border-white/[0.14] dark:bg-[#242424] dark:text-[#f3f3f1] dark:hover:bg-[#2b2b2b] dark:focus-visible:ring-white/50 dark:focus-visible:ring-offset-[#0a0a0a] sm:px-4 sm:text-sm"
                 >
                   Explore subjects
                   <ArrowRight aria-hidden="true" className="size-4" />
-                </Link>
-                <Link
+                </TrackedLink>
+                <TrackedLink
                   href="/roadmaps"
+                  eventParameters={{
+                    link_text: "Explore roadmaps",
+                    destination: "/roadmaps",
+                    ui_location: "homepage_hero",
+                  }}
                   className="inline-flex h-10 min-w-0 items-center justify-center whitespace-nowrap rounded-[10px] px-2 text-[13px] font-medium text-[#606060] transition-colors hover:bg-black/[0.04] hover:text-[#151515] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/40 dark:text-[#a8a8a8] dark:hover:bg-white/[0.06] dark:hover:text-white dark:focus-visible:ring-white/50 sm:px-4 sm:text-sm"
                 >
                   <span className="sm:hidden">Roadmaps</span>
                   <span className="hidden sm:inline">Explore roadmaps</span>
-                </Link>
+                </TrackedLink>
               </div>
 
               <div className="-mx-5 mt-5 overflow-x-auto px-5 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:mt-7 sm:overflow-visible sm:px-0 sm:pb-0">
@@ -130,14 +152,20 @@ export default function HomePage() {
                   <span className="mr-1 shrink-0 font-medium text-[#151515] dark:text-[#f3f3f1]">
                     Popular
                   </span>
-                  {popularTopics.map(([label, href]) => (
-                    <Link
+                  {popularTopics.map(([label, href], index) => (
+                    <TrackedLink
                       key={label}
                       href={href}
-                      className="shrink-0 rounded-full border border-black/[0.11] bg-black/[0.02] px-3 py-1.5 transition-colors hover:border-black/25 hover:bg-black/[0.045] hover:text-[#151515] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/40 dark:border-white/[0.12] dark:bg-white/[0.035] dark:hover:border-white/25 dark:hover:bg-white/[0.07] dark:hover:text-white dark:focus-visible:ring-white/50"
+                      eventParameters={{
+                        link_text: label,
+                        destination: href,
+                        ui_location: "homepage_popular_topics",
+                        content_type: "topic",
+                      }}
+                      className={`${index === 3 ? "hidden sm:inline-flex" : "shrink-0"} rounded-full border border-black/[0.11] bg-black/[0.02] px-3 py-1.5 transition-colors hover:border-black/25 hover:bg-black/[0.045] hover:text-[#151515] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/40 dark:border-white/[0.12] dark:bg-white/[0.035] dark:hover:border-white/25 dark:hover:bg-white/[0.07] dark:hover:text-white dark:focus-visible:ring-white/50`}
                     >
                       {label}
-                    </Link>
+                    </TrackedLink>
                   ))}
                 </div>
               </div>
@@ -160,13 +188,22 @@ export default function HomePage() {
                 Start with computer science basics. Then move to system design
                 and other topics when you are ready.
               </p>
-              <Link
+              <TrackedLink
                 href="/subjects"
+                eventParameters={{
+                  link_text: "Browse the curriculum",
+                  destination: "/subjects",
+                  ui_location: "homepage_curriculum",
+                }}
                 className="mt-8 inline-flex items-center gap-2 text-[14px] font-medium underline decoration-black/25 underline-offset-4 transition-colors hover:decoration-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/40 dark:decoration-white/30 dark:hover:decoration-white dark:focus-visible:ring-white/50"
               >
                 Browse the curriculum
-                <ArrowRight className="size-4" strokeWidth={1.7} aria-hidden="true" />
-              </Link>
+                <ArrowRight
+                  className="size-4"
+                  strokeWidth={1.7}
+                  aria-hidden="true"
+                />
+              </TrackedLink>
             </div>
 
             <div className="border-t border-black/[0.12] dark:border-white/[0.13]">
@@ -186,7 +223,11 @@ export default function HomePage() {
                       {description}
                     </p>
                   </div>
-                  <Check className="size-4 text-[#777] dark:text-[#858585]" strokeWidth={1.6} aria-hidden="true" />
+                  <Check
+                    className="size-4 text-[#777] dark:text-[#858585]"
+                    strokeWidth={1.6}
+                    aria-hidden="true"
+                  />
                 </div>
               ))}
             </div>
@@ -208,7 +249,6 @@ export default function HomePage() {
             <div className="mt-6">
               <ProductMap />
             </div>
-
           </div>
         </section>
 
@@ -216,7 +256,11 @@ export default function HomePage() {
           <div className="mx-auto max-w-[1240px]">
             <div className="relative grid overflow-hidden rounded-[20px] border border-black/[0.1] bg-[#ededeb] px-6 py-16 dark:border-white/[0.11] dark:bg-[#121212] sm:px-10 sm:py-20 lg:grid-cols-[minmax(0,0.9fr)_minmax(380px,1.1fr)] lg:items-center lg:gap-16 lg:px-16 lg:py-24">
               <div className="relative max-w-3xl">
-                <Command className="size-6 text-[#606060] dark:text-[#a8a8a8]" strokeWidth={1.55} aria-hidden="true" />
+                <Command
+                  className="size-6 text-[#606060] dark:text-[#a8a8a8]"
+                  strokeWidth={1.55}
+                  aria-hidden="true"
+                />
                 <h2 className="mt-7 text-balance text-[clamp(2.6rem,5vw,5.2rem)] font-semibold leading-[0.94] tracking-[-0.067em]">
                   Start with one topic today.
                 </h2>
@@ -224,13 +268,23 @@ export default function HomePage() {
                   Learn the full idea first. Then use the shorter notes when
                   your interview is close.
                 </p>
-                <Link
+                <TrackedLink
                   href="/subjects/operating-systems"
+                  eventParameters={{
+                    link_text: "Open Operating Systems",
+                    destination: "/subjects/operating-systems",
+                    ui_location: "homepage_final_cta",
+                    content_type: "subject",
+                  }}
                   className="mt-8 inline-flex h-12 items-center gap-2 rounded-[10px] bg-[#151515] px-5 text-[14px] font-medium text-white transition-[transform,background-color] hover:bg-black active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/40 focus-visible:ring-offset-2 focus-visible:ring-offset-[#ededeb] dark:border dark:border-white/[0.14] dark:bg-[#242424] dark:text-[#f3f3f1] dark:hover:bg-[#2b2b2b] dark:focus-visible:ring-white/50 dark:focus-visible:ring-offset-[#121212]"
                 >
                   Open Operating Systems
-                  <ArrowRight className="size-4" strokeWidth={1.7} aria-hidden="true" />
-                </Link>
+                  <ArrowRight
+                    className="size-4"
+                    strokeWidth={1.7}
+                    aria-hidden="true"
+                  />
+                </TrackedLink>
               </div>
               <div className="mt-14 border-t border-black/[0.1] pt-10 dark:border-white/[0.11] lg:mt-0 lg:border-l lg:border-t-0 lg:pl-14 lg:pt-0">
                 <TopicFocusIllustration />

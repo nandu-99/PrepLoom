@@ -1,0 +1,1365 @@
+import type { SubjectTopic } from "@/lib/subject-content";
+
+export const processorExecutionModels: SubjectTopic = {
+  slug: "single-cycle-and-multi-cycle-processors",
+  title: "Single-Cycle and Multi-Cycle Processors",
+  description:
+    "Compare two basic processor designs using latency, CPI, clock period, and complete CPU time.",
+  readTime: "38 min",
+  difficulty: "Intermediate",
+  tags: ["Datapath", "CPI", "CPU Time"],
+  learn: {
+    opening:
+      "A processor may finish every instruction in one long clock cycle, or divide the work across several shorter cycles. The best design is decided by total execution time, not CPI alone.",
+    sections: [
+      {
+        title: "Two Ways to Execute an Instruction",
+        paragraphs: [
+          "In a single-cycle processor, fetch, decode, execute, memory access, and register write all fit inside one clock cycle. CPI is 1, but the clock must be long enough for the slowest instruction.",
+          "In a multi-cycle processor, the same work is divided into shorter steps. Different instructions can use different numbers of cycles, and hardware such as the ALU can be reused in different cycles.",
+        ],
+        visual: {
+          src: "/notes/modern-computer-architecture/cpu-execution-models.svg",
+          alt: "Timeline showing sequential non-overlapping instructions in single-cycle and multi-cycle processors.",
+          width: 1536,
+          height: 1024,
+          caption:
+            "Without pipelining, the next instruction starts only after the current instruction finishes.",
+        },
+      },
+      {
+        title: "Correct Performance Comparison",
+        paragraphs: [
+          "CPI by itself is not speed. A design with a larger CPI can be faster when its clock cycle is much shorter.",
+          "Average CPI is a weighted average when instruction classes take different cycle counts.",
+        ],
+        formulas: [
+          {
+            label: "CPU time",
+            expression:
+              "CPU time = Instruction count × Average CPI × Clock cycle time",
+          },
+          {
+            label: "Average CPI",
+            expression: "Average CPI = Σ(Fractionᵢ × CPIᵢ)",
+          },
+          {
+            label: "Speedup",
+            expression: "Speedup = Old execution time ÷ New execution time",
+          },
+        ],
+        dataTable: {
+          headers: ["Feature", "Single-cycle", "Multi-cycle"],
+          rows: [
+            ["CPI", "Always 1", "Usually greater than 1"],
+            ["Clock", "Long", "Shorter"],
+            [
+              "Hardware",
+              "May need separate resources",
+              "Resources can be reused",
+            ],
+            ["Control", "Simpler", "Finite-state, more complex"],
+          ],
+        },
+      },
+      {
+        title: "Latency, Throughput, and Instruction Steps",
+        paragraphs: [
+          "Latency is the time from starting one instruction until it finishes. Throughput is the number of instructions completed per unit time. A shorter clock can improve throughput even when an instruction needs several cycles.",
+          "A multi-cycle control unit is commonly a finite-state machine. Its current state and instruction type decide which datapath action happens in the next cycle. The ALU can be reused for PC increment, address calculation, arithmetic, and branch comparison.",
+        ],
+        dataTable: {
+          headers: ["Instruction type", "Typical multi-cycle path"],
+          rows: [
+            ["Load", "IF → ID → EX → MEM → WB"],
+            ["Store", "IF → ID → EX → MEM"],
+            ["ALU instruction", "IF → ID → EX → WB"],
+            ["Branch", "IF → ID → EX"],
+          ],
+        },
+        formulas: [
+          {
+            label: "Instruction latency",
+            expression: "Latency = CPI × Clock cycle time",
+          },
+          {
+            label: "Instruction throughput",
+            expression: "Throughput = Completed instructions ÷ Time",
+          },
+        ],
+      },
+      {
+        title: "Worked Problems",
+        paragraphs: [],
+        problems: [
+          {
+            title: "Compare time per instruction",
+            prompt:
+              "A single-cycle CPU has a 100 ns cycle. A multi-cycle CPU has a 25 ns cycle and average CPI 3.2. Which is faster?",
+            steps: [
+              "Single-cycle time = 1 × 100 ns = 100 ns.",
+              "Multi-cycle time = 3.2 × 25 ns = 80 ns.",
+              "Speedup = 100 ÷ 80 = 1.25.",
+            ],
+            answer: "The multi-cycle CPU is 1.25 times faster.",
+          },
+          {
+            title: "Find average CPI",
+            prompt:
+              "Loads are 30% at CPI 5, stores 10% at CPI 4, and other instructions 60% at CPI 3. Find average CPI.",
+            steps: [
+              "Average CPI = 0.30 × 5 + 0.10 × 4 + 0.60 × 3.",
+              "Average CPI = 1.5 + 0.4 + 1.8.",
+            ],
+            answer: "Average CPI = 3.7.",
+          },
+          {
+            title: "Find total CPU time",
+            prompt:
+              "A program has 2 × 10⁶ instructions, CPI 4, and a 5 ns cycle. Find CPU time.",
+            steps: [
+              "Total cycles = 2 × 10⁶ × 4 = 8 × 10⁶.",
+              "Time = 8 × 10⁶ × 5 ns = 40 × 10⁶ ns.",
+            ],
+            answer: "CPU time = 40 ms.",
+          },
+          {
+            title: "Find the break-even CPI",
+            prompt:
+              "A single-cycle CPU uses 120 ns. A multi-cycle CPU uses 30 ns. What average CPI gives equal time?",
+            steps: ["120 ns = CPI × 30 ns.", "CPI = 120 ÷ 30."],
+            answer: "Break-even average CPI = 4.",
+          },
+          {
+            title: "Compare instruction latency",
+            prompt:
+              "A multi-cycle load takes 5 cycles of 20 ns each, while an ALU instruction takes 4 cycles. Find both latencies.",
+            steps: [
+              "Load latency = 5 × 20 ns = 100 ns.",
+              "ALU latency = 4 × 20 ns = 80 ns.",
+            ],
+            answer:
+              "Load latency is 100 ns and ALU-instruction latency is 80 ns.",
+          },
+        ],
+      },
+    ],
+    mechanism: {
+      title: "How a multi-cycle instruction runs",
+      steps: [
+        "Fetch the instruction.",
+        "Decode it and read registers.",
+        "Use the ALU for an operation or address.",
+        "Access memory only when required.",
+        "Write a result only when required.",
+      ],
+    },
+    example: {
+      title: "Why load is slower",
+      body: "A load needs fetch, decode, address calculation, memory read, and register write. A simple branch may finish after fetch, decode, and comparison.",
+    },
+    misconception:
+      "CPI 1 does not guarantee the fastest processor. The clock period and instruction count also matter.",
+  },
+  revise: {
+    definition:
+      "Single-cycle completes an instruction in one long cycle. Multi-cycle divides it into shorter reusable steps.",
+    essentials: [
+      "Single-cycle: CPI = 1, long clock.",
+      "Multi-cycle: variable CPI, shorter clock.",
+      "CPU time = IC × CPI × cycle time.",
+      "Latency = time for one instruction; throughput = completions per unit time.",
+      "Multi-cycle control commonly uses a finite-state machine.",
+      "Use weighted average CPI for an instruction mix.",
+    ],
+    comparisonTitle: "Design trade-off",
+    comparison: {
+      left: {
+        label: "Single-cycle",
+        points: ["Simple control", "Slowest instruction fixes clock"],
+      },
+      right: {
+        label: "Multi-cycle",
+        points: ["Better hardware reuse", "More control states"],
+      },
+    },
+    followUp: "Next, overlap these stages using a pipeline.",
+  },
+  lastMinute: {
+    definition: "One long cycle versus several short cycles.",
+    memoryLine: "Never compare processors using CPI alone.",
+    cues: ["Single: CPI 1", "Multi: shorter clock", "Time = IC × CPI × T"],
+    trap: "A lower CPI can still produce a longer CPU time.",
+  },
+};
+
+export const fiveStageInstructionPipeline: SubjectTopic = {
+  slug: "five-stage-instruction-pipeline",
+  title: "Five-Stage Instruction Pipeline",
+  description:
+    "Understand IF, ID, EX, MEM, and WB, and calculate pipeline time, speedup, and efficiency.",
+  readTime: "44 min",
+  difficulty: "Intermediate",
+  tags: ["Pipeline", "Throughput", "Speedup"],
+  learn: {
+    opening:
+      "Pipelining overlaps different stages of several instructions. It mainly improves throughput; it does not make one instruction pass through fewer stages.",
+    sections: [
+      {
+        title: "The Five Stages",
+        paragraphs: [
+          "IF fetches the instruction. ID decodes it and reads registers. EX performs an ALU operation or calculates an address. MEM accesses data memory. WB writes the result to a register.",
+          "The IF/ID, ID/EX, EX/MEM, and MEM/WB pipeline registers hold data and control signals between clock edges. For example, ID/EX carries operand values and EX/MEM carries the ALU result.",
+        ],
+        visual: {
+          src: "/notes/modern-computer-architecture/five-stage-pipeline.png",
+          alt: "Five-stage instruction pipeline timing chart for three instructions.",
+          width: 1536,
+          height: 1024,
+          caption:
+            "After filling, an ideal pipeline completes one instruction per cycle.",
+        },
+        dataTable: {
+          headers: ["Stage", "Main work"],
+          rows: [
+            ["IF", "Fetch instruction and update PC"],
+            ["ID", "Decode and read registers"],
+            ["EX", "ALU operation or address"],
+            ["MEM", "Read or write data memory"],
+            ["WB", "Write register result"],
+          ],
+        },
+      },
+      {
+        title: "Pipeline Timing",
+        paragraphs: [
+          "With k equal stages and no stalls, n instructions need k + n - 1 cycles. The first result appears after k cycles; later results can appear once per cycle.",
+          "The clock period is decided by the slowest stage plus pipeline-register overhead. Unequal stages reduce the ideal benefit.",
+        ],
+        formulas: [
+          { label: "Ideal pipeline cycles", expression: "Cycles = k + n - 1" },
+          {
+            label: "Pipeline cycles with hazards",
+            expression: "Cycles = k + n - 1 + Stall cycles",
+          },
+          { label: "Non-pipelined cycles", expression: "Cycles = n × k" },
+          { label: "Ideal speedup", expression: "Speedup = nk ÷ (k + n - 1)" },
+          {
+            label: "Pipeline clock",
+            expression: "Tclk = Maximum stage delay + Register overhead",
+          },
+          {
+            label: "Efficiency",
+            expression: "Efficiency = Speedup ÷ Number of stages",
+          },
+          {
+            label: "One-instruction latency",
+            expression: "Latency = k × Pipeline clock period",
+          },
+        ],
+        points: [
+          "The ideal speedup formula assumes balanced stages, no hazards, and matching timing assumptions for the compared designs.",
+        ],
+      },
+      {
+        title: "Worked Problems",
+        paragraphs: [],
+        problems: [
+          {
+            title: "Count ideal cycles",
+            prompt:
+              "How many cycles do 10 instructions need in a five-stage pipeline?",
+            steps: ["k = 5 and n = 10.", "Cycles = 5 + 10 - 1."],
+            answer: "14 cycles.",
+          },
+          {
+            title: "Calculate ideal speedup",
+            prompt:
+              "Compare 10 instructions in a five-stage non-pipelined design and an ideal pipeline.",
+            steps: [
+              "Non-pipelined cycles = 10 × 5 = 50.",
+              "Pipeline cycles = 14.",
+              "Speedup = 50 ÷ 14.",
+            ],
+            answer: "Speedup ≈ 3.57 times.",
+          },
+          {
+            title: "Find the clock period",
+            prompt:
+              "Stage delays are 180, 120, 160, 200, and 100 ps. Register overhead is 20 ps.",
+            steps: ["The slowest stage is 200 ps.", "Tclk = 200 + 20 ps."],
+            answer: "Pipeline clock period = 220 ps.",
+          },
+          {
+            title: "Find execution time",
+            prompt:
+              "Twenty instructions use the five-stage pipeline above with no stalls. Find time.",
+            steps: [
+              "Cycles = 5 + 20 - 1 = 24.",
+              "Time = 24 × 220 ps = 5280 ps.",
+            ],
+            answer: "Execution time = 5.28 ns.",
+          },
+          {
+            title: "Find efficiency",
+            prompt:
+              "A five-stage pipeline achieves speedup 3.5. Find efficiency.",
+            steps: [
+              "Efficiency = speedup ÷ stages.",
+              "Efficiency = 3.5 ÷ 5 = 0.70.",
+            ],
+            answer: "Efficiency = 70%.",
+          },
+          {
+            title: "Build a timing schedule",
+            prompt:
+              "Three independent instructions enter a five-stage pipeline in consecutive cycles. Where is I3 during cycle 5, and when does it finish?",
+            steps: [
+              "I3 enters IF in cycle 3.",
+              "It is in ID in cycle 4 and EX in cycle 5.",
+              "It then uses MEM in cycle 6 and WB in cycle 7.",
+            ],
+            answer:
+              "I3 is in EX during cycle 5 and finishes at the end of cycle 7.",
+          },
+          {
+            title: "Include pipeline stalls",
+            prompt:
+              "Six instructions use a five-stage pipeline and experience two total stall cycles. Find total cycles.",
+            steps: ["Ideal cycles = 5 + 6 - 1 = 10.", "Add 2 stall cycles."],
+            answer: "Total execution time = 12 cycles.",
+          },
+        ],
+      },
+    ],
+    mechanism: {
+      title: "How instructions overlap",
+      steps: [
+        "Cycle 1: I1 is in IF.",
+        "Cycle 2: I1 enters ID while I2 enters IF.",
+        "Continue moving each instruction one stage per cycle.",
+        "After the pipeline fills, ideally retire one instruction each cycle.",
+      ],
+    },
+    example: {
+      title: "Assembly flow",
+      body: "An ADD can be in EX while the next instruction is in ID and a third instruction is in IF. They use different hardware stages at the same time.",
+    },
+    misconception:
+      "A five-stage pipeline does not normally make one instruction five times faster. It improves the rate of completing many instructions.",
+  },
+  revise: {
+    definition:
+      "Pipelining overlaps IF, ID, EX, MEM, and WB across instructions.",
+    essentials: [
+      "Pipeline registers: IF/ID, ID/EX, EX/MEM, MEM/WB.",
+      "Ideal cycles = k + n - 1.",
+      "Actual cycles = ideal cycles + stalls.",
+      "First result takes k cycles.",
+      "Steady state can complete one instruction per cycle.",
+      "Slowest stage plus register overhead fixes Tclk.",
+      "Pipelining improves throughput more than latency.",
+    ],
+    followUp: "Real dependencies prevent perfect overlap.",
+  },
+  lastMinute: {
+    definition: "IF → ID → EX → MEM → WB",
+    memoryLine: "Fill, steady state, drain: k + n - 1 cycles.",
+    cues: [
+      "Ideal CPI approaches 1",
+      "Tclk uses slowest stage",
+      "Speedup approaches k",
+    ],
+    trap: "Do not use n cycles for n instructions; include pipeline fill cycles.",
+  },
+};
+
+export const pipelineDataHazards: SubjectTopic = {
+  slug: "data-hazards-and-forwarding",
+  title: "Data Hazards and Forwarding",
+  description:
+    "Recognize RAW, WAR, and WAW dependencies and solve common pipeline stalls with forwarding.",
+  readTime: "43 min",
+  difficulty: "Intermediate",
+  tags: ["RAW", "Forwarding", "Stalls"],
+  learn: {
+    opening:
+      "A data hazard appears when an instruction needs a value that another instruction has not made available yet. The hardware may forward the value or pause the dependent instruction.",
+    sections: [
+      {
+        title: "Dependency Types",
+        paragraphs: [
+          "RAW is a true dependency: a later instruction reads a value produced by an earlier one. WAR and WAW are name dependencies caused by reuse of a register name.",
+          "In a basic in-order five-stage pipeline, reads happen before later writes and writes finish in order, so WAR and WAW normally do not occur. They matter in out-of-order machines.",
+        ],
+        dataTable: {
+          headers: ["Hazard", "Meaning", "Example"],
+          rows: [
+            ["RAW", "Read after write", "ADD R1,... then SUB ...,R1"],
+            ["WAR", "Write after read", "Read R1 then later write R1"],
+            ["WAW", "Write after write", "Two instructions write R1"],
+          ],
+        },
+        visual: {
+          src: "/notes/modern-computer-architecture/data-hazards-forwarding.svg",
+          alt: "Correctly staggered pipeline timing showing EX-to-EX ALU forwarding and a separate one-cycle load-use stall.",
+          width: 1536,
+          height: 1024,
+          caption:
+            "An ALU result can forward to the next EX stage; a directly dependent load-use pair needs one bubble.",
+        },
+      },
+      {
+        title: "Forwarding and Stalling",
+        paragraphs: [
+          "Forwarding, also called bypassing, sends an older instruction's available result from EX/MEM or MEM/WB directly to the current EX inputs without waiting for register write-back.",
+          "The forwarding unit checks that the older instruction will write a nonzero destination register and that its destination matches a required source register. A store may need a forwarded value for the data it writes, and a branch may need a recent result for comparison.",
+          "A load gets its value only after the memory stage. A directly following instruction usually needs one stall in the classic five-stage pipeline even when forwarding exists. The hazard unit freezes the PC and IF/ID register, then inserts a bubble into ID/EX.",
+        ],
+        formulas: [
+          {
+            label: "Example forwarding match",
+            expression:
+              "EX/MEM.RegWrite = 1 and EX/MEM.Rd ≠ 0 and EX/MEM.Rd = ID/EX.Rs",
+          },
+        ],
+        flow: [
+          "Detect source-register match",
+          "Check RegWrite and nonzero destination",
+          "Check whether result is ready",
+          "Forward when ready",
+          "Otherwise freeze and insert a bubble",
+        ],
+      },
+      {
+        title: "Compiler Instruction Scheduling",
+        paragraphs: [
+          "A compiler can move an independent instruction between a load and its consumer when program meaning stays unchanged.",
+        ],
+        dataTable: {
+          headers: ["Before scheduling", "After scheduling"],
+          rows: [
+            ["LW R1,0(R2)", "LW R1,0(R2)"],
+            ["ADD R3,R1,R4", "OR R8,R6,R7"],
+            ["OR R8,R6,R7", "ADD R3,R1,R4"],
+          ],
+        },
+      },
+      {
+        title: "Worked Problems",
+        paragraphs: [],
+        problems: [
+          {
+            title: "Identify RAW",
+            prompt: "I1: ADD R1,R2,R3; I2: SUB R4,R1,R5. Name the hazard.",
+            steps: ["I1 writes R1.", "I2 reads R1 before the normal WB time."],
+            answer:
+              "RAW hazard on R1; ALU forwarding can normally remove the stall.",
+          },
+          {
+            title: "Handle load-use",
+            prompt:
+              "I1: LW R1,0(R2); I2: ADD R3,R1,R4. What action is normally required?",
+            steps: [
+              "The load value arrives after MEM.",
+              "I2 needs it in EX too early.",
+              "Insert one bubble, then forward the loaded value.",
+            ],
+            answer: "One stall cycle is normally required.",
+          },
+          {
+            title: "Count cycles with a stall",
+            prompt:
+              "Four instructions use a five-stage pipeline and have one load-use stall. Find total cycles.",
+            steps: ["Ideal cycles = 5 + 4 - 1 = 8.", "Add one stall cycle."],
+            answer: "Total = 9 cycles.",
+          },
+          {
+            title: "Remove a false dependency",
+            prompt: "I1 reads R5 and I2 later writes R5. Is this RAW?",
+            steps: [
+              "I1 does not need a value from I2.",
+              "The order is read before write.",
+            ],
+            answer:
+              "No. It is WAR, a name dependency, not a true RAW dependency.",
+          },
+          {
+            title: "Forward store data",
+            prompt:
+              "I1: ADD R1,R2,R3; I2: SW R1,0(R4). What dependency exists?",
+            steps: [
+              "I1 produces R1.",
+              "The store needs R1 as the value written to memory.",
+              "A suitable store-data bypass can forward the new value.",
+            ],
+            answer:
+              "This is a RAW dependency on R1; forwarding can avoid waiting for normal WB on a pipeline that provides this path.",
+          },
+        ],
+      },
+    ],
+    mechanism: {
+      title: "Hazard-unit decision",
+      steps: [
+        "Compare source registers of the current instruction with destination registers ahead.",
+        "Ignore instructions that do not write a register.",
+        "Select a forwarded ALU or memory result if it is ready.",
+        "Stall when the required value will arrive too late.",
+      ],
+    },
+    example: {
+      title: "Useful instruction scheduling",
+      body: "A compiler may place an independent instruction between a load and its consumer. That useful work can replace a hardware stall.",
+    },
+    misconception:
+      "Forwarding does not remove every RAW hazard. A directly following load-use pair usually still stalls once.",
+  },
+  revise: {
+    definition:
+      "A data hazard is an unsafe timing overlap between dependent instructions.",
+    essentials: [
+      "RAW is a true dependency.",
+      "WAR and WAW are name dependencies.",
+      "A forwarding match needs RegWrite, a nonzero destination, and a source-register match.",
+      "Forward EX/MEM or MEM/WB results to EX.",
+      "Store data and branch comparisons can also depend on recent results.",
+      "Load-use usually needs one stall in the classic pipeline.",
+      "A bubble performs no useful instruction work.",
+    ],
+    followUp: "Branches and shared hardware create two other hazard classes.",
+  },
+  lastMinute: {
+    definition:
+      "RAW needs the earlier result; bypass it if ready, otherwise stall.",
+    memoryLine:
+      "ALU result: forward. Immediate load consumer: stall once, then forward.",
+    cues: ["RAW = true", "WAR/WAW = name", "Bubble = lost cycle"],
+    trap: "Do not claim that WAR and WAW normally occur in the simple in-order five-stage pipeline.",
+  },
+};
+
+export const pipelineControlAndStructuralHazards: SubjectTopic = {
+  slug: "control-and-structural-hazards",
+  title: "Control and Structural Hazards",
+  description:
+    "Handle branches, prediction mistakes, pipeline flushing, and conflicts over shared hardware.",
+  readTime: "43 min",
+  difficulty: "Intermediate",
+  tags: ["Branches", "Prediction", "Structural Hazards"],
+  learn: {
+    opening:
+      "A branch can change the next program counter, while a structural conflict makes two stages request the same hardware. Both can stop ideal pipeline flow.",
+    sections: [
+      {
+        title: "Control Hazards",
+        paragraphs: [
+          "The fetch stage needs the next PC before a branch may be resolved. Direction prediction decides taken or not taken. Target prediction supplies the address for a predicted-taken branch, often using a branch target buffer, or BTB.",
+          "Static prediction uses a fixed rule, such as predict not taken or predict backward branches taken. A one-bit dynamic predictor remembers the last outcome and changes prediction after one opposite result. A two-bit saturating predictor is more stable and needs two consecutive opposite outcomes to reverse a strong prediction.",
+          "The CPU fetches speculatively. A correct prediction keeps useful work; a wrong prediction flushes younger instructions and restarts at the correct PC. Some older ISAs use a delayed branch, where the instruction in the delay slot executes whether or not the branch is taken.",
+        ],
+        visual: {
+          src: "/notes/modern-computer-architecture/pipeline-control-structural-hazards.svg",
+          alt: "Complete branch pipeline showing younger wrong-path instructions flushed, plus an IF-versus-MEM single-port memory conflict.",
+          width: 1536,
+          height: 1024,
+          caption:
+            "Wrong-path work is flushed; an IF/MEM single-port conflict needs separate memories or a stall.",
+        },
+        formulas: [
+          {
+            label: "Branch stall contribution",
+            expression:
+              "Extra CPI = Branch frequency × Misprediction rate × Misprediction penalty",
+          },
+          {
+            label: "Effective CPI",
+            expression: "Effective CPI = Base CPI + Extra CPI",
+            note: "Use this form when base CPI does not already include the branch penalty.",
+          },
+        ],
+      },
+      {
+        title: "One-Bit and Two-Bit Predictors",
+        paragraphs: [
+          "A one-bit predictor is simple but can miss twice around a loop boundary: once when the loop exits and again when it starts later. A two-bit counter resists one unusual result.",
+        ],
+        dataTable: {
+          headers: [
+            "Two-bit state",
+            "Prediction",
+            "Taken outcome",
+            "Not-taken outcome",
+          ],
+          rows: [
+            ["00 Strongly NT", "Not taken", "01", "00"],
+            ["01 Weakly NT", "Not taken", "10", "00"],
+            ["10 Weakly T", "Taken", "11", "01"],
+            ["11 Strongly T", "Taken", "11", "10"],
+          ],
+        },
+      },
+      {
+        title: "Structural Hazards",
+        paragraphs: [
+          "A structural hazard occurs when two active stages need the same hardware in the same cycle. For example, IF and MEM can conflict if instructions and data share one single-port memory.",
+          "Possible fixes are separate instruction and data caches, multi-port hardware, duplicated resources, or a stall. The best choice balances speed, area, power, and cost.",
+        ],
+        dataTable: {
+          headers: ["Hazard", "Typical fix"],
+          rows: [
+            ["Unknown branch target", "Predict, resolve earlier, or stall"],
+            ["Wrong prediction", "Flush and fetch correct path"],
+            ["IF and MEM conflict", "Separate memories or stall"],
+            ["One ALU requested twice", "Add resource or schedule access"],
+          ],
+        },
+      },
+      {
+        title: "Worked Problems",
+        paragraphs: [],
+        problems: [
+          {
+            title: "Calculate branch penalty",
+            prompt:
+              "Branches are 20% of instructions. Ten percent are mispredicted and each mistake costs 3 cycles. Find extra CPI.",
+            steps: ["Extra CPI = 0.20 × 0.10 × 3.", "Extra CPI = 0.06."],
+            answer:
+              "Extra CPI = 0.06; if base CPI is 1, effective CPI is 1.06.",
+          },
+          {
+            title: "Find mispredictions",
+            prompt:
+              "A program runs 50,000 instructions. Fifteen percent are branches and predictor accuracy is 92%. Find expected mistakes.",
+            steps: [
+              "Branches = 50,000 × 0.15 = 7,500.",
+              "Misprediction rate = 1 - 0.92 = 0.08.",
+              "Mistakes = 7,500 × 0.08.",
+            ],
+            answer: "Expected mispredictions = 600.",
+          },
+          {
+            title: "Update a two-bit predictor",
+            prompt:
+              "A branch counter is Strongly Taken. One outcome is Not Taken. What is the next state?",
+            steps: [
+              "Move one state toward Not Taken.",
+              "A single opposite result does not reverse a strong prediction.",
+            ],
+            answer: "Weakly Taken; it still predicts Taken next time.",
+          },
+          {
+            title: "Identify a structural conflict",
+            prompt:
+              "IF and a load's MEM stage request one single-port memory in the same cycle.",
+            steps: [
+              "One port can serve only one request.",
+              "Either stall one stage or provide independent instruction and data access.",
+            ],
+            answer: "This is a structural hazard.",
+          },
+          {
+            title: "Follow predictor states",
+            prompt:
+              "A two-bit predictor starts in Strongly Taken. The next outcomes are Not Taken, Not Taken, and Taken. Find the state after each outcome.",
+            steps: [
+              "Strongly Taken + Not Taken → Weakly Taken.",
+              "Weakly Taken + Not Taken → Weakly Not Taken.",
+              "Weakly Not Taken + Taken → Weakly Taken.",
+            ],
+            answer:
+              "The states are Weakly Taken, Weakly Not Taken, and Weakly Taken.",
+          },
+        ],
+      },
+    ],
+    mechanism: {
+      title: "How branch recovery works",
+      steps: [
+        "Predict the next PC.",
+        "Fetch and execute speculatively.",
+        "Resolve the branch condition and target.",
+        "Keep work if correct; flush younger work if wrong.",
+        "Restart fetch from the correct address.",
+      ],
+    },
+    example: {
+      title: "Loop prediction",
+      body: "A loop branch is taken many times and not taken once at exit. A dynamic predictor can learn the repeated taken behaviour and usually miss only near the exit.",
+    },
+    misconception:
+      "Speculative instructions may execute internally, but wrong-path results must not become visible architectural state.",
+  },
+  revise: {
+    definition:
+      "Control hazards come from an unknown next PC; structural hazards come from a busy shared resource.",
+    essentials: [
+      "Direction predicts taken/not taken; a BTB predicts the target.",
+      "A one-bit predictor follows the last result.",
+      "A two-bit counter resists one unusual outcome.",
+      "Misprediction means flush plus restart.",
+      "Extra CPI = branch frequency × miss rate × penalty.",
+      "A delayed branch always executes its delay-slot instruction.",
+      "Separate I-cache and D-cache can remove an IF/MEM conflict.",
+    ],
+    followUp:
+      "Modern CPUs search for more independent work when one instruction waits.",
+  },
+  lastMinute: {
+    definition:
+      "Branch uncertainty causes control hazards; resource conflicts cause structural hazards.",
+    memoryLine: "Predict, verify, flush if wrong.",
+    cues: [
+      "Wrong path = flush",
+      "Two-bit predictor",
+      "One resource, two requests = conflict",
+    ],
+    trap: "Prediction accuracy is not the misprediction rate; miss rate = 1 - accuracy.",
+  },
+};
+
+export const superscalarAndOutOfOrder: SubjectTopic = {
+  slug: "superscalar-and-out-of-order-execution",
+  title: "Superscalar and Out-of-Order Execution",
+  description:
+    "See how modern CPUs issue several instructions, rename registers, speculate, and retire in order.",
+  readTime: "50 min",
+  difficulty: "Advanced",
+  tags: ["Superscalar", "Register Renaming", "ROB"],
+  learn: {
+    opening:
+      "A superscalar CPU can start several instructions in one cycle. Out-of-order execution lets ready instructions move ahead of stalled ones while retirement preserves the program's visible order.",
+    sections: [
+      {
+        title: "Modern Instruction Flow",
+        paragraphs: [
+          "Decode finds operations and dependencies. Register renaming maps architectural registers to a larger set of physical registers, removing WAR and WAW name dependencies. RAW dependencies remain because the real data must still be produced.",
+          "During rename or dispatch, the CPU allocates an entry in the reorder buffer, or ROB. Reservation stations or an issue queue hold operations until operands and execution units are ready. Completion marks the ROB entry ready and records its result or status.",
+          "Instructions retire in program order so exceptions are precise and wrong speculative work can be discarded. Completion means execution has finished; retirement or commit means the result is allowed to update visible architectural state.",
+        ],
+        visual: {
+          src: "/notes/modern-computer-architecture/out-of-order-execution.svg",
+          alt: "Out-of-order flow where ROB entries are allocated at rename, execution marks them ready, and retirement remains in program order.",
+          width: 1536,
+          height: 1024,
+          caption:
+            "ROB entries exist before execution; completed results become ready and retire in program order.",
+        },
+        flow: [
+          "Fetch",
+          "Decode and rename",
+          "Allocate ROB entry and dispatch",
+          "Issue when ready",
+          "Execute",
+          "Mark result ready",
+          "Retire in order",
+        ],
+      },
+      {
+        title: "Renaming, Scheduling, and Memory Order",
+        paragraphs: [
+          "A rename table maps each architectural register name to its newest physical register. A later writer receives a fresh physical destination, so older readers and writers do not conflict over one name.",
+          "A load/store queue, or LSQ, tracks memory operations. Loads and stores may use the same address, so the CPU checks their order and may forward data from an older store to a younger load. Incorrect memory speculation must be recovered like incorrect branch speculation.",
+        ],
+        dataTable: {
+          headers: ["Structure", "Main job"],
+          rows: [
+            ["Rename table", "Map architectural to physical registers"],
+            [
+              "Reservation station / issue queue",
+              "Wait for operands and an execution unit",
+            ],
+            ["ROB", "Track order, readiness, results, and exceptions"],
+            ["LSQ", "Keep loads and stores safe"],
+          ],
+        },
+      },
+      {
+        title: "Width, IPC, and Speculation",
+        paragraphs: [
+          "Issue width is the maximum number of operations that may start in one cycle. Actual IPC is usually lower because of dependencies, cache misses, branch mistakes, and limited execution units.",
+          "Speculation uses predicted control flow. If the prediction is wrong, younger instructions are squashed before they update visible program state.",
+        ],
+        formulas: [
+          {
+            label: "Instructions per cycle",
+            expression: "IPC = Retired instructions ÷ Clock cycles",
+          },
+          {
+            label: "Cycles per instruction",
+            expression: "CPI = Clock cycles ÷ Retired instructions",
+          },
+          {
+            label: "Ideal width bound",
+            expression: "Minimum cycles ≥ ⌈Instruction count ÷ Issue width⌉",
+          },
+        ],
+      },
+      {
+        title: "Worked Problems",
+        paragraphs: [],
+        problems: [
+          {
+            title: "Ideal width bound",
+            prompt:
+              "A four-wide CPU executes 100 independent instructions. Ignore fill and all stalls. Find the minimum issue cycles.",
+            steps: ["Cycles ≥ ⌈100 ÷ 4⌉.", "⌈25⌉ = 25."],
+            answer: "The ideal lower bound is 25 cycles.",
+          },
+          {
+            title: "Calculate actual IPC",
+            prompt: "A CPU retires 100 instructions in 40 cycles.",
+            steps: ["IPC = 100 ÷ 40."],
+            answer: "IPC = 2.5 instructions per cycle.",
+          },
+          {
+            title: "Classify renaming benefit",
+            prompt:
+              "I1 reads R1 and I2 later writes R1. Can renaming remove the dependency?",
+            steps: [
+              "This is WAR, a name dependency.",
+              "Give I2 a new physical destination register.",
+            ],
+            answer: "Yes. Renaming removes the WAR dependency.",
+          },
+          {
+            title: "Find CPI from IPC",
+            prompt:
+              "A processor sustains IPC 2.5. Find CPI for the same interval.",
+            steps: ["CPI = 1 ÷ IPC.", "CPI = 1 ÷ 2.5."],
+            answer: "CPI = 0.4.",
+          },
+          {
+            title: "Explain precise recovery",
+            prompt:
+              "A younger divide completes before an older load raises a fault. Which may retire?",
+            steps: [
+              "The ROB checks instructions in program order.",
+              "The older fault is handled before the younger result becomes visible.",
+            ],
+            answer:
+              "The younger divide must not retire before the older fault.",
+          },
+          {
+            title: "Rename two writers",
+            prompt:
+              "The current map is R1 → P4. I1 writes R1, and a later I2 also writes R1. Show one valid renaming.",
+            steps: [
+              "Give I1 a fresh destination, for example P9, and update the map to R1 → P9.",
+              "Give I2 another fresh destination, for example P12, and update the map to R1 → P12.",
+              "I1 and I2 no longer compete to write the same physical register.",
+            ],
+            answer:
+              "I1 may write P9 and I2 may write P12; the newest architectural R1 maps to P12.",
+          },
+          {
+            title: "Schedule around a long load",
+            prompt:
+              "An older load is waiting for memory. Two younger additions use only ready registers. Can they execute?",
+            steps: [
+              "The additions have no RAW dependency on the load.",
+              "If execution units and ROB entries are available, the scheduler may issue them.",
+              "Their results still wait for safe in-order retirement.",
+            ],
+            answer:
+              "Yes. They may execute out of order but cannot retire ahead of the older unresolved instruction.",
+          },
+        ],
+      },
+    ],
+    mechanism: {
+      title: "How out-of-order remains correct",
+      steps: [
+        "Rename destinations to remove false dependencies.",
+        "Track operands and readiness in the issue queue.",
+        "Execute ready operations on free units.",
+        "Record results and exception status in the ROB.",
+        "Retire only the oldest completed instruction.",
+      ],
+    },
+    example: {
+      title: "Work around a cache miss",
+      body: "If a load waits for memory, independent additions behind it can execute. Their results wait in the ROB until all older instructions can retire safely.",
+    },
+    misconception:
+      "Out-of-order execution does not mean out-of-order architectural results. Retirement is normally in program order.",
+  },
+  revise: {
+    definition:
+      "Superscalar means multiple-issue; out-of-order means ready work can execute before older stalled work.",
+    essentials: [
+      "Rename removes WAR and WAW, not RAW.",
+      "A ROB entry is allocated before execution and marked ready after completion.",
+      "Issue queue or reservation stations track ready operations.",
+      "LSQ keeps reordered loads and stores safe.",
+      "Completion is not retirement.",
+      "ROB supports in-order retirement and precise exceptions.",
+      "IPC can be greater than 1.",
+      "Wrong speculative work is squashed.",
+    ],
+    followUp:
+      "Cache behaviour often decides whether the execution engine stays busy.",
+  },
+  lastMinute: {
+    definition: "Rename → issue ready work → execute → ROB → retire in order.",
+    memoryLine: "Execution may reorder; visible state must stay correct.",
+    cues: [
+      "Width is a maximum",
+      "ROB = ordered commit",
+      "Rename removes false dependencies",
+    ],
+    trap: "Do not say a four-wide CPU always achieves IPC 4.",
+  },
+};
+
+export const memoryHierarchyAndCache: SubjectTopic = {
+  slug: "memory-hierarchy-and-cache",
+  title: "Memory Hierarchy, Cache, and Virtual Memory",
+  description:
+    "Use locality, cache mapping, AMAT, address translation, and page faults to reason about memory performance.",
+  readTime: "68 min",
+  difficulty: "Advanced",
+  tags: ["Cache", "AMAT", "Virtual Memory"],
+  learn: {
+    opening:
+      "Fast memory is expensive and small; large memory is slower. A hierarchy keeps recently used blocks close to the CPU and relies on program locality.",
+    sections: [
+      {
+        title: "Hierarchy and Locality",
+        paragraphs: [
+          "Registers are smallest and fastest, followed by L1, L2, L3 cache, main memory, and storage. A cache hit finds the block nearby; a miss fetches it from a lower level.",
+          "Temporal locality means recently used data is likely to be used again. Spatial locality means nearby addresses are likely to be used soon. Data moves in fixed-size cache blocks or lines.",
+        ],
+        visual: {
+          src: "/notes/modern-computer-architecture/memory-hierarchy-cache.png",
+          alt: "Charcoal memory hierarchy pyramid with cache tag, index, and offset address fields.",
+          width: 1536,
+          height: 1024,
+          caption:
+            "Capacity grows downward while speed falls; an address selects a cache set and byte.",
+        },
+      },
+      {
+        title: "Mapping and Address Fields",
+        paragraphs: [
+          "A direct-mapped cache has one possible line per memory block. A fully associative cache allows any line. An N-way set-associative cache allows N possible lines inside the selected set.",
+          "The offset selects a byte within a block. The index selects a set. The remaining high bits form the tag, which is compared with stored tags.",
+        ],
+        formulas: [
+          {
+            label: "Cache lines",
+            expression: "Lines = Cache capacity ÷ Block size",
+          },
+          { label: "Sets", expression: "Sets = Lines ÷ Ways" },
+          {
+            label: "Offset bits",
+            expression: "Offset = log₂(Block size in bytes)",
+          },
+          { label: "Index bits", expression: "Index = log₂(Number of sets)" },
+          {
+            label: "Tag bits",
+            expression: "Tag = Address bits - Index bits - Offset bits",
+          },
+        ],
+      },
+      {
+        title: "Hits, Misses, and Writes",
+        paragraphs: [
+          "AMAT combines the common hit time with the less common miss cost. Miss rate must be written as a fraction, not a percentage number.",
+          "Write-through updates cache and lower memory immediately. Write-back updates lower memory only when a dirty block is replaced. Write-allocate brings a missed block into cache; no-write-allocate writes around the cache.",
+        ],
+        formulas: [
+          {
+            label: "One-level AMAT",
+            expression: "AMAT = Hit time + Miss rate × Miss penalty",
+          },
+          {
+            label: "Two-level AMAT",
+            expression: "AMAT = T₁ + MR₁ × (T₂ + MR₂ × Memory penalty)",
+          },
+        ],
+      },
+      {
+        title: "Miss Types, Replacement, and Cache State",
+        paragraphs: [
+          "A compulsory miss is the first access to a block. A capacity miss occurs because the working set is larger than the cache. A conflict miss occurs when useful blocks compete for the same set even though space exists elsewhere.",
+          "A direct-mapped cache has no replacement choice. An associative cache uses a policy such as LRU or FIFO to choose a victim. Each entry needs a valid bit and tag; a write-back cache also needs a dirty bit.",
+        ],
+        dataTable: {
+          headers: ["Miss type", "Cause", "Useful response"],
+          rows: [
+            [
+              "Compulsory",
+              "First access to a block",
+              "Larger blocks may exploit spatial locality",
+            ],
+            ["Capacity", "Working set exceeds cache", "Larger cache may help"],
+            [
+              "Conflict",
+              "Blocks compete for one set",
+              "More associativity may help",
+            ],
+          ],
+        },
+      },
+      {
+        title: "Virtual Memory and Address Translation",
+        paragraphs: [
+          "Virtual memory gives each process its own virtual address space. Memory is divided into fixed-size virtual pages and physical frames. The page table maps a virtual page number to a physical frame number; the page offset does not change during translation.",
+          "A translation lookaside buffer, or TLB, caches recent page-table entries. On a TLB miss, hardware or software checks the page table. If the page is not present in RAM, a page fault occurs and the operating system fetches it from storage.",
+          "Paging avoids external fragmentation between allocated blocks, but the unused part of the final page can cause internal fragmentation. Page faults are far more expensive than ordinary cache misses.",
+        ],
+        formulas: [
+          {
+            label: "Page offset bits",
+            expression: "Offset bits = log₂(Page size in bytes)",
+          },
+          {
+            label: "Virtual page number",
+            expression: "VPN bits = Virtual-address bits - Page-offset bits",
+          },
+          {
+            label: "Physical address",
+            expression:
+              "Physical address = Physical frame number || Page offset",
+          },
+        ],
+        dataTable: {
+          headers: ["Event", "Meaning", "Next action"],
+          rows: [
+            ["TLB hit", "Translation is cached", "Form physical address"],
+            ["TLB miss, page present", "Read page-table entry", "Refill TLB"],
+            ["Page fault", "Page is not in RAM", "OS loads page from storage"],
+          ],
+        },
+      },
+      {
+        title: "Worked Problems",
+        paragraphs: [],
+        problems: [
+          {
+            title: "Split a cache address",
+            prompt:
+              "A 32-bit address uses a 32 KiB, four-way cache with 64-byte blocks. Find offset, index, and tag bits.",
+            steps: [
+              "Lines = 32 KiB ÷ 64 B = 512.",
+              "Sets = 512 ÷ 4 = 128.",
+              "Offset = log₂64 = 6 bits; index = log₂128 = 7 bits.",
+              "Tag = 32 - 7 - 6.",
+            ],
+            answer: "Offset = 6, index = 7, tag = 19 bits.",
+          },
+          {
+            title: "Calculate one-level AMAT",
+            prompt:
+              "Hit time is 1 ns, miss rate is 5%, and miss penalty is 50 ns.",
+            steps: ["Convert 5% to 0.05.", "AMAT = 1 + 0.05 × 50."],
+            answer: "AMAT = 3.5 ns.",
+          },
+          {
+            title: "Calculate two-level AMAT",
+            prompt:
+              "L1 time is 1 ns with 4% miss rate. L2 time is 8 ns with 10% local miss rate. Memory penalty is 80 ns.",
+            steps: [
+              "The L2 miss rate is local: 10% of accesses that reach L2.",
+              "L2 access average = 8 + 0.10 × 80 = 16 ns.",
+              "AMAT = 1 + 0.04 × 16.",
+            ],
+            answer: "AMAT = 1.64 ns.",
+          },
+          {
+            title: "Find a direct-mapped line",
+            prompt:
+              "A direct-mapped cache has 128 lines. Which line receives memory block 300?",
+            steps: [
+              "Line = block number mod number of lines.",
+              "Line = 300 mod 128.",
+            ],
+            answer: "Block 300 maps to line 44.",
+          },
+          {
+            title: "Calculate cache data capacity",
+            prompt:
+              "A cache has 256 lines of 32 bytes each. Ignore tags and status bits. Find capacity in bytes, KiB, and bits.",
+            steps: [
+              "Capacity = 256 × 32 bytes = 8192 bytes.",
+              "8192 bytes ÷ 1024 = 8 KiB.",
+              "Bits = 8192 × 8 = 65,536 bits.",
+            ],
+            answer: "Data capacity = 8192 bytes = 8 KiB = 65,536 bits.",
+          },
+          {
+            title: "Translate a paged address",
+            prompt:
+              "A system uses 4 KiB pages. Virtual address 0x12345 maps virtual page 0x12 to physical frame 0x2A. Find the physical address.",
+            steps: [
+              "A 4 KiB page has a 12-bit, or three-hex-digit, offset.",
+              "Virtual address 0x12345 has VPN 0x12 and offset 0x345.",
+              "Replace VPN 0x12 with physical frame 0x2A and keep the offset.",
+            ],
+            answer: "Physical address = 0x2A345.",
+          },
+          {
+            title: "Identify a cache miss",
+            prompt:
+              "Two frequently used blocks repeatedly remove each other from one direct-mapped line, while many other lines are unused. Name the miss type.",
+            steps: [
+              "The cache has unused capacity.",
+              "The blocks are forced to the same line by the mapping.",
+            ],
+            answer: "These are conflict misses.",
+          },
+          {
+            title: "Estimate internal fragmentation",
+            prompt:
+              "A process needs 10,000 bytes and uses 4 KiB pages. Find allocated space and unused space in its last page.",
+            steps: [
+              "Pages needed = ⌈10,000 ÷ 4096⌉ = 3.",
+              "Allocated space = 3 × 4096 = 12,288 bytes.",
+              "Unused space = 12,288 - 10,000.",
+            ],
+            answer:
+              "Allocated space is 12,288 bytes; internal fragmentation is 2,288 bytes.",
+          },
+        ],
+      },
+    ],
+    mechanism: {
+      title: "How a memory reference is served",
+      steps: [
+        "Obtain address translation through the TLB or page table when virtual memory is used.",
+        "Handle a page fault if the required page is absent from RAM.",
+        "Use the cache index to select a set and compare the required tag with valid ways.",
+        "On a hit, use the block offset to select the requested bytes.",
+        "On a miss, choose a victim, write back a dirty victim if needed, and fetch the block.",
+      ],
+    },
+    example: {
+      title: "Why arrays cache well",
+      body: "Reading an array in address order uses many bytes from every fetched block. This creates strong spatial locality.",
+    },
+    misconception:
+      "Cache capacity alone does not determine address fields. Block size and associativity determine the number of sets and therefore the index bits.",
+  },
+  revise: {
+    definition:
+      "A cache stores nearby memory blocks; virtual memory maps process pages to physical frames.",
+    essentials: [
+      "Temporal = reuse same data; spatial = use nearby data.",
+      "Lines = capacity ÷ block size; sets = lines ÷ ways.",
+      "Cache address = tag + index + block offset.",
+      "AMAT = hit time + miss rate × miss penalty.",
+      "Miss types: compulsory, capacity, conflict.",
+      "Associative caches need a victim policy such as LRU or FIFO.",
+      "Valid says an entry is usable; dirty says write-back data changed.",
+      "TLB caches page translations.",
+      "Physical address = frame number + unchanged page offset.",
+      "Missing RAM page = page fault.",
+    ],
+    followUp:
+      "Many-core GPUs need locality and regular access at a much larger scale.",
+  },
+  lastMinute: {
+    definition:
+      "Cache finds data using tag/index/offset; virtual memory translates page/frame plus an unchanged offset.",
+    memoryLine:
+      "Cache: capacity → lines → sets → index. VM: page size → offset; translate VPN to PFN.",
+    cues: [
+      "Direct = 1 way",
+      "Fully associative = 1 set",
+      "3 C misses",
+      "TLB = translation cache",
+      "Page fault = not in RAM",
+      "AMAT uses miss-rate fraction",
+    ],
+    trap: "Do not confuse a TLB miss with a page fault: the page can be in RAM even when its translation is not in the TLB.",
+  },
+};
+
+export const simdSimtAndGpu: SubjectTopic = {
+  slug: "simd-simt-and-gpu-architecture",
+  title: "SIMD, SIMT, and GPU Architecture",
+  description:
+    "Compare CPUs and GPUs, then reason about warps, divergence, coalescing, and throughput.",
+  readTime: "52 min",
+  difficulty: "Intermediate",
+  tags: ["SIMD", "SIMT", "GPU"],
+  learn: {
+    opening:
+      "CPUs use a few powerful cores for low-latency general work. GPUs use many simpler execution lanes to provide high throughput when thousands of similar operations can run together.",
+    sections: [
+      {
+        title: "CPU, SIMD, and SIMT",
+        paragraphs: [
+          "SIMD exposes vector instructions directly: one instruction operates on several elements stored in vector registers through a vector ALU. For example, an eight-lane vector addition can add eight pairs of numbers with one vector instruction.",
+          "SIMT exposes many software threads. GPU hardware groups threads for execution, while each thread keeps its own registers and thread identity. In NVIDIA CUDA, a warp contains 32 threads.",
+          "Threads are arranged into blocks, and blocks form a grid. Blocks are scheduled on streaming multiprocessors. This model suits image processing, matrix work, simulation, and machine learning.",
+        ],
+        visual: {
+          src: "/notes/modern-computer-architecture/cpu-gpu-simt.svg",
+          alt: "CPU and GPU comparison with exactly 32 visible thread lanes in a CUDA warp, divergence, and coalesced memory.",
+          width: 1536,
+          height: 1024,
+          caption:
+            "GPUs gain throughput from many threads, regular control flow, and nearby memory accesses.",
+        },
+        dataTable: {
+          headers: ["CPU", "GPU"],
+          rows: [
+            ["Few complex cores", "Many execution lanes"],
+            ["Large caches and control", "More area for arithmetic"],
+            ["Optimized for latency", "Optimized for throughput"],
+            ["Handles irregular work well", "Best with abundant parallel work"],
+          ],
+        },
+      },
+      {
+        title: "Divergence and Coalescing",
+        paragraphs: [
+          "If threads in one warp take different branch paths, the hardware executes the required paths with inactive lanes masked. This branch divergence reduces useful parallel work.",
+          "When nearby threads access nearby addresses, requests can be coalesced into fewer memory transactions. Scattered access usually wastes bandwidth. CPU-GPU transfer time can also limit the speedup of a small task.",
+        ],
+        formulas: [
+          { label: "Warp count", expression: "Warps = ⌈Threads ÷ Warp size⌉" },
+          {
+            label: "End-to-end speedup",
+            expression:
+              "Speedup = CPU time ÷ (GPU compute time + transfer time)",
+          },
+        ],
+      },
+      {
+        title: "Matrix Work and Arithmetic Intensity",
+        paragraphs: [
+          "In matrix addition, a thread can calculate one output element. In matrix multiplication, one output needs a row-by-column dot product.",
+          "Arithmetic intensity measures how much computation is performed for transferred data. Low-intensity work is often limited by memory bandwidth; high-intensity work has a better chance of using the GPU's arithmetic throughput.",
+        ],
+        formulas: [
+          {
+            label: "Arithmetic intensity",
+            expression:
+              "Arithmetic intensity = Number of arithmetic operations ÷ Bytes transferred",
+          },
+        ],
+        dataTable: {
+          headers: ["Work pattern", "Likely limit"],
+          rows: [
+            ["Few operations per byte", "Memory bandwidth"],
+            ["Many operations per reused byte", "Compute throughput"],
+            ["Frequent CPU-GPU copies", "Transfer link"],
+            ["Different paths inside one warp", "Control divergence"],
+          ],
+        },
+      },
+      {
+        title: "Worked Problems",
+        paragraphs: [],
+        problems: [
+          {
+            title: "Count warps",
+            prompt:
+              "A kernel launches 1000 threads on hardware with 32-thread warps. Find scheduled warps and unused lanes in the final warp.",
+            steps: [
+              "Warps = ⌈1000 ÷ 32⌉ = 32.",
+              "Available lanes = 32 × 32 = 1024.",
+              "Unused lanes = 1024 - 1000.",
+            ],
+            answer:
+              "32 warps are scheduled; the final warp has 24 unused lanes.",
+          },
+          {
+            title: "Estimate divergent work",
+            prompt:
+              "Within one warp, one branch path takes 20 cycles and the other takes 12 cycles. Assume both complete paths execute sequentially and ignore all overhead.",
+            steps: [
+              "The warp executes each required path with different lanes masked.",
+              "Under the stated simplified model, time ≈ 20 + 12 cycles.",
+            ],
+            answer:
+              "The divergent region takes about 32 cycles under these assumptions.",
+          },
+          {
+            title: "Find transfer time",
+            prompt: "Copy 4 GB over a 20 GB/s link. Ignore overhead.",
+            steps: ["Time = data ÷ bandwidth.", "Time = 4 GB ÷ 20 GB/s."],
+            answer: "Transfer time = 0.2 s.",
+          },
+          {
+            title: "Calculate GPU speedup",
+            prompt:
+              "A CPU version takes 120 ms. GPU computation takes 20 ms and transfers take 10 ms.",
+            steps: [
+              "End-to-end GPU time = 20 + 10 = 30 ms.",
+              "Speedup = 120 ÷ 30.",
+            ],
+            answer: "End-to-end speedup = 4 times.",
+          },
+          {
+            title: "Calculate arithmetic intensity",
+            prompt:
+              "A kernel performs 2400 arithmetic operations while transferring 600 bytes from memory. Find arithmetic intensity.",
+            steps: [
+              "Arithmetic intensity = operations ÷ bytes.",
+              "Arithmetic intensity = 2400 ÷ 600.",
+            ],
+            answer: "Arithmetic intensity = 4 operations per byte.",
+          },
+          {
+            title: "Understand vector lanes",
+            prompt:
+              "An eight-lane SIMD unit adds two arrays containing 40 elements. Ignore setup and remainder overhead. Find the number of vector additions.",
+            steps: [
+              "Each vector addition handles 8 element pairs.",
+              "Vector instructions = 40 ÷ 8.",
+            ],
+            answer: "Five vector-add instructions are required.",
+          },
+        ],
+      },
+    ],
+    mechanism: {
+      title: "How to map work to a GPU",
+      steps: [
+        "Create many independent threads, often one per output element.",
+        "Group threads into blocks and blocks into a grid.",
+        "Keep threads in a warp on similar control paths.",
+        "Arrange neighbouring threads to access neighbouring addresses.",
+        "Include transfer and launch cost when measuring speedup.",
+      ],
+    },
+    example: {
+      title: "Image filter",
+      body: "Assign one thread to each pixel. Nearby threads read nearby pixels, so the work is parallel and memory access can be coalesced.",
+    },
+    misconception:
+      "A GPU is not automatically faster. Small, serial, branch-heavy, or transfer-heavy tasks may run better on a CPU.",
+  },
+  revise: {
+    definition:
+      "SIMD exposes vector operations; SIMT exposes threads that hardware groups for execution.",
+    essentials: [
+      "Vector registers hold several elements; a vector ALU operates on their lanes.",
+      "CPU targets low latency and irregular control; GPU targets high throughput.",
+      "NVIDIA CUDA groups 32 threads into a warp.",
+      "Divergence serializes required paths within a warp.",
+      "Coalesced access reduces memory transactions.",
+      "Arithmetic intensity = operations ÷ bytes transferred.",
+      "Measure transfers in end-to-end time.",
+    ],
+    followUp: "This completes Module 5 and the MCA course.",
+  },
+  lastMinute: {
+    definition:
+      "Many similar threads + regular branches + nearby data = good GPU use.",
+    memoryLine:
+      "SIMD uses vector lanes; SIMT schedules threads. Keep warps together in control flow and memory access.",
+    cues: [
+      "Vector register + vector ALU",
+      "Divergence hurts",
+      "Coalescing helps",
+      "Intensity = operations ÷ bytes",
+      "Include transfer time",
+    ],
+    trap: "A 32-thread warp is NVIDIA CUDA-specific; other GPU programming models and hardware use different execution-group terms or sizes.",
+  },
+};

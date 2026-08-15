@@ -1,15 +1,25 @@
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { InterviewOverviewAnimation } from "@/components/interview-questions/interview-overview-animation";
+import { behavioralInterviewQuestions } from "@/content/interview-questions/behavioral";
+import { computerNetworksInterviewQuestions } from "@/content/interview-questions/computer-networks";
 import { cssInterviewQuestions } from "@/content/interview-questions/css";
+import { dbmsInterviewQuestions } from "@/content/interview-questions/dbms";
 import { htmlInterviewQuestions } from "@/content/interview-questions/html";
 import { javascriptInterviewQuestions } from "@/content/interview-questions/javascript";
+import { operatingSystemInterviewQuestions } from "@/content/interview-questions/operating-systems";
+import { oopInterviewQuestions } from "@/content/interview-questions/oop";
 import { reactInterviewQuestions } from "@/content/interview-questions/react";
 import {
   ArrowRight,
+  Boxes,
   Braces,
   Code2,
+  Cpu,
+  Database,
   FileCode2,
+  MessageSquareText,
+  Network,
   Server,
   Sparkles,
 } from "lucide-react";
@@ -28,49 +38,93 @@ type Topic = {
   description: string;
   icon: LucideIcon;
   href?: string;
-  detail: string;
+  detail?: string;
 };
 
 const topics: Topic[] = [
   {
+    name: "Behavioral",
+    description:
+      "Ownership, teamwork, leadership, setbacks, and answers grounded in real experience.",
+    icon: MessageSquareText,
+    href: "/interview-questions/behavioral",
+    detail: `${behavioralInterviewQuestions.length} questions`,
+  },
+  {
+    name: "Operating Systems",
+    description:
+      "Processes, scheduling, synchronization, memory, file systems, and practical scenarios.",
+    icon: Cpu,
+    href: "/interview-questions/operating-systems",
+    detail: `${operatingSystemInterviewQuestions.length} questions`,
+  },
+  {
+    name: "Computer Networks",
+    description:
+      "Web protocols, TCP/IP, routing, addressing, security, and troubleshooting.",
+    icon: Network,
+    href: "/interview-questions/computer-networks",
+    detail: `${computerNetworksInterviewQuestions.length} questions`,
+  },
+  {
+    name: "OOP",
+    description:
+      "Objects, inheritance, polymorphism, SOLID principles, and practical design decisions.",
+    icon: Boxes,
+    href: "/interview-questions/oop",
+    detail: `${oopInterviewQuestions.length} questions`,
+  },
+  {
+    name: "DBMS",
+    description:
+      "SQL, normalization, transactions, indexing, concurrency, and practical database decisions.",
+    icon: Database,
+    href: "/interview-questions/dbms",
+    detail: `${dbmsInterviewQuestions.length} questions`,
+  },
+  {
     name: "HTML",
-    description: "Document structure, semantics, forms, accessibility, and browser behavior.",
+    description:
+      "Document structure, semantics, forms, accessibility, and browser behavior.",
     icon: Code2,
     href: "/interview-questions/html",
     detail: `${htmlInterviewQuestions.length} questions`,
   },
   {
     name: "CSS",
-    description: "Layout, responsive design, selectors, the cascade, and rendering.",
+    description:
+      "Layout, responsive design, selectors, the cascade, and rendering.",
     icon: Sparkles,
     href: "/interview-questions/css",
     detail: `${cssInterviewQuestions.length} questions`,
   },
   {
     name: "JavaScript",
-    description: "Language fundamentals, the runtime, asynchronous code, and the DOM.",
+    description:
+      "Language fundamentals, the runtime, asynchronous code, and the DOM.",
     icon: Braces,
     href: "/interview-questions/javascript",
     detail: `${javascriptInterviewQuestions.length} questions`,
   },
   {
     name: "React",
-    description: "Components, hooks, state, rendering, and application architecture.",
+    description:
+      "Components, hooks, state, rendering, and application architecture.",
     icon: Code2,
     href: "/interview-questions/react",
     detail: `${reactInterviewQuestions.length} questions`,
   },
   {
     name: "TypeScript",
-    description: "Types, narrowing, generics, inference, and safer application code.",
+    description:
+      "Types, narrowing, generics, inference, and safer application code.",
     icon: FileCode2,
-    detail: "Coming soon",
   },
   {
     name: "Node.js",
-    description: "The event loop, APIs, modules, streams, and backend fundamentals.",
+    description:
+      "The event loop, APIs, modules, streams, and backend fundamentals.",
     icon: Server,
-    detail: "Coming soon",
   },
 ];
 
@@ -97,7 +151,8 @@ export default function InterviewQuestionsPage() {
                 Prepare your answers before the interview.
               </h1>
               <p className="mt-6 max-w-[55ch] text-[15px] leading-7 text-[#555] dark:text-[#b3b3b3] sm:text-[17px] sm:leading-8">
-                Choose a topic, explain each answer aloud, and check what you missed.
+                Choose a topic, explain each answer aloud, and check what you
+                missed.
               </p>
             </div>
 
@@ -106,20 +161,26 @@ export default function InterviewQuestionsPage() {
         </section>
 
         <section className="px-5 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
-          <div className="mx-auto max-w-[980px]">
+          <div className="mx-auto max-w-[1240px]">
             <h2 className="text-[clamp(1.8rem,3vw,2.7rem)] font-semibold tracking-[-0.045em]">
               Choose a topic
             </h2>
-            <div className="mt-7 grid gap-3 sm:grid-cols-2">
+            <div className="mt-7 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {topics.map((topic) => {
                 const Icon = topic.icon;
                 const content = (
                   <>
                     <div className="flex items-start justify-between gap-5">
-                      <Icon className="size-5 text-[#777] dark:text-[#858585]" strokeWidth={1.55} aria-hidden="true" />
-                      <span className="text-[10px] text-[#777] dark:text-[#858585]">
-                        {topic.detail}
-                      </span>
+                      <Icon
+                        className="size-5 text-[#777] dark:text-[#858585]"
+                        strokeWidth={1.55}
+                        aria-hidden="true"
+                      />
+                      {topic.detail ? (
+                        <span className="text-[10px] text-[#777] dark:text-[#858585]">
+                          {topic.detail}
+                        </span>
+                      ) : null}
                     </div>
                     <h3 className="mt-5 text-[20px] font-semibold tracking-[-0.035em]">
                       {topic.name}
@@ -130,7 +191,11 @@ export default function InterviewQuestionsPage() {
                     {topic.href && (
                       <span className="mt-5 inline-flex items-center gap-2 text-[12px] font-medium">
                         Start practicing
-                        <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" strokeWidth={1.7} aria-hidden="true" />
+                        <ArrowRight
+                          className="size-4 transition-transform group-hover:translate-x-0.5"
+                          strokeWidth={1.7}
+                          aria-hidden="true"
+                        />
                       </span>
                     )}
                   </>

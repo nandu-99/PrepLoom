@@ -75,9 +75,21 @@ const ioSystemsDetailed: SubjectTopic = {
         dataTable: {
           headers: ["Part", "What it is", "Example"],
           rows: [
-            ["I/O Device", "Physical hardware that performs input or output", "Keyboard, SSD, printer"],
-            ["Device Controller", "Hardware that controls the device and exposes registers", "USB or storage controller"],
-            ["Device Driver", "OS software that knows how to operate that controller", "Printer or network driver"],
+            [
+              "I/O Device",
+              "Physical hardware that performs input or output",
+              "Keyboard, SSD, printer",
+            ],
+            [
+              "Device Controller",
+              "Hardware that controls the device and exposes registers",
+              "USB or storage controller",
+            ],
+            [
+              "Device Driver",
+              "OS software that knows how to operate that controller",
+              "Printer or network driver",
+            ],
           ],
         },
       },
@@ -89,17 +101,38 @@ const ioSystemsDetailed: SubjectTopic = {
         dataTable: {
           headers: ["Register", "Purpose", "Example"],
           rows: [
-            ["Control", "Starts or configures an operation", "Begin a disk read"],
-            ["Status", "Reports ready, busy, complete, or error", "Check whether a device is ready"],
-            ["Data", "Carries a small piece of input or output data", "Read one received byte"],
+            [
+              "Control",
+              "Starts or configures an operation",
+              "Begin a disk read",
+            ],
+            [
+              "Status",
+              "Reports ready, busy, complete, or error",
+              "Check whether a device is ready",
+            ],
+            [
+              "Data",
+              "Carries a small piece of input or output data",
+              "Read one received byte",
+            ],
           ],
         },
         table: {
           headers: ["Memory-Mapped I/O", "Port-Mapped I/O"],
           rows: [
-            ["Device registers use normal memory addresses", "Device registers use a separate I/O address space"],
-            ["Normal load and store instructions can access them", "Special I/O instructions are used"],
-            ["Common on many modern architectures", "Commonly associated with x86-style I/O ports"],
+            [
+              "Device registers use normal memory addresses",
+              "Device registers use a separate I/O address space",
+            ],
+            [
+              "Normal load and store instructions can access them",
+              "Special I/O instructions are used",
+            ],
+            [
+              "Common on many modern architectures",
+              "Commonly associated with x86-style I/O ports",
+            ],
           ],
         },
       },
@@ -180,9 +213,21 @@ const ioSystemsDetailed: SubjectTopic = {
         dataTable: {
           headers: ["Method", "CPU involvement", "Good fit"],
           rows: [
-            ["Polling", "Repeatedly checks status", "Very short or simple waits"],
-            ["Interrupt-Driven I/O", "Starts work and handles an Interrupt later", "Unpredictable or slower events"],
-            ["DMA", "Sets up the block transfer and handles completion", "Large, high-speed data transfers"],
+            [
+              "Polling",
+              "Repeatedly checks status",
+              "Very short or simple waits",
+            ],
+            [
+              "Interrupt-Driven I/O",
+              "Starts work and handles an Interrupt later",
+              "Unpredictable or slower events",
+            ],
+            [
+              "DMA",
+              "Sets up the block transfer and handles completion",
+              "Large, high-speed data transfers",
+            ],
           ],
         },
       },
@@ -206,10 +251,22 @@ const ioSystemsDetailed: SubjectTopic = {
         table: {
           headers: ["Benefits", "Costs"],
           rows: [
-            ["Applications do not need device-specific hardware logic", "Drivers and controllers add complexity"],
-            ["Interrupts reduce constant status checking", "Too many Interrupts can reduce performance"],
-            ["DMA reduces CPU copying for large transfers", "DMA requires setup and can compete with the CPU for the memory bus"],
-            ["The OS protects and coordinates device access", "A faulty driver can affect the whole system"],
+            [
+              "Applications do not need device-specific hardware logic",
+              "Drivers and controllers add complexity",
+            ],
+            [
+              "Interrupts reduce constant status checking",
+              "Too many Interrupts can reduce performance",
+            ],
+            [
+              "DMA reduces CPU copying for large transfers",
+              "DMA requires setup and can compete with the CPU for the memory bus",
+            ],
+            [
+              "The OS protects and coordinates device access",
+              "A faulty driver can affect the whole system",
+            ],
           ],
         },
       },
@@ -276,10 +333,22 @@ const ioSystemsDetailed: SubjectTopic = {
         dataTable: {
           headers: ["Concept", "Main job", "Main cost"],
           rows: [
-            ["Programmed I/O", "CPU instructions move data", "High CPU involvement"],
+            [
+              "Programmed I/O",
+              "CPU instructions move data",
+              "High CPU involvement",
+            ],
             ["Polling", "CPU repeatedly checks status", "Busy waiting"],
-            ["Interrupts", "Device notifies the CPU", "Interrupt-handling overhead"],
-            ["DMA", "Controller moves a large block", "Setup and memory-bus contention"],
+            [
+              "Interrupts",
+              "Device notifies the CPU",
+              "Interrupt-handling overhead",
+            ],
+            [
+              "DMA",
+              "Controller moves a large block",
+              "Setup and memory-bus contention",
+            ],
           ],
         },
       },
@@ -288,8 +357,14 @@ const ioSystemsDetailed: SubjectTopic = {
         table: {
           headers: ["Memory-Mapped I/O", "Port-Mapped I/O"],
           rows: [
-            ["Registers use memory addresses", "Registers use a separate I/O address space"],
-            ["Uses load and store instructions", "Uses special I/O instructions"],
+            [
+              "Registers use memory addresses",
+              "Registers use a separate I/O address space",
+            ],
+            [
+              "Uses load and store instructions",
+              "Uses special I/O instructions",
+            ],
           ],
         },
         paragraphs: [
@@ -370,8 +445,7 @@ const ioSystemsDetailed: SubjectTopic = {
     memoryLineLabel: "Remember This",
     memoryLine: "Polling checks. Interrupts notify. DMA moves blocks.",
     memoryLineAtEnd: true,
-    trap:
-      "Polling, Interrupts, and DMA do not form one universal performance ranking. DMA commonly uses an Interrupt to report completion.",
+    trap: "Polling, Interrupts, and DMA do not form one universal performance ranking. DMA commonly uses an Interrupt to report completion.",
   },
 };
 

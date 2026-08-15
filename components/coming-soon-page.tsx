@@ -47,7 +47,11 @@ export function ComingSoonPage({
               className="inline-flex h-11 items-center justify-center gap-2 rounded-[10px] bg-[#151515] px-5 text-sm font-medium text-white transition-[background-color,transform] hover:bg-black active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/40 focus-visible:ring-offset-2 focus-visible:ring-offset-[#f7f7f5] dark:border dark:border-white/[0.14] dark:bg-[#242424] dark:text-[#f3f3f1] dark:hover:bg-[#2b2b2b] dark:focus-visible:ring-white/50 dark:focus-visible:ring-offset-[#0a0a0a]"
             >
               Study Operating Systems
-              <ArrowRight className="size-4" strokeWidth={1.7} aria-hidden="true" />
+              <ArrowRight
+                className="size-4"
+                strokeWidth={1.7}
+                aria-hidden="true"
+              />
             </Link>
             <Link
               href="/subjects"

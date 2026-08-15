@@ -12,7 +12,7 @@ export const reactInterviewQuestions: InterviewQuestion[] = [
     question: "What is JSX, and how is it different from HTML?",
     answer:
       "JSX is a syntax extension that lets you write HTML-like markup inside JavaScript. It is transformed into React element descriptions. JSX can contain JavaScript expressions inside braces, uses JavaScript-style property names such as className, and requires every tag to be closed. Unlike HTML, JSX is not a string and is not sent directly to the browser.",
-    code: "const name = \"Maya\";\nconst heading = <h1 className=\"title\">Hello, {name}</h1>;",
+    code: 'const name = "Maya";\nconst heading = <h1 className="title">Hello, {name}</h1>;',
   },
   {
     id: "components-function-vs-class",
@@ -52,7 +52,7 @@ export const reactInterviewQuestions: InterviewQuestion[] = [
     question: "Why should React state be treated as immutable?",
     answer:
       "Do not change an existing state object or array directly. Create a new value and pass it to the setter. React uses object identity when deciding whether state changed, and old render snapshots must stay unchanged. Copy every changed level when updating nested data.",
-    code: "setUser((user) => ({\n  ...user,\n  address: { ...user.address, city: \"Pune\" },\n}));",
+    code: 'setUser((user) => ({\n  ...user,\n  address: { ...user.address, city: "Pune" },\n}));',
   },
   {
     id: "lifting-state-up",
@@ -96,7 +96,8 @@ export const reactInterviewQuestions: InterviewQuestion[] = [
   },
   {
     id: "controlled-vs-uncontrolled",
-    question: "What is the difference between controlled and uncontrolled inputs?",
+    question:
+      "What is the difference between controlled and uncontrolled inputs?",
     answer:
       "A controlled input gets its current value from React state and updates that state in onChange. An uncontrolled input keeps its current value in the DOM and is usually read with a ref or FormData. Controlled inputs are useful when the UI must react to every change. Uncontrolled inputs can be simpler for basic forms.",
   },
@@ -163,14 +164,14 @@ export const reactInterviewQuestions: InterviewQuestion[] = [
     question: "When is useReducer better than useState?",
     answer:
       "useReducer is useful when state has many related transitions or when update rules should live in one pure reducer function. The component dispatches an action, and the reducer returns the next state. useState is usually simpler for a few independent values.",
-    code: "const [state, dispatch] = useReducer(reducer, initialState);\ndispatch({ type: \"item_added\", item });",
+    code: 'const [state, dispatch] = useReducer(reducer, initialState);\ndispatch({ type: "item_added", item });',
   },
   {
     id: "context-and-prop-drilling",
     question: "What are Context and prop drilling?",
     answer:
       "Prop drilling means passing data through components that do not need it only to reach a deeper child. Context lets a parent provide a value to any descendant that reads that context. It is useful for data such as theme or the current user, but it does not replace all state management and can make reuse harder when overused.",
-    code: "const ThemeContext = createContext(\"light\");\n\nfunction App() {\n  return <ThemeContext value=\"dark\"><Page /></ThemeContext>;\n}\n\nconst theme = useContext(ThemeContext);",
+    code: 'const ThemeContext = createContext("light");\n\nfunction App() {\n  return <ThemeContext value="dark"><Page /></ThemeContext>;\n}\n\nfunction Page() {\n  const theme = useContext(ThemeContext);\n  return <main data-theme={theme}>Current theme: {theme}</main>;\n}',
   },
   {
     id: "memoization-apis",
@@ -233,7 +234,7 @@ export const reactInterviewQuestions: InterviewQuestion[] = [
     question: "How do React.lazy and Suspense support code splitting?",
     answer:
       "lazy loads a component module only when React first tries to render it. While the code is loading, the nearest Suspense boundary displays its fallback. This reduces the initial JavaScript bundle when the split is placed around code that is not needed immediately.",
-    code: "const Settings = lazy(() => import(\"./Settings.js\"));\n\n<Suspense fallback={<SettingsSkeleton />}>\n  <Settings />\n</Suspense>",
+    code: 'const Settings = lazy(() => import("./Settings.js"));\n\n<Suspense fallback={<SettingsSkeleton />}>\n  <Settings />\n</Suspense>',
   },
   {
     id: "suspense-data",
@@ -271,7 +272,7 @@ export const reactInterviewQuestions: InterviewQuestion[] = [
     question: "What are createRoot and hydrateRoot used for?",
     answer:
       "createRoot mounts a client-rendered React application into a DOM node. hydrateRoot attaches React to HTML that was already produced on the server. The older ReactDOM.render and ReactDOM.hydrate APIs were removed in React 19 and should not be used in new code.",
-    code: "const root = createRoot(document.getElementById(\"root\"));\nroot.render(<App />);\n\n// For server-rendered HTML:\nhydrateRoot(document.getElementById(\"root\"), <App />);",
+    code: 'const root = createRoot(document.getElementById("root"));\nroot.render(<App />);\n\n// For server-rendered HTML:\nhydrateRoot(document.getElementById("root"), <App />);',
   },
   {
     id: "hydration-mismatch",
@@ -281,7 +282,8 @@ export const reactInterviewQuestions: InterviewQuestion[] = [
   },
   {
     id: "csr-ssr",
-    question: "What is the difference between client-side and server-side rendering?",
+    question:
+      "What is the difference between client-side and server-side rendering?",
     answer:
       "Client-side rendering builds most of the UI in the browser after JavaScript loads. Server-side rendering sends HTML created on the server, then hydrates it for interaction. Server rendering can improve the first display and content discovery, but it adds server work and requires matching server and client output.",
   },
@@ -299,16 +301,18 @@ export const reactInterviewQuestions: InterviewQuestion[] = [
   },
   {
     id: "component-reuse-patterns",
-    question: "How do higher-order components, render props, and compound components differ?",
+    question:
+      "How do higher-order components, render props, and compound components differ?",
     answer:
       "A higher-order component is a function that returns an enhanced component. A render prop passes a function that decides what UI to render. Compound components are related components designed to work together, often sharing context. Hooks now replace many HOC and render-prop uses, while compound components remain useful for flexible UI APIs.",
   },
   {
     id: "default-props-and-prop-types",
-    question: "What should be used instead of defaultProps and PropTypes in modern function components?",
+    question:
+      "What should be used instead of defaultProps and PropTypes in modern function components?",
     answer:
       "Use JavaScript default parameters for default prop values. React 19 removed defaultProps support for function components, although class components still support it. React 19 also ignores propTypes on components, so use TypeScript or another build-time type system for new applications. Runtime validation is still needed for untrusted external data.",
-    code: "type AvatarProps = { size?: number };\n\nfunction Avatar({ size = 40 }: AvatarProps) {\n  return <img width={size} height={size} alt=\"\" />;\n}",
+    code: 'type AvatarProps = { size?: number };\n\nfunction Avatar({ size = 40 }: AvatarProps) {\n  return <img width={size} height={size} alt="" />;\n}',
   },
   {
     id: "class-lifecycle",

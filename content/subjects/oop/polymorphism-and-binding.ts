@@ -39,9 +39,18 @@ export const polymorphism: SubjectTopic = {
         table: {
           headers: ["Compile-time polymorphism", "Runtime polymorphism"],
           rows: [
-            ["Usually method or constructor overloading", "Method overriding through a parent type or interface"],
-            ["Compiler selects a matching parameter list", "Runtime dispatch selects the most specific override"],
-            ["Also called static or early binding in basic notes", "Also called dynamic or late binding"],
+            [
+              "Usually method or constructor overloading",
+              "Method overriding through a parent type or interface",
+            ],
+            [
+              "Compiler selects a matching parameter list",
+              "Runtime dispatch selects the most specific override",
+            ],
+            [
+              "Also called static or early binding in basic notes",
+              "Also called dynamic or late binding",
+            ],
           ],
         },
         paragraphs: [
@@ -124,7 +133,12 @@ export const polymorphism: SubjectTopic = {
       },
       {
         title: "Dispatch Rule",
-        flow: ["Parent reference", "Child object", "Call shared method", "Child override runs"],
+        flow: [
+          "Parent reference",
+          "Child object",
+          "Call shared method",
+          "Child override runs",
+        ],
       },
       {
         title: "Java Boundary",
@@ -154,14 +168,23 @@ export const polymorphism: SubjectTopic = {
       },
       {
         title: "Runtime Flow",
-        flow: ["Parent reference", "Child object", "Method call", "Child override"],
+        flow: [
+          "Parent reference",
+          "Child object",
+          "Method call",
+          "Child override",
+        ],
         wide: true,
       },
     ],
-    memoryLine: "Reference decides what is callable; runtime object decides which override runs.",
-    cues: ["One contract", "Many implementations", "Java instance-method dispatch"],
-    trap:
-      "Do not say fields or static methods use runtime polymorphism in Java.",
+    memoryLine:
+      "Reference decides what is callable; runtime object decides which override runs.",
+    cues: [
+      "One contract",
+      "Many implementations",
+      "Java instance-method dispatch",
+    ],
+    trap: "Do not say fields or static methods use runtime polymorphism in Java.",
   },
 };
 
@@ -221,10 +244,22 @@ export const overloadingVsOverriding: SubjectTopic = {
         dataTable: {
           headers: ["Point", "Overloading", "Overriding"],
           rows: [
-            ["Meaning", "Same name, different parameters", "Compatible inherited instance method"],
-            ["Classes", "Can be in one class or across inheritance", "Requires a subtype relationship"],
+            [
+              "Meaning",
+              "Same name, different parameters",
+              "Compatible inherited instance method",
+            ],
+            [
+              "Classes",
+              "Can be in one class or across inheritance",
+              "Requires a subtype relationship",
+            ],
             ["Decision", "Compile time", "Runtime object"],
-            ["Return type", "Alone cannot distinguish overloads", "Same or covariant reference type"],
+            [
+              "Return type",
+              "Alone cannot distinguish overloads",
+              "Same or covariant reference type",
+            ],
             ["Binding", "Static or early", "Dynamic or late"],
           ],
         },
@@ -275,7 +310,7 @@ export const overloadingVsOverriding: SubjectTopic = {
     },
     example: {
       title: "A call using both rules",
-      body: "Suppose Printer has overloaded print(String) and print(Object) methods, and ColorPrinter overrides print(String). For a Printer reference holding a ColorPrinter object, print(\"Hi\") selects print(String) at compile time and then runs ColorPrinter's override at runtime.",
+      body: 'Suppose Printer has overloaded print(String) and print(Object) methods, and ColorPrinter overrides print(String). For a Printer reference holding a ColorPrinter object, print("Hi") selects print(String) at compile time and then runs ColorPrinter\'s override at runtime.',
     },
     misconception:
       "A different return type alone is not overloading, and a same-named static or private child method is not overriding.",
@@ -291,7 +326,11 @@ export const overloadingVsOverriding: SubjectTopic = {
         dataTable: {
           headers: ["Rule", "Overloading", "Overriding"],
           rows: [
-            ["Parameters", "Must differ", "Same signature or valid subsignature"],
+            [
+              "Parameters",
+              "Must differ",
+              "Same signature or valid subsignature",
+            ],
             ["Inheritance", "Not required", "Required"],
             ["Selection", "Compile time", "Runtime"],
             ["Return type", "Not enough alone", "Same or covariant"],
@@ -316,7 +355,8 @@ export const overloadingVsOverriding: SubjectTopic = {
       "Return type alone cannot overload a Java method.",
       "When both apply: select overload first, dispatch override second.",
     ],
-    followUp: "What happens first when a method is both overloaded and overridden?",
+    followUp:
+      "What happens first when a method is both overloaded and overridden?",
   },
   lastMinute: {
     definition:
@@ -332,14 +372,20 @@ export const overloadingVsOverriding: SubjectTopic = {
       },
       {
         title: "Order",
-        flow: ["Select overload at compile time", "Dispatch override at runtime"],
+        flow: [
+          "Select overload at compile time",
+          "Dispatch override at runtime",
+        ],
         wide: true,
       },
     ],
     memoryLine: "Overload first; override second.",
-    cues: ["private: not overridden", "static: hidden", "final: cannot override"],
-    trap:
-      "Do not decide an overload from the runtime argument object; Java uses compile-time argument types.",
+    cues: [
+      "private: not overridden",
+      "static: hidden",
+      "final: cannot override",
+    ],
+    trap: "Do not decide an overload from the runtime argument object; Java uses compile-time argument types.",
   },
 };
 
@@ -411,10 +457,22 @@ export const dynamicBindingAndCasting: SubjectTopic = {
         dataTable: {
           headers: ["Question", "What decides it?", "Example"],
           rows: [
-            ["Can this member be called?", "Compile-time reference type", "Animal may expose sound()"],
+            [
+              "Can this member be called?",
+              "Compile-time reference type",
+              "Animal may expose sound()",
+            ],
             ["Which override runs?", "Runtime object's class", "Dog.sound()"],
-            ["Is a downcast valid?", "Runtime object compatibility", "Animal reference must hold a Dog"],
-            ["Which overload is selected?", "Compile-time argument types", "print(Animal) or print(Dog)"],
+            [
+              "Is a downcast valid?",
+              "Runtime object compatibility",
+              "Animal reference must hold a Dog",
+            ],
+            [
+              "Which overload is selected?",
+              "Compile-time argument types",
+              "print(Animal) or print(Dog)",
+            ],
           ],
         },
       },
@@ -463,7 +521,10 @@ export const dynamicBindingAndCasting: SubjectTopic = {
           headers: ["Static binding", "Dynamic binding"],
           rows: [
             ["Compile-time decision", "Runtime decision"],
-            ["Overloads, fields, static and private methods", "Overridden instance methods"],
+            [
+              "Overloads, fields, static and private methods",
+              "Overridden instance methods",
+            ],
           ],
         },
       },
@@ -474,13 +535,21 @@ export const dynamicBindingAndCasting: SubjectTopic = {
           rows: [
             ["Child to parent", "Parent reference to child type"],
             ["Normally implicit and safe", "Explicit and runtime-checked"],
-            ["Type-safe but narrows visible interface", "Can expose child-specific members"],
+            [
+              "Type-safe but narrows visible interface",
+              "Can expose child-specific members",
+            ],
           ],
         },
       },
       {
         title: "Safe Downcast",
-        flow: ["Parent reference", "instanceof target type", "Pattern variable", "Use child operation"],
+        flow: [
+          "Parent reference",
+          "instanceof target type",
+          "Pattern variable",
+          "Use child operation",
+        ],
       },
     ],
     essentialsStyle: "plain",
@@ -492,7 +561,8 @@ export const dynamicBindingAndCasting: SubjectTopic = {
       "An incompatible Java downcast throws ClassCastException.",
       "Casting does not change the actual object.",
     ],
-    followUp: "Why can animal.sound() work while animal.fetch() does not compile?",
+    followUp:
+      "Why can animal.sound() work while animal.fetch() does not compile?",
   },
   lastMinute: {
     definition:
@@ -500,7 +570,12 @@ export const dynamicBindingAndCasting: SubjectTopic = {
     sections: [
       {
         title: "Casting Flow",
-        flow: ["Dog object", "Upcast to Animal", "Check instanceof", "Downcast to Dog"],
+        flow: [
+          "Dog object",
+          "Upcast to Animal",
+          "Check instanceof",
+          "Downcast to Dog",
+        ],
         wide: true,
       },
       {
@@ -513,9 +588,13 @@ export const dynamicBindingAndCasting: SubjectTopic = {
         ],
       },
     ],
-    memoryLine: "Reference type controls access; runtime object controls overrides.",
-    cues: ["Cast changes the view, not object", "Check before downcast", "Overload before override"],
-    trap:
-      "Do not downcast only to force a different override; overridden methods already use runtime dispatch.",
+    memoryLine:
+      "Reference type controls access; runtime object controls overrides.",
+    cues: [
+      "Cast changes the view, not object",
+      "Check before downcast",
+      "Overload before override",
+    ],
+    trap: "Do not downcast only to force a different override; overridden methods already use runtime dispatch.",
   },
 };

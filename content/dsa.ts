@@ -1,5 +1,6 @@
 export type DsaGoal = "Foundations" | "Interview" | "Revision";
-export type DsaExperience = "New to DSA" | "Know the basics" | "Comfortable with DSA";
+export type DsaExperience =
+  "New to DSA" | "Know the basics" | "Comfortable with DSA";
 export type DsaScope = "Focused" | "Balanced" | "Comprehensive";
 
 export type DsaSheet = {
@@ -25,14 +26,23 @@ export const dsaSheets: DsaSheet[] = [
     name: "Striver A2Z DSA Sheet",
     provider: "takeUforward",
     mark: "A2",
-    summary: "A structured path that starts with programming basics and moves through advanced DSA topics.",
+    summary:
+      "A structured path that starts with programming basics and moves through advanced DSA topics.",
     bestFor: "Students learning DSA properly for the first time.",
-    avoidIf: "You already know the major patterns and only need quick interview revision.",
+    avoidIf:
+      "You already know the major patterns and only need quick interview revision.",
     goals: ["Foundations"],
     experience: "New to DSA",
     scope: "Comprehensive",
     pace: "Long-term learning",
-    topics: ["Basics", "Arrays", "Linked lists", "Trees", "Graphs", "Dynamic programming"],
+    topics: [
+      "Basics",
+      "Arrays",
+      "Linked lists",
+      "Trees",
+      "Graphs",
+      "Dynamic programming",
+    ],
     approach: [
       "Follow the order instead of jumping between topics.",
       "Learn the concept before solving its practice set.",
@@ -45,14 +55,23 @@ export const dsaSheets: DsaSheet[] = [
     name: "Striver SDE Sheet",
     provider: "takeUforward",
     mark: "SD",
-    summary: "A broad interview sheet built around frequently asked DSA problems and core patterns.",
-    bestFor: "Students who know DSA basics and want structured interview practice.",
+    summary:
+      "A broad interview sheet built around frequently asked DSA problems and core patterns.",
+    bestFor:
+      "Students who know DSA basics and want structured interview practice.",
     avoidIf: "You still need to learn data structures from the beginning.",
     goals: ["Interview"],
     experience: "Know the basics",
     scope: "Comprehensive",
     pace: "Steady interview preparation",
-    topics: ["Arrays", "Greedy", "Binary search", "Trees", "Graphs", "Dynamic programming"],
+    topics: [
+      "Arrays",
+      "Greedy",
+      "Binary search",
+      "Trees",
+      "Graphs",
+      "Dynamic programming",
+    ],
     approach: [
       "Solve one topic group at a time.",
       "Write down the pattern used by each difficult problem.",
@@ -65,14 +84,23 @@ export const dsaSheets: DsaSheet[] = [
     name: "Striver 79 Sheet",
     provider: "takeUforward",
     mark: "79",
-    summary: "A shorter collection intended for focused, last-moment interview preparation.",
+    summary:
+      "A shorter collection intended for focused, last-moment interview preparation.",
     bestFor: "Candidates revising familiar DSA patterns before interviews.",
-    avoidIf: "You need complete topic coverage or are still learning the fundamentals.",
+    avoidIf:
+      "You need complete topic coverage or are still learning the fundamentals.",
     goals: ["Revision"],
     experience: "Comfortable with DSA",
     scope: "Focused",
     pace: "Short revision cycle",
-    topics: ["Arrays", "Binary search", "Linked lists", "Trees", "Graphs", "Dynamic programming"],
+    topics: [
+      "Arrays",
+      "Binary search",
+      "Linked lists",
+      "Trees",
+      "Graphs",
+      "Dynamic programming",
+    ],
     approach: [
       "Use it as revision, not as your first DSA course.",
       "Set a time limit before checking an explanation.",
@@ -85,14 +113,22 @@ export const dsaSheets: DsaSheet[] = [
     name: "LeetCode 75",
     provider: "LeetCode",
     mark: "75",
-    summary: "A compact official study plan covering essential and commonly used interview patterns.",
+    summary:
+      "A compact official study plan covering essential and commonly used interview patterns.",
     bestFor: "Candidates who want a smaller, focused interview plan.",
     avoidIf: "You want a complete basics-to-advanced DSA curriculum.",
     goals: ["Interview"],
     experience: "Know the basics",
     scope: "Focused",
     pace: "Focused preparation",
-    topics: ["Arrays", "Two pointers", "Sliding window", "Trees", "Graphs", "Dynamic programming"],
+    topics: [
+      "Arrays",
+      "Two pointers",
+      "Sliding window",
+      "Trees",
+      "Graphs",
+      "Dynamic programming",
+    ],
     approach: [
       "Complete the topics in the study-plan order.",
       "Attempt each problem before reading hints.",
@@ -105,14 +141,23 @@ export const dsaSheets: DsaSheet[] = [
     name: "Top Interview 150",
     provider: "LeetCode",
     mark: "150",
-    summary: "An official, wider interview study plan with classic problems across major DSA topics.",
+    summary:
+      "An official, wider interview study plan with classic problems across major DSA topics.",
     bestFor: "Candidates with enough time for broad interview preparation.",
-    avoidIf: "Your interview is close and you need a much smaller revision list.",
+    avoidIf:
+      "Your interview is close and you need a much smaller revision list.",
     goals: ["Interview"],
     experience: "Know the basics",
     scope: "Comprehensive",
     pace: "Longer interview preparation",
-    topics: ["Arrays", "Hash maps", "Intervals", "Trees", "Graphs", "Dynamic programming"],
+    topics: [
+      "Arrays",
+      "Hash maps",
+      "Intervals",
+      "Trees",
+      "Graphs",
+      "Dynamic programming",
+    ],
     approach: [
       "Group practice by pattern instead of chasing daily counts.",
       "Record the time and mistakes for difficult attempts.",
@@ -125,14 +170,24 @@ export const dsaSheets: DsaSheet[] = [
     name: "Top 100 Liked",
     provider: "LeetCode",
     mark: "100",
-    summary: "A collection of highly rated problems organized around popular interview topics.",
-    bestFor: "Candidates strengthening pattern recognition after learning the basics.",
-    avoidIf: "You need a teaching-first course with a strict basics-to-advanced order.",
+    summary:
+      "A collection of highly rated problems organized around popular interview topics.",
+    bestFor:
+      "Candidates strengthening pattern recognition after learning the basics.",
+    avoidIf:
+      "You need a teaching-first course with a strict basics-to-advanced order.",
     goals: ["Interview", "Revision"],
     experience: "Comfortable with DSA",
     scope: "Balanced",
     pace: "Pattern-based practice",
-    topics: ["Arrays", "Strings", "Linked lists", "Trees", "Graphs", "Dynamic programming"],
+    topics: [
+      "Arrays",
+      "Strings",
+      "Linked lists",
+      "Trees",
+      "Graphs",
+      "Dynamic programming",
+    ],
     approach: [
       "Name the pattern before writing code.",
       "Compare multiple solutions only after finishing your own attempt.",

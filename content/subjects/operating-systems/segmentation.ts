@@ -65,9 +65,21 @@ const segmentationDetailed: SubjectTopic = {
         dataTable: {
           headers: ["Field", "Meaning", "Use"],
           rows: [
-            ["Base", "Starting physical address of the Segment", "Finds where the Segment begins"],
-            ["Limit", "Length of the Segment", "Checks whether the Offset is valid"],
-            ["Protection", "Read, Write, and Execute permissions", "Controls allowed access"],
+            [
+              "Base",
+              "Starting physical address of the Segment",
+              "Finds where the Segment begins",
+            ],
+            [
+              "Limit",
+              "Length of the Segment",
+              "Checks whether the Offset is valid",
+            ],
+            [
+              "Protection",
+              "Read, Write, and Execute permissions",
+              "Controls allowed access",
+            ],
           ],
         },
       },
@@ -95,7 +107,10 @@ const segmentationDetailed: SubjectTopic = {
         table: {
           headers: ["Segment Number", "Offset"],
           rows: [
-            ["Selects a Segment Table Entry", "Selects a byte inside the Segment"],
+            [
+              "Selects a Segment Table Entry",
+              "Selects a byte inside the Segment",
+            ],
             ["Finds Base and Limit", "Must be smaller than Limit"],
           ],
         },
@@ -111,8 +126,7 @@ const segmentationDetailed: SubjectTopic = {
           alt: "A logical address split into Segment Number and Offset, followed through a Segment Table and an Offset less than Limit check to either Base plus Offset or Invalid Memory Access.",
           width: 1536,
           height: 1024,
-          caption:
-            "The Limit check happens before Base and Offset are added.",
+          caption: "The Limit check happens before Base and Offset are added.",
         },
       },
       {
@@ -179,10 +193,26 @@ const segmentationDetailed: SubjectTopic = {
           rows: [
             ["Unit size", "Fixed-size Pages", "Variable-sized Segments"],
             ["View", "Memory-management blocks", "Logical program parts"],
-            ["Logical address", "Page Number + Offset", "Segment Number + Offset"],
-            ["Mapping data", "Page Table stores Frame Number", "Segment Table stores Base and Limit"],
-            ["Fragmentation", "No External Fragmentation between Frames; possible Internal Fragmentation", "Possible External Fragmentation"],
-            ["Protection and sharing", "Possible per Page", "Natural per logical Segment"],
+            [
+              "Logical address",
+              "Page Number + Offset",
+              "Segment Number + Offset",
+            ],
+            [
+              "Mapping data",
+              "Page Table stores Frame Number",
+              "Segment Table stores Base and Limit",
+            ],
+            [
+              "Fragmentation",
+              "No External Fragmentation between Frames; possible Internal Fragmentation",
+              "Possible External Fragmentation",
+            ],
+            [
+              "Protection and sharing",
+              "Possible per Page",
+              "Natural per logical Segment",
+            ],
           ],
         },
       },
@@ -218,10 +248,22 @@ const segmentationDetailed: SubjectTopic = {
         table: {
           headers: ["Advantages", "Disadvantages"],
           rows: [
-            ["Natural logical organization", "Pure Segmentation can cause External Fragmentation"],
-            ["Per-Segment protection", "Allocation and compaction are more complex"],
-            ["Easy sharing of logical parts such as Code", "Segment Tables and bounds checks add overhead"],
-            ["Segments can grow independently", "Segmentation with Paging adds another translation stage"],
+            [
+              "Natural logical organization",
+              "Pure Segmentation can cause External Fragmentation",
+            ],
+            [
+              "Per-Segment protection",
+              "Allocation and compaction are more complex",
+            ],
+            [
+              "Easy sharing of logical parts such as Code",
+              "Segment Tables and bounds checks add overhead",
+            ],
+            [
+              "Segments can grow independently",
+              "Segmentation with Paging adds another translation stage",
+            ],
           ],
         },
       },
@@ -260,8 +302,7 @@ const segmentationDetailed: SubjectTopic = {
           alt: "A logical program divided into variable-sized Code, Data, Heap, and Stack Segments mapped to separate regions of physical memory.",
           width: 1536,
           height: 1024,
-          caption:
-            "Each Segment represents one logical part of the program.",
+          caption: "Each Segment represents one logical part of the program.",
         },
       },
       {
@@ -308,7 +349,10 @@ const segmentationDetailed: SubjectTopic = {
           rows: [
             ["Fixed-size Pages", "Variable-sized logical Segments"],
             ["Memory-management division", "Logical program division"],
-            ["Removes External Fragmentation between Frames", "Pure Segmentation may cause External Fragmentation"],
+            [
+              "Removes External Fragmentation between Frames",
+              "Pure Segmentation may cause External Fragmentation",
+            ],
             ["Page Number + Offset", "Segment Number + Offset"],
           ],
         },
@@ -368,8 +412,7 @@ const segmentationDetailed: SubjectTopic = {
     memoryLineLabel: "Remember This",
     memoryLine: "Check Limit first, then calculate Base + Offset.",
     memoryLineAtEnd: true,
-    trap:
-      "Limit is the Segment size, not the last physical address.",
+    trap: "Limit is the Segment size, not the last physical address.",
   },
 };
 

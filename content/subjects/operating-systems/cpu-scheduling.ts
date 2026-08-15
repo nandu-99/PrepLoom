@@ -6,7 +6,9 @@ const existingCpuScheduling = baseOperatingSystemsContent.modules
   .find((topic) => topic.slug === "cpu-scheduling");
 
 if (!existingCpuScheduling) {
-  throw new Error("CPU Scheduling topic is missing from Operating Systems content.");
+  throw new Error(
+    "CPU Scheduling topic is missing from Operating Systems content.",
+  );
 }
 
 const cpuSchedulingDetailed: SubjectTopic = {
@@ -60,9 +62,7 @@ const cpuSchedulingDetailed: SubjectTopic = {
       },
       {
         title: "Scheduling Queues",
-        paragraphs: [
-          "Processes move between queues as their state changes.",
-        ],
+        paragraphs: ["Processes move between queues as their state changes."],
         points: [
           "Job Queue: Contains processes that have entered the system.",
           "Ready Queue: Contains processes waiting for CPU time.",
@@ -92,29 +92,34 @@ const cpuSchedulingDetailed: SubjectTopic = {
       },
       {
         title: "CPU-Bound vs I/O-Bound Processes",
-        paragraphs: [
-          "Different workloads need different scheduling behavior.",
-        ],
+        paragraphs: ["Different workloads need different scheduling behavior."],
         table: {
           headers: ["CPU-Bound", "I/O-Bound"],
           rows: [
             ["Long CPU bursts", "Short CPU bursts"],
             ["Less frequent I/O", "Frequent I/O waits"],
-            ["Examples: compiling, rendering, simulation", "Examples: browser, editor, terminal"],
+            [
+              "Examples: compiling, rendering, simulation",
+              "Examples: browser, editor, terminal",
+            ],
             ["Usually values throughput", "Usually values quick response"],
           ],
         },
       },
       {
         title: "Scheduler vs Dispatcher",
-        paragraphs: [
-          "The Scheduler and Dispatcher perform different jobs.",
-        ],
+        paragraphs: ["The Scheduler and Dispatcher perform different jobs."],
         table: {
           headers: ["Scheduler", "Dispatcher"],
           rows: [
-            ["Decides which task runs next", "Gives CPU control to the selected task"],
-            ["Checks the Ready Queue and scheduling policy", "Performs the context switch"],
+            [
+              "Decides which task runs next",
+              "Gives CPU control to the selected task",
+            ],
+            [
+              "Checks the Ready Queue and scheduling policy",
+              "Performs the context switch",
+            ],
             ["Makes the decision", "Applies the decision"],
           ],
         },
@@ -137,10 +142,19 @@ const cpuSchedulingDetailed: SubjectTopic = {
         table: {
           headers: ["Non-Preemptive", "Preemptive"],
           rows: [
-            ["The running process keeps the CPU", "The OS can interrupt the running process"],
-            ["It runs until it finishes or waits", "It may return to the Ready Queue"],
+            [
+              "The running process keeps the CPU",
+              "The OS can interrupt the running process",
+            ],
+            [
+              "It runs until it finishes or waits",
+              "It may return to the Ready Queue",
+            ],
             ["Less switching overhead", "Usually better response and fairness"],
-            ["A long task can delay others", "More context switches can add overhead"],
+            [
+              "A long task can delay others",
+              "More context switches can add overhead",
+            ],
           ],
         },
       },
@@ -182,8 +196,14 @@ const cpuSchedulingDetailed: SubjectTopic = {
           rows: [
             ["Faster response", "Less frequent switching"],
             ["More context switches", "Lower switching overhead"],
-            ["Lower delay for interactive work", "Longer delay for waiting tasks"],
-            ["Can reduce throughput", "Can behave like non-preemptive scheduling"],
+            [
+              "Lower delay for interactive work",
+              "Longer delay for waiting tasks",
+            ],
+            [
+              "Can reduce throughput",
+              "Can behave like non-preemptive scheduling",
+            ],
           ],
         },
       },
@@ -299,7 +319,10 @@ const cpuSchedulingDetailed: SubjectTopic = {
         table: {
           headers: ["Non-Preemptive", "Preemptive"],
           rows: [
-            ["A running task keeps the CPU", "The OS can interrupt a running task"],
+            [
+              "A running task keeps the CPU",
+              "The OS can interrupt a running task",
+            ],
             ["Less switching overhead", "Usually better response and fairness"],
           ],
         },
@@ -401,7 +424,9 @@ const existingAdvancedScheduling = baseOperatingSystemsContent.modules
   .find((topic) => topic.slug === "scheduling-algorithms");
 
 if (!existingAdvancedScheduling) {
-  throw new Error("Scheduling Algorithms topic is missing from Operating Systems content.");
+  throw new Error(
+    "Scheduling Algorithms topic is missing from Operating Systems content.",
+  );
 }
 
 const schedulingAlgorithmsDetailed: SubjectTopic = {
@@ -526,7 +551,10 @@ const schedulingAlgorithmsDetailed: SubjectTopic = {
           rows: [
             ["Non-Preemptive", "Preemptive"],
             ["Uses total Burst Time", "Uses Remaining Time"],
-            ["Decision after finish or wait", "Decision when a shorter task arrives"],
+            [
+              "Decision after finish or wait",
+              "Decision when a shorter task arrives",
+            ],
             ["Fewer context switches", "More context switches"],
           ],
         },
@@ -579,10 +607,22 @@ const schedulingAlgorithmsDetailed: SubjectTopic = {
           headers: ["Algorithm", "Main Idea and Main Problem"],
           rows: [
             ["FCFS", "Arrival order; Convoy Effect"],
-            ["SJF", "Shortest burst; needs prediction and may starve long jobs"],
-            ["SRTF", "Shortest remaining time; more switching and starvation risk"],
-            ["Priority", "Highest priority first; low-priority tasks may starve"],
-            ["Round Robin", "Fixed time slices; quantum controls overhead and response"],
+            [
+              "SJF",
+              "Shortest burst; needs prediction and may starve long jobs",
+            ],
+            [
+              "SRTF",
+              "Shortest remaining time; more switching and starvation risk",
+            ],
+            [
+              "Priority",
+              "Highest priority first; low-priority tasks may starve",
+            ],
+            [
+              "Round Robin",
+              "Fixed time slices; quantum controls overhead and response",
+            ],
           ],
         },
       },
@@ -661,11 +701,7 @@ const schedulingAlgorithmsDetailed: SubjectTopic = {
       },
       right: {
         label: "SRTF",
-        points: [
-          "Preemptive",
-          "Uses Remaining Time",
-          "More context switches",
-        ],
+        points: ["Preemptive", "Uses Remaining Time", "More context switches"],
       },
     },
     followUp: "",
@@ -753,9 +789,7 @@ const schedulingNumerical: SubjectTopic = {
       },
       {
         title: "FCFS Solution",
-        paragraphs: [
-          "FCFS runs processes in arrival order: P1, P2, then P3.",
-        ],
+        paragraphs: ["FCFS runs processes in arrival order: P1, P2, then P3."],
         gantt: {
           segments: [
             { label: "P1", start: 0, end: 5 },
@@ -951,7 +985,10 @@ const schedulingNumerical: SubjectTopic = {
             { label: "P3", start: 8, end: 9 },
           ],
         },
-        points: ["Completion Times: P1 = 5, P2 = 8, P3 = 9", "Average Waiting Time = 3.33"],
+        points: [
+          "Completion Times: P1 = 5, P2 = 8, P3 = 9",
+          "Average Waiting Time = 3.33",
+        ],
       },
     ],
     essentialsStyle: "plain",
@@ -1145,7 +1182,10 @@ const advancedSchedulingDetailed: SubjectTopic = {
           headers: ["Load Balancing", "CPU Affinity"],
           rows: [
             ["Moves work away from busy CPUs", "Keeps work on a preferred CPU"],
-            ["Improves CPU usage across the system", "Helps reuse warm cache data"],
+            [
+              "Improves CPU usage across the system",
+              "Helps reuse warm cache data",
+            ],
             ["May increase task movement", "May leave some CPUs less balanced"],
           ],
         },

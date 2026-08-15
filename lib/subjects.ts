@@ -21,51 +21,69 @@ export const subjects: Subject[] = [
   },
   {
     order: "02",
+    slug: "modern-computer-architecture",
+    name: "Computer Architecture",
+    description:
+      "Understand how binary logic, memory, and processors execute programs.",
+    topics: ["Digital Logic", "Memory", "Processors"],
+    availability: "available",
+  },
+  {
+    order: "03",
     slug: "oop",
-    name: "OOP",
+    name: "Object-Oriented Programming",
     description:
       "Master object-oriented principles and explain design choices clearly.",
     topics: ["Classes", "Encapsulation", "Abstraction"],
     availability: "available",
   },
   {
-    order: "03",
+    order: "04",
     slug: "dbms",
-    name: "DBMS",
+    name: "Database Systems",
     description:
       "Build strong foundations in databases, transactions, SQL, and indexing.",
     topics: ["Transactions", "SQL", "Indexes"],
-    availability: "coming-soon",
+    availability: "available",
   },
   {
-    order: "04",
+    order: "05",
     slug: "computer-networks",
     name: "Computer Networks",
     description:
       "Learn how systems communicate through protocols, layers, and the web.",
-    topics: ["TCP/IP", "HTTP", "DNS"],
-    availability: "coming-soon",
+    topics: ["Layers", "Packets", "Topologies"],
+    availability: "available",
   },
   {
-    order: "05",
+    order: "06",
+    slug: "machine-learning",
+    name: "Machine Learning",
+    description:
+      "Learn how models use data to make predictions and discover patterns.",
+    topics: ["Regression", "Classification", "Clustering"],
+    availability: "available",
+  },
+  {
+    order: "07",
+    slug: "deep-learning",
+    name: "Deep Learning",
+    description:
+      "Understand neural networks for vision, sequences, and modern AI systems.",
+    topics: ["Neural Networks", "CNNs", "Transformers"],
+    availability: "available",
+  },
+  {
+    order: "08",
     slug: "dsa-theory",
-    name: "DSA Theory",
+    name: "Data Structures and Algorithms",
     description:
       "Strengthen the theory behind complexity, data structures, and algorithms.",
     topics: ["Complexity", "Trees", "Graphs"],
     availability: "coming-soon",
   },
   {
-    order: "06",
-    slug: "system-design",
-    name: "System Design",
-    description:
-      "Reason about scalable systems, trade-offs, data, and reliability.",
-    topics: ["Scaling", "Caching", "Databases"],
-    availability: "coming-soon",
-  },
-  {
-    order: "07",
+    order: "09",
     slug: "web-fundamentals",
     name: "Web Fundamentals",
     description:
@@ -74,12 +92,12 @@ export const subjects: Subject[] = [
     availability: "coming-soon",
   },
   {
-    order: "08",
-    slug: "aiml",
-    name: "AI & Machine Learning",
+    order: "10",
+    slug: "system-design",
+    name: "System Design",
     description:
-      "Learn how intelligent systems use data, models, and algorithms to make predictions.",
-    topics: ["Machine Learning", "Neural Networks", "Generative AI"],
+      "Reason about scalable systems, trade-offs, data, and reliability.",
+    topics: ["Scaling", "Caching", "Databases"],
     availability: "coming-soon",
   },
 ];

@@ -248,8 +248,7 @@ const introductionToOperatingSystems: SubjectTopic = {
     ],
     memoryLineLabel: "Remember This",
     memoryLineAtEnd: true,
-    memoryLine:
-      "OS = Resource Manager + Protection Layer + Hardware Helper.",
+    memoryLine: "OS = Resource Manager + Protection Layer + Hardware Helper.",
     trap: "",
   },
 };
@@ -277,7 +276,10 @@ const kernelModesAndInterrupts: SubjectTopic = {
           rows: [
             ["The complete system software", "The core part of the OS"],
             ["Includes services and user tools", "Manages protected resources"],
-            ["Provides the full working environment", "Runs with full system access"],
+            [
+              "Provides the full working environment",
+              "Runs with full system access",
+            ],
           ],
         },
       },
@@ -303,8 +305,14 @@ const kernelModesAndInterrupts: SubjectTopic = {
           rows: [
             ["Runs applications", "Runs the Kernel"],
             ["Has limited access", "Has full hardware access"],
-            ["Cannot run protected instructions", "Can run protected instructions"],
-            ["Cannot access another process freely", "Can manage process memory"],
+            [
+              "Cannot run protected instructions",
+              "Can run protected instructions",
+            ],
+            [
+              "Cannot access another process freely",
+              "Can manage process memory",
+            ],
             ["Requests OS services", "Checks and performs requests"],
           ],
         },
@@ -343,14 +351,14 @@ const kernelModesAndInterrupts: SubjectTopic = {
       {
         title: "Mode Transition",
         paragraphs: [
-          "A mode transition is the safe movement between application code and Kernel code.",
+          "A mode transition is the controlled movement between less-privileged code and Kernel code. A system call from an application enters Kernel Mode and normally returns to User Mode. An interrupt or exception returns to the privilege mode of the interrupted context, which may already have been Kernel Mode.",
         ],
         flow: [
-          "User Mode",
+          "Current Mode (Usually User Mode)",
           "System Call, Interrupt, or Exception",
           "Kernel Mode",
           "Handle the Event",
-          "Return to User Mode",
+          "Return to the Previous Mode",
         ],
       },
       {
@@ -362,7 +370,10 @@ const kernelModesAndInterrupts: SubjectTopic = {
           headers: ["Kernel Design", "Simple Meaning"],
           rows: [
             ["Monolithic", "Most OS services run inside the Kernel"],
-            ["Microkernel", "Only the most important services stay inside the Kernel"],
+            [
+              "Microkernel",
+              "Only the most important services stay inside the Kernel",
+            ],
             ["Hybrid", "Uses ideas from both designs"],
           ],
         },
@@ -433,11 +444,11 @@ const kernelModesAndInterrupts: SubjectTopic = {
       {
         title: "Mode Transition",
         flow: [
-          "User Mode",
+          "Current Mode (Usually User Mode)",
           "System Call, Interrupt, or Exception",
           "Kernel Mode",
           "Handle the Event",
-          "Return to User Mode",
+          "Return to the Previous Mode",
         ],
       },
       {
@@ -457,7 +468,7 @@ const kernelModesAndInterrupts: SubjectTopic = {
       "System Call: A program asks for an OS service.",
       "Interrupt: Hardware needs CPU attention.",
       "Exception: The CPU finds a problem.",
-      "The CPU returns to User Mode after the Kernel finishes its work.",
+      "The CPU returns to the interrupted context's previous privilege mode after the Kernel finishes its work.",
     ],
     followUp: "",
   },
@@ -483,10 +494,10 @@ const kernelModesAndInterrupts: SubjectTopic = {
       {
         title: "Mode Transition",
         flow: [
-          "User Mode",
+          "Current Mode (Usually User Mode)",
           "Controlled Event",
           "Kernel Mode",
-          "Return to User Mode",
+          "Return to the Previous Mode",
         ],
         wide: true,
       },
@@ -512,7 +523,9 @@ const existingSystemCalls = baseOperatingSystemsContent.modules
   .find((topic) => topic.slug === "system-calls");
 
 if (!existingSystemCalls) {
-  throw new Error("System Calls topic is missing from Operating Systems content.");
+  throw new Error(
+    "System Calls topic is missing from Operating Systems content.",
+  );
 }
 
 const systemCallsDetailed: SubjectTopic = {

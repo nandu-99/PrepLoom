@@ -19,7 +19,9 @@ export function OopIllustration() {
         aria-labelledby="oop-illustration-title oop-illustration-description"
         className="h-auto w-full text-[#151515] dark:text-[#d8d8d6]"
       >
-        <title id="oop-illustration-title">One class creating three objects</title>
+        <title id="oop-illustration-title">
+          One class creating three objects
+        </title>
         <desc id="oop-illustration-description">
           A Car class defines fields and methods. Three Car objects use that
           structure while keeping separate state.
@@ -29,7 +31,10 @@ export function OopIllustration() {
           initial={reduceMotion ? false : { opacity: 0, y: -10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.55 }}
-          transition={{ duration: reduceMotion ? 0 : 0.5, ease: [0.16, 1, 0.3, 1] }}
+          transition={{
+            duration: reduceMotion ? 0 : 0.5,
+            ease: [0.16, 1, 0.3, 1],
+          }}
         >
           <rect
             x="230"
@@ -50,13 +55,40 @@ export function OopIllustration() {
             vectorEffect="non-scaling-stroke"
             opacity="0.35"
           />
-          <text x="360" y="67" textAnchor="middle" fill="currentColor" fontSize="22" fontWeight="600">
+          <text
+            x="360"
+            y="67"
+            textAnchor="middle"
+            fill="currentColor"
+            fontSize="22"
+            fontWeight="600"
+          >
             Car class
           </text>
-          <text x="260" y="116" fill="currentColor" fontSize="13" opacity="0.55">Fields</text>
-          <text x="260" y="143" fill="currentColor" fontSize="15">color · speed</text>
-          <text x="385" y="116" fill="currentColor" fontSize="13" opacity="0.55">Methods</text>
-          <text x="385" y="143" fill="currentColor" fontSize="15">start · brake</text>
+          <text
+            x="260"
+            y="116"
+            fill="currentColor"
+            fontSize="13"
+            opacity="0.55"
+          >
+            Fields
+          </text>
+          <text x="260" y="143" fill="currentColor" fontSize="15">
+            color · speed
+          </text>
+          <text
+            x="385"
+            y="116"
+            fill="currentColor"
+            fontSize="13"
+            opacity="0.55"
+          >
+            Methods
+          </text>
+          <text x="385" y="143" fill="currentColor" fontSize="15">
+            start · brake
+          </text>
         </motion.g>
 
         {objects.map((object, index) => {
@@ -80,7 +112,9 @@ export function OopIllustration() {
                 }}
               />
               <motion.g
-                initial={reduceMotion ? false : { opacity: 0, y: 8, scale: 0.96 }}
+                initial={
+                  reduceMotion ? false : { opacity: 0, y: 8, scale: 0.96 }
+                }
                 whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: true, amount: 0.55 }}
                 transition={{
@@ -108,13 +142,33 @@ export function OopIllustration() {
                   vectorEffect="non-scaling-stroke"
                   opacity="0.3"
                 />
-                <text x={center} y="307" textAnchor="middle" fill="currentColor" fontSize="17" fontWeight="600">
+                <text
+                  x={center}
+                  y="307"
+                  textAnchor="middle"
+                  fill="currentColor"
+                  fontSize="17"
+                  fontWeight="600"
+                >
                   {object.label}
                 </text>
-                <text x={center} y="348" textAnchor="middle" fill="currentColor" fontSize="12" opacity="0.55">
+                <text
+                  x={center}
+                  y="348"
+                  textAnchor="middle"
+                  fill="currentColor"
+                  fontSize="12"
+                  opacity="0.55"
+                >
                   color · speed
                 </text>
-                <text x={center} y="371" textAnchor="middle" fill="currentColor" fontSize="13">
+                <text
+                  x={center}
+                  y="371"
+                  textAnchor="middle"
+                  fill="currentColor"
+                  fontSize="13"
+                >
                   {object.state}
                 </text>
               </motion.g>

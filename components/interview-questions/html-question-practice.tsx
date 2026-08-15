@@ -1,6 +1,7 @@
 "use client";
 
 import type { InterviewQuestion } from "@/content/interview-questions/types";
+import { QuestionToolbar } from "@/components/interview-questions/question-toolbar";
 import { BookOpen, Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
 
@@ -20,8 +21,13 @@ function Answer({ question }: { question: InterviewQuestion }) {
               key={point}
               className="grid grid-cols-[14px_minmax(0,1fr)] gap-2 text-[13px] leading-6 text-[#505050] dark:text-[#b8b8b8]"
             >
-              <span aria-hidden="true" className="mt-[11px] h-px bg-black/35 dark:bg-white/35" />
-              <span className="min-w-0 break-words [overflow-wrap:anywhere]">{point}</span>
+              <span
+                aria-hidden="true"
+                className="mt-[11px] h-px bg-black/35 dark:bg-white/35"
+              />
+              <span className="min-w-0 break-words [overflow-wrap:anywhere]">
+                {point}
+              </span>
             </li>
           ))}
         </ul>
@@ -73,44 +79,16 @@ export function QuestionPractice({
 
   return (
     <div className="min-w-0">
-      <div className="sticky top-[68px] z-30 mb-5 flex min-w-0 justify-end rounded-b-[12px] border-b border-black/[0.1] bg-[#f7f7f5]/95 py-3 backdrop-blur-xl dark:border-white/[0.11] dark:bg-[#0a0a0a]/95 sm:px-3 sm:py-4">
-        <div className="text-right">
-          <p className="mb-1.5 text-[9px] font-medium text-[#606060] dark:text-[#a8a8a8] sm:text-[11px]">
-            Choose your mode
-          </p>
-          <div
-            className="inline-grid grid-cols-2 rounded-[10px] border border-black/[0.11] bg-black/[0.025] p-1 dark:border-white/[0.12] dark:bg-white/[0.04]"
-            aria-label="Answer mode"
-          >
-            {(
-              [
-                { id: "practice", label: "Practice", icon: BookOpen },
-                { id: "test", label: "Test", icon: EyeOff },
-              ] as const
-            ).map((item) => {
-              const Icon = item.icon;
-              const active = mode === item.id;
-
-              return (
-                <button
-                  key={item.id}
-                  type="button"
-                  onClick={() => selectMode(item.id)}
-                  aria-pressed={active}
-                  className={`inline-flex h-8 items-center justify-center gap-1.5 rounded-[8px] px-2.5 text-[10px] font-medium transition-[background-color,color,transform] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/40 dark:focus-visible:ring-white/50 sm:h-9 sm:gap-2 sm:px-4 sm:text-[11px] ${
-                    active
-                      ? "bg-[#151515] text-white dark:bg-[#ededed] dark:text-[#151515]"
-                      : "text-[#606060] hover:text-[#151515] dark:text-[#a8a8a8] dark:hover:text-white"
-                  }`}
-                >
-                  <Icon className="size-3.5" strokeWidth={1.7} aria-hidden="true" />
-                  {item.label}
-                </button>
-              );
-            })}
-          </div>
-        </div>
-      </div>
+      <QuestionToolbar
+        filteredCount={questions.length}
+        totalCount={questions.length}
+        mode={mode}
+        modeOptions={[
+          { id: "practice", label: "Practice", icon: BookOpen },
+          { id: "test", label: "Test", icon: EyeOff },
+        ]}
+        onModeChange={selectMode}
+      />
 
       <div className="grid min-w-0 gap-3">
         {questions.map((question, index) => {
@@ -139,9 +117,17 @@ export function QuestionPractice({
                     className="col-start-2 inline-flex h-8 w-fit items-center gap-2 rounded-[8px] px-2 text-[11px] font-medium text-[#606060] transition-colors hover:bg-black/[0.04] hover:text-[#151515] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/40 dark:text-[#a8a8a8] dark:hover:bg-white/[0.06] dark:hover:text-white dark:focus-visible:ring-white/50 sm:col-start-3 sm:row-start-1"
                   >
                     {answerVisible ? (
-                      <EyeOff className="size-3.5" strokeWidth={1.7} aria-hidden="true" />
+                      <EyeOff
+                        className="size-3.5"
+                        strokeWidth={1.7}
+                        aria-hidden="true"
+                      />
                     ) : (
-                      <Eye className="size-3.5" strokeWidth={1.7} aria-hidden="true" />
+                      <Eye
+                        className="size-3.5"
+                        strokeWidth={1.7}
+                        aria-hidden="true"
+                      />
                     )}
                     {answerVisible ? "Hide answer" : "Reveal answer"}
                   </button>

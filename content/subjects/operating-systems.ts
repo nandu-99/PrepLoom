@@ -10,7 +10,6 @@ import {
   deadlockFundamentalsDetailed,
   deadlockPreventionAvoidanceDetailed,
 } from "@/content/subjects/operating-systems/deadlocks";
-import { deadlockHandlingDetailed } from "@/content/subjects/operating-systems/deadlock-handling";
 import { deadlockNumericals } from "@/content/subjects/operating-systems/deadlock-numericals";
 import {
   introductionToOperatingSystems,
@@ -52,105 +51,104 @@ export const operatingSystemsContent: SubjectContent = {
   slug: "operating-systems",
   modules: [
     ...baseOperatingSystemsContent.modules.flatMap((module, index) => {
-    const topics = module.topics
-      .filter(
-        (topic) =>
-          (index !== 0 || topic.slug !== "what-is-an-operating-system") &&
-          topic.slug !== "process-states",
-      )
-      .map((topic) =>
-        topic.slug === "system-calls"
-          ? systemCallsDetailed
-          : topic.slug === "program-vs-process"
-            ? processesDetailed
-            : topic.slug === "process-vs-thread"
-              ? threadsDetailed
-              : topic.slug === "cpu-scheduling"
-                ? cpuSchedulingDetailed
-                : topic.slug === "scheduling-algorithms"
-                  ? schedulingAlgorithmsDetailed
-                  : topic.slug === "paging"
-                    ? pagingAndAddressTranslation
-                    : topic.slug === "virtual-memory"
-                      ? virtualMemoryDemandPagingDetailed
-            : topic,
-      );
-
-    const currentModule = {
-      ...module,
-      order: index > 3 ? String(index + 2).padStart(2, "0") : module.order,
-      title:
-        index === 0
-          ? "OS Fundamentals"
-          : module.title === "Concurrency"
-            ? "Synchronization"
-            : module.title === "Memory"
-              ? "Memory Management"
-            : module.title,
-      description:
-        module.title === "Concurrency"
-          ? "Shared data, race conditions, critical sections, and safe coordination between concurrent tasks."
-          : module.description,
-      topics:
-        index === 0
-          ? [
-              introductionToOperatingSystems,
-              kernelModesAndInterrupts,
-              ...topics,
-            ]
-          : module.title === "CPU Scheduling"
-            ? [...topics, schedulingNumerical, advancedSchedulingDetailed]
-          : module.title === "Concurrency"
-              ? [
-                  processSynchronizationDetailed,
-                  softwareBasedSynchronizationDetailed,
-                  hardwareBasedSynchronizationDetailed,
-                  locksMutexesSpinlocksDetailed,
-                  semaphoresDetailed,
-                  monitorsConditionVariablesDetailed,
-                  producerConsumerDetailed,
-                  readersWritersDetailed,
-                  diningPhilosophersDetailed,
-                ]
-            : module.title === "Memory"
-              ? [
-                  memoryManagementFundamentals,
-                  contiguousMemoryAllocation,
-                  ...topics.flatMap((topic) =>
-                    topic.slug === "paging"
-                      ? [topic, pageTableStructures, segmentationDetailed]
+      const topics = module.topics
+        .filter(
+          (topic) =>
+            (index !== 0 || topic.slug !== "what-is-an-operating-system") &&
+            topic.slug !== "process-states",
+        )
+        .map((topic) =>
+          topic.slug === "system-calls"
+            ? systemCallsDetailed
+            : topic.slug === "program-vs-process"
+              ? processesDetailed
+              : topic.slug === "process-vs-thread"
+                ? threadsDetailed
+                : topic.slug === "cpu-scheduling"
+                  ? cpuSchedulingDetailed
+                  : topic.slug === "scheduling-algorithms"
+                    ? schedulingAlgorithmsDetailed
+                    : topic.slug === "paging"
+                      ? pagingAndAddressTranslation
                       : topic.slug === "virtual-memory"
-                        ? [
-                            topic,
-                            pageReplacementAlgorithms,
-                            frameAllocationThrashing,
-                          ]
-                      : [topic],
-                  ),
-                ]
-            : topics,
-    };
+                        ? virtualMemoryDemandPagingDetailed
+                        : topic,
+        );
 
-    if (module.title !== "Concurrency") {
-      return [currentModule];
-    }
-
-    return [
-      currentModule,
-      {
-        order: "05",
-        title: "Deadlocks",
+      const currentModule = {
+        ...module,
+        order: index > 3 ? String(index + 2).padStart(2, "0") : module.order,
+        title:
+          index === 0
+            ? "OS Fundamentals"
+            : module.title === "Concurrency"
+              ? "Synchronization"
+              : module.title === "Memory"
+                ? "Memory Management"
+                : module.title,
         description:
-          "Resource waiting, Coffman conditions, prevention, avoidance, detection, and recovery.",
-        topics: [
-          deadlockFundamentalsDetailed,
-          deadlockPreventionAvoidanceDetailed,
-          deadlockDetectionRecoveryDetailed,
-          deadlockNumericals,
-          deadlockHandlingDetailed,
-        ],
-      },
-    ];
+          module.title === "Concurrency"
+            ? "Shared data, race conditions, critical sections, and safe coordination between concurrent tasks."
+            : module.description,
+        topics:
+          index === 0
+            ? [
+                introductionToOperatingSystems,
+                kernelModesAndInterrupts,
+                ...topics,
+              ]
+            : module.title === "CPU Scheduling"
+              ? [...topics, schedulingNumerical, advancedSchedulingDetailed]
+              : module.title === "Concurrency"
+                ? [
+                    processSynchronizationDetailed,
+                    softwareBasedSynchronizationDetailed,
+                    hardwareBasedSynchronizationDetailed,
+                    locksMutexesSpinlocksDetailed,
+                    semaphoresDetailed,
+                    monitorsConditionVariablesDetailed,
+                    producerConsumerDetailed,
+                    readersWritersDetailed,
+                    diningPhilosophersDetailed,
+                  ]
+                : module.title === "Memory"
+                  ? [
+                      memoryManagementFundamentals,
+                      contiguousMemoryAllocation,
+                      ...topics.flatMap((topic) =>
+                        topic.slug === "paging"
+                          ? [topic, pageTableStructures, segmentationDetailed]
+                          : topic.slug === "virtual-memory"
+                            ? [
+                                topic,
+                                pageReplacementAlgorithms,
+                                frameAllocationThrashing,
+                              ]
+                            : [topic],
+                      ),
+                    ]
+                  : topics,
+      };
+
+      if (module.title !== "Concurrency") {
+        return [currentModule];
+      }
+
+      return [
+        currentModule,
+        {
+          order: "05",
+          title: "Deadlocks",
+          description:
+            "Resource waiting, Coffman conditions, prevention, avoidance, detection, and recovery.",
+          topics: [
+            deadlockFundamentalsDetailed,
+            deadlockPreventionAvoidanceDetailed,
+            deadlockDetectionRecoveryDetailed,
+            deadlockNumericals,
+          ],
+        },
+      ];
     }),
     {
       order: "07",

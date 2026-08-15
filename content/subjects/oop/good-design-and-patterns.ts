@@ -128,7 +128,11 @@ export const couplingCohesionAndComposition: SubjectTopic = {
       },
       {
         title: "Composition",
-        flow: ["Receive collaborator", "Call its contract", "Replace implementation without changing type"],
+        flow: [
+          "Receive collaborator",
+          "Call its contract",
+          "Replace implementation without changing type",
+        ],
       },
     ],
     essentialsStyle: "plain",
@@ -146,13 +150,21 @@ export const couplingCohesionAndComposition: SubjectTopic = {
     sections: [
       {
         title: "Remember",
-        points: ["High cohesion", "Low unnecessary coupling", "Composition for HAS-A", "Inject required collaborators"],
+        points: [
+          "High cohesion",
+          "Low unnecessary coupling",
+          "Composition for HAS-A",
+          "Inject required collaborators",
+        ],
       },
     ],
     memoryLine: "Keep related work together; keep dependency knowledge small.",
-    cues: ["One reason to change", "Depend on contracts", "Composition over false inheritance"],
-    trap:
-      "Do not create an interface for every class only to claim low coupling.",
+    cues: [
+      "One reason to change",
+      "Depend on contracts",
+      "Composition over false inheritance",
+    ],
+    trap: "Do not create an interface for every class only to claim low coupling.",
   },
 };
 
@@ -209,11 +221,31 @@ export const solidPrinciples: SubjectTopic = {
         dataTable: {
           headers: ["Principle", "Applied to checkout", "Common mistake"],
           rows: [
-            ["SRP", "Separate payment, receipt, and persistence jobs", "One giant service"],
-            ["OCP", "Add a new PaymentMethod implementation", "Edit a growing type switch"],
-            ["LSP", "Every method honours the payment contract", "Child rejects required operations"],
-            ["ISP", "Small payment and refund roles", "One huge gateway interface"],
-            ["DIP", "Checkout depends on PaymentGateway", "Checkout constructs one vendor SDK"],
+            [
+              "SRP",
+              "Separate payment, receipt, and persistence jobs",
+              "One giant service",
+            ],
+            [
+              "OCP",
+              "Add a new PaymentMethod implementation",
+              "Edit a growing type switch",
+            ],
+            [
+              "LSP",
+              "Every method honours the payment contract",
+              "Child rejects required operations",
+            ],
+            [
+              "ISP",
+              "Small payment and refund roles",
+              "One huge gateway interface",
+            ],
+            [
+              "DIP",
+              "Checkout depends on PaymentGateway",
+              "Checkout constructs one vendor SDK",
+            ],
           ],
         },
         paragraphs: [
@@ -285,7 +317,8 @@ export const solidPrinciples: SubjectTopic = {
       "Abstractions should express stable needs.",
       "Avoid speculative layers and interfaces.",
     ],
-    followUp: "How is Dependency Inversion different from dependency injection?",
+    followUp:
+      "How is Dependency Inversion different from dependency injection?",
   },
   lastMinute: {
     definition:
@@ -293,13 +326,19 @@ export const solidPrinciples: SubjectTopic = {
     sections: [
       {
         title: "Letters",
-        points: ["S: one reason to change", "O: extend stable design", "L: safe substitution", "I: focused client roles", "D: depend on abstractions"],
+        points: [
+          "S: one reason to change",
+          "O: extend stable design",
+          "L: safe substitution",
+          "I: focused client roles",
+          "D: depend on abstractions",
+        ],
       },
     ],
-    memoryLine: "SOLID guides change; it does not demand extra layers everywhere.",
+    memoryLine:
+      "SOLID guides change; it does not demand extra layers everywhere.",
     cues: ["Contracts", "Expected variation", "Business policy over details"],
-    trap:
-      "Do not call a hierarchy valid only because its methods have matching signatures; behaviour must remain substitutable.",
+    trap: "Do not call a hierarchy valid only because its methods have matching signatures; behaviour must remain substitutable.",
   },
 };
 
@@ -357,8 +396,14 @@ export const factoryAndStrategyPatterns: SubjectTopic = {
         table: {
           headers: ["Factory", "Strategy"],
           rows: [
-            ["Focuses on object creation", "Focuses on interchangeable behaviour"],
-            ["Returns a suitable product", "Context delegates to selected algorithm"],
+            [
+              "Focuses on object creation",
+              "Focuses on interchangeable behaviour",
+            ],
+            [
+              "Returns a suitable product",
+              "Context delegates to selected algorithm",
+            ],
             ["Hides construction details", "Avoids behaviour condition chains"],
           ],
         },
@@ -430,7 +475,12 @@ export const factoryAndStrategyPatterns: SubjectTopic = {
       },
       {
         title: "Factory Names",
-        points: ["Simple Factory", "Factory Method", "Abstract Factory", "Static factory method is a separate creation idiom"],
+        points: [
+          "Simple Factory",
+          "Factory Method",
+          "Abstract Factory",
+          "Static factory method is a separate creation idiom",
+        ],
       },
     ],
     essentialsStyle: "plain",
@@ -440,7 +490,8 @@ export const factoryAndStrategyPatterns: SubjectTopic = {
       "Every product or strategy must respect its common contract.",
       "Do not add pattern indirection to trivial construction or behaviour.",
     ],
-    followUp: "Why is a static factory method not automatically the Factory Method pattern?",
+    followUp:
+      "Why is a static factory method not automatically the Factory Method pattern?",
   },
   lastMinute: {
     definition:
@@ -448,14 +499,22 @@ export const factoryAndStrategyPatterns: SubjectTopic = {
     sections: [
       {
         title: "Flow",
-        flow: ["Factory selects object", "Context receives strategy", "Context delegates behaviour"],
+        flow: [
+          "Factory selects object",
+          "Context receives strategy",
+          "Context delegates behaviour",
+        ],
         wide: true,
       },
     ],
-    memoryLine: "Factory = create or return a product. Strategy = interchangeable algorithm.",
-    cues: ["Common product", "Common behaviour", "Avoid repeated concrete checks"],
-    trap:
-      "Do not call every static creation helper the GoF Factory Method pattern.",
+    memoryLine:
+      "Factory = create or return a product. Strategy = interchangeable algorithm.",
+    cues: [
+      "Common product",
+      "Common behaviour",
+      "Avoid repeated concrete checks",
+    ],
+    trap: "Do not call every static creation helper the GoF Factory Method pattern.",
   },
 };
 
@@ -591,11 +650,22 @@ export const observerAndSingletonPatterns: SubjectTopic = {
     sections: [
       {
         title: "Observer",
-        points: ["Subscribe", "Publish event", "Notify subscribers", "Unsubscribe when required", "Define sync or async separately"],
+        points: [
+          "Subscribe",
+          "Publish event",
+          "Notify subscribers",
+          "Unsubscribe when required",
+          "Define sync or async separately",
+        ],
       },
       {
         title: "Singleton",
-        points: ["Controlled construction", "One scoped instance", "Thread-safe initialization", "Global-state and testing risks"],
+        points: [
+          "Controlled construction",
+          "One scoped instance",
+          "Thread-safe initialization",
+          "Global-state and testing risks",
+        ],
       },
     ],
     essentialsStyle: "plain",
@@ -606,7 +676,8 @@ export const observerAndSingletonPatterns: SubjectTopic = {
       "Java enum singleton is robust but still creates global access if used globally.",
       "Dependency injection often makes shared services easier to test.",
     ],
-    followUp: "Why does Observer not automatically mean asynchronous event delivery?",
+    followUp:
+      "Why does Observer not automatically mean asynchronous event delivery?",
   },
   lastMinute: {
     definition:
@@ -619,12 +690,16 @@ export const observerAndSingletonPatterns: SubjectTopic = {
       },
       {
         title: "Singleton Checks",
-        points: ["Real uniqueness need?", "What scope?", "Thread-safe creation?", "Can dependency be injected instead?"],
+        points: [
+          "Real uniqueness need?",
+          "What scope?",
+          "Thread-safe creation?",
+          "Can dependency be injected instead?",
+        ],
       },
     ],
     memoryLine: "Observer distributes change; Singleton restricts creation.",
     cues: ["Unsubscribe", "Sync/async is separate", "Beware global state"],
-    trap:
-      "Do not claim a Singleton automatically creates one instance across multiple processes or servers.",
+    trap: "Do not claim a Singleton automatically creates one instance across multiple processes or servers.",
   },
 };

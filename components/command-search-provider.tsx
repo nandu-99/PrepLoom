@@ -1,6 +1,7 @@
 "use client";
 
 import { CommandSearch } from "@/components/command-search";
+import type { SearchCatalog } from "@/lib/search-types";
 import {
   createContext,
   useCallback,
@@ -21,8 +22,10 @@ const CommandSearchContext = createContext<CommandSearchContextValue | null>(
 );
 
 export function CommandSearchProvider({
+  catalog,
   children,
 }: {
+  catalog: SearchCatalog;
   children: React.ReactNode;
 }) {
   const [searchOpen, setSearchOpen] = useState(false);
@@ -33,13 +36,17 @@ export function CommandSearchProvider({
     const handleShortcut = (event: KeyboardEvent) => {
       if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") {
         event.preventDefault();
-        setSearchOpen((current) => !current);
+        if (searchOpen) {
+          closeSearch();
+        } else {
+          openSearch();
+        }
       }
     };
 
     document.addEventListener("keydown", handleShortcut);
     return () => document.removeEventListener("keydown", handleShortcut);
-  }, []);
+  }, [closeSearch, openSearch, searchOpen]);
 
   const value = useMemo(
     () => ({ searchOpen, openSearch, closeSearch }),
@@ -49,7 +56,11 @@ export function CommandSearchProvider({
   return (
     <CommandSearchContext.Provider value={value}>
       {children}
-      <CommandSearch open={searchOpen} onOpenChange={setSearchOpen} />
+      <CommandSearch
+        catalog={catalog}
+        open={searchOpen}
+        onOpenChange={setSearchOpen}
+      />
     </CommandSearchContext.Provider>
   );
 }
