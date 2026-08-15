@@ -59,6 +59,7 @@ Local defaults:
 APP_ENV=development
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
 FEATURE_QUIZZES=false
+ENABLE_STAGING_ANALYTICS=false
 ```
 
 Never commit `.env.local` or real credentials.
