@@ -1,6 +1,7 @@
 "use client";
 
 import type { InterviewQuestion } from "@/content/interview-questions/types";
+import { QuestionToolbar } from "@/components/interview-questions/question-toolbar";
 import { BookOpen, Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
 
@@ -49,81 +50,20 @@ export function CategorizedQuestionPractice({
 
   return (
     <div className="min-w-0">
-      <div className="sticky top-[68px] z-30 mb-5 border-b border-black/[0.1] bg-[#f7f7f5]/95 py-3 backdrop-blur-xl dark:border-white/[0.11] dark:bg-[#0a0a0a]/95 sm:py-4">
-        <div className="flex min-w-0 flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
-          <div className="min-w-0">
-            <p className="mb-2 text-[10px] font-medium text-[#606060] dark:text-[#a8a8a8]">
-              Filter by category
-            </p>
-            <div className="-mx-5 overflow-x-auto px-5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:px-0">
-              <div className="flex w-max gap-1.5" aria-label={categoryLabel}>
-                {categoryOptions.map((option) => {
-                  const active = category === option;
-                  return (
-                    <button
-                      key={option}
-                      type="button"
-                      onClick={() => setCategory(option)}
-                      aria-pressed={active}
-                      className={`h-8 shrink-0 rounded-[8px] border px-3 text-[10px] font-medium transition-[border-color,background-color,color,transform] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/40 dark:focus-visible:ring-white/50 sm:text-[11px] ${
-                        active
-                          ? "border-[#151515] bg-[#151515] text-white dark:border-[#ededed] dark:bg-[#ededed] dark:text-[#151515]"
-                          : "border-black/[0.1] text-[#606060] hover:border-black/25 hover:text-[#151515] dark:border-white/[0.12] dark:text-[#a8a8a8] dark:hover:border-white/25 dark:hover:text-white"
-                      }`}
-                    >
-                      {option}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
-
-          <div className="shrink-0 lg:text-right">
-            <p className="mb-2 text-[10px] font-medium text-[#606060] dark:text-[#a8a8a8]">
-              Choose your mode
-            </p>
-            <div
-              className="inline-grid grid-cols-2 rounded-[10px] border border-black/[0.11] bg-black/[0.025] p-1 dark:border-white/[0.12] dark:bg-white/[0.04]"
-              aria-label="Answer mode"
-            >
-              {(
-                [
-                  { id: "learn", label: "Learn", icon: BookOpen },
-                  { id: "practice", label: "Practice", icon: EyeOff },
-                ] as const
-              ).map((item) => {
-                const Icon = item.icon;
-                const active = mode === item.id;
-                return (
-                  <button
-                    key={item.id}
-                    type="button"
-                    onClick={() => selectMode(item.id)}
-                    aria-pressed={active}
-                    className={`inline-flex h-8 items-center justify-center gap-1.5 rounded-[8px] px-3 text-[10px] font-medium transition-[background-color,color,transform] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/40 dark:focus-visible:ring-white/50 sm:h-9 sm:px-4 sm:text-[11px] ${
-                      active
-                        ? "bg-[#151515] text-white dark:bg-[#ededed] dark:text-[#151515]"
-                        : "text-[#606060] hover:text-[#151515] dark:text-[#a8a8a8] dark:hover:text-white"
-                    }`}
-                  >
-                    <Icon
-                      className="size-3.5"
-                      strokeWidth={1.7}
-                      aria-hidden="true"
-                    />
-                    {item.label}
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <p className="mb-4 text-[11px] text-[#777] dark:text-[#858585]">
-        Showing {filteredQuestions.length} of {questions.length} questions
-      </p>
+      <QuestionToolbar
+        filteredCount={filteredQuestions.length}
+        totalCount={questions.length}
+        mode={mode}
+        modeOptions={[
+          { id: "learn", label: "Learn", icon: BookOpen },
+          { id: "practice", label: "Practice", icon: EyeOff },
+        ]}
+        onModeChange={selectMode}
+        categories={categoryOptions}
+        selectedCategory={category}
+        onCategoryChange={setCategory}
+        categoryLabel={categoryLabel}
+      />
 
       {filteredQuestions.length ? (
         <div className="grid min-w-0 gap-3">
