@@ -12,15 +12,44 @@ import {
   X,
 } from "lucide-react";
 import { trackEvent } from "@/lib/analytics";
-import type { SearchCatalog, SearchIcon, SearchItem } from "@/lib/search-types";
+import {
+  rankSearchGroups,
+  type RankedSearchResult,
+} from "@/lib/search-ranking";
+import type {
+  SearchCatalog,
+  SearchIcon,
+  SearchItem,
+  SearchResultType,
+} from "@/lib/search-types";
 import { useRouter } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 const searchIcons: Record<SearchIcon, typeof BookOpen> = {
   book: BookOpen,
   braces: Braces,
   code: Code2,
   route: Route,
+};
+
+const resultTypeLabels: Record<SearchResultType, string> = {
+  subject: "Subject",
+  module: "Module",
+  topic: "Topic",
+  "interview-question": "Question",
+  resource: "Resource",
+  roadmap: "Roadmap",
+};
+
+type VisibleSearchResult = {
+  item: SearchItem;
+  matchReason: RankedSearchResult["matchReason"] | "suggested";
+  rank: number;
+};
+
+type VisibleSearchGroup = {
+  label: string;
+  results: VisibleSearchResult[];
 };
 
 function sanitizeSearchTerm(value: string) {
@@ -45,9 +74,37 @@ export function CommandSearch({
   const router = useRouter();
   const [query, setQuery] = useState("");
   const previousOpen = useRef(open);
-  const visibleGroups = query.trim()
-    ? catalog.searchGroups
-    : catalog.initialGroups;
+  const normalizedQuery = query.trim();
+  const visibleGroups = useMemo<VisibleSearchGroup[]>(() => {
+    if (!normalizedQuery) {
+      return catalog.initialGroups.map((group) => ({
+        label: group.label,
+        results: group.items.map((item, index) => ({
+          item,
+          matchReason: "suggested",
+          rank: index + 1,
+        })),
+      }));
+    }
+
+    const rankedResults = rankSearchGroups(catalog.searchGroups, query);
+    if (!rankedResults.length) return [];
+
+    return [
+      {
+        label: "Best match",
+        results: [rankedResults[0]],
+      },
+      ...(rankedResults.length > 1
+        ? [
+            {
+              label: "More results",
+              results: rankedResults.slice(1),
+            },
+          ]
+        : []),
+    ];
+  }, [catalog.initialGroups, catalog.searchGroups, normalizedQuery, query]);
 
   useEffect(() => {
     if (previousOpen.current && !open) {
@@ -72,11 +129,8 @@ export function CommandSearch({
     onOpenChange(nextOpen);
   };
 
-  const openResult = (
-    item: SearchItem,
-    resultType: string,
-    resultPosition: number,
-  ) => {
+  const openResult = (result: VisibleSearchResult) => {
+    const { item, matchReason, rank } = result;
     const sanitizedQuery = sanitizeSearchTerm(query);
 
     trackEvent("search", {
@@ -87,8 +141,9 @@ export function CommandSearch({
         : "suggested_result_selected",
       query_length: query.trim().length,
       result_title: item.title,
-      result_type: resultType,
-      result_position: resultPosition,
+      result_type: item.type,
+      result_position: rank,
+      match_reason: matchReason,
       destination: item.href,
     });
 
@@ -112,7 +167,11 @@ export function CommandSearch({
               development resources.
             </Dialog.Description>
 
-            <Command label="PrepLoom search" className="flex min-h-0 flex-col">
+            <Command
+              label="PrepLoom search"
+              shouldFilter={false}
+              className="flex min-h-0 flex-col"
+            >
               <div className="flex h-14 items-center gap-3 border-b border-black/10 px-4 dark:border-white/10 sm:h-16 sm:px-5">
                 <Search
                   aria-hidden="true"
@@ -151,24 +210,28 @@ export function CommandSearch({
                     heading={group.label}
                     className="mb-2 overflow-hidden text-black last:mb-0 dark:text-white [&_[cmdk-group-heading]]:px-3 [&_[cmdk-group-heading]]:pb-1.5 [&_[cmdk-group-heading]]:pt-2 [&_[cmdk-group-heading]]:text-[11px] [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:uppercase [&_[cmdk-group-heading]]:tracking-[0.14em] [&_[cmdk-group-heading]]:text-[#7C7C7C]"
                   >
-                    {group.items.map((item, itemIndex) => {
+                    {group.results.map((result) => {
+                      const { item } = result;
                       const Icon = searchIcons[item.icon];
                       return (
                         <Command.Item
                           key={`${group.label}:${item.href}:${item.title}`}
                           value={`${item.title} ${item.description}`}
                           keywords={item.keywords}
-                          onSelect={() =>
-                            openResult(item, group.label, itemIndex + 1)
-                          }
+                          onSelect={() => openResult(result)}
                           className="group flex cursor-default select-none items-center gap-3 rounded-xl px-3 py-2.5 outline-none data-[selected=true]:bg-black/[0.07] data-[selected=true]:text-black dark:data-[selected=true]:bg-white/[0.1] dark:data-[selected=true]:text-white"
                         >
                           <span className="grid size-9 shrink-0 place-items-center rounded-lg border border-black/10 bg-black/[0.03] text-[#7C7C7C] group-data-[selected=true]:bg-black/[0.05] group-data-[selected=true]:text-black dark:border-white/10 dark:bg-white/[0.04] dark:group-data-[selected=true]:bg-white/[0.08] dark:group-data-[selected=true]:text-white">
                             <Icon aria-hidden="true" className="size-[17px]" />
                           </span>
                           <span className="min-w-0 flex-1">
-                            <span className="block truncate text-sm font-medium">
-                              {item.title}
+                            <span className="flex min-w-0 items-center gap-2">
+                              <span className="min-w-0 flex-1 truncate text-sm font-medium">
+                                {item.title}
+                              </span>
+                              <span className="shrink-0 text-[10px] font-medium text-[#7C7C7C] group-data-[selected=true]:text-black/55 dark:group-data-[selected=true]:text-white/55">
+                                {resultTypeLabels[item.type]}
+                              </span>
                             </span>
                             <span className="mt-0.5 block truncate text-xs text-[#7C7C7C] group-data-[selected=true]:text-black/60 dark:group-data-[selected=true]:text-white/60">
                               {item.description}
