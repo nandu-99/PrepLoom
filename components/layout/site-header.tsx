@@ -3,6 +3,7 @@
 import { useCommandSearch } from "@/components/command-search-provider";
 import { PrepLoomLogo } from "@/components/preploom-logo";
 import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler";
+import { trackEvent } from "@/lib/analytics";
 import {
   BookOpen,
   Braces,
@@ -74,6 +75,13 @@ export function SiteHeader() {
       <div className="mx-auto flex h-[68px] max-w-[1440px] items-center gap-5 px-5 sm:px-6 lg:px-8">
         <Link
           href="/"
+          onClick={() =>
+            trackEvent("navigation_click", {
+              link_text: "PrepLoom home",
+              destination: "/",
+              ui_location: "header_logo",
+            })
+          }
           aria-label="PrepLoom home"
           className="shrink-0 rounded-[10px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/40 dark:focus-visible:ring-white/50"
         >
@@ -90,6 +98,13 @@ export function SiteHeader() {
               <Link
                 key={item.label}
                 href={item.href}
+                onClick={() =>
+                  trackEvent("navigation_click", {
+                    link_text: item.label,
+                    destination: item.href,
+                    ui_location: "header_desktop",
+                  })
+                }
                 className={`rounded-[8px] px-3 py-2 text-[13px] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/40 dark:focus-visible:ring-white/50 ${
                   active
                     ? "bg-black/[0.06] font-medium text-[#151515] dark:bg-white/[0.08] dark:text-white"
@@ -104,6 +119,20 @@ export function SiteHeader() {
         </nav>
 
         <div className="ml-auto flex items-center gap-2">
+          <button
+            type="button"
+            onClick={openSearch}
+            aria-label="Search PrepLoom"
+            aria-expanded={searchOpen}
+            aria-controls="preploom-command-search"
+            className="grid size-10 place-items-center rounded-[10px] border border-black/[0.11] text-[#555] transition-colors hover:border-black/25 hover:text-[#151515] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/40 dark:border-white/[0.12] dark:text-[#b3b3b3] dark:hover:border-white/25 dark:hover:text-white dark:focus-visible:ring-white/50 sm:hidden"
+          >
+            <Search
+              className="size-[18px]"
+              strokeWidth={1.7}
+              aria-hidden="true"
+            />
+          </button>
           <button
             type="button"
             onClick={openSearch}
@@ -176,7 +205,14 @@ export function SiteHeader() {
               <Link
                 key={item.label}
                 href={item.href}
-                onClick={() => setMenuOpen(false)}
+                onClick={() => {
+                  trackEvent("navigation_click", {
+                    link_text: item.label,
+                    destination: item.href,
+                    ui_location: "header_mobile",
+                  });
+                  setMenuOpen(false);
+                }}
                 tabIndex={menuOpen ? 0 : -1}
                 className="flex min-h-11 items-center gap-3 rounded-[10px] px-3 text-[14px] text-[#555] hover:bg-black/[0.05] hover:text-[#151515] dark:text-[#b3b3b3] dark:hover:bg-white/[0.07] dark:hover:text-white"
               >
