@@ -76,6 +76,7 @@ Configure variables independently in each Vercel project under **Settings → En
 APP_ENV=staging
 NEXT_PUBLIC_SITE_URL=https://preploom-staging.vercel.app
 FEATURE_QUIZZES=true
+ENABLE_STAGING_ANALYTICS=false
 ```
 
 ### Production variables
@@ -94,12 +95,14 @@ Copy `.env.example` to `.env.local`:
 APP_ENV=development
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
 FEATURE_QUIZZES=false
+ENABLE_STAGING_ANALYTICS=false
 ```
 
 ### Validation rules
 
 - `APP_ENV` accepts only `development`, `staging`, or `production`.
-- Boolean flags accept only `true` or `false`.
+- `FEATURE_QUIZZES` and `ENABLE_STAGING_ANALYTICS` accept only `true` or
+  `false`.
 - Missing values use safe development defaults.
 - Server-only secrets must never use the `NEXT_PUBLIC_` prefix.
 - Environment files and credentials must not be committed.
@@ -137,7 +140,7 @@ To release quizzes in production:
 - `robots.txt` disallows all crawlers.
 - `sitemap.xml` contains an empty URL set.
 - Google site verification is omitted.
-- Google Analytics is not loaded.
+- Google Analytics is not loaded by default.
 
 ### Production
 
@@ -146,6 +149,22 @@ To release quizzes in production:
 - The sitemap contains available production routes.
 - Google verification is enabled.
 - Google Analytics is loaded.
+
+### Temporary staging Analytics validation
+
+To validate Analytics with Tag Assistant without enabling production indexing
+behavior:
+
+1. Keep `APP_ENV=staging` in the `preploom-staging` project.
+2. Set `ENABLE_STAGING_ANALYTICS=true` for the staging project's Production
+   environment.
+3. Redeploy staging and complete the Tag Assistant and GA4 DebugView checks.
+4. Set `ENABLE_STAGING_ANALYTICS=false` (or remove it) and redeploy after QA.
+
+The flag is ignored outside the staging application environment. Staging uses
+the existing GA4 measurement ID while enabled, so identify test traffic by the
+`preploom-staging.vercel.app` hostname. The flag changes only Analytics loading;
+staging metadata, robots, sitemap, and Google verification remain non-production.
 
 `noindex` and `robots.txt` discourage discovery but do not restrict access. The staging domain is currently publicly reachable. If access restriction becomes necessary, use application-level staging authentication or a paid platform protection option.
 

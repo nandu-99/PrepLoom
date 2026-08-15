@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { CommandSearchProvider } from "@/components/command-search-provider";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { Geist, Geist_Mono, Inter } from "next/font/google";
-import { isProductionEnvironment } from "@/lib/env";
+import { isAnalyticsEnabled, isProductionEnvironment } from "@/lib/env";
 import { buildSearchCatalog } from "@/lib/search-index";
 import "./globals.css";
 
@@ -102,7 +102,7 @@ export default function RootLayout({
           {children}
         </CommandSearchProvider>
       </body>
-      {isProductionEnvironment ? <GoogleAnalytics gaId="G-EL58LD1HMW" /> : null}
+      {isAnalyticsEnabled ? <GoogleAnalytics gaId="G-EL58LD1HMW" /> : null}
     </html>
   );
 }
