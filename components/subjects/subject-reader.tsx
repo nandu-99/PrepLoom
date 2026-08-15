@@ -1,10 +1,13 @@
 "use client";
 
+import { ContentEngagementTracker } from "@/components/analytics/content-engagement-tracker";
+import { ContentScrollTracker } from "@/components/analytics/content-scroll-tracker";
 import {
   LearnContent,
   RecallContent,
   ReviewContent,
 } from "@/components/subjects/subject-workspace";
+import { trackEvent } from "@/lib/analytics";
 import type {
   SubjectContent,
   SubjectStudyMode,
@@ -19,17 +22,28 @@ import {
   ListTree,
 } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { useSearchParams } from "next/navigation";
 import {
+  Suspense,
+  useCallback,
   useEffect,
   useId,
   useMemo,
   useRef,
   useState,
-  type Dispatch,
-  type SetStateAction,
 } from "react";
 
 type ReadingLayout = "topic" | "all";
+
+type TopicViewSource =
+  | "initial_load"
+  | "restored_state"
+  | "url_query"
+  | "contents_desktop"
+  | "contents_mobile"
+  | "previous_button"
+  | "next_button"
+  | "all_notes_scroll";
 
 type SavedReadingState = {
   layout: ReadingLayout;
@@ -122,11 +136,47 @@ function TopicActions({
   );
 }
 
-export function SubjectReader({
-  subject,
+function SubjectTopicUrlSync({
+  topics,
+  onSelect,
+  reduceMotion,
 }: {
-  subject: SubjectContent;
+  topics: SubjectTopic[];
+  onSelect: (slug: string) => void;
+  reduceMotion: boolean | null;
 }) {
+  const searchParams = useSearchParams();
+  const requestedTopicSlug = searchParams.get("topic");
+
+  useEffect(() => {
+    if (
+      !requestedTopicSlug ||
+      !topics.some((topic) => topic.slug === requestedTopicSlug)
+    ) {
+      return;
+    }
+
+    let scrollFrame = 0;
+    const selectionFrame = window.requestAnimationFrame(() => {
+      onSelect(requestedTopicSlug);
+      scrollFrame = window.requestAnimationFrame(() => {
+        document.getElementById("reading-preview-note")?.scrollIntoView({
+          behavior: reduceMotion ? "auto" : "smooth",
+          block: "start",
+        });
+      });
+    });
+
+    return () => {
+      window.cancelAnimationFrame(selectionFrame);
+      window.cancelAnimationFrame(scrollFrame);
+    };
+  }, [onSelect, reduceMotion, requestedTopicSlug, topics]);
+
+  return null;
+}
+
+export function SubjectReader({ subject }: { subject: SubjectContent }) {
   const topics = useMemo(
     () => subject.modules.flatMap((module) => module.topics),
     [subject.modules],
@@ -139,9 +189,21 @@ export function SubjectReader({
   const [saved, setSaved] = useState<string[]>([]);
   const [hydrated, setHydrated] = useState(false);
   const pendingScrollSlug = useRef<string | null>(null);
+  const pendingTopicView = useRef<{
+    slug: string;
+    source: TopicViewSource;
+  } | null>(null);
+  const lastTrackedTopicKey = useRef<string | null>(null);
   const reduceMotion = useReducedMotion();
 
-  const selectedIndex = topics.findIndex((topic) => topic.slug === selectedSlug);
+  const selectUrlTopic = useCallback((slug: string) => {
+    pendingTopicView.current = { slug, source: "url_query" };
+    setSelectedSlug(slug);
+  }, []);
+
+  const selectedIndex = topics.findIndex(
+    (topic) => topic.slug === selectedSlug,
+  );
   const selectedTopic = topics[selectedIndex] ?? topics[0];
   const selectedModuleTitle =
     subject.modules.find((module) =>
@@ -160,7 +222,17 @@ export function SubjectReader({
           if (["learn", "revise", "last-minute"].includes(state.mode)) {
             setMode(state.mode);
           }
-          if (topics.some((topic) => topic.slug === state.selectedSlug)) {
+          const urlTopicSlug = new URLSearchParams(window.location.search).get(
+            "topic",
+          );
+          if (
+            !urlTopicSlug &&
+            topics.some((topic) => topic.slug === state.selectedSlug)
+          ) {
+            pendingTopicView.current = {
+              slug: state.selectedSlug,
+              source: "restored_state",
+            };
             setSelectedSlug(state.selectedSlug);
           }
           setCompleted(state.completed ?? []);
@@ -187,6 +259,51 @@ export function SubjectReader({
   }, [completed, hydrated, layout, mode, saved, selectedSlug, storageKey]);
 
   useEffect(() => {
+    if (!hydrated) return;
+
+    const requestedTopicSlug = new URLSearchParams(window.location.search).get(
+      "topic",
+    );
+    const hasValidRequestedTopic = topics.some(
+      (topic) => topic.slug === requestedTopicSlug,
+    );
+
+    if (hasValidRequestedTopic && requestedTopicSlug !== selectedSlug) return;
+
+    const topicKey = `${subject.slug}:${selectedSlug}`;
+    if (lastTrackedTopicKey.current === topicKey) return;
+
+    const pendingView = pendingTopicView.current;
+    const viewSource =
+      pendingView?.slug === selectedSlug ? pendingView.source : "initial_load";
+
+    trackEvent("topic_view", {
+      subject_slug: subject.slug,
+      subject_name: subject.title,
+      topic_slug: selectedTopic.slug,
+      topic_name: selectedTopic.title,
+      module_name: selectedModuleTitle,
+      study_mode: mode,
+      reading_layout: layout,
+      view_source: viewSource,
+    });
+
+    lastTrackedTopicKey.current = topicKey;
+    pendingTopicView.current = null;
+  }, [
+    hydrated,
+    layout,
+    mode,
+    selectedModuleTitle,
+    selectedSlug,
+    selectedTopic.slug,
+    selectedTopic.title,
+    subject.slug,
+    subject.title,
+    topics,
+  ]);
+
+  useEffect(() => {
     if (layout !== "all") return;
     const elements = topics
       .map((topic) => document.getElementById(`all-note-${topic.slug}`))
@@ -198,7 +315,14 @@ export function SubjectReader({
           .filter((entry) => entry.isIntersecting)
           .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
         if (visible) {
-          setSelectedSlug(visible.target.id.replace("all-note-", ""));
+          const slug = visible.target.id.replace("all-note-", "");
+          if (slug !== selectedSlug) {
+            pendingTopicView.current = {
+              slug,
+              source: "all_notes_scroll",
+            };
+            setSelectedSlug(slug);
+          }
         }
       },
       { rootMargin: "-24% 0px -58% 0px", threshold: [0, 0.2, 0.5] },
@@ -206,7 +330,7 @@ export function SubjectReader({
 
     elements.forEach((element) => observer.observe(element));
     return () => observer.disconnect();
-  }, [layout, topics]);
+  }, [layout, selectedSlug, topics]);
 
   useEffect(() => {
     if (!pendingScrollSlug.current) return;
@@ -222,30 +346,88 @@ export function SubjectReader({
     return () => window.cancelAnimationFrame(frame);
   }, [layout, mode, reduceMotion]);
 
-  function toggleList(
-    setter: Dispatch<SetStateAction<string[]>>,
-    slug: string,
-  ) {
-    setter((current) =>
-      current.includes(slug)
+  function getTopicAnalyticsContext(slug: string) {
+    const topic = topics.find((item) => item.slug === slug);
+    const moduleName = subject.modules.find((module) =>
+      module.topics.some((item) => item.slug === slug),
+    )?.title;
+
+    return {
+      topic_name: topic?.title,
+      module_name: moduleName,
+    };
+  }
+
+  function toggleCompleted(slug: string) {
+    const wasCompleted = completed.includes(slug);
+
+    if (!wasCompleted) {
+      trackEvent("topic_complete", {
+        subject_slug: subject.slug,
+        topic_slug: slug,
+        ...getTopicAnalyticsContext(slug),
+        study_mode: mode,
+        reading_layout: layout,
+      });
+    }
+
+    setCompleted((current) =>
+      wasCompleted
         ? current.filter((item) => item !== slug)
         : [...current, slug],
     );
   }
 
+  function toggleSaved(slug: string) {
+    const wasSaved = saved.includes(slug);
+
+    if (!wasSaved) {
+      trackEvent("topic_save", {
+        subject_slug: subject.slug,
+        topic_slug: slug,
+        ...getTopicAnalyticsContext(slug),
+        study_mode: mode,
+        reading_layout: layout,
+      });
+    }
+
+    setSaved((current) =>
+      wasSaved ? current.filter((item) => item !== slug) : [...current, slug],
+    );
+  }
+
   function changeLayout(nextLayout: ReadingLayout) {
     if (nextLayout === layout) return;
+
+    trackEvent("reading_layout_change", {
+      subject_slug: subject.slug,
+      topic_slug: selectedSlug,
+      previous_layout: layout,
+      reading_layout: nextLayout,
+      study_mode: mode,
+    });
+
     pendingScrollSlug.current = selectedSlug;
     setLayout(nextLayout);
   }
 
   function changeMode(nextMode: SubjectStudyMode) {
     if (nextMode === mode) return;
+
+    trackEvent("study_mode_change", {
+      subject_slug: subject.slug,
+      topic_slug: selectedSlug,
+      previous_mode: mode,
+      study_mode: nextMode,
+      reading_layout: layout,
+    });
+
     pendingScrollSlug.current = selectedSlug;
     setMode(nextMode);
   }
 
-  function selectTopic(slug: string) {
+  function selectTopic(slug: string, source: TopicViewSource) {
+    pendingTopicView.current = { slug, source };
     setSelectedSlug(slug);
     if (layout === "all") {
       document.getElementById(`all-note-${slug}`)?.scrollIntoView({
@@ -262,6 +444,13 @@ export function SubjectReader({
 
   return (
     <section className="border-b border-black/[0.08] dark:border-white/[0.09]">
+      <Suspense fallback={null}>
+        <SubjectTopicUrlSync
+          topics={topics}
+          onSelect={selectUrlTopic}
+          reduceMotion={reduceMotion}
+        />
+      </Suspense>
       <div className="sticky top-[68px] z-30 border-b border-black/[0.08] bg-[#f7f7f5]/95 px-5 py-3 backdrop-blur-xl dark:border-white/[0.09] dark:bg-[#0a0a0a]/95 sm:px-6 lg:px-8">
         <div className="mx-auto grid max-w-[1320px] gap-3 lg:grid-cols-[1fr_auto_auto] lg:items-center lg:gap-5">
           <p className="text-[13px] font-medium">
@@ -269,10 +458,21 @@ export function SubjectReader({
           </p>
 
           <div className="flex items-center justify-between gap-3">
-            <span className="hidden text-[11px] text-[#777] dark:text-[#999] sm:inline">Reading layout</span>
-            <div className="grid grid-cols-2 rounded-[12px] bg-black/[0.045] p-1 dark:bg-white/[0.055]" aria-label="Reading layout">
+            <span className="hidden text-[11px] text-[#777] dark:text-[#999] sm:inline">
+              Reading layout
+            </span>
+            <div
+              className="grid grid-cols-2 rounded-[12px] bg-black/[0.045] p-1 dark:bg-white/[0.055]"
+              aria-label="Reading layout"
+            >
               {layoutOptions.map((option) => (
-                <button key={option.value} type="button" onClick={() => changeLayout(option.value)} aria-pressed={layout === option.value} className={`min-h-9 rounded-[9px] px-3 text-[12px] font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/40 dark:focus-visible:ring-white/50 ${layout === option.value ? "bg-[#151515] text-white dark:bg-[#242424] dark:text-[#f3f3f1] dark:ring-1 dark:ring-inset dark:ring-white/[0.12]" : "text-[#606060] hover:text-[#151515] dark:text-[#a8a8a8] dark:hover:text-white"}`}>
+                <button
+                  key={option.value}
+                  type="button"
+                  onClick={() => changeLayout(option.value)}
+                  aria-pressed={layout === option.value}
+                  className={`min-h-9 rounded-[9px] px-3 text-[12px] font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/40 dark:focus-visible:ring-white/50 ${layout === option.value ? "bg-[#151515] text-white dark:bg-[#242424] dark:text-[#f3f3f1] dark:ring-1 dark:ring-inset dark:ring-white/[0.12]" : "text-[#606060] hover:text-[#151515] dark:text-[#a8a8a8] dark:hover:text-white"}`}
+                >
                   {option.label}
                 </button>
               ))}
@@ -280,10 +480,21 @@ export function SubjectReader({
           </div>
 
           <div className="flex items-center justify-between gap-3">
-            <span className="hidden text-[11px] text-[#777] dark:text-[#999] sm:inline">Note depth</span>
-            <div className="grid flex-1 grid-cols-3 rounded-[12px] bg-black/[0.045] p-1 dark:bg-white/[0.055] sm:flex-none" aria-label="Note depth">
+            <span className="hidden text-[11px] text-[#777] dark:text-[#999] sm:inline">
+              Note depth
+            </span>
+            <div
+              className="grid flex-1 grid-cols-3 rounded-[12px] bg-black/[0.045] p-1 dark:bg-white/[0.055] sm:flex-none"
+              aria-label="Note depth"
+            >
               {modeOptions.map((option) => (
-                <button key={option.value} type="button" onClick={() => changeMode(option.value)} aria-pressed={mode === option.value} className={`min-h-9 rounded-[9px] px-2.5 text-[11px] font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/40 dark:focus-visible:ring-white/50 sm:px-3 sm:text-[12px] ${mode === option.value ? "bg-[#151515] text-white dark:bg-[#242424] dark:text-[#f3f3f1] dark:ring-1 dark:ring-inset dark:ring-white/[0.12]" : "text-[#606060] hover:text-[#151515] dark:text-[#a8a8a8] dark:hover:text-white"}`}>
+                <button
+                  key={option.value}
+                  type="button"
+                  onClick={() => changeMode(option.value)}
+                  aria-pressed={mode === option.value}
+                  className={`min-h-9 rounded-[9px] px-2.5 text-[11px] font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/40 dark:focus-visible:ring-white/50 sm:px-3 sm:text-[12px] ${mode === option.value ? "bg-[#151515] text-white dark:bg-[#242424] dark:text-[#f3f3f1] dark:ring-1 dark:ring-inset dark:ring-white/[0.12]" : "text-[#606060] hover:text-[#151515] dark:text-[#a8a8a8] dark:hover:text-white"}`}
+                >
                   {option.label}
                 </button>
               ))}
@@ -293,32 +504,68 @@ export function SubjectReader({
       </div>
 
       <div className="mx-auto max-w-[1320px] px-5 py-10 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
+        {hydrated ? (
+          <>
+            <ContentScrollTracker
+              targetId="reading-preview-note"
+              subjectSlug={subject.slug}
+              topicSlug={layout === "topic" ? selectedTopic.slug : undefined}
+              topicName={layout === "topic" ? selectedTopic.title : undefined}
+              moduleName={layout === "topic" ? selectedModuleTitle : undefined}
+              studyMode={mode}
+              readingLayout={layout}
+            />
+            <ContentEngagementTracker
+              targetId={
+                layout === "topic"
+                  ? "reading-preview-note"
+                  : `all-note-${selectedTopic.slug}`
+              }
+              subjectSlug={subject.slug}
+              topicSlug={selectedTopic.slug}
+              topicName={selectedTopic.title}
+              moduleName={selectedModuleTitle}
+              studyMode={mode}
+              readingLayout={layout}
+            />
+          </>
+        ) : null}
         <details className="group mb-8 rounded-[14px] border border-black/[0.1] dark:border-white/[0.11] lg:hidden">
           <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between gap-4 px-4 text-[13px] font-medium">
             <span className="inline-flex items-center gap-2">
-              <ListTree className="size-4" strokeWidth={1.7} aria-hidden="true" />
+              <ListTree
+                className="size-4"
+                strokeWidth={1.7}
+                aria-hidden="true"
+              />
               Contents
             </span>
-            <ChevronDown className="size-4 transition-transform group-open:rotate-180" strokeWidth={1.7} aria-hidden="true" />
+            <ChevronDown
+              className="size-4 transition-transform group-open:rotate-180"
+              strokeWidth={1.7}
+              aria-hidden="true"
+            />
           </summary>
           <TopicList
             key={`mobile-${selectedModuleTitle}`}
             subject={subject}
             selectedSlug={selectedSlug}
             completed={completed}
-            onSelect={selectTopic}
+            onSelect={(slug) => selectTopic(slug, "contents_mobile")}
           />
         </details>
 
         <div className="grid items-start gap-12 lg:grid-cols-[250px_minmax(0,780px)] lg:justify-between xl:grid-cols-[270px_minmax(0,800px)_170px]">
           <aside className="sticky top-[178px] hidden max-h-[calc(100dvh-205px)] overflow-y-auto pr-5 lg:block">
-            <p className="text-[12px] font-medium text-[#616161] dark:text-[#a8a8a8]">Contents</p>
+            <p className="text-[12px] font-medium text-[#616161] dark:text-[#a8a8a8]">
+              Contents
+            </p>
             <TopicList
               key={`desktop-${selectedModuleTitle}`}
               subject={subject}
               selectedSlug={selectedSlug}
               completed={completed}
-              onSelect={selectTopic}
+              onSelect={(slug) => selectTopic(slug, "contents_desktop")}
               desktop
             />
           </aside>
@@ -333,8 +580,8 @@ export function SubjectReader({
                 completed={completed}
                 saved={saved}
                 onSelect={selectTopic}
-                onToggleComplete={(slug) => toggleList(setCompleted, slug)}
-                onToggleSaved={(slug) => toggleList(setSaved, slug)}
+                onToggleComplete={toggleCompleted}
+                onToggleSaved={toggleSaved}
                 reduceMotion={Boolean(reduceMotion)}
               />
             ) : (
@@ -343,8 +590,8 @@ export function SubjectReader({
                 mode={mode}
                 completed={completed}
                 saved={saved}
-                onToggleComplete={(slug) => toggleList(setCompleted, slug)}
-                onToggleSaved={(slug) => toggleList(setSaved, slug)}
+                onToggleComplete={toggleCompleted}
+                onToggleSaved={toggleSaved}
               />
             )}
           </div>
@@ -360,10 +607,8 @@ export function SubjectReader({
                 topic={selectedTopic}
                 completed={completed.includes(selectedTopic.slug)}
                 saved={saved.includes(selectedTopic.slug)}
-                onToggleComplete={() =>
-                  toggleList(setCompleted, selectedTopic.slug)
-                }
-                onToggleSaved={() => toggleList(setSaved, selectedTopic.slug)}
+                onToggleComplete={() => toggleCompleted(selectedTopic.slug)}
+                onToggleSaved={() => toggleSaved(selectedTopic.slug)}
                 placement="sidebar"
               />
             </div>
@@ -502,20 +747,84 @@ function TopicByTopic({
   topics: SubjectTopic[];
   completed: string[];
   saved: string[];
-  onSelect: (slug: string) => void;
+  onSelect: (slug: string, source: TopicViewSource) => void;
   onToggleComplete: (slug: string) => void;
   onToggleSaved: (slug: string) => void;
   reduceMotion: boolean;
 }) {
   return (
     <AnimatePresence mode="wait">
-      <motion.article key={`${topic.slug}:${mode}`} initial={reduceMotion ? false : { opacity: 0, y: 7 }} animate={{ opacity: 1, y: 0 }} exit={reduceMotion ? undefined : { opacity: 0, y: -5 }} transition={{ duration: reduceMotion ? 0 : 0.18 }}>
+      <motion.article
+        key={`${topic.slug}:${mode}`}
+        initial={reduceMotion ? false : { opacity: 0, y: 7 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={reduceMotion ? undefined : { opacity: 0, y: -5 }}
+        transition={{ duration: reduceMotion ? 0 : 0.18 }}
+      >
         <TopicHeader topic={topic} mode={mode} />
-        <div className="py-12"><TopicContent topic={topic} mode={mode} /></div>
-        <TopicActions topic={topic} completed={completed.includes(topic.slug)} saved={saved.includes(topic.slug)} onToggleComplete={() => onToggleComplete(topic.slug)} onToggleSaved={() => onToggleSaved(topic.slug)} />
+        <div className="py-12">
+          <TopicContent topic={topic} mode={mode} />
+        </div>
+        <TopicActions
+          topic={topic}
+          completed={completed.includes(topic.slug)}
+          saved={saved.includes(topic.slug)}
+          onToggleComplete={() => onToggleComplete(topic.slug)}
+          onToggleSaved={() => onToggleSaved(topic.slug)}
+        />
         <footer className="mt-7 grid gap-3 border-t border-black/[0.12] pt-6 dark:border-white/[0.13] sm:grid-cols-2">
-          <button type="button" disabled={selectedIndex === 0} onClick={() => onSelect(topics[Math.max(0, selectedIndex - 1)].slug)} className="flex min-h-16 items-center gap-3 rounded-[12px] px-3 text-left text-[13px] transition-colors hover:bg-black/[0.035] disabled:cursor-not-allowed disabled:opacity-35 dark:hover:bg-white/[0.05]"><ChevronLeft className="size-4" strokeWidth={1.7} aria-hidden="true" /><span><span className="block text-[11px] text-[#616161] dark:text-[#a8a8a8]">Previous</span><span className="mt-1 block font-medium">{clean(topics[Math.max(0, selectedIndex - 1)].title)}</span></span></button>
-          <button type="button" disabled={selectedIndex === topics.length - 1} onClick={() => onSelect(topics[Math.min(topics.length - 1, selectedIndex + 1)].slug)} className="flex min-h-16 items-center justify-end gap-3 rounded-[12px] px-3 text-right text-[13px] transition-colors hover:bg-black/[0.035] disabled:cursor-not-allowed disabled:opacity-35 dark:hover:bg-white/[0.05]"><span><span className="block text-[11px] text-[#616161] dark:text-[#a8a8a8]">Next</span><span className="mt-1 block font-medium">{clean(topics[Math.min(topics.length - 1, selectedIndex + 1)].title)}</span></span><ChevronRight className="size-4" strokeWidth={1.7} aria-hidden="true" /></button>
+          <button
+            type="button"
+            disabled={selectedIndex === 0}
+            onClick={() =>
+              onSelect(
+                topics[Math.max(0, selectedIndex - 1)].slug,
+                "previous_button",
+              )
+            }
+            className="flex min-h-16 items-center gap-3 rounded-[12px] px-3 text-left text-[13px] transition-colors hover:bg-black/[0.035] disabled:cursor-not-allowed disabled:opacity-35 dark:hover:bg-white/[0.05]"
+          >
+            <ChevronLeft
+              className="size-4"
+              strokeWidth={1.7}
+              aria-hidden="true"
+            />
+            <span>
+              <span className="block text-[11px] text-[#616161] dark:text-[#a8a8a8]">
+                Previous
+              </span>
+              <span className="mt-1 block font-medium">
+                {clean(topics[Math.max(0, selectedIndex - 1)].title)}
+              </span>
+            </span>
+          </button>
+          <button
+            type="button"
+            disabled={selectedIndex === topics.length - 1}
+            onClick={() =>
+              onSelect(
+                topics[Math.min(topics.length - 1, selectedIndex + 1)].slug,
+                "next_button",
+              )
+            }
+            className="flex min-h-16 items-center justify-end gap-3 rounded-[12px] px-3 text-right text-[13px] transition-colors hover:bg-black/[0.035] disabled:cursor-not-allowed disabled:opacity-35 dark:hover:bg-white/[0.05]"
+          >
+            <span>
+              <span className="block text-[11px] text-[#616161] dark:text-[#a8a8a8]">
+                Next
+              </span>
+              <span className="mt-1 block font-medium">
+                {clean(
+                  topics[Math.min(topics.length - 1, selectedIndex + 1)].title,
+                )}
+              </span>
+            </span>
+            <ChevronRight
+              className="size-4"
+              strokeWidth={1.7}
+              aria-hidden="true"
+            />
+          </button>
         </footer>
       </motion.article>
     </AnimatePresence>
@@ -543,15 +852,31 @@ function AllNotes({
         {subject.modules.map((module) => (
           <section key={module.title}>
             <header className="mb-12 border-b border-black/[0.12] pb-6 dark:border-white/[0.13]">
-              <h2 className="text-[28px] font-semibold tracking-[-0.045em] sm:text-[34px]">{clean(module.title)}</h2>
-              <p className="mt-3 text-[14px] leading-6 text-[#606060] dark:text-[#a8a8a8]">{clean(module.description)}</p>
+              <h2 className="text-[28px] font-semibold tracking-[-0.045em] sm:text-[34px]">
+                {clean(module.title)}
+              </h2>
+              <p className="mt-3 text-[14px] leading-6 text-[#606060] dark:text-[#a8a8a8]">
+                {clean(module.description)}
+              </p>
             </header>
             <div className="space-y-14 sm:space-y-16">
               {module.topics.map((topic) => (
-                <article id={`all-note-${topic.slug}`} key={topic.slug} className="scroll-mt-52 border-b border-black/[0.1] pb-14 last:border-b-0 last:pb-0 dark:border-white/[0.11] sm:pb-16 [content-visibility:auto] [contain-intrinsic-size:auto_900px]">
+                <article
+                  id={`all-note-${topic.slug}`}
+                  key={topic.slug}
+                  className="scroll-mt-52 border-b border-black/[0.1] pb-14 last:border-b-0 last:pb-0 dark:border-white/[0.11] sm:pb-16 [content-visibility:auto] [contain-intrinsic-size:auto_900px]"
+                >
                   <TopicHeader topic={topic} mode={mode} compact />
-                  <div className="py-10"><TopicContent topic={topic} mode={mode} /></div>
-                  <TopicActions topic={topic} completed={completed.includes(topic.slug)} saved={saved.includes(topic.slug)} onToggleComplete={() => onToggleComplete(topic.slug)} onToggleSaved={() => onToggleSaved(topic.slug)} />
+                  <div className="py-10">
+                    <TopicContent topic={topic} mode={mode} />
+                  </div>
+                  <TopicActions
+                    topic={topic}
+                    completed={completed.includes(topic.slug)}
+                    saved={saved.includes(topic.slug)}
+                    onToggleComplete={() => onToggleComplete(topic.slug)}
+                    onToggleSaved={() => onToggleSaved(topic.slug)}
+                  />
                 </article>
               ))}
             </div>
@@ -562,11 +887,25 @@ function AllNotes({
   );
 }
 
-function TopicHeader({ topic, mode, compact = false }: { topic: SubjectTopic; mode: SubjectStudyMode; compact?: boolean }) {
+function TopicHeader({
+  topic,
+  mode,
+  compact = false,
+}: {
+  topic: SubjectTopic;
+  mode: SubjectStudyMode;
+  compact?: boolean;
+}) {
   return (
     <header className="border-b border-black/[0.12] pb-8 dark:border-white/[0.13]">
-      <h2 className={`text-balance font-semibold leading-[0.96] tracking-[-0.06em] ${compact ? "text-[clamp(2.25rem,4vw,3.8rem)]" : "text-[clamp(2.7rem,5vw,4.8rem)]"}`}>{clean(topic.title)}</h2>
-      <p className="mt-5 max-w-[64ch] text-[16px] leading-8 text-[#505050] dark:text-[#b8b8b8]">{clean(mode === "learn" ? topic.learn.opening : topic.description)}</p>
+      <h2
+        className={`text-balance font-semibold leading-[0.96] tracking-[-0.06em] ${compact ? "text-[clamp(2.25rem,4vw,3.8rem)]" : "text-[clamp(2.7rem,5vw,4.8rem)]"}`}
+      >
+        {clean(topic.title)}
+      </h2>
+      <p className="mt-5 max-w-[64ch] text-[16px] leading-8 text-[#505050] dark:text-[#b8b8b8]">
+        {clean(mode === "learn" ? topic.learn.opening : topic.description)}
+      </p>
     </header>
   );
 }

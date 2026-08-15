@@ -1,5 +1,6 @@
 "use client";
 
+import { trackEvent } from "@/lib/analytics";
 import { subjects } from "@/lib/subjects";
 import { isAvailable } from "@/lib/release-status";
 import {
@@ -691,6 +692,14 @@ export function SubjectsPage() {
                     </p>
                     <Link
                       href={activeSubjectHref}
+                      onClick={() =>
+                        trackEvent("subject_select", {
+                          subject_slug: activeSubject.slug,
+                          subject_name: activeSubject.name,
+                          availability: activeSubject.availability,
+                          ui_location: "subjects_featured_panel",
+                        })
+                      }
                       className="group inline-flex items-center gap-2 text-sm font-medium underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                     >
                       {activeSubjectAvailable
@@ -723,6 +732,14 @@ export function SubjectsPage() {
                     href={subjectHref}
                     onMouseEnter={() => setActiveSubjectSlug(subject.slug)}
                     onFocus={() => setActiveSubjectSlug(subject.slug)}
+                    onClick={() =>
+                      trackEvent("subject_select", {
+                        subject_slug: subject.slug,
+                        subject_name: subject.name,
+                        availability: subject.availability,
+                        ui_location: "subjects_list",
+                      })
+                    }
                     className={`group relative flex min-h-[74px] items-center gap-4 px-5 py-3 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring ${
                       available
                         ? "opacity-100"
