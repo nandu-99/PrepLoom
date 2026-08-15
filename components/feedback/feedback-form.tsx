@@ -15,7 +15,9 @@ const feedbackTypes = [
 ];
 
 export function FeedbackForm() {
-  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [status, setStatus] = useState<
+    "idle" | "sending" | "success" | "error"
+  >("idle");
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -57,7 +59,10 @@ export function FeedbackForm() {
     >
       <div className="grid gap-5 sm:grid-cols-2">
         <label className="text-[13px] font-medium">
-          Name <span className="font-normal text-[#777] dark:text-[#888]">(optional)</span>
+          Name{" "}
+          <span className="font-normal text-[#777] dark:text-[#888]">
+            (optional)
+          </span>
           <input
             className={fieldClassName}
             type="text"
@@ -66,7 +71,10 @@ export function FeedbackForm() {
           />
         </label>
         <label className="text-[13px] font-medium">
-          Email <span className="font-normal text-[#777] dark:text-[#888]">(optional)</span>
+          Email{" "}
+          <span className="font-normal text-[#777] dark:text-[#888]">
+            (optional)
+          </span>
           <input
             className={fieldClassName}
             type="email"
@@ -77,11 +85,7 @@ export function FeedbackForm() {
         </label>
       </div>
 
-      <Select.Root
-        name="feedbackType"
-        defaultValue="Content issue"
-        required
-      >
+      <Select.Root name="feedbackType" defaultValue="Content issue" required>
         <Select.Label className="text-[13px] font-medium">
           Feedback type
         </Select.Label>
@@ -128,7 +132,10 @@ export function FeedbackForm() {
       </Select.Root>
 
       <label className="block text-[13px] font-medium">
-        Page link <span className="font-normal text-[#777] dark:text-[#888]">(optional)</span>
+        Page link{" "}
+        <span className="font-normal text-[#777] dark:text-[#888]">
+          (optional)
+        </span>
         <input
           className={fieldClassName}
           type="url"
@@ -165,7 +172,11 @@ export function FeedbackForm() {
         >
           {status === "sending" ? "Sending..." : "Send feedback"}
           {status === "sending" ? (
-            <LoaderCircle className="size-3.5 animate-spin" strokeWidth={1.7} aria-hidden="true" />
+            <LoaderCircle
+              className="size-3.5 animate-spin"
+              strokeWidth={1.7}
+              aria-hidden="true"
+            />
           ) : (
             <Send className="size-3.5" strokeWidth={1.7} aria-hidden="true" />
           )}

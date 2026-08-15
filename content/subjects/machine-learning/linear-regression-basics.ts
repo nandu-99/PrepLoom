@@ -28,8 +28,8 @@ export const simpleLinearRegression: SubjectTopic = {
         formulas: [
           {
             label: "Simple linear regression",
-            expression: "ŷ = β₀ + β₁x",
-            note: "β₀ is the intercept, β₁ is the slope, x is the input, and ŷ is the prediction.",
+            expression: "ŷ = β̂₀ + β̂₁x",
+            note: "β̂₀ is the fitted intercept, β̂₁ is the fitted slope, x is the input, and ŷ is the prediction.",
           },
         ],
         dataTable: {
@@ -208,7 +208,7 @@ export const simpleLinearRegression: SubjectTopic = {
       {
         title: "Essential Formulas",
         formulas: [
-          { label: "Prediction", expression: "ŷ = β₀ + β₁x" },
+          { label: "Prediction", expression: "ŷ = β̂₀ + β̂₁x" },
           { label: "Residual", expression: "eᵢ = yᵢ − ŷᵢ" },
           { label: "Slope", expression: "β̂₁ = Σ(xᵢ − x̄)(yᵢ − ȳ) / Σ(xᵢ − x̄)²" },
           { label: "Intercept", expression: "β̂₀ = ȳ − β̂₁x̄" },
@@ -236,7 +236,7 @@ export const simpleLinearRegression: SubjectTopic = {
     followUp: "Why does OLS square residuals instead of simply adding them?",
   },
   lastMinute: {
-    definition: "Fit one straight line: ŷ = β₀ + β₁x.",
+    definition: "Fit one straight line: ŷ = β̂₀ + β̂₁x.",
     sections: [
       {
         title: "Formula Order",
@@ -297,12 +297,12 @@ export const multipleLinearRegression: SubjectTopic = {
         formulas: [
           {
             label: "Multiple linear regression",
-            expression: "ŷ = β₀ + β₁x₁ + β₂x₂ + … + βₚxₚ",
+            expression: "ŷ = β̂₀ + β̂₁x₁ + β̂₂x₂ + … + β̂ₚxₚ",
           },
           {
             label: "Matrix form",
-            expression: "ŷ = Xβ",
-            note: "When X includes a first column of ones, β includes the intercept.",
+            expression: "ŷ = Xβ̂",
+            note: "When X includes a first column of ones, β̂ includes the fitted intercept.",
           },
         ],
         visual: {
@@ -376,7 +376,7 @@ export const multipleLinearRegression: SubjectTopic = {
         formulas: [
           {
             label: "Example with a binary indicator",
-            expression: "ŷ = β₀ + β₁(area) + β₂(is_city_center)",
+            expression: "ŷ = β̂₀ + β̂₁(area) + β̂₂(is_city_center)",
             note: "is_city_center is 1 for city centre and 0 for the reference location.",
           },
         ],
@@ -478,8 +478,8 @@ export const multipleLinearRegression: SubjectTopic = {
       {
         title: "Essential Formulas",
         formulas: [
-          { label: "Scalar form", expression: "ŷ = β₀ + β₁x₁ + … + βₚxₚ" },
-          { label: "Matrix form", expression: "ŷ = Xβ" },
+          { label: "Scalar form", expression: "ŷ = β̂₀ + β̂₁x₁ + … + β̂ₚxₚ" },
+          { label: "Matrix form", expression: "ŷ = Xβ̂" },
           { label: "Closed-form OLS", expression: "β̂ = (XᵀX)⁻¹Xᵀy" },
         ],
       },
@@ -511,7 +511,7 @@ export const multipleLinearRegression: SubjectTopic = {
     sections: [
       {
         title: "Equation",
-        points: ["ŷ = β₀ + β₁x₁ + … + βₚxₚ", "Matrix form: ŷ = Xβ"],
+        points: ["ŷ = β̂₀ + β̂₁x₁ + … + β̂ₚxₚ", "Matrix form: ŷ = Xβ̂"],
       },
       {
         title: "Interpret Carefully",

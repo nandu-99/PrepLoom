@@ -34,15 +34,16 @@ const deadlockNumericals: SubjectTopic = {
           headers: ["Single instance", "Multiple instances"],
           rows: [
             ["A cycle proves Deadlock", "A cycle shows possible Deadlock"],
-            ["No cycle means no current Deadlock", "Run a completion or Detection check"],
+            [
+              "No cycle means no current Deadlock",
+              "Run a completion or Detection check",
+            ],
           ],
         },
       },
       {
         title: "RAG Example - Cycle but No Deadlock",
-        paragraphs: [
-          "R1 has two instances and R2 has one instance.",
-        ],
+        paragraphs: ["R1 has two instances and R2 has one instance."],
         dataTable: {
           headers: ["Process", "Currently holds", "Currently requests"],
           rows: [
@@ -108,9 +109,7 @@ const deadlockNumericals: SubjectTopic = {
       },
       {
         title: "3. Safe Resource Request",
-        paragraphs: [
-          "Suppose P1 requests [1, 0, 2].",
-        ],
+        paragraphs: ["Suppose P1 requests [1, 0, 2]."],
         points: [
           "Request ≤ Need: [1, 0, 2] ≤ [1, 2, 2].",
           "Request ≤ Available: [1, 0, 2] ≤ [3, 3, 2].",
@@ -122,9 +121,7 @@ const deadlockNumericals: SubjectTopic = {
       },
       {
         title: "Unsafe Resource Request",
-        paragraphs: [
-          "Suppose P4 requests [3, 3, 0] from the original state.",
-        ],
+        paragraphs: ["Suppose P4 requests [3, 3, 0] from the original state."],
         points: [
           "The request is within P4's Need and the current Available vector.",
           "Temporary Available becomes [0, 0, 2].",
@@ -198,9 +195,7 @@ const deadlockNumericals: SubjectTopic = {
         title: "RAG Rule",
         table: {
           headers: ["Single instance", "Multiple instances"],
-          rows: [
-            ["Cycle means Deadlock", "Cycle means Deadlock may exist"],
-          ],
+          rows: [["Cycle means Deadlock", "Cycle means Deadlock may exist"]],
         },
       },
       {

@@ -45,8 +45,7 @@ const virtualMemoryDemandPagingDetailed: SubjectTopic = {
           alt: "Four Virtual Pages with Page Table entries showing Pages 0 and 2 present in RAM Frames 5 and 12, while Pages 1 and 3 are not present and remain in backing store.",
           width: 1536,
           height: 1024,
-          caption:
-            "Only the required Pages need to be resident in RAM.",
+          caption: "Only the required Pages need to be resident in RAM.",
         },
       },
       {
@@ -59,10 +58,16 @@ const virtualMemoryDemandPagingDetailed: SubjectTopic = {
         dataTable: {
           headers: ["Virtual Memory", "Physical Memory"],
           rows: [
-            ["Address space seen by a process", "Actual RAM installed in the computer"],
+            [
+              "Address space seen by a process",
+              "Actual RAM installed in the computer",
+            ],
             ["May be larger than RAM", "Limited by available hardware"],
             ["Uses Virtual Addresses", "Uses Physical Addresses"],
-            ["Managed through mappings and Page Tables", "Holds resident Pages in Frames"],
+            [
+              "Managed through mappings and Page Tables",
+              "Holds resident Pages in Frames",
+            ],
           ],
         },
       },
@@ -105,10 +110,22 @@ const virtualMemoryDemandPagingDetailed: SubjectTopic = {
         dataTable: {
           headers: ["Fault reason", "OS action", "Can execution continue?"],
           rows: [
-            ["Valid Page is not resident", "Load or create the Page", "Usually yes"],
+            [
+              "Valid Page is not resident",
+              "Load or create the Page",
+              "Usually yes",
+            ],
             ["Copy-on-Write", "Create a private writable copy", "Usually yes"],
-            ["Invalid address", "Reject the access and notify the process", "Usually no"],
-            ["Forbidden access", "Reject or handle according to the mapping", "Depends on the cause"],
+            [
+              "Invalid address",
+              "Reject the access and notify the process",
+              "Usually no",
+            ],
+            [
+              "Forbidden access",
+              "Reject or handle according to the mapping",
+              "Depends on the cause",
+            ],
           ],
         },
       },
@@ -137,7 +154,10 @@ const virtualMemoryDemandPagingDetailed: SubjectTopic = {
           headers: ["Minor Page Fault", "Major Page Fault"],
           rows: [
             ["No storage read is required", "Storage input/output is required"],
-            ["Page may already exist elsewhere in RAM or be created without reading storage", "Page must be read from a file or swap"],
+            [
+              "Page may already exist elsewhere in RAM or be created without reading storage",
+              "Page must be read from a file or swap",
+            ],
             ["Usually much faster", "Usually much slower"],
           ],
         },
@@ -165,8 +185,14 @@ const virtualMemoryDemandPagingDetailed: SubjectTopic = {
         table: {
           headers: ["Temporal Locality", "Spatial Locality"],
           rows: [
-            ["Recently used data is likely to be used again", "Nearby addresses are likely to be used soon"],
-            ["Example: a loop repeatedly reads the same variable", "Example: an array is read in order"],
+            [
+              "Recently used data is likely to be used again",
+              "Nearby addresses are likely to be used soon",
+            ],
+            [
+              "Example: a loop repeatedly reads the same variable",
+              "Example: an array is read in order",
+            ],
           ],
         },
       },
@@ -194,10 +220,19 @@ const virtualMemoryDemandPagingDetailed: SubjectTopic = {
         table: {
           headers: ["Benefits", "Costs"],
           rows: [
-            ["Processes get separate protected address spaces", "Page Tables and translation use memory and CPU time"],
+            [
+              "Processes get separate protected address spaces",
+              "Page Tables and translation use memory and CPU time",
+            ],
             ["Only needed Pages must occupy RAM", "Major Page Faults are slow"],
-            ["Large programs can run when their active working set fits", "Too many active Pages can create memory pressure"],
-            ["Copy-on-Write avoids immediate copying", "Fault handling pauses the process"],
+            [
+              "Large programs can run when their active working set fits",
+              "Too many active Pages can create memory pressure",
+            ],
+            [
+              "Copy-on-Write avoids immediate copying",
+              "Fault handling pauses the process",
+            ],
           ],
         },
       },
@@ -238,7 +273,8 @@ const virtualMemoryDemandPagingDetailed: SubjectTopic = {
           alt: "CPU requests Page 5, checks its Page Table entry, accesses RAM when present, or raises a Page Fault and loads the Page from backing storage when absent.",
           width: 1536,
           height: 1024,
-          caption: "Demand Paging loads a valid missing Page when it is requested.",
+          caption:
+            "Demand Paging loads a valid missing Page when it is requested.",
         },
       },
       {
@@ -248,7 +284,10 @@ const virtualMemoryDemandPagingDetailed: SubjectTopic = {
           rows: [
             ["Access RAM normally", "Raise a Page Fault"],
             ["Continue execution", "Validate the access"],
-            ["No OS fault handling", "Load or create the Page, update the Page Table, and restart"],
+            [
+              "No OS fault handling",
+              "Load or create the Page, update the Page Table, and restart",
+            ],
           ],
         },
       },
@@ -302,7 +341,8 @@ const virtualMemoryDemandPagingDetailed: SubjectTopic = {
       "Copy-on-Write creates a private Page only when a shared Page is modified.",
       "Too many Page Faults can cause Thrashing.",
     ],
-    followUp: "Why can the OS restart an instruction after handling a Page Fault?",
+    followUp:
+      "Why can the OS restart an instruction after handling a Page Fault?",
   },
   lastMinute: {
     definition:
@@ -339,10 +379,10 @@ const virtualMemoryDemandPagingDetailed: SubjectTopic = {
       "A valid missing Page can continue after handling; an invalid access may end the process.",
     ],
     memoryLineLabel: "Remember This",
-    memoryLine: "Page present → Execute. Valid Page missing → Page Fault, make it resident, restart.",
+    memoryLine:
+      "Page present → Execute. Valid Page missing → Page Fault, make it resident, restart.",
     memoryLineAtEnd: true,
-    trap:
-      "A Page Fault is not automatically a crash, and a missing Page does not always need to be read from disk.",
+    trap: "A Page Fault is not automatically a crash, and a missing Page does not always need to be read from disk.",
   },
 };
 

@@ -21,7 +21,9 @@ export function HeroSearchTrigger() {
       />
       <span className="min-w-0 flex-1 truncate text-[13px] font-normal text-[#7C7C7C] sm:text-[15px]">
         <span className="sm:hidden">Search PrepLoom</span>
-        <span className="hidden sm:inline">Search subjects, topics, or questions</span>
+        <span className="hidden sm:inline">
+          Search subjects, topics, or questions
+        </span>
       </span>
       <kbd className="hidden shrink-0 rounded-md border border-black/10 bg-black/[0.035] px-1.5 py-0.5 text-[10px] font-medium text-[#7C7C7C] dark:border-white/10 dark:bg-white/[0.06] sm:block">
         ⌘ K

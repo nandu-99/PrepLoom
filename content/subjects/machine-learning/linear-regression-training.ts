@@ -33,7 +33,7 @@ export const lossFunctionAndGradientDescent: SubjectTopic = {
       {
         title: "The Cost Used for Gradient Descent",
         paragraphs: [
-          "For a line ŷ = β₀ + β₁x, a common cost is half the MSE. The factor 1/2 cancels the 2 produced when the square is differentiated. It changes the scale of the cost, but not the location of its minimum.",
+          "For a candidate line ŷ = β₀ + β₁x during optimization, a common cost is half the MSE. The factor 1/2 cancels the 2 produced when the square is differentiated. It changes the scale of the cost, but not the location of its minimum. After optimization, the fitted values are written β̂₀ and β̂₁.",
         ],
         formulas: [
           {

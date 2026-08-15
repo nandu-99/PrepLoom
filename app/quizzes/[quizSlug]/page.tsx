@@ -17,7 +17,9 @@ export function generateStaticParams() {
   return quizzes.map((quiz) => ({ quizSlug: quiz.slug }));
 }
 
-export async function generateMetadata({ params }: QuizPageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: QuizPageProps): Promise<Metadata> {
   const { quizSlug } = await params;
   const quiz = getQuizBySlug(quizSlug);
 

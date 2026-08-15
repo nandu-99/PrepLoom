@@ -8,16 +8,9 @@ async function main() {
 
   await mkdir(outputDirectory, { recursive: true });
 
-  const outputFile = path.join(
-    outputDirectory,
-    "os-introduction.raw.json",
-  );
+  const outputFile = path.join(outputDirectory, "os-introduction.raw.json");
 
-  const json = JSON.stringify(
-    introductionToOperatingSystems,
-    null,
-    2,
-  );
+  const json = JSON.stringify(introductionToOperatingSystems, null, 2);
 
   await writeFile(outputFile, json, "utf8");
 

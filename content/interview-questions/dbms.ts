@@ -164,8 +164,8 @@ export const dbmsInterviewQuestions: DbmsQuestion[] = [
     category: "SQL filtering, grouping and aggregation",
     question: "How would you count completed and pending orders in one query?",
     answer:
-      "I would use conditional aggregation so the table is grouped once and each condition contributes to its own count. `SUM` with a `CASE` expression is portable and also works when I later group the result by customer, day, or another dimension.",
-    code: "SELECT\n  SUM(CASE WHEN status = 'completed' THEN 1 ELSE 0 END) AS completed,\n  SUM(CASE WHEN status = 'pending' THEN 1 ELSE 0 END) AS pending\nFROM orders;",
+      "I would use conditional aggregation so the table is grouped once and each condition contributes to its own count. `SUM` with a `CASE` expression is portable, and `COALESCE` makes an empty table return zero instead of NULL. The same approach works when I later group the result by customer, day, or another dimension.",
+    code: "SELECT\n  COALESCE(SUM(CASE WHEN status = 'completed' THEN 1 ELSE 0 END), 0) AS completed,\n  COALESCE(SUM(CASE WHEN status = 'pending' THEN 1 ELSE 0 END), 0) AS pending\nFROM orders;",
   },
   {
     id: "delete-truncate-drop",
@@ -263,7 +263,7 @@ export const dbmsInterviewQuestions: DbmsQuestion[] = [
     category: "Functional dependencies and normalization",
     question: "When does a table violate Second Normal Form?",
     answer:
-      "A table in First Normal Form violates Second Normal Form when a non-key attribute depends on only part of a composite candidate key. The partial dependency should move to another table. If every candidate key has one attribute, this specific violation cannot occur.",
+      "A table in First Normal Form violates Second Normal Form when a non-prime attribute—one that belongs to no candidate key—depends on only part of a composite candidate key. The partial dependency should move to another table. If every candidate key has one attribute, this specific violation cannot occur.",
   },
   {
     id: "third-normal-form-vs-bcnf",

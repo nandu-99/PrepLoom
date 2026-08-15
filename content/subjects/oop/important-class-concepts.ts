@@ -115,7 +115,10 @@ export const thisSuperAndObjectContext: SubjectTopic = {
           rows: [
             ["Current-object view", "Direct-parent view"],
             ["this.field or this.method()", "super.field or super.method()"],
-            ["this(...) delegates in same class", "super(...) invokes parent constructor"],
+            [
+              "this(...) delegates in same class",
+              "super(...) invokes parent constructor",
+            ],
           ],
         },
       },
@@ -139,8 +142,7 @@ export const thisSuperAndObjectContext: SubjectTopic = {
     followUp: "Why can this not be used inside a static method?",
   },
   lastMinute: {
-    definition:
-      "this = current object; super = accessible direct-parent view.",
+    definition: "this = current object; super = accessible direct-parent view.",
     sections: [
       {
         title: "Uses",
@@ -154,8 +156,7 @@ export const thisSuperAndObjectContext: SubjectTopic = {
     ],
     memoryLine: "One object, two views: this is current; super is parent.",
     cues: ["No static context", "No private bypass", "Constructor chaining"],
-    trap:
-      "Do not describe super as a separate object or as a way to access private parent members.",
+    trap: "Do not describe super as a separate object or as a way to access private parent members.",
   },
 };
 
@@ -203,9 +204,15 @@ export const staticVsInstanceMembers: SubjectTopic = {
         table: {
           headers: ["Instance method", "Static method"],
           rows: [
-            ["Directly uses instance and static members", "Directly uses only static members"],
+            [
+              "Directly uses instance and static members",
+              "Directly uses only static members",
+            ],
             ["Has this object context", "Has no this object context"],
-            ["Usually called through an object", "Prefer calling through the class"],
+            [
+              "Usually called through an object",
+              "Prefer calling through the class",
+            ],
           ],
         },
       },
@@ -280,9 +287,15 @@ export const staticVsInstanceMembers: SubjectTopic = {
         table: {
           headers: ["Instance", "Static"],
           rows: [
-            ["One value per object", "One class-level value per loading context"],
+            [
+              "One value per object",
+              "One class-level value per loading context",
+            ],
             ["Has object context", "No automatic object context"],
-            ["Can directly use instance state", "Needs an object reference for instance state"],
+            [
+              "Can directly use instance state",
+              "Needs an object reference for instance state",
+            ],
           ],
         },
       },
@@ -306,8 +319,7 @@ export const staticVsInstanceMembers: SubjectTopic = {
     followUp: "Why can a static method not directly read an instance field?",
   },
   lastMinute: {
-    definition:
-      "Instance = per object. Static = class level.",
+    definition: "Instance = per object. Static = class level.",
     sections: [
       {
         title: "Fast Compare",
@@ -320,9 +332,12 @@ export const staticVsInstanceMembers: SubjectTopic = {
       },
     ],
     memoryLine: "Object-specific? Instance. Class-wide? Consider static.",
-    cues: ["balance: instance", "accountCount: static", "Shared state needs care"],
-    trap:
-      "Do not say every static field is immutable or safe for concurrent access.",
+    cues: [
+      "balance: instance",
+      "accountCount: static",
+      "Shared state needs care",
+    ],
+    trap: "Do not say every static field is immutable or safe for concurrent access.",
   },
 };
 
@@ -451,7 +466,11 @@ export const identityEqualityAndCopying: SubjectTopic = {
           rows: [
             ["Reference assignment", "No new object", "Everything shared"],
             ["Shallow copy", "New outer object", "References still shared"],
-            ["Deep copy", "New required mutable objects", "Required state independent"],
+            [
+              "Deep copy",
+              "New required mutable objects",
+              "Required state independent",
+            ],
           ],
         },
       },
@@ -473,7 +492,8 @@ export const identityEqualityAndCopying: SubjectTopic = {
       "Java clone is not an automatic universal deep copy.",
       "Java reference assignment and C++ value copying behave differently.",
     ],
-    followUp: "Why can a shallow copy still change when the original object's address changes?",
+    followUp:
+      "Why can a shallow copy still change when the original object's address changes?",
   },
   lastMinute: {
     definition:
@@ -490,14 +510,22 @@ export const identityEqualityAndCopying: SubjectTopic = {
       },
       {
         title: "Copying",
-        flow: ["Assignment: alias", "Shallow: new outer", "Deep: copy required mutable state"],
+        flow: [
+          "Assignment: alias",
+          "Shallow: new outer",
+          "Deep: copy required mutable state",
+        ],
         wide: true,
       },
     ],
-    memoryLine: "Same reference, same value, or separate state? Ask which one you need.",
-    cues: ["Aliasing shares all", "Shallow shares nested", "Deep follows the model"],
-    trap:
-      "Do not use == for Java String content or assume assignment copies an object.",
+    memoryLine:
+      "Same reference, same value, or separate state? Ask which one you need.",
+    cues: [
+      "Aliasing shares all",
+      "Shallow shares nested",
+      "Deep follows the model",
+    ],
+    trap: "Do not use == for Java String content or assume assignment copies an object.",
   },
 };
 
@@ -560,7 +588,12 @@ export const immutability: SubjectTopic = {
         paragraphs: [
           "An immutable object does not update itself. An operation that represents a change returns a new value and leaves the original unchanged.",
         ],
-        flow: ["Original value", "Operation", "New value", "Original unchanged"],
+        flow: [
+          "Original value",
+          "Operation",
+          "New value",
+          "Original unchanged",
+        ],
       },
       {
         title: "Thread-Safety Qualification",
@@ -658,7 +691,12 @@ export const immutability: SubjectTopic = {
     sections: [
       {
         title: "Flow",
-        flow: ["Validate", "Copy mutable input", "Store safely", "Return new value for change"],
+        flow: [
+          "Validate",
+          "Copy mutable input",
+          "Store safely",
+          "Return new value for change",
+        ],
         wide: true,
       },
       {
@@ -673,7 +711,6 @@ export const immutability: SubjectTopic = {
     ],
     memoryLine: "No observable mutation; changes create new values.",
     cues: ["Defensive copy", "No setters", "Safe sharing", "Stable hash key"],
-    trap:
-      "Do not call a class immutable while callers can mutate an internal list, date, array, or other nested object.",
+    trap: "Do not call a class immutable while callers can mutate an internal list, date, array, or other nested object.",
   },
 };

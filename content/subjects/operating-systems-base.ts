@@ -108,8 +108,7 @@ export const operatingSystemsContent: SubjectContent = {
               "Protection: prevents unsafe access between programs.",
               "System calls: controlled entry into kernel services.",
             ],
-            trap:
-              "Do not define an OS only as an interface between the user and hardware; resource management and protection are equally important.",
+            trap: "Do not define an OS only as an interface between the user and hardware; resource management and protection are equally important.",
           },
         }),
         topic({
@@ -172,8 +171,7 @@ export const operatingSystemsContent: SubjectContent = {
               "Arguments must be validated.",
               "Examples: open, read, fork, exec.",
             ],
-            trap:
-              "A library call is not always a system call; some library functions complete entirely in user space.",
+            trap: "A library call is not always a system call; some library functions complete entirely in user space.",
           },
         }),
       ],
@@ -242,8 +240,7 @@ export const operatingSystemsContent: SubjectContent = {
               "Process owns execution state.",
               "PCB lets the OS manage it.",
             ],
-            trap:
-              "Do not say a process contains only code; it also includes memory, CPU state, and OS-managed resources.",
+            trap: "Do not say a process contains only code; it also includes memory, CPU state, and OS-managed resources.",
           },
         }),
         topic({
@@ -324,8 +321,7 @@ export const operatingSystemsContent: SubjectContent = {
               "Private per thread: stack, registers, program counter.",
               "Processes isolate; threads collaborate.",
             ],
-            trap:
-              "Threads do not share their stacks. Each thread requires a private stack for function calls and local variables.",
+            trap: "Threads do not share their stacks. Each thread requires a private stack for function calls and local variables.",
           },
         }),
         topic({
@@ -390,8 +386,7 @@ export const operatingSystemsContent: SubjectContent = {
               "I/O request: running to waiting.",
               "I/O completion: waiting to ready.",
             ],
-            trap:
-              "Waiting and ready are not interchangeable: only a ready process can be selected immediately by the CPU scheduler.",
+            trap: "Waiting and ready are not interchangeable: only a ready process can be selected immediately by the CPU scheduler.",
           },
         }),
       ],
@@ -455,14 +450,14 @@ export const operatingSystemsContent: SubjectContent = {
               "Why can improving response time reduce overall efficiency?",
           },
           lastMinute: {
-            memoryLine: "Scheduling balances response, waiting, throughput, and fairness.",
+            memoryLine:
+              "Scheduling balances response, waiting, throughput, and fairness.",
             cues: [
               "Ready queue supplies candidates.",
               "Dispatcher performs the switch.",
               "Preemption improves responsiveness at a cost.",
             ],
-            trap:
-              "Turnaround time and response time are different: response ends at the first CPU service, not process completion.",
+            trap: "Turnaround time and response time are different: response ends at the first CPU service, not process completion.",
           },
         }),
         topic({
@@ -537,15 +532,15 @@ export const operatingSystemsContent: SubjectContent = {
               "What happens when the round-robin time quantum becomes very large?",
           },
           lastMinute: {
-            memoryLine: "FCFS = order, SJF = shortest, RR = slices, Priority = importance.",
+            memoryLine:
+              "FCFS = order, SJF = shortest, RR = slices, Priority = importance.",
             cues: [
               "Convoy effect: FCFS.",
               "Minimum average wait: SJF.",
               "Aging prevents starvation.",
               "Quantum controls round-robin behaviour.",
             ],
-            trap:
-              "Round robin does not guarantee the minimum average waiting time; its strength is fairness and response time.",
+            trap: "Round robin does not guarantee the minimum average waiting time; its strength is fairness and response time.",
           },
         }),
       ],
@@ -605,8 +600,7 @@ export const operatingSystemsContent: SubjectContent = {
               "Protect critical sections or use atomic operations.",
               "Test outcomes alone cannot prove race freedom.",
             ],
-            followUp:
-              "How can an increment operation cause a lost update?",
+            followUp: "How can an increment operation cause a lost update?",
           },
           lastMinute: {
             memoryLine: "Shared state + unsafe interleaving = race condition.",
@@ -615,8 +609,7 @@ export const operatingSystemsContent: SubjectContent = {
               "Ask whether the operation is truly atomic.",
               "Protect invariants, not merely individual lines.",
             ],
-            trap:
-              "Concurrency bugs do not require simultaneous physical execution; interleaving on one CPU is enough.",
+            trap: "Concurrency bugs do not require simultaneous physical execution; interleaving on one CPU is enough.",
           },
         }),
         topic({
@@ -687,18 +680,17 @@ export const operatingSystemsContent: SubjectContent = {
                 ],
               },
             },
-            followUp:
-              "When would you choose a semaphore instead of a mutex?",
+            followUp: "When would you choose a semaphore instead of a mutex?",
           },
           lastMinute: {
-            memoryLine: "Mutex protects; semaphore permits; condition variable waits.",
+            memoryLine:
+              "Mutex protects; semaphore permits; condition variable waits.",
             cues: [
               "Guard shared state with the same mutex.",
               "Wait in a loop, not an if statement.",
               "Notify after changing the predicate.",
             ],
-            trap:
-              "A binary semaphore and a mutex can look similar, but mutex ownership semantics make them conceptually different.",
+            trap: "A binary semaphore and a mutex can look similar, but mutex ownership semantics make them conceptually different.",
           },
         }),
         topic({
@@ -775,8 +767,7 @@ export const operatingSystemsContent: SubjectContent = {
                 ],
               },
             },
-            followUp:
-              "How does imposing a global lock order prevent deadlock?",
+            followUp: "How does imposing a global lock order prevent deadlock?",
           },
           lastMinute: {
             memoryLine: "ME + HW + NP + CW = deadlock can occur.",
@@ -786,8 +777,7 @@ export const operatingSystemsContent: SubjectContent = {
               "No preemption.",
               "Circular wait.",
             ],
-            trap:
-              "The four conditions are necessary, not a guarantee that a deadlock is currently present.",
+            trap: "The four conditions are necessary, not a guarantee that a deadlock is currently present.",
           },
         }),
       ],
@@ -795,7 +785,8 @@ export const operatingSystemsContent: SubjectContent = {
     {
       order: "05",
       title: "Memory",
-      description: "Address translation, allocation, and the virtual-memory model.",
+      description:
+        "Address translation, allocation, and the virtual-memory model.",
       topics: [
         topic({
           slug: "paging",
@@ -857,8 +848,7 @@ export const operatingSystemsContent: SubjectContent = {
               "No external fragmentation.",
               "TLB caches translations.",
             ],
-            trap:
-              "A TLB miss is not automatically a page fault; the mapping may still be present in the page table.",
+            trap: "A TLB miss is not automatically a page fault; the mapping may still be present in the page table.",
           },
         }),
         topic({
@@ -933,14 +923,14 @@ export const operatingSystemsContent: SubjectContent = {
               "Why can increasing the number of active processes cause thrashing?",
           },
           lastMinute: {
-            memoryLine: "Virtual address space is the view; pages and frames are the mapping.",
+            memoryLine:
+              "Virtual address space is the view; pages and frames are the mapping.",
             cues: [
               "Fault → validate → load → map → retry.",
               "Locality keeps fault rates manageable.",
               "Thrashing means excessive paging.",
             ],
-            trap:
-              "Not every page fault is an error. Demand paging intentionally uses valid page faults to load data lazily.",
+            trap: "Not every page fault is an error. Demand paging intentionally uses valid page faults to load data lazily.",
           },
         }),
       ],

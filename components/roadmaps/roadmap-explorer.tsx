@@ -1,11 +1,6 @@
 "use client";
 
-import {
-  ArrowRight,
-  Braces,
-  Code2,
-  Database,
-} from "lucide-react";
+import { ArrowRight, Braces, Code2, Database } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useState } from "react";
@@ -34,43 +29,50 @@ const roadmaps: Roadmap[] = [
     stages: [
       {
         title: "HTML",
-        description: "Learn how to structure accessible and searchable web pages.",
+        description:
+          "Learn how to structure accessible and searchable web pages.",
         topics:
           "Document structure, semantic HTML, forms and validation, tables, images, audio, video, accessibility, SEO metadata",
       },
       {
         title: "CSS",
-        description: "Build responsive layouts and understand how browser styling works.",
+        description:
+          "Build responsive layouts and understand how browser styling works.",
         topics:
           "Selectors, cascade, specificity, inheritance, box model, units, positioning, Flexbox, Grid, responsive design, transitions, animations, custom properties",
       },
       {
         title: "Git and Vercel deployment",
-        description: "Track your work and publish frontend applications confidently.",
+        description:
+          "Track your work and publish frontend applications confidently.",
         topics:
           "Git basics, commits, branches, merging, pull requests, GitHub, environment variables, preview deployments, production deployments",
       },
       {
         title: "JavaScript",
-        description: "Learn the language and browser APIs used in everyday frontend work.",
+        description:
+          "Learn the language and browser APIs used in everyday frontend work.",
         topics:
           "Variables, data types, operators, functions, arrays, objects, DOM, events, modules, error handling, fetch, promises, async and await",
       },
       {
         title: "Tailwind CSS",
-        description: "Use a utility-first CSS framework to build consistent interfaces.",
+        description:
+          "Use a utility-first CSS framework to build consistent interfaces.",
         topics:
           "Utility classes, responsive variants, state variants, layout, spacing, typography, colors, theme configuration, reusable component patterns",
       },
       {
         title: "Advanced JavaScript",
-        description: "Understand the language behavior behind complex applications.",
+        description:
+          "Understand the language behavior behind complex applications.",
         topics:
           "Scope, closures, hoisting, prototypes, this, event loop, microtasks, advanced promises, iterators, generators, memory, performance",
       },
       {
         title: "React",
-        description: "Learn a component framework for building interactive applications.",
+        description:
+          "Learn a component framework for building interactive applications.",
         topics:
           "Components, JSX, props, state, hooks, forms, routing, data fetching, context, performance, testing",
       },
@@ -92,7 +94,8 @@ const roadmaps: Roadmap[] = [
     stages: [
       {
         title: "Language and runtime foundations",
-        description: "Build confidence in one backend language and its runtime.",
+        description:
+          "Build confidence in one backend language and its runtime.",
         topics:
           "Language syntax, data types, functions, OOP, modules, package management, error handling, asynchronous programming, memory basics, debugging, clean code",
       },
@@ -116,7 +119,8 @@ const roadmaps: Roadmap[] = [
       },
       {
         title: "Caching and asynchronous work",
-        description: "Improve response times and move heavy work off request paths.",
+        description:
+          "Improve response times and move heavy work off request paths.",
         topics:
           "Caching strategies, Redis, cache invalidation, background jobs, message queues, pub-sub, retries, idempotency, scheduled jobs, event-driven systems",
       },
@@ -128,7 +132,8 @@ const roadmaps: Roadmap[] = [
       },
       {
         title: "Testing, observability, and deployment",
-        description: "Prepare backend services for production and ongoing maintenance.",
+        description:
+          "Prepare backend services for production and ongoing maintenance.",
         topics:
           "Unit testing, integration testing, API testing, logging, metrics, tracing, health checks, Docker, environment variables, CI/CD, cloud deployment, monitoring",
       },
@@ -144,12 +149,14 @@ const roadmaps: Roadmap[] = [
     stages: [
       {
         title: "Arrays, strings, and complexity",
-        description: "Build the foundation for analysing and solving common problems.",
+        description:
+          "Build the foundation for analysing and solving common problems.",
         topics: "Arrays, strings, time complexity, space complexity",
       },
       {
         title: "Recursion, binary search, and sorting",
-        description: "Learn core techniques for dividing and ordering problem spaces.",
+        description:
+          "Learn core techniques for dividing and ordering problem spaces.",
         topics: "Recursion, binary search, sorting",
       },
       {
@@ -175,11 +182,13 @@ const roadmaps: Roadmap[] = [
       {
         title: "Dynamic programming",
         description: "Solve optimization problems using reusable subproblems.",
-        topics: "Knapsack, longest common subsequence, longest increasing subsequence",
+        topics:
+          "Knapsack, longest common subsequence, longest increasing subsequence",
       },
       {
         title: "No-hints practice",
-        description: "Solve a mixed problem without being told which pattern to use.",
+        description:
+          "Solve a mixed problem without being told which pattern to use.",
         topics: "Any topic, no hints",
       },
     ],
@@ -223,7 +232,11 @@ export function RoadmapExplorer() {
                 }`}
               >
                 <span className="grid size-10 place-items-center rounded-[10px] border border-black/[0.09] bg-black/[0.02] dark:border-white/[0.1] dark:bg-white/[0.035]">
-                  <Icon className="size-[18px]" strokeWidth={1.6} aria-hidden="true" />
+                  <Icon
+                    className="size-[18px]"
+                    strokeWidth={1.6}
+                    aria-hidden="true"
+                  />
                 </span>
                 <span className="min-w-0">
                   <span className="block text-[14px] font-medium">
@@ -235,7 +248,9 @@ export function RoadmapExplorer() {
                 </span>
                 <ArrowRight
                   className={`size-4 transition-transform ${
-                    active ? "translate-x-0" : "-translate-x-1 opacity-0 group-hover:translate-x-0 group-hover:opacity-100"
+                    active
+                      ? "translate-x-0"
+                      : "-translate-x-1 opacity-0 group-hover:translate-x-0 group-hover:opacity-100"
                   }`}
                   strokeWidth={1.6}
                   aria-hidden="true"
@@ -246,20 +261,31 @@ export function RoadmapExplorer() {
         </div>
       </div>
 
-      <div id="selected-roadmap" role="tabpanel" className="min-w-0 bg-[#f7f7f5] p-5 dark:bg-[#0a0a0a] sm:p-8 lg:p-11">
+      <div
+        id="selected-roadmap"
+        role="tabpanel"
+        className="min-w-0 bg-[#f7f7f5] p-5 dark:bg-[#0a0a0a] sm:p-8 lg:p-11"
+      >
         <AnimatePresence mode="wait" initial={false}>
           <motion.div
             key={activeRoadmap.id}
             initial={reduceMotion ? false : { opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={reduceMotion ? undefined : { opacity: 0, y: -5 }}
-            transition={{ duration: reduceMotion ? 0 : 0.22, ease: [0.16, 1, 0.3, 1] }}
+            transition={{
+              duration: reduceMotion ? 0 : 0.22,
+              ease: [0.16, 1, 0.3, 1],
+            }}
           >
             <div className="border-b border-black/[0.09] pb-8 dark:border-white/[0.1]">
               <div>
                 <div className="flex items-center gap-3">
                   <span className="grid size-10 place-items-center rounded-[10px] border border-black/[0.1] dark:border-white/[0.11]">
-                    <ActiveIcon className="size-[18px]" strokeWidth={1.55} aria-hidden="true" />
+                    <ActiveIcon
+                      className="size-[18px]"
+                      strokeWidth={1.55}
+                      aria-hidden="true"
+                    />
                   </span>
                   <span className="text-[12px] text-[#606060] dark:text-[#a8a8a8]">
                     {activeRoadmap.label}

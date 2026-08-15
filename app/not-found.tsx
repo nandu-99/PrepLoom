@@ -39,14 +39,22 @@ export default function NotFound() {
                   href="/"
                   className="inline-flex h-11 items-center justify-center gap-2 whitespace-nowrap rounded-[10px] bg-[#151515] px-5 text-sm font-medium text-white transition-[background-color,transform] hover:bg-[#252525] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/40 focus-visible:ring-offset-2 focus-visible:ring-offset-[#f7f7f5] dark:border dark:border-white/[0.14] dark:bg-[#f3f3f1] dark:text-[#151515] dark:hover:bg-white dark:focus-visible:ring-white/50 dark:focus-visible:ring-offset-[#0a0a0a]"
                 >
-                  <ArrowLeft className="size-4" strokeWidth={1.7} aria-hidden="true" />
+                  <ArrowLeft
+                    className="size-4"
+                    strokeWidth={1.7}
+                    aria-hidden="true"
+                  />
                   Back home
                 </Link>
                 <Link
                   href="/subjects"
                   className="inline-flex h-11 items-center justify-center gap-2 whitespace-nowrap rounded-[10px] border border-black/[0.11] px-5 text-sm font-medium text-[#555] transition-[border-color,background-color,color,transform] hover:border-black/25 hover:bg-black/[0.035] hover:text-[#151515] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/40 dark:border-white/[0.12] dark:text-[#b3b3b3] dark:hover:border-white/25 dark:hover:bg-white/[0.06] dark:hover:text-white dark:focus-visible:ring-white/50"
                 >
-                  <BookOpen className="size-4" strokeWidth={1.7} aria-hidden="true" />
+                  <BookOpen
+                    className="size-4"
+                    strokeWidth={1.7}
+                    aria-hidden="true"
+                  />
                   Browse subjects
                 </Link>
               </div>

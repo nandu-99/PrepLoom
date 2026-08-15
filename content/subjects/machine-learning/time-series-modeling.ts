@@ -22,6 +22,7 @@ export const autocorrelationAcfAndPacf: SubjectTopic = {
           {
             label: "Sample autocorrelation at lag k",
             expression: "rₖ = Σₜ₌ₖ₊₁ⁿ(yₜ−ȳ)(yₜ₋ₖ−ȳ) / Σₜ₌₁ⁿ(yₜ−ȳ)²",
+            note: "Read this first as: compare the series with a copy shifted by k time periods.",
           },
         ],
         visual: {
@@ -161,7 +162,7 @@ export const arMaArimaAndSeasonalModels: SubjectTopic = {
           "An MA(q) model uses the current random shock and q earlier forecast errors. Here, moving average is a model of lagged errors, not the rolling-average smoothing operation.",
         ],
         formulas: [
-          { label: "MA(q)", expression: "yₜ = c + εₜ + θ₁εₜ₋₁ + … + θqεₜ₋q" },
+          { label: "MA(q)", expression: "yₜ = c + εₜ + θ₁εₜ₋₁ + … + θ_q εₜ₋q" },
         ],
       },
       {

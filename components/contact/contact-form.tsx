@@ -14,7 +14,9 @@ const reasons = [
 ];
 
 export function ContactForm() {
-  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [status, setStatus] = useState<
+    "idle" | "sending" | "success" | "error"
+  >("idle");
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -77,11 +79,7 @@ export function ContactForm() {
         </label>
       </div>
 
-      <Select.Root
-        name="reason"
-        defaultValue="Content correction"
-        required
-      >
+      <Select.Root name="reason" defaultValue="Content correction" required>
         <Select.Label className="text-[13px] font-medium">
           What is this about?
         </Select.Label>
@@ -154,7 +152,11 @@ export function ContactForm() {
         >
           {status === "sending" ? "Sending..." : "Send message"}
           {status === "sending" ? (
-            <LoaderCircle className="size-3.5 animate-spin" strokeWidth={1.7} aria-hidden="true" />
+            <LoaderCircle
+              className="size-3.5 animate-spin"
+              strokeWidth={1.7}
+              aria-hidden="true"
+            />
           ) : (
             <Send className="size-3.5" strokeWidth={1.7} aria-hidden="true" />
           )}

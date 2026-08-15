@@ -28,7 +28,7 @@ export const computerNetworksInterviewQuestions: ComputerNetworksQuestion[] = [
     question:
       "What happens to application data as it moves down the network stack?",
     answer:
-      "Each layer adds information needed for its job. Transport adds ports and reliability information, the network layer adds IP addresses, and the link layer adds a local frame header and trailer. The receiver removes these in reverse order and delivers the original data to the application.",
+      "Each layer adds information needed for its job. The transport layer adds ports and protocol-specific control information; TCP adds sequencing and reliability fields, while UDP does not provide delivery or ordering guarantees. The network layer adds IP addresses, and the link layer adds a local frame header and trailer. The receiver removes these in reverse order and delivers the original data to the application.",
   },
   {
     id: "switch-router-gateway",
@@ -253,7 +253,7 @@ export const computerNetworksInterviewQuestions: ComputerNetworksQuestion[] = [
     category: "IP addressing and NAT",
     question: "When does a host send a packet to its default gateway?",
     answer:
-      "The host compares the destination with its own network prefix. If the destination is on the local subnet, it sends the frame directly to that host. Otherwise it sends the frame to the default gateway's link-layer address, while the IP destination remains the final remote host.",
+      "The host performs a routing-table lookup for the destination. A directly connected destination is sent on-link, and a matching more-specific route may select another next hop or interface. The default gateway is used only when no more-specific route matches. The frame is addressed to the selected next hop, while the IP destination remains the final remote host.",
   },
 
   {
@@ -342,9 +342,10 @@ export const computerNetworksInterviewQuestions: ComputerNetworksQuestion[] = [
   {
     id: "csma-cd-and-csma-ca",
     category: "Wi-Fi and transmission",
-    question: "Why does Wi-Fi use CSMA/CA instead of Ethernet's CSMA/CD?",
+    question:
+      "Why does Wi-Fi use CSMA/CA instead of the CSMA/CD used by classic shared Ethernet?",
     answer:
-      "A wireless station cannot reliably detect a collision while transmitting because its own signal is much stronger than incoming signals, and not every station can hear every other station. Wi-Fi therefore tries to avoid collisions using sensing, random backoff, acknowledgments, and optional RTS/CTS.",
+      "A wireless station cannot reliably detect a collision while transmitting because its own signal is much stronger than incoming signals, and not every station can hear every other station. Wi-Fi therefore tries to avoid collisions using sensing, random backoff, acknowledgments, and optional RTS/CTS. CSMA/CD applied to classic shared, half-duplex Ethernet; modern switched full-duplex Ethernet does not normally use it.",
   },
   {
     id: "wifi-bands",

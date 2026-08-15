@@ -38,7 +38,7 @@ type Topic = {
   description: string;
   icon: LucideIcon;
   href?: string;
-  detail: string;
+  detail?: string;
 };
 
 const topics: Topic[] = [
@@ -119,14 +119,12 @@ const topics: Topic[] = [
     description:
       "Types, narrowing, generics, inference, and safer application code.",
     icon: FileCode2,
-    detail: "Coming soon",
   },
   {
     name: "Node.js",
     description:
       "The event loop, APIs, modules, streams, and backend fundamentals.",
     icon: Server,
-    detail: "Coming soon",
   },
 ];
 
@@ -178,9 +176,11 @@ export default function InterviewQuestionsPage() {
                         strokeWidth={1.55}
                         aria-hidden="true"
                       />
-                      <span className="text-[10px] text-[#777] dark:text-[#858585]">
-                        {topic.detail}
-                      </span>
+                      {topic.detail ? (
+                        <span className="text-[10px] text-[#777] dark:text-[#858585]">
+                          {topic.detail}
+                        </span>
+                      ) : null}
                     </div>
                     <h3 className="mt-5 text-[20px] font-semibold tracking-[-0.035em]">
                       {topic.name}

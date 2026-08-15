@@ -74,7 +74,11 @@ const pagingAndAddressTranslation: SubjectTopic = {
         dataTable: {
           headers: ["Address part", "Purpose", "During translation"],
           rows: [
-            ["Page Number", "Finds the process Page", "Replaced by Frame Number"],
+            [
+              "Page Number",
+              "Finds the process Page",
+              "Replaced by Frame Number",
+            ],
             ["Offset", "Finds the byte inside the Page", "Stays unchanged"],
           ],
         },
@@ -105,9 +109,15 @@ const pagingAndAddressTranslation: SubjectTopic = {
         table: {
           headers: ["Page Table", "Frame Table"],
           rows: [
-            ["Normally one per process", "One system-wide physical-memory record"],
+            [
+              "Normally one per process",
+              "One system-wide physical-memory record",
+            ],
             ["Maps Virtual Pages to Frames", "Tracks every physical Frame"],
-            ["Used for address translation", "Used for physical-memory allocation and ownership"],
+            [
+              "Used for address translation",
+              "Used for physical-memory allocation and ownership",
+            ],
           ],
         },
       },
@@ -192,11 +202,31 @@ const pagingAndAddressTranslation: SubjectTopic = {
         dataTable: {
           headers: ["Field", "Meaning", "Used for"],
           rows: [
-            ["Frame Number", "Physical Frame holding the Page", "Address translation"],
-            ["Present / Valid", "Whether the mapping or Page state permits access", "Detecting invalid or non-resident access"],
-            ["Protection", "Read, Write, and Execute permissions", "Memory protection"],
-            ["Dirty", "Page has been modified", "Deciding whether it must be written back"],
-            ["Reference", "Page has been accessed recently", "Page-replacement decisions"],
+            [
+              "Frame Number",
+              "Physical Frame holding the Page",
+              "Address translation",
+            ],
+            [
+              "Present / Valid",
+              "Whether the mapping or Page state permits access",
+              "Detecting invalid or non-resident access",
+            ],
+            [
+              "Protection",
+              "Read, Write, and Execute permissions",
+              "Memory protection",
+            ],
+            [
+              "Dirty",
+              "Page has been modified",
+              "Deciding whether it must be written back",
+            ],
+            [
+              "Reference",
+              "Page has been accessed recently",
+              "Page-replacement decisions",
+            ],
           ],
         },
         points: [
@@ -244,8 +274,14 @@ const pagingAndAddressTranslation: SubjectTopic = {
         table: {
           headers: ["TLB Flush", "ASID"],
           rows: [
-            ["Invalidate old entries during a switch", "Tag each entry with its address space"],
-            ["Simple but causes new TLB Misses", "Keeps safe entries across switches"],
+            [
+              "Invalidate old entries during a switch",
+              "Tag each entry with its address space",
+            ],
+            [
+              "Simple but causes new TLB Misses",
+              "Keeps safe entries across switches",
+            ],
           ],
         },
       },
@@ -267,8 +303,16 @@ const pagingAndAddressTranslation: SubjectTopic = {
         dataTable: {
           headers: ["Given", "Calculation", "Result"],
           rows: [
-            ["TLB = 10 ns, RAM = 100 ns, hit ratio = 95%", "Hit time = 10 + 100", "110 ns"],
-            ["TLB Miss uses one Page Table access", "Miss time = 10 + 100 + 100", "210 ns"],
+            [
+              "TLB = 10 ns, RAM = 100 ns, hit ratio = 95%",
+              "Hit time = 10 + 100",
+              "110 ns",
+            ],
+            [
+              "TLB Miss uses one Page Table access",
+              "Miss time = 10 + 100 + 100",
+              "210 ns",
+            ],
             ["Weighted average", "0.95 × 110 + 0.05 × 210", "115 ns"],
           ],
         },
@@ -281,9 +325,15 @@ const pagingAndAddressTranslation: SubjectTopic = {
         table: {
           headers: ["Smaller Pages", "Larger Pages"],
           rows: [
-            ["Less average waste in the final Page", "More possible waste in the final Page"],
+            [
+              "Less average waste in the final Page",
+              "More possible waste in the final Page",
+            ],
             ["More Page Table entries", "Fewer Page Table entries"],
-            ["Finer allocation and protection", "Can make bulk transfer more efficient"],
+            [
+              "Finer allocation and protection",
+              "Can make bulk transfer more efficient",
+            ],
           ],
         },
       },
@@ -295,9 +345,18 @@ const pagingAndAddressTranslation: SubjectTopic = {
         table: {
           headers: ["Advantages", "Disadvantages"],
           rows: [
-            ["No External Fragmentation between allocated Frames", "Possible Internal Fragmentation in the final Page"],
-            ["Pages may use non-contiguous Frames", "Page Tables consume memory"],
-            ["Supports protection and Virtual Memory", "TLB Misses and translation add overhead"],
+            [
+              "No External Fragmentation between allocated Frames",
+              "Possible Internal Fragmentation in the final Page",
+            ],
+            [
+              "Pages may use non-contiguous Frames",
+              "Page Tables consume memory",
+            ],
+            [
+              "Supports protection and Virtual Memory",
+              "TLB Misses and translation add overhead",
+            ],
           ],
         },
       },

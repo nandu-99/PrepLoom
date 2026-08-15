@@ -194,7 +194,7 @@ export const behavioralInterviewQuestions: BehavioralQuestion[] = [
     howToAnswer:
       "Explain the immediate risk, the information you had, and why the chosen option was reasonable. Include how you verified the decision afterward.",
     example:
-      "During the Telangana Champions League launch, OTP emails began failing because the Nodemailer SMTP setup had a limit of only 500 messages, which I had not known before the traffic arrived. Login was a critical path, so waiting was not an option. I confirmed that the application flow was working and isolated delivery capacity as the problem. I then moved the transactional email flow to Resend so it could support the live demand. The decision restored the login path and taught me to verify third-party limits before a high-traffic launch.",
+      "During the Telangana Champions League launch, OTP emails began failing because the SMTP provider used through Nodemailer had a limit of only 500 messages, which I had not known before the traffic arrived. Login was a critical path, so waiting was not an option. I confirmed that the application flow was working and isolated delivery capacity as the problem. I then moved the transactional email flow to Resend so it could support the live demand. The decision restored the login path and taught me to verify third-party limits before a high-traffic launch.",
   },
   {
     id: "prioritize-work",

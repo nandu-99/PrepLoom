@@ -48,7 +48,10 @@ export async function POST(request: Request) {
     const pageUrl = cleanOptional(submission.pageUrl, 1000);
 
     if (formType !== "contact" && formType !== "feedback") {
-      return Response.json({ message: "Invalid form submission." }, { status: 400 });
+      return Response.json(
+        { message: "Invalid form submission." },
+        { status: 400 },
+      );
     }
 
     const isContact = formType === "contact";
@@ -60,7 +63,10 @@ export async function POST(request: Request) {
       (isContact && (!name || !email)) ||
       (email && !isEmail(email))
     ) {
-      return Response.json({ message: "Please check the form fields." }, { status: 400 });
+      return Response.json(
+        { message: "Please check the form fields." },
+        { status: 400 },
+      );
     }
 
     const label = isContact ? "Contact" : "Feedback";

@@ -251,7 +251,7 @@ export const transformerEncoderAndDecoder: SubjectTopic = {
         formulas: [
           {
             label: "Feedforward layer",
-            expression: "FFN(x) = W₂ φ(W₁x + b₁) + b₂",
+            expression: "FFN(x) = φ(xW₁ + b₁)W₂ + b₂",
           },
           { label: "Shapes", expression: "dmodel → dff → dmodel" },
           { label: "Parameters", expression: "2dmodeldff + dff + dmodel" },
@@ -479,7 +479,7 @@ export const transformerTrainingInferenceAndSelection: SubjectTopic = {
           "The output matrix is large when vocabulary size V is large. Some models tie it to the token-embedding matrix when their shapes are compatible, reducing separate parameters.",
         ],
         formulas: [
-          { label: "Vocabulary logits", expression: "zₜ = Wvocab hₜ + bvocab" },
+          { label: "Vocabulary logits", expression: "zₜ = hₜWvocab + bvocab" },
           { label: "Untied output-head parameters", expression: "Vdmodel + V" },
         ],
       },

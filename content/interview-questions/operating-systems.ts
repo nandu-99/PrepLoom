@@ -359,7 +359,7 @@ export const operatingSystemInterviewQuestions: OperatingSystemQuestion[] = [
     category: "I/O and storage",
     question: "What are we trading when we choose a RAID level?",
     answer:
-      "We trade usable capacity, performance, and fault tolerance. Striping can improve throughput, mirroring provides simple redundancy, and parity uses less extra space but adds update and recovery work. RAID improves availability against drive failure, but it is not a replacement for backups.",
+      "We trade usable capacity, performance, and fault tolerance. Striping can improve throughput, mirroring provides simple redundancy, and parity uses less extra space but adds update and recovery work. RAID levels with redundancy can improve availability against drive failure, but RAID 0 provides no fault tolerance. RAID is not a replacement for backups.",
   },
 
   {

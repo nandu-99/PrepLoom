@@ -38,8 +38,8 @@ export default function ContactPage() {
                 Tell us what needs attention.
               </h1>
               <p className="mt-4 max-w-[600px] text-[14px] leading-7 text-[#555] dark:text-[#b3b3b3]">
-                Send a correction, suggest a useful resource, share feedback,
-                or ask a general question.
+                Send a correction, suggest a useful resource, share feedback, or
+                ask a general question.
               </p>
             </div>
 

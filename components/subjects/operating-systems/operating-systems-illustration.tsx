@@ -79,7 +79,13 @@ export function OperatingSystemsIllustration() {
               vectorEffect="non-scaling-stroke"
               className="fill-[#ededeb] dark:fill-[#141414]"
             />
-            <circle cx={cx - 22} cy="91" r="5" fill="currentColor" opacity="0.35" />
+            <circle
+              cx={cx - 22}
+              cy="91"
+              r="5"
+              fill="currentColor"
+              opacity="0.35"
+            />
             <path
               d={`M${cx - 8} 86 H${cx + 26} M${cx - 8} 96 H${cx + 14}`}
               fill="none"
@@ -119,9 +125,7 @@ export function OperatingSystemsIllustration() {
         ))}
 
         <motion.g
-          initial={
-            reduceMotion ? { opacity: 1 } : { opacity: 0, scale: 0.72 }
-          }
+          initial={reduceMotion ? { opacity: 1 } : { opacity: 0, scale: 0.72 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true, amount: 0.55 }}
           transition={{
@@ -159,7 +163,13 @@ export function OperatingSystemsIllustration() {
             [360, 273],
             [329, 242],
           ].map(([cx, cy]) => (
-            <circle key={`${cx}-${cy}`} cx={cx} cy={cy} r="3.5" fill="currentColor" />
+            <circle
+              key={`${cx}-${cy}`}
+              cx={cx}
+              cy={cy}
+              r="3.5"
+              fill="currentColor"
+            />
           ))}
         </motion.g>
 
