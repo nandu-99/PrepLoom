@@ -67,16 +67,35 @@ function subjectItems(): SearchItem[] {
       ...(subjectAliases[subject.slug] ?? []),
     ],
     icon: "book",
+    type: "subject",
+    aliases: subjectAliases[subject.slug],
   }));
 }
 
 function subjectTopicGroups(): SearchGroup[] {
   return subjectContents.map((subject) => ({
     label: subject.title,
-    items: subject.modules.flatMap((module) =>
-      module.topics.map((topic) => ({
+    items: subject.modules.flatMap((module) => {
+      const firstTopic = module.topics[0];
+      const moduleItem: SearchItem = {
+        title: module.title,
+        description: `${subject.title} / ${module.topics.length} topics`,
+        href: firstTopic
+          ? `/subjects/${subject.slug}?topic=${encodeURIComponent(firstTopic.slug)}#reading-preview-note`
+          : `/subjects/${subject.slug}`,
+        keywords: [
+          subject.title,
+          subject.shortTitle,
+          module.description,
+          ...module.topics.flatMap((topic) => [topic.title, ...topic.tags]),
+        ],
+        icon: "book",
+        type: "module",
+      };
+
+      const topicItems: SearchItem[] = module.topics.map((topic) => ({
         title: topic.title,
-        description: `${subject.shortTitle} - ${module.title}`,
+        description: `${subject.title} / ${module.title}`,
         href: `/subjects/${subject.slug}?topic=${encodeURIComponent(topic.slug)}#reading-preview-note`,
         keywords: [
           subject.title,
@@ -85,9 +104,12 @@ function subjectTopicGroups(): SearchGroup[] {
           topic.slug.replaceAll("-", " "),
           ...topic.tags,
         ],
-        icon: "book" as const,
-      })),
-    ),
+        icon: "book",
+        type: "topic",
+      }));
+
+      return [moduleItem, ...topicItems];
+    }),
   }));
 }
 
@@ -159,6 +181,7 @@ function interviewItems(): SearchItem[] {
       href: `${collection.href}#${question.id}`,
       keywords: [collection.label, question.id.replaceAll("-", " ")],
       icon: collection.label === "Behavioral" ? "book" : "code",
+      type: "interview-question",
     })),
   );
 }
@@ -171,6 +194,7 @@ function webdevItems(): SearchItem[] {
       href: "/webdev?tab=websites",
       keywords: ["webdev", "website", "tool", resource.category],
       icon: "code" as const,
+      type: "resource" as const,
     })),
     ...projectIdeas.map((project) => ({
       title: project.title,
@@ -185,6 +209,7 @@ function webdevItems(): SearchItem[] {
         ...project.skills,
       ],
       icon: "code" as const,
+      type: "resource" as const,
     })),
     ...componentLibraries.map((library) => ({
       title: library.name,
@@ -192,6 +217,7 @@ function webdevItems(): SearchItem[] {
       href: "/webdev?tab=libraries",
       keywords: ["webdev", "components", "ui", library.category],
       icon: "code" as const,
+      type: "resource" as const,
     })),
     ...practicalGuides.map((guide) => ({
       title: guide.title,
@@ -199,6 +225,7 @@ function webdevItems(): SearchItem[] {
       href: `/webdev?tab=guides&guide=${encodeURIComponent(guide.id)}`,
       keywords: ["webdev", "guide", guide.environment, ...guide.prerequisites],
       icon: "code" as const,
+      type: "resource" as const,
     })),
     ...skillTemplates.map((skill) => ({
       title: skill.title,
@@ -206,6 +233,7 @@ function webdevItems(): SearchItem[] {
       href: "/webdev?tab=skills",
       keywords: ["webdev", "skill", skill.category],
       icon: "code" as const,
+      type: "resource" as const,
     })),
   ];
 }
@@ -226,6 +254,7 @@ function dsaItems(): SearchItem[] {
       ...sheet.topics,
     ],
     icon: "braces",
+    type: "resource",
   }));
 }
 
@@ -236,6 +265,7 @@ const exploreItems: SearchItem[] = [
     href: "/interview-questions",
     keywords: ["interview", "questions", "practice"],
     icon: "code",
+    type: "resource",
   },
   {
     title: "Web development resources",
@@ -243,6 +273,7 @@ const exploreItems: SearchItem[] = [
     href: "/webdev",
     keywords: ["webdev", "resources", "tools", "projects"],
     icon: "code",
+    type: "resource",
   },
   {
     title: "DSA preparation",
@@ -250,6 +281,7 @@ const exploreItems: SearchItem[] = [
     href: "/dsa",
     keywords: ["dsa", "algorithms", "data structures", "sheets"],
     icon: "braces",
+    type: "resource",
   },
   {
     title: "Learning roadmaps",
@@ -257,6 +289,7 @@ const exploreItems: SearchItem[] = [
     href: "/roadmaps",
     keywords: ["roadmap", "frontend", "backend", "dsa"],
     icon: "route",
+    type: "roadmap",
   },
 ];
 
