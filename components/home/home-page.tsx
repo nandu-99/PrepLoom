@@ -16,10 +16,19 @@ export const metadata: Metadata = {
 };
 
 const popularTopics = [
-  ["Deadlocks", "/subjects/operating-systems#workspace"],
-  ["Process vs Thread", "/subjects/operating-systems#workspace"],
-  ["CPU Scheduling", "/subjects/operating-systems#workspace"],
-  ["Paging", "/subjects/operating-systems#workspace"],
+  [
+    "Deadlocks",
+    "/subjects/operating-systems?topic=deadlock-fundamentals#reading-preview-note",
+  ],
+  ["Polymorphism", "/subjects/oop?topic=polymorphism#reading-preview-note"],
+  [
+    "Normalization",
+    "/subjects/dbms?topic=normalization-and-anomalies#reading-preview-note",
+  ],
+  [
+    "TCP/IP Models",
+    "/subjects/computer-networks?topic=osi-and-tcp-ip-models#reading-preview-note",
+  ],
 ];
 
 const subjects = [
@@ -143,7 +152,7 @@ export default function HomePage() {
                   <span className="mr-1 shrink-0 font-medium text-[#151515] dark:text-[#f3f3f1]">
                     Popular
                   </span>
-                  {popularTopics.map(([label, href]) => (
+                  {popularTopics.map(([label, href], index) => (
                     <TrackedLink
                       key={label}
                       href={href}
@@ -153,7 +162,7 @@ export default function HomePage() {
                         ui_location: "homepage_popular_topics",
                         content_type: "topic",
                       }}
-                      className="shrink-0 rounded-full border border-black/[0.11] bg-black/[0.02] px-3 py-1.5 transition-colors hover:border-black/25 hover:bg-black/[0.045] hover:text-[#151515] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/40 dark:border-white/[0.12] dark:bg-white/[0.035] dark:hover:border-white/25 dark:hover:bg-white/[0.07] dark:hover:text-white dark:focus-visible:ring-white/50"
+                      className={`${index === 3 ? "hidden sm:inline-flex" : "shrink-0"} rounded-full border border-black/[0.11] bg-black/[0.02] px-3 py-1.5 transition-colors hover:border-black/25 hover:bg-black/[0.045] hover:text-[#151515] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/40 dark:border-white/[0.12] dark:bg-white/[0.035] dark:hover:border-white/25 dark:hover:bg-white/[0.07] dark:hover:text-white dark:focus-visible:ring-white/50`}
                     >
                       {label}
                     </TrackedLink>

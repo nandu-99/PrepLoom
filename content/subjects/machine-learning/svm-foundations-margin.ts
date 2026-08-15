@@ -17,6 +17,7 @@ export const svmFundamentalsAndHyperplanes: SubjectTopic = {
         paragraphs: [
           "For the standard SVM formulation, each training row has features xᵢ and a label yᵢ in {−1,+1}. The model learns a weight vector w and bias b.",
           "The sign of the decision score gives the predicted class. The size of the score indicates which side of the boundary the point lies on, but it is not automatically a probability.",
+          "The compact product wᵀx means w₁x₁ + w₂x₂ + …: multiply each feature by its weight and add the results.",
         ],
         formulas: [
           { label: "Decision score", expression: "f(x) = wᵀx + b" },

@@ -20,8 +20,13 @@ function Answer({ question }: { question: InterviewQuestion }) {
               key={point}
               className="grid grid-cols-[14px_minmax(0,1fr)] gap-2 text-[13px] leading-6 text-[#505050] dark:text-[#b8b8b8]"
             >
-              <span aria-hidden="true" className="mt-[11px] h-px bg-black/35 dark:bg-white/35" />
-              <span className="min-w-0 break-words [overflow-wrap:anywhere]">{point}</span>
+              <span
+                aria-hidden="true"
+                className="mt-[11px] h-px bg-black/35 dark:bg-white/35"
+              />
+              <span className="min-w-0 break-words [overflow-wrap:anywhere]">
+                {point}
+              </span>
             </li>
           ))}
         </ul>
@@ -103,7 +108,11 @@ export function QuestionPractice({
                       : "text-[#606060] hover:text-[#151515] dark:text-[#a8a8a8] dark:hover:text-white"
                   }`}
                 >
-                  <Icon className="size-3.5" strokeWidth={1.7} aria-hidden="true" />
+                  <Icon
+                    className="size-3.5"
+                    strokeWidth={1.7}
+                    aria-hidden="true"
+                  />
                   {item.label}
                 </button>
               );
@@ -139,9 +148,17 @@ export function QuestionPractice({
                     className="col-start-2 inline-flex h-8 w-fit items-center gap-2 rounded-[8px] px-2 text-[11px] font-medium text-[#606060] transition-colors hover:bg-black/[0.04] hover:text-[#151515] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/40 dark:text-[#a8a8a8] dark:hover:bg-white/[0.06] dark:hover:text-white dark:focus-visible:ring-white/50 sm:col-start-3 sm:row-start-1"
                   >
                     {answerVisible ? (
-                      <EyeOff className="size-3.5" strokeWidth={1.7} aria-hidden="true" />
+                      <EyeOff
+                        className="size-3.5"
+                        strokeWidth={1.7}
+                        aria-hidden="true"
+                      />
                     ) : (
-                      <Eye className="size-3.5" strokeWidth={1.7} aria-hidden="true" />
+                      <Eye
+                        className="size-3.5"
+                        strokeWidth={1.7}
+                        aria-hidden="true"
+                      />
                     )}
                     {answerVisible ? "Hide answer" : "Reveal answer"}
                   </button>

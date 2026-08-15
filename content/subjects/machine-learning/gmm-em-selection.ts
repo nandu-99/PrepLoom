@@ -48,11 +48,16 @@ export const expectationMaximizationAlgorithm: SubjectTopic = {
         title: "M-Step: Maximization",
         paragraphs: [
           "Keep responsibilities fixed and update every component using weighted summaries. Nₖ is the effective number of examples assigned to component k.",
+          "In one dimension, the covariance update is simply a responsibility-weighted variance: add γᵢₖ(xᵢ−μₖ)² across examples and divide by Nₖ. The final matrix formula generalizes that calculation to several features.",
         ],
         formulas: [
           { label: "Effective count", expression: "Nₖ = Σᵢγᵢₖ" },
           { label: "Mixing weight", expression: "πₖ = Nₖ/n" },
           { label: "Mean", expression: "μₖ = [Σᵢγᵢₖxᵢ]/Nₖ" },
+          {
+            label: "One-dimensional variance",
+            expression: "σₖ² = [Σᵢγᵢₖ(xᵢ−μₖ)²]/Nₖ",
+          },
           { label: "Covariance", expression: "Σₖ = [Σᵢγᵢₖ(xᵢ−μₖ)(xᵢ−μₖ)ᵀ]/Nₖ" },
         ],
       },

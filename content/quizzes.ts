@@ -43,7 +43,10 @@ const operatingSystemsFoundations: QuizDefinition = {
       prompt: "What is the main role of an operating system?",
       options: [
         { id: "a", label: "To write application code for the user" },
-        { id: "b", label: "To manage hardware and provide services to programs" },
+        {
+          id: "b",
+          label: "To manage hardware and provide services to programs",
+        },
         { id: "c", label: "To replace the computer processor" },
         { id: "d", label: "To store every file in main memory" },
       ],
@@ -74,7 +77,10 @@ const operatingSystemsFoundations: QuizDefinition = {
       options: [
         { id: "a", label: "A program stored on disk that is not running" },
         { id: "b", label: "A single instruction inside a program" },
-        { id: "c", label: "A program in execution with its own state and resources" },
+        {
+          id: "c",
+          label: "A program in execution with its own state and resources",
+        },
         { id: "d", label: "A permanent part of the CPU" },
       ],
       correctOptionId: "c",
@@ -88,7 +94,10 @@ const operatingSystemsFoundations: QuizDefinition = {
       prompt: "What information is normally stored in a Process Control Block?",
       options: [
         { id: "a", label: "Only the name of the source code file" },
-        { id: "b", label: "Process state, registers, and scheduling information" },
+        {
+          id: "b",
+          label: "Process state, registers, and scheduling information",
+        },
         { id: "c", label: "The physical design of the processor" },
         { id: "d", label: "Passwords for every user on the system" },
       ],
@@ -110,14 +119,18 @@ const operatingSystemsFoundations: QuizDefinition = {
       correctOptionId: "b",
       explanation:
         "Threads inside one process share code, data, heap memory, and resources such as open files. Each thread still keeps its own stack, registers, and instruction pointer.",
-      keyPoint: "Threads share process resources but keep their own execution state.",
+      keyPoint:
+        "Threads share process resources but keep their own execution state.",
       relatedHref: "/subjects/operating-systems",
     },
     {
       id: "context-switch",
       prompt: "What happens during a context switch?",
       options: [
-        { id: "a", label: "The OS saves one task's state and loads another task's state" },
+        {
+          id: "a",
+          label: "The OS saves one task's state and loads another task's state",
+        },
         { id: "b", label: "The computer permanently deletes a process" },
         { id: "c", label: "The CPU changes its physical architecture" },
         { id: "d", label: "Every file is copied into memory" },
@@ -130,7 +143,8 @@ const operatingSystemsFoundations: QuizDefinition = {
     },
     {
       id: "fcfs",
-      prompt: "What common problem can First Come, First Served scheduling cause?",
+      prompt:
+        "What common problem can First Come, First Served scheduling cause?",
       options: [
         { id: "a", label: "Circular wait" },
         { id: "b", label: "The convoy effect" },
@@ -140,7 +154,8 @@ const operatingSystemsFoundations: QuizDefinition = {
       correctOptionId: "b",
       explanation:
         "A long CPU-bound process at the front can make many short processes wait behind it. This is called the convoy effect and can increase average waiting time.",
-      keyPoint: "FCFS is simple, but one long job can delay every job behind it.",
+      keyPoint:
+        "FCFS is simple, but one long job can delay every job behind it.",
       relatedHref: "/subjects/operating-systems",
     },
     {
@@ -160,7 +175,8 @@ const operatingSystemsFoundations: QuizDefinition = {
     },
     {
       id: "round-robin",
-      prompt: "What controls how long a process runs in Round Robin scheduling?",
+      prompt:
+        "What controls how long a process runs in Round Robin scheduling?",
       options: [
         { id: "a", label: "A fixed time quantum" },
         { id: "b", label: "The size of its source code" },
@@ -177,8 +193,14 @@ const operatingSystemsFoundations: QuizDefinition = {
       id: "preemptive",
       prompt: "What makes a scheduling algorithm preemptive?",
       options: [
-        { id: "a", label: "A running process always finishes before another starts" },
-        { id: "b", label: "The OS can interrupt a running process and schedule another" },
+        {
+          id: "a",
+          label: "A running process always finishes before another starts",
+        },
+        {
+          id: "b",
+          label: "The OS can interrupt a running process and schedule another",
+        },
         { id: "c", label: "Only one process can exist at a time" },
         { id: "d", label: "Processes choose their own memory addresses" },
       ],

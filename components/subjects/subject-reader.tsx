@@ -59,9 +59,9 @@ const layoutOptions: { value: ReadingLayout; label: string }[] = [
 ];
 
 const modeOptions: { value: SubjectStudyMode; label: string }[] = [
-  { value: "learn", label: "Detailed" },
-  { value: "revise", label: "Quick review" },
-  { value: "last-minute", label: "Last check" },
+  { value: "learn", label: "Learn" },
+  { value: "revise", label: "Revise" },
+  { value: "last-minute", label: "Recall" },
 ];
 
 function clean(text: string) {
@@ -189,12 +189,38 @@ export function SubjectReader({ subject }: { subject: SubjectContent }) {
   const [saved, setSaved] = useState<string[]>([]);
   const [hydrated, setHydrated] = useState(false);
   const pendingScrollSlug = useRef<string | null>(null);
+  const pendingProgrammaticScrollSlug = useRef<string | null>(null);
+  const pendingProgrammaticScrollTimeout = useRef<number | null>(null);
   const pendingTopicView = useRef<{
     slug: string;
     source: TopicViewSource;
   } | null>(null);
   const lastTrackedTopicKey = useRef<string | null>(null);
   const reduceMotion = useReducedMotion();
+
+  const completeProgrammaticScroll = useCallback((slug: string) => {
+    if (pendingProgrammaticScrollSlug.current !== slug) return;
+
+    pendingProgrammaticScrollSlug.current = null;
+    if (pendingProgrammaticScrollTimeout.current !== null) {
+      window.clearTimeout(pendingProgrammaticScrollTimeout.current);
+      pendingProgrammaticScrollTimeout.current = null;
+    }
+  }, []);
+
+  const beginProgrammaticScroll = useCallback(
+    (slug: string) => {
+      if (pendingProgrammaticScrollTimeout.current !== null) {
+        window.clearTimeout(pendingProgrammaticScrollTimeout.current);
+      }
+
+      pendingProgrammaticScrollSlug.current = slug;
+      pendingProgrammaticScrollTimeout.current = window.setTimeout(() => {
+        completeProgrammaticScroll(slug);
+      }, 1500);
+    },
+    [completeProgrammaticScroll],
+  );
 
   const selectUrlTopic = useCallback((slug: string) => {
     pendingTopicView.current = { slug, source: "url_query" };
@@ -316,13 +342,22 @@ export function SubjectReader({ subject }: { subject: SubjectContent }) {
           .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
         if (visible) {
           const slug = visible.target.id.replace("all-note-", "");
-          if (slug !== selectedSlug) {
+          const programmaticScrollSlug = pendingProgrammaticScrollSlug.current;
+
+          if (programmaticScrollSlug && slug !== programmaticScrollSlug) return;
+          if (slug === programmaticScrollSlug) {
+            completeProgrammaticScroll(slug);
+          }
+
+          setSelectedSlug((currentSlug) => {
+            if (slug === currentSlug) return currentSlug;
+
             pendingTopicView.current = {
               slug,
               source: "all_notes_scroll",
             };
-            setSelectedSlug(slug);
-          }
+            return slug;
+          });
         }
       },
       { rootMargin: "-24% 0px -58% 0px", threshold: [0, 0.2, 0.5] },
@@ -330,13 +365,14 @@ export function SubjectReader({ subject }: { subject: SubjectContent }) {
 
     elements.forEach((element) => observer.observe(element));
     return () => observer.disconnect();
-  }, [layout, selectedSlug, topics]);
+  }, [completeProgrammaticScroll, layout, topics]);
 
   useEffect(() => {
     if (!pendingScrollSlug.current) return;
     const slug = pendingScrollSlug.current;
     const frame = window.requestAnimationFrame(() => {
       const id = layout === "all" ? `all-note-${slug}` : "reading-preview-note";
+      if (layout === "all") beginProgrammaticScroll(slug);
       document.getElementById(id)?.scrollIntoView({
         behavior: reduceMotion ? "auto" : "smooth",
         block: "start",
@@ -344,7 +380,7 @@ export function SubjectReader({ subject }: { subject: SubjectContent }) {
       pendingScrollSlug.current = null;
     });
     return () => window.cancelAnimationFrame(frame);
-  }, [layout, mode, reduceMotion]);
+  }, [beginProgrammaticScroll, layout, mode, reduceMotion]);
 
   function getTopicAnalyticsContext(slug: string) {
     const topic = topics.find((item) => item.slug === slug);
@@ -408,6 +444,9 @@ export function SubjectReader({ subject }: { subject: SubjectContent }) {
     });
 
     pendingScrollSlug.current = selectedSlug;
+    if (nextLayout === "topic" && pendingProgrammaticScrollSlug.current) {
+      completeProgrammaticScroll(pendingProgrammaticScrollSlug.current);
+    }
     setLayout(nextLayout);
   }
 
@@ -430,6 +469,7 @@ export function SubjectReader({ subject }: { subject: SubjectContent }) {
     pendingTopicView.current = { slug, source };
     setSelectedSlug(slug);
     if (layout === "all") {
+      beginProgrammaticScroll(slug);
       document.getElementById(`all-note-${slug}`)?.scrollIntoView({
         behavior: reduceMotion ? "auto" : "smooth",
         block: "start",
@@ -481,11 +521,11 @@ export function SubjectReader({ subject }: { subject: SubjectContent }) {
 
           <div className="flex items-center justify-between gap-3">
             <span className="hidden text-[11px] text-[#777] dark:text-[#999] sm:inline">
-              Note depth
+              Study mode
             </span>
             <div
               className="grid flex-1 grid-cols-3 rounded-[12px] bg-black/[0.045] p-1 dark:bg-white/[0.055] sm:flex-none"
-              aria-label="Note depth"
+              aria-label="Study mode"
             >
               {modeOptions.map((option) => (
                 <button
@@ -864,7 +904,7 @@ function AllNotes({
                 <article
                   id={`all-note-${topic.slug}`}
                   key={topic.slug}
-                  className="scroll-mt-52 border-b border-black/[0.1] pb-14 last:border-b-0 last:pb-0 dark:border-white/[0.11] sm:pb-16 [content-visibility:auto] [contain-intrinsic-size:auto_900px]"
+                  className="scroll-mt-52 border-b border-black/[0.1] pb-14 last:border-b-0 last:pb-0 dark:border-white/[0.11] sm:pb-16"
                 >
                   <TopicHeader topic={topic} mode={mode} compact />
                   <div className="py-10">

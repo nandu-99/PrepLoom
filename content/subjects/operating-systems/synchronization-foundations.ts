@@ -136,9 +136,18 @@ const processSynchronizationDetailed: SubjectTopic = {
         table: {
           headers: ["Non-Atomic Update", "Atomic Update"],
           rows: [
-            ["Read, modify, and write can interleave", "Appears as one indivisible action"],
-            ["Another task may change the value in between", "No partial update is visible"],
-            ["Can cause a lost update", "Can protect the update from that race"],
+            [
+              "Read, modify, and write can interleave",
+              "Appears as one indivisible action",
+            ],
+            [
+              "Another task may change the value in between",
+              "No partial update is visible",
+            ],
+            [
+              "Can cause a lost update",
+              "Can protect the update from that race",
+            ],
           ],
         },
       },
@@ -269,7 +278,10 @@ const processSynchronizationDetailed: SubjectTopic = {
           rows: [
             ["Prevents race conditions", "Adds synchronization overhead"],
             ["Maintains consistent data", "Poor locking can cause deadlock"],
-            ["Allows safe resource sharing", "Too much locking reduces parallelism"],
+            [
+              "Allows safe resource sharing",
+              "Too much locking reduces parallelism",
+            ],
           ],
         },
       },
@@ -333,11 +345,9 @@ const processSynchronizationDetailed: SubjectTopic = {
       "Classic Example = Two threads increment the same counter but one increment is lost.",
     ],
     memoryLineLabel: "Remember This",
-    memoryLine:
-      "Shared Data + Unsafe Interleaving = Race Condition.",
+    memoryLine: "Shared Data + Unsafe Interleaving = Race Condition.",
     memoryLineAtEnd: true,
-    trap:
-      "A race condition can happen through interleaving on one CPU. True parallel execution is not required.",
+    trap: "A race condition can happen through interleaving on one CPU. True parallel execution is not required.",
   },
 };
 
@@ -613,9 +623,18 @@ const softwareBasedSynchronizationDetailed: SubjectTopic = {
         dataTable: {
           headers: ["Solution", "Main problem"],
           rows: [
-            ["Plain Lock Variable", "Check and set are separate, so Mutual Exclusion can fail"],
-            ["Strict Alternation", "A process waits for its turn even when the other process is not interested"],
-            ["Interest Flags", "Both processes can raise their flags and wait forever"],
+            [
+              "Plain Lock Variable",
+              "Check and set are separate, so Mutual Exclusion can fail",
+            ],
+            [
+              "Strict Alternation",
+              "A process waits for its turn even when the other process is not interested",
+            ],
+            [
+              "Interest Flags",
+              "Both processes can raise their flags and wait forever",
+            ],
           ],
         },
       },
@@ -737,8 +756,7 @@ const softwareBasedSynchronizationDetailed: SubjectTopic = {
     memoryLine:
       "Lock races. Alternation blocks. Flags can deadlock. Turn resolves the tie.",
     memoryLineAtEnd: true,
-    trap:
-      "On modern systems, Peterson's Algorithm needs proper atomic operations and memory ordering. Ordinary shared variables may not be enough.",
+    trap: "On modern systems, Peterson's Algorithm needs proper atomic operations and memory ordering. Ordinary shared variables may not be enough.",
   },
 };
 
@@ -893,11 +911,23 @@ const hardwareBasedSynchronizationDetailed: SubjectTopic = {
         dataTable: {
           headers: ["Feature", "Test-and-Set", "Compare-and-Swap"],
           rows: [
-            ["Operation", "Sets a value and returns the old value", "Updates only after an expected-value match"],
+            [
+              "Operation",
+              "Sets a value and returns the old value",
+              "Updates only after an expected-value match",
+            ],
             ["Atomic", "Yes", "Yes"],
             ["Simple lock", "Very simple", "Flexible"],
-            ["Busy waiting", "When used in a retry loop", "When used in a retry loop"],
-            ["Common use", "Spinlocks and basic locks", "Locks and lock-free algorithms"],
+            [
+              "Busy waiting",
+              "When used in a retry loop",
+              "When used in a retry loop",
+            ],
+            [
+              "Common use",
+              "Spinlocks and basic locks",
+              "Locks and lock-free algorithms",
+            ],
           ],
         },
       },
@@ -938,10 +968,7 @@ const hardwareBasedSynchronizationDetailed: SubjectTopic = {
         paragraphs: [
           "These instructions solve the Check-Then-Set problem found in early software-based solutions.",
         ],
-        points: [
-          "Test-and-Set (TAS)",
-          "Compare-and-Swap (CAS)",
-        ],
+        points: ["Test-and-Set (TAS)", "Compare-and-Swap (CAS)"],
       },
       {
         title: "Why it Matters",
@@ -1000,10 +1027,19 @@ const hardwareBasedSynchronizationDetailed: SubjectTopic = {
         table: {
           headers: ["Benefits", "Limitations"],
           rows: [
-            ["Removes the Check-Then-Set race", "Retry loops can waste CPU time"],
-            ["Fast hardware-supported synchronization", "Starvation is possible"],
+            [
+              "Removes the Check-Then-Set race",
+              "Retry loops can waste CPU time",
+            ],
+            [
+              "Fast hardware-supported synchronization",
+              "Starvation is possible",
+            ],
             ["Builds locks across CPU cores", "Fairness is not guaranteed"],
-            ["CAS supports lock-free algorithms", "CAS is more complex than TAS"],
+            [
+              "CAS supports lock-free algorithms",
+              "CAS is more complex than TAS",
+            ],
           ],
         },
       },
@@ -1012,7 +1048,10 @@ const hardwareBasedSynchronizationDetailed: SubjectTopic = {
         dataTable: {
           headers: ["Test-and-Set", "Compare-and-Swap"],
           rows: [
-            ["Reads and sets the value atomically", "Updates only when the expected value matches"],
+            [
+              "Reads and sets the value atomically",
+              "Updates only when the expected value matches",
+            ],
             ["Simple lock implementation", "More flexible operation"],
             ["Often used for spinlocks", "Common in lock-free algorithms"],
           ],
@@ -1035,22 +1074,12 @@ const hardwareBasedSynchronizationDetailed: SubjectTopic = {
     sections: [
       {
         title: "Main Instructions",
-        points: [
-          "Test-and-Set (TAS)",
-          "Compare-and-Swap (CAS)",
-        ],
+        points: ["Test-and-Set (TAS)", "Compare-and-Swap (CAS)"],
       },
       {
         title: "Working",
-        flow: [
-          "Thread",
-          "Atomic Instruction (TAS / CAS)",
-          "Lock Acquired?",
-        ],
-        points: [
-          "Yes: Enter the Critical Section.",
-          "No: Wait or retry.",
-        ],
+        flow: ["Thread", "Atomic Instruction (TAS / CAS)", "Lock Acquired?"],
+        points: ["Yes: Enter the Critical Section.", "No: Wait or retry."],
         wide: true,
       },
       {
@@ -1076,8 +1105,7 @@ const hardwareBasedSynchronizationDetailed: SubjectTopic = {
     memoryLine:
       "TAS always sets. CAS compares before updating. Retry loops spin.",
     memoryLineAtEnd: true,
-    trap:
-      "Atomic hardware instructions provide the building block, but correct locks also need release logic and proper memory ordering.",
+    trap: "Atomic hardware instructions provide the building block, but correct locks also need release logic and proper memory ordering.",
   },
 };
 
@@ -1165,7 +1193,10 @@ const locksMutexesSpinlocksDetailed: SubjectTopic = {
         table: {
           headers: ["Coarse-Grained Locking", "Fine-Grained Locking"],
           rows: [
-            ["One lock protects a large area", "Several locks protect smaller independent areas"],
+            [
+              "One lock protects a large area",
+              "Several locks protect smaller independent areas",
+            ],
             ["Simpler to understand", "Allows more concurrency"],
             ["Lower deadlock risk", "Higher deadlock and ordering risk"],
             ["Threads may wait more often", "Harder to implement and maintain"],
@@ -1222,7 +1253,11 @@ const locksMutexesSpinlocksDetailed: SubjectTopic = {
           headers: ["Path", "When Used", "What Happens"],
           rows: [
             ["Fast path", "Mutex is free", "Acquire with an atomic operation"],
-            ["Slow path", "Mutex is busy", "Join a wait queue and usually sleep"],
+            [
+              "Slow path",
+              "Mutex is busy",
+              "Join a wait queue and usually sleep",
+            ],
           ],
         },
       },
@@ -1334,9 +1369,21 @@ const locksMutexesSpinlocksDetailed: SubjectTopic = {
             ["Waiting behavior", "Usually sleeps or blocks", "Keeps checking"],
             ["CPU use while waiting", "Low", "High"],
             ["Best for", "Longer or unknown waits", "Extremely short waits"],
-            ["Waiting overhead", "Sleep and wake-up work", "Repeated atomic checks"],
-            ["Common use", "Applications and kernels", "Kernel and low-level code"],
-            ["Ownership", "Strict owner", "May not be tracked, but holder releases"],
+            [
+              "Waiting overhead",
+              "Sleep and wake-up work",
+              "Repeated atomic checks",
+            ],
+            [
+              "Common use",
+              "Applications and kernels",
+              "Kernel and low-level code",
+            ],
+            [
+              "Ownership",
+              "Strict owner",
+              "May not be tracked, but holder releases",
+            ],
           ],
         },
       },
@@ -1391,11 +1438,7 @@ const locksMutexesSpinlocksDetailed: SubjectTopic = {
         paragraphs: [
           "Every thread using the protected resource must follow the same rule.",
         ],
-        flow: [
-          "Acquire Lock",
-          "Execute Critical Section",
-          "Release Lock",
-        ],
+        flow: ["Acquire Lock", "Execute Critical Section", "Release Lock"],
         visual: {
           src: "/notes/operating-systems/lock-critical-section-flow.png",
           alt: "Two threads using the same lock so only one thread accesses the protected shared resource at a time.",
@@ -1458,7 +1501,10 @@ const locksMutexesSpinlocksDetailed: SubjectTopic = {
         table: {
           headers: ["Coarse-Grained", "Fine-Grained"],
           rows: [
-            ["One lock protects a large section", "Several locks protect smaller sections"],
+            [
+              "One lock protects a large section",
+              "Several locks protect smaller sections",
+            ],
             ["Simpler to manage", "Allows more concurrency"],
             ["Threads wait more often", "More complex and easier to deadlock"],
           ],
@@ -1472,7 +1518,11 @@ const locksMutexesSpinlocksDetailed: SubjectTopic = {
             ["Waiting thread", "Usually sleeps", "Keeps checking"],
             ["Best for", "Longer or unknown waits", "Extremely short waits"],
             ["Waiting cost", "Scheduling overhead", "CPU time"],
-            ["Common use", "Applications and kernels", "Kernel and low-level code"],
+            [
+              "Common use",
+              "Applications and kernels",
+              "Kernel and low-level code",
+            ],
           ],
         },
       },
@@ -1498,11 +1548,7 @@ const locksMutexesSpinlocksDetailed: SubjectTopic = {
     sections: [
       {
         title: "Working",
-        flow: [
-          "Acquire Lock",
-          "Critical Section",
-          "Release Lock",
-        ],
+        flow: ["Acquire Lock", "Critical Section", "Release Lock"],
         wide: true,
       },
     ],
@@ -1521,8 +1567,7 @@ const locksMutexesSpinlocksDetailed: SubjectTopic = {
     memoryLine:
       "Mutex sleeps. Spinlock spins. Both protect a Critical Section.",
     memoryLineAtEnd: true,
-    trap:
-      "Never choose a Spinlock for a long wait or when the lock holder cannot run.",
+    trap: "Never choose a Spinlock for a long wait or when the lock holder cannot run.",
   },
 };
 

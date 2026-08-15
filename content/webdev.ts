@@ -107,7 +107,8 @@ export const projectIdeas: ProjectIdea[] = [
   {
     id: "expense-tracker",
     title: "Personal expense tracker",
-    description: "Track income, spending, budgets, and monthly financial progress.",
+    description:
+      "Track income, spending, budgets, and monthly financial progress.",
     level: "Beginner",
     stack: "React, Tailwind CSS, local storage",
     features: [
@@ -117,7 +118,13 @@ export const projectIdeas: ProjectIdea[] = [
       "Summary charts and totals",
       "CSV data export",
     ],
-    skills: ["Forms", "State", "Local storage", "Charts", "Data transformation"],
+    skills: [
+      "Forms",
+      "State",
+      "Local storage",
+      "Charts",
+      "Data transformation",
+    ],
   },
   {
     id: "weather-dashboard",
@@ -132,12 +139,19 @@ export const projectIdeas: ProjectIdea[] = [
       "Saved favorite locations",
       "Loading and error states",
     ],
-    skills: ["API requests", "Async state", "Search", "Date formatting", "Responsive design"],
+    skills: [
+      "API requests",
+      "Async state",
+      "Search",
+      "Date formatting",
+      "Responsive design",
+    ],
   },
   {
     id: "job-application-tracker",
     title: "Job application tracker",
-    description: "Organize applications, interviews, follow-ups, and company notes.",
+    description:
+      "Organize applications, interviews, follow-ups, and company notes.",
     level: "Intermediate",
     stack: "Next.js, PostgreSQL, Prisma",
     features: [
@@ -152,7 +166,8 @@ export const projectIdeas: ProjectIdea[] = [
   {
     id: "ecommerce-store",
     title: "E-commerce store",
-    description: "Build a complete online store with products, cart, and checkout.",
+    description:
+      "Build a complete online store with products, cart, and checkout.",
     level: "Intermediate",
     stack: "Next.js, PostgreSQL, Stripe",
     features: [
@@ -162,12 +177,19 @@ export const projectIdeas: ProjectIdea[] = [
       "Order history",
       "Admin product management",
     ],
-    skills: ["Payments", "Cart state", "Database relations", "Authentication", "Server actions"],
+    skills: [
+      "Payments",
+      "Cart state",
+      "Database relations",
+      "Authentication",
+      "Server actions",
+    ],
   },
   {
     id: "realtime-chat-app",
     title: "Real-time chat application",
-    description: "Create private and group conversations with instant message delivery.",
+    description:
+      "Create private and group conversations with instant message delivery.",
     level: "Advanced",
     stack: "Next.js, PostgreSQL, WebSockets",
     features: [
@@ -177,12 +199,19 @@ export const projectIdeas: ProjectIdea[] = [
       "Image and file attachments",
       "Read receipts and notifications",
     ],
-    skills: ["WebSockets", "Real-time state", "File uploads", "Authorization", "Notifications"],
+    skills: [
+      "WebSockets",
+      "Real-time state",
+      "File uploads",
+      "Authorization",
+      "Notifications",
+    ],
   },
   {
     id: "learning-management-system",
     title: "Learning management system",
-    description: "Manage courses, lessons, student progress, quizzes, and instructors.",
+    description:
+      "Manage courses, lessons, student progress, quizzes, and instructors.",
     level: "Advanced",
     stack: "Next.js, PostgreSQL, Cloud storage",
     features: [
@@ -192,7 +221,13 @@ export const projectIdeas: ProjectIdea[] = [
       "Quizzes and grading",
       "Progress tracking dashboards",
     ],
-    skills: ["Role-based access", "File storage", "Relational data", "Progress tracking", "Analytics"],
+    skills: [
+      "Role-based access",
+      "File storage",
+      "Relational data",
+      "Progress tracking",
+      "Analytics",
+    ],
   },
 ];
 
@@ -250,25 +285,29 @@ export const componentLibraries: ComponentLibrary[] = [
 export const skillTemplates: SkillTemplate[] = [
   {
     title: "taste-skill",
-    description: "Build polished interfaces with stronger layout, typography, and visual discipline.",
+    description:
+      "Build polished interfaces with stronger layout, typography, and visual discipline.",
     category: "Design",
     href: "https://www.skills.sh/leonxlnx/taste-skill/design-taste-frontend",
   },
   {
     title: "debug-skill",
-    description: "Debug with runtime evidence, clear hypotheses, reproduction, and verification.",
+    description:
+      "Debug with runtime evidence, clear hypotheses, reproduction, and verification.",
     category: "Debugging",
     href: "https://www.skills.sh/vltansky/debug-skill/debug",
   },
   {
     title: "refactor-skill",
-    description: "Plan safe refactors that preserve behavior and keep changes reviewable.",
+    description:
+      "Plan safe refactors that preserve behavior and keep changes reviewable.",
     category: "Refactoring",
     href: "https://www.skills.sh/mattpocock/skills/request-refactor-plan",
   },
   {
     title: "review-skill",
-    description: "Review code for correctness, reliability, performance, and maintainability.",
+    description:
+      "Review code for correctness, reliability, performance, and maintainability.",
     category: "Review",
     href: "https://www.skills.sh/mattpocock/skills/code-review",
   },
@@ -280,15 +319,22 @@ export const practicalGuides: PracticalGuide[] = [
     title: "Project setup",
     summary: "Create a Vite or Next.js project with Tailwind CSS.",
     environment: "Local terminal",
-    prerequisites: ["Node.js 20.19+ or 22.12+ for Vite", "Node.js 20.9+ for Next.js", "npm", "A code editor"],
-    outcome: "A Vite React or Next.js application with Tailwind CSS ready for development.",
+    prerequisites: [
+      "Node.js 20.19+ or 22.12+ for Vite",
+      "Node.js 20.9+ for Next.js",
+      "npm",
+      "A code editor",
+    ],
+    outcome:
+      "A Vite React or Next.js application with Tailwind CSS ready for development.",
     checked: "August 2026",
     sourceLabel: "Tailwind CSS documentation",
     sourceHref: "https://tailwindcss.com/docs/installation/using-vite",
     steps: [
       {
         title: "Choose your framework",
-        explanation: "Use Vite for a lightweight React app or Next.js when you need routing, server rendering, or backend features.",
+        explanation:
+          "Use Vite for a lightweight React app or Next.js when you need routing, server rendering, or backend features.",
         code: "Vite: React single-page application\nNext.js: Full-stack React application",
       },
       {
@@ -305,33 +351,38 @@ export const practicalGuides: PracticalGuide[] = [
         title: "Configure the Vite plugin",
         explanation: "Add the Tailwind plugin alongside the React plugin.",
         language: "ts",
-        code: "// vite.config.ts\nimport { defineConfig } from \"vite\"\nimport react from \"@vitejs/plugin-react\"\nimport tailwindcss from \"@tailwindcss/vite\"\n\nexport default defineConfig({\n  plugins: [react(), tailwindcss()],\n})",
+        code: '// vite.config.ts\nimport { defineConfig } from "vite"\nimport react from "@vitejs/plugin-react"\nimport tailwindcss from "@tailwindcss/vite"\n\nexport default defineConfig({\n  plugins: [react(), tailwindcss()],\n})',
       },
       {
         title: "Import Tailwind in Vite",
-        explanation: "Add the Tailwind import to the CSS file already loaded by the app.",
+        explanation:
+          "Add the Tailwind import to the CSS file already loaded by the app.",
         language: "css",
-        code: "/* src/index.css */\n@import \"tailwindcss\";",
+        code: '/* src/index.css */\n@import "tailwindcss";',
       },
       {
         title: "Create a Next.js project",
-        explanation: "Creates an App Router project with TypeScript, ESLint, and Tailwind CSS.",
+        explanation:
+          "Creates an App Router project with TypeScript, ESLint, and Tailwind CSS.",
         code: "npx create-next-app@latest my-app --yes\ncd my-app",
       },
       {
         title: "Confirm Tailwind in Next.js",
-        explanation: "The generated app/globals.css file should contain the Tailwind import.",
+        explanation:
+          "The generated app/globals.css file should contain the Tailwind import.",
         language: "css",
-        code: "@import \"tailwindcss\";",
+        code: '@import "tailwindcss";',
       },
       {
         title: "Start the project",
-        explanation: "Open the local URL shown in the terminal and confirm your first Tailwind utility works.",
+        explanation:
+          "Open the local URL shown in the terminal and confirm your first Tailwind utility works.",
         code: "npm run dev",
       },
       {
         title: "Verify the production build",
-        explanation: "Stop the development server, then confirm the optimized build completes without errors.",
+        explanation:
+          "Stop the development server, then confirm the optimized build completes without errors.",
         code: "npm run build",
       },
     ],
@@ -341,15 +392,22 @@ export const practicalGuides: PracticalGuide[] = [
     title: "shadcn/ui setup",
     summary: "Initialize shadcn/ui and add your first component.",
     environment: "React project",
-    prerequisites: ["A supported React project", "Tailwind CSS", "An import alias", "npm"],
-    outcome: "shadcn/ui configured with an editable Button component in your project.",
+    prerequisites: [
+      "A supported React project",
+      "Tailwind CSS",
+      "An import alias",
+      "npm",
+    ],
+    outcome:
+      "shadcn/ui configured with an editable Button component in your project.",
     checked: "August 2026",
     sourceLabel: "shadcn/ui documentation",
     sourceHref: "https://ui.shadcn.com/docs/cli",
     steps: [
       {
         title: "Initialize shadcn/ui",
-        explanation: "Detects the framework and creates components.json and theme configuration.",
+        explanation:
+          "Detects the framework and creates components.json and theme configuration.",
         code: "npx shadcn@latest init",
       },
       {
@@ -359,13 +417,15 @@ export const practicalGuides: PracticalGuide[] = [
       },
       {
         title: "Use the component",
-        explanation: "Import the generated component from your configured alias.",
+        explanation:
+          "Import the generated component from your configured alias.",
         language: "tsx",
-        code: "import { Button } from \"@/components/ui/button\"\n\nexport default function Page() {\n  return <Button>Continue</Button>\n}",
+        code: 'import { Button } from "@/components/ui/button"\n\nexport default function Page() {\n  return <Button>Continue</Button>\n}',
       },
       {
         title: "Review before adding more",
-        explanation: "Preview the files and dependencies a component would add before installing it.",
+        explanation:
+          "Preview the files and dependencies a component would add before installing it.",
         code: "npx shadcn@latest add card --dry-run",
       },
     ],
@@ -375,50 +435,68 @@ export const practicalGuides: PracticalGuide[] = [
     title: "GitHub account and SSH",
     summary: "Create a secure GitHub account and connect it to your computer.",
     environment: "Browser and terminal",
-    prerequisites: ["An email address", "An authenticator app", "Git installed", "Terminal access"],
-    outcome: "A verified GitHub account with two-factor authentication and working SSH access.",
+    prerequisites: [
+      "An email address",
+      "An authenticator app",
+      "Git installed",
+      "Terminal access",
+    ],
+    outcome:
+      "A verified GitHub account with two-factor authentication and working SSH access.",
     checked: "August 2026",
     sourceLabel: "GitHub documentation",
-    sourceHref: "https://docs.github.com/en/authentication/connecting-to-github-with-ssh",
+    sourceHref:
+      "https://docs.github.com/en/authentication/connecting-to-github-with-ssh",
     steps: [
       {
         title: "Create your account",
-        explanation: "Create a personal GitHub account and verify your email address.",
+        explanation:
+          "Create a personal GitHub account and verify your email address.",
         code: "https://github.com/signup\n\nGitHub inbox → Verify email address",
       },
       {
         title: "Secure the account",
-        explanation: "Add your profile details, enable two-factor authentication, and save the recovery codes.",
+        explanation:
+          "Add your profile details, enable two-factor authentication, and save the recovery codes.",
         code: "GitHub → Settings → Public profile\nGitHub → Settings → Password and authentication → Enable 2FA",
-        warning: "Store recovery codes outside GitHub in a trusted password manager.",
+        warning:
+          "Store recovery codes outside GitHub in a trusted password manager.",
       },
       {
         title: "Check for an existing SSH key",
-        explanation: "Look for an existing public key before creating another one.",
+        explanation:
+          "Look for an existing public key before creating another one.",
         code: "ls -al ~/.ssh",
       },
       {
         title: "Generate an SSH key if needed",
-        explanation: "Run this only when you do not already have a key you want to use with GitHub.",
-        code: "ssh-keygen -t ed25519 -C \"you@example.com\"",
-        warning: "Use a secure passphrase. Never share or commit the private key file named id_ed25519.",
+        explanation:
+          "Run this only when you do not already have a key you want to use with GitHub.",
+        code: 'ssh-keygen -t ed25519 -C "you@example.com"',
+        warning:
+          "Use a secure passphrase. Never share or commit the private key file named id_ed25519.",
       },
       {
         title: "Add the key to the SSH agent",
-        explanation: "On macOS, Linux, or Git Bash, start the agent and load the private key.",
-        code: "eval \"$(ssh-agent -s)\"\nssh-add ~/.ssh/id_ed25519",
-        warning: "Windows PowerShell uses different ssh-agent steps; follow GitHub's instructions for your operating system.",
+        explanation:
+          "On macOS, Linux, or Git Bash, start the agent and load the private key.",
+        code: 'eval "$(ssh-agent -s)"\nssh-add ~/.ssh/id_ed25519',
+        warning:
+          "Windows PowerShell uses different ssh-agent steps; follow GitHub's instructions for your operating system.",
       },
       {
         title: "Add the public key to GitHub",
-        explanation: "Copy the complete public key and add it as an authentication key on GitHub.",
+        explanation:
+          "Copy the complete public key and add it as an authentication key on GitHub.",
         code: "cat ~/.ssh/id_ed25519.pub\n\n# GitHub → Settings → SSH and GPG keys → New SSH key",
       },
       {
         title: "Test the connection",
-        explanation: "Verify GitHub's host fingerprint before accepting it; a successful test greets your username.",
+        explanation:
+          "Verify GitHub's host fingerprint before accepting it; a successful test greets your username.",
         code: "ssh -T git@github.com",
-        warning: "GitHub's successful SSH test can still exit with status 1 because shell access is disabled.",
+        warning:
+          "GitHub's successful SSH test can still exit with status 1 because shell access is disabled.",
       },
     ],
   },
@@ -427,43 +505,56 @@ export const practicalGuides: PracticalGuide[] = [
     title: "Deploy frontend on Vercel",
     summary: "Deploy a frontend from GitHub with automatic previews.",
     environment: "Vercel",
-    prerequisites: ["A frontend project", "A GitHub repository", "A Vercel account"],
-    outcome: "A production frontend URL with automatic deployments from your main branch.",
+    prerequisites: [
+      "A frontend project",
+      "A GitHub repository",
+      "A Vercel account",
+    ],
+    outcome:
+      "A production frontend URL with automatic deployments from your main branch.",
     checked: "August 2026",
     sourceLabel: "Vercel deployment documentation",
     sourceHref: "https://vercel.com/docs/deployments/overview",
     steps: [
       {
         title: "Verify the project locally",
-        explanation: "Install locked dependencies and confirm the production build succeeds.",
+        explanation:
+          "Install locked dependencies and confirm the production build succeeds.",
         code: "npm ci\nnpm run build",
       },
       {
         title: "Import the repository",
-        explanation: "Connect GitHub, choose the repository, and import it from the dashboard.",
+        explanation:
+          "Connect GitHub, choose the repository, and import it from the dashboard.",
         code: "Vercel Dashboard → New Project → Import",
       },
       {
         title: "Review the project settings",
-        explanation: "Confirm the framework preset, root directory, build command, and output directory before deployment.",
+        explanation:
+          "Confirm the framework preset, root directory, build command, and output directory before deployment.",
         code: "Configure Project → Framework Preset, Root Directory, Build and Output Settings",
       },
       {
         title: "Configure environment variables",
-        explanation: "Add required values and select the Production environment before the first deployment.",
+        explanation:
+          "Add required values and select the Production environment before the first deployment.",
         code: "Configure Project → Environment Variables → Production",
-        warning: "Never expose private server secrets through public frontend environment variables.",
+        warning:
+          "Never expose private server secrets through public frontend environment variables.",
       },
       {
         title: "Deploy from the dashboard",
-        explanation: "Select Deploy and wait until the deployment status is Ready.",
+        explanation:
+          "Select Deploy and wait until the deployment status is Ready.",
         code: "Configure Project → Deploy",
       },
       {
         title: "Verify the generated URL",
-        explanation: "Open the production URL and test the homepage, direct routes, refreshes, forms, and API requests.",
+        explanation:
+          "Open the production URL and test the homepage, direct routes, refreshes, forms, and API requests.",
         code: "Project → Overview or Deployments → Open the production URL",
-        warning: "Environment variable changes affect only new deployments. Redeploy after changing a value.",
+        warning:
+          "Environment variable changes affect only new deployments. Redeploy after changing a value.",
       },
     ],
   },
@@ -472,7 +563,11 @@ export const practicalGuides: PracticalGuide[] = [
     title: "Deploy backend on Vercel",
     summary: "Deploy API endpoints with Vercel Functions.",
     environment: "Vercel Functions",
-    prerequisites: ["A Node.js project", "A Git repository", "A Vercel account"],
+    prerequisites: [
+      "A Node.js project",
+      "A Git repository",
+      "A Vercel account",
+    ],
     outcome: "A deployed API endpoint running as a Vercel Function.",
     checked: "August 2026",
     sourceLabel: "Vercel Functions documentation",
@@ -480,37 +575,45 @@ export const practicalGuides: PracticalGuide[] = [
     steps: [
       {
         title: "Create an API function",
-        explanation: "Files inside the api directory are built and served as functions.",
+        explanation:
+          "Files inside the api directory are built and served as functions.",
         language: "ts",
-        code: "// api/health.ts\nexport default {\n  fetch(_request: Request) {\n    return Response.json({ status: \"ok\" })\n  },\n}",
+        code: '// api/health.ts\nexport default {\n  fetch(_request: Request) {\n    return Response.json({ status: "ok" })\n  },\n}',
       },
       {
         title: "Configure a root index.js backend",
-        explanation: "Use this compatibility configuration only when the backend entry file is index.js in the project root.",
+        explanation:
+          "Use this compatibility configuration only when the backend entry file is index.js in the project root.",
         language: "json",
-        code: "{\n  \"version\": 2,\n  \"builds\": [\n    {\n      \"src\": \"index.js\",\n      \"use\": \"@vercel/node\"\n    }\n  ],\n  \"routes\": [\n    {\n      \"src\": \"/(.*)\",\n      \"dest\": \"/index.js\"\n    }\n  ]\n}",
-        warning: "Save this as vercel.json in the project root. Skip it when using the api/health.ts function above. Vercel now considers builds a legacy option and recommends zero-configuration functions for new projects.",
+        code: '{\n  "version": 2,\n  "builds": [\n    {\n      "src": "index.js",\n      "use": "@vercel/node"\n    }\n  ],\n  "routes": [\n    {\n      "src": "/(.*)",\n      "dest": "/index.js"\n    }\n  ]\n}',
+        warning:
+          "Save this as vercel.json in the project root. Skip it when using the api/health.ts function above. Vercel now considers builds a legacy option and recommends zero-configuration functions for new projects.",
       },
       {
         title: "Import the repository",
-        explanation: "Connect the Git provider, select the backend repository, and review its project settings.",
+        explanation:
+          "Connect the Git provider, select the backend repository, and review its project settings.",
         code: "Vercel Dashboard → New Project → Import",
       },
       {
         title: "Add server secrets",
-        explanation: "Store database URLs and API keys, and select the environments where each value is available.",
+        explanation:
+          "Store database URLs and API keys, and select the environments where each value is available.",
         code: "Configure Project → Environment Variables → Select Production",
         warning: "Keep secrets server-only and never commit .env files.",
       },
       {
         title: "Deploy from the dashboard",
-        explanation: "Select Deploy and wait until the deployment status is Ready.",
+        explanation:
+          "Select Deploy and wait until the deployment status is Ready.",
         code: "Configure Project → Deploy",
-        warning: "Vercel Functions are request-based. Long-running servers and persistent local storage need a different host.",
+        warning:
+          "Vercel Functions are request-based. Long-running servers and persistent local storage need a different host.",
       },
       {
         title: "Verify the endpoint and logs",
-        explanation: "Open the deployed health route, confirm the JSON response, and inspect runtime logs for failures.",
+        explanation:
+          "Open the deployed health route, confirm the JSON response, and inspect runtime logs for failures.",
         code: "https://your-project.vercel.app/api/health\nProject → Logs",
       },
     ],
@@ -520,7 +623,11 @@ export const practicalGuides: PracticalGuide[] = [
     title: "Deploy on Render (fallback)",
     summary: "Deploy a static frontend or persistent web service on Render.",
     environment: "Render",
-    prerequisites: ["A GitHub repository", "A working build or start command", "A Render account"],
+    prerequisites: [
+      "A GitHub repository",
+      "A working build or start command",
+      "A Render account",
+    ],
     outcome: "A frontend or backend deployed to an onrender.com URL.",
     checked: "August 2026",
     sourceLabel: "Render deployment documentation",
@@ -528,29 +635,35 @@ export const practicalGuides: PracticalGuide[] = [
     steps: [
       {
         title: "Choose the service type",
-        explanation: "Use Static Site for built frontend files or Web Service for a running backend.",
+        explanation:
+          "Use Static Site for built frontend files or Web Service for a running backend.",
         code: "Render Dashboard → New → Static Site or Web Service",
       },
       {
         title: "Configure a static frontend",
-        explanation: "Use the build command and publish directory produced by your framework.",
+        explanation:
+          "Use the build command and publish directory produced by your framework.",
         code: "Build command: npm ci && npm run build\nPublish directory for Vite: dist",
       },
       {
         title: "Support client-side routes",
-        explanation: "For a static single-page app, add a rewrite so direct visits to app routes serve index.html.",
+        explanation:
+          "For a static single-page app, add a rewrite so direct visits to app routes serve index.html.",
         code: "Service → Redirects/Rewrites\nSource: /*\nDestination: /index.html\nAction: Rewrite",
       },
       {
         title: "Configure a backend",
-        explanation: "Install dependencies, start the server, and listen on Render's assigned port.",
+        explanation:
+          "Install dependencies, start the server, and listen on Render's assigned port.",
         code: "Build command: npm ci\nStart command: npm start\nBind address: 0.0.0.0\nPort: process.env.PORT",
       },
       {
         title: "Add variables and deploy",
-        explanation: "Configure secrets, create the service, wait for a successful deploy, and open its generated URL.",
+        explanation:
+          "Configure secrets, create the service, wait for a successful deploy, and open its generated URL.",
         code: "Creation form → Advanced → Add Environment Variable\nCreate Static Site or Create Web Service\nEvents → Confirm the deploy succeeded\nOpen the generated onrender.com URL",
-        warning: "Free web services spin down after 15 minutes without inbound traffic and can take about a minute to wake. Render states that free instances are not for production, and their local filesystem is ephemeral.",
+        warning:
+          "Free web services spin down after 15 minutes without inbound traffic and can take about a minute to wake. Render states that free instances are not for production, and their local filesystem is ephemeral.",
       },
     ],
   },
@@ -559,31 +672,41 @@ export const practicalGuides: PracticalGuide[] = [
     title: "Google Search Console",
     summary: "Verify your site and monitor its Google Search performance.",
     environment: "Google Search Console",
-    prerequisites: ["A deployed public website", "A Google account", "Domain or site access"],
-    outcome: "A verified Search Console property collecting search and indexing data.",
+    prerequisites: [
+      "A deployed public website",
+      "A Google account",
+      "Domain or site access",
+    ],
+    outcome:
+      "A verified Search Console property collecting search and indexing data.",
     checked: "August 2026",
     sourceLabel: "Search Console documentation",
     sourceHref: "https://support.google.com/webmasters/answer/34592?hl=en",
     steps: [
       {
         title: "Add your property",
-        explanation: "Use a Domain property for all protocols and subdomains, or a URL-prefix property for one exact URL.",
+        explanation:
+          "Use a Domain property for all protocols and subdomains, or a URL-prefix property for one exact URL.",
         code: "https://search.google.com/search-console → Add property",
       },
       {
         title: "Verify ownership",
-        explanation: "Copy the exact TXT record name and value Google provides into your DNS provider, then return to verify it.",
+        explanation:
+          "Copy the exact TXT record name and value Google provides into your DNS provider, then return to verify it.",
         code: "Record type: TXT\nName or host: Use the value shown by Google\nValue: Use the verification value shown by Google",
-        warning: "Keep the verification record in DNS after verification succeeds.",
+        warning:
+          "Keep the verification record in DNS after verification succeeds.",
       },
       {
         title: "Submit the sitemap",
-        explanation: "First open the sitemap URL to confirm it is public and valid, then submit its path in Search Console.",
+        explanation:
+          "First open the sitemap URL to confirm it is public and valid, then submit its path in Search Console.",
         code: "Verify: https://example.com/sitemap.xml\nSearch Console → Sitemaps → Enter sitemap.xml → Submit",
       },
       {
         title: "Inspect the live site",
-        explanation: "Inspect important production URLs, run a live test, and request indexing when appropriate.",
+        explanation:
+          "Inspect important production URLs, run a live test, and request indexing when appropriate.",
         code: "Search Console → URL inspection → Enter the full production URL → Test live URL",
       },
     ],
@@ -593,7 +716,11 @@ export const practicalGuides: PracticalGuide[] = [
     title: "Google Analytics (GA4)",
     summary: "Create a GA4 property and start measuring website traffic.",
     environment: "Google Analytics",
-    prerequisites: ["A deployed website", "A Google account", "Permission to edit the site"],
+    prerequisites: [
+      "A deployed website",
+      "A Google account",
+      "Permission to edit the site",
+    ],
     outcome: "A GA4 web data stream receiving visits from your website.",
     checked: "August 2026",
     sourceLabel: "Google Analytics documentation",
@@ -601,24 +728,29 @@ export const practicalGuides: PracticalGuide[] = [
     steps: [
       {
         title: "Create the GA4 property",
-        explanation: "Create an Analytics account if needed, then add a GA4 property for the website.",
+        explanation:
+          "Create an Analytics account if needed, then add a GA4 property for the website.",
         code: "https://analytics.google.com → Admin → Create → Property",
       },
       {
         title: "Create a web data stream",
-        explanation: "Enter the production website URL and copy the Measurement ID.",
+        explanation:
+          "Enter the production website URL and copy the Measurement ID.",
         code: "Admin → Data collection and modification → Data streams → Web\nMeasurement ID: G-XXXXXXXXXX",
       },
       {
         title: "Install the Google tag",
-        explanation: "Copy the complete tag generated for your stream and place it immediately after the opening head tag on every page.",
+        explanation:
+          "Copy the complete tag generated for your stream and place it immediately after the opening head tag on every page.",
         code: "Web stream → View tag instructions → Install manually → Copy the generated Google tag",
       },
       {
         title: "Verify data collection",
-        explanation: "Visit the deployed site, then check Realtime; initial data can take up to 30 minutes to appear.",
+        explanation:
+          "Visit the deployed site, then check Realtime; initial data can take up to 30 minutes to appear.",
         code: "Analytics → Reports → Realtime",
-        warning: "Review consent and privacy requirements for the regions where your visitors live before enabling analytics cookies.",
+        warning:
+          "Review consent and privacy requirements for the regions where your visitors live before enabling analytics cookies.",
       },
     ],
   },

@@ -139,7 +139,7 @@ export const oopInterviewQuestions: OopQuestion[] = [
     question:
       "How does constructor chaining work between a superclass and subclass in modern Java?",
     answer:
-      "Each constructor invokes another constructor in the same class or the direct superclass, either explicitly or implicitly. Java 25 allows safe prologue statements before an explicit invocation, but they cannot use the object under construction. Superclass construction completes before the remaining subclass initialization and constructor body.",
+      "Each constructor invokes another constructor in the same class or the direct superclass, either explicitly or implicitly. Java 25 allows a restricted prologue before an explicit invocation. In that early-construction context, code may initialize instance fields declared by the current class, but it cannot read instance state, invoke instance methods, or allow the partially constructed object to escape. Superclass construction completes before the remaining subclass initialization and constructor body.",
   },
   {
     id: "fragile-base-class",

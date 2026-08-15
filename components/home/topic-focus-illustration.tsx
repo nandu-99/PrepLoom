@@ -39,8 +39,8 @@ export function TopicFocusIllustration() {
       >
         <title id="topic-focus-title">One focused study path</title>
         <desc id="topic-focus-description">
-          Several paths come together into one choice, followed by a single
-          path through three study checkpoints.
+          Several paths come together into one choice, followed by a single path
+          through three study checkpoints.
         </desc>
 
         <g
@@ -89,7 +89,9 @@ export function TopicFocusIllustration() {
             cy={cy}
             r="5"
             fill="currentColor"
-            initial={reduceMotion ? { opacity: 0.5 } : { opacity: 0, scale: 0.5 }}
+            initial={
+              reduceMotion ? { opacity: 0.5 } : { opacity: 0, scale: 0.5 }
+            }
             whileInView={{ opacity: 0.5, scale: 1 }}
             viewport={{ once: true, amount: 0.6 }}
             transition={{
@@ -196,7 +198,9 @@ export function TopicFocusIllustration() {
           stroke="currentColor"
           strokeWidth="1"
           vectorEffect="non-scaling-stroke"
-          initial={reduceMotion ? { opacity: 0.18 } : { opacity: 0, scale: 0.65 }}
+          initial={
+            reduceMotion ? { opacity: 0.18 } : { opacity: 0, scale: 0.65 }
+          }
           whileInView={{ opacity: 0.18, scale: 1 }}
           viewport={{ once: true, amount: 0.6 }}
           transition={{

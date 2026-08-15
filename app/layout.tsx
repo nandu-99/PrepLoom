@@ -4,6 +4,7 @@ import { GoogleAnalytics } from "@next/third-parties/google";
 import { Geist, Geist_Mono, Inter } from "next/font/google";
 import { isAnalyticsEnabled, isProductionEnvironment } from "@/lib/env";
 import { buildSearchCatalog } from "@/lib/search-index";
+import "katex/dist/katex.min.css";
 import "./globals.css";
 
 const geistSans = Geist({

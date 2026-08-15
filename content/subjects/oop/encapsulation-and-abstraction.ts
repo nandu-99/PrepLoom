@@ -83,9 +83,18 @@ export const encapsulation: SubjectTopic = {
         table: {
           headers: ["Encapsulation", "Data hiding"],
           rows: [
-            ["Groups data and related methods", "Restricts direct access to internal details"],
-            ["Creates a controlled object boundary", "Is one technique used inside that boundary"],
-            ["Focuses on design and responsibility", "Focuses on access and visibility"],
+            [
+              "Groups data and related methods",
+              "Restricts direct access to internal details",
+            ],
+            [
+              "Creates a controlled object boundary",
+              "Is one technique used inside that boundary",
+            ],
+            [
+              "Focuses on design and responsibility",
+              "Focuses on access and visibility",
+            ],
           ],
         },
       },
@@ -139,7 +148,12 @@ export const encapsulation: SubjectTopic = {
       },
       {
         title: "How It Is Applied",
-        flow: ["Private state", "Public method", "Validate request", "Safe state change"],
+        flow: [
+          "Private state",
+          "Public method",
+          "Validate request",
+          "Safe state change",
+        ],
       },
       {
         title: "Encapsulation vs Data Hiding",
@@ -169,7 +183,8 @@ export const encapsulation: SubjectTopic = {
       "An invariant is a condition that must remain true for valid state.",
       "Mutable internal objects may need defensive copies or read-only views.",
     ],
-    followUp: "Why is a private field with an unrestricted setter still weak encapsulation?",
+    followUp:
+      "Why is a private field with an unrestricted setter still weak encapsulation?",
   },
   lastMinute: {
     definition:
@@ -196,8 +211,7 @@ export const encapsulation: SubjectTopic = {
       "Getter reads; setter changes.",
       "Not every field needs both.",
     ],
-    trap:
-      "Private fields plus unrestricted setters are not strong encapsulation.",
+    trap: "Private fields plus unrestricted setters are not strong encapsulation.",
   },
 };
 
@@ -226,7 +240,13 @@ export const accessModifiers: SubjectTopic = {
           "Java provides public, protected, package-private, and private access. Package-private has no keyword; it is used when no access modifier is written.",
         ],
         dataTable: {
-          headers: ["Modifier", "Same class", "Same package", "Subclass outside package", "Unrelated code outside package"],
+          headers: [
+            "Modifier",
+            "Same class",
+            "Same package",
+            "Subclass outside package",
+            "Unrelated code outside package",
+          ],
           rows: [
             ["private", "Yes", "No", "No", "No"],
             ["package-private", "Yes", "Yes", "No", "No"],
@@ -278,7 +298,12 @@ export const accessModifiers: SubjectTopic = {
           "Start with the narrowest access that allows the design to work. Increase access only when another part of the program truly needs it.",
           "This reduces accidental dependencies and makes future changes easier.",
         ],
-        flow: ["Try private", "Need package access?", "Need subclass access?", "Use public only when part of the external interface"],
+        flow: [
+          "Try private",
+          "Need package access?",
+          "Need subclass access?",
+          "Use public only when part of the external interface",
+        ],
       },
       {
         title: "Language Differences",
@@ -321,7 +346,13 @@ export const accessModifiers: SubjectTopic = {
       {
         title: "Java Access Table",
         dataTable: {
-          headers: ["Modifier", "Class", "Package", "Outside subclass", "Everywhere"],
+          headers: [
+            "Modifier",
+            "Class",
+            "Package",
+            "Outside subclass",
+            "Everywhere",
+          ],
           rows: [
             ["private", "Yes", "No", "No", "No"],
             ["package-private", "Yes", "Yes", "No", "No"],
@@ -359,7 +390,8 @@ export const accessModifiers: SubjectTopic = {
       "public access does not remove the need for validation.",
       "Access rules vary between Java, C++, JavaScript, and other languages.",
     ],
-    followUp: "What is the difference between protected and package-private access in Java?",
+    followUp:
+      "What is the difference between protected and package-private access in Java?",
   },
   lastMinute: {
     definition:
@@ -387,8 +419,7 @@ export const accessModifiers: SubjectTopic = {
       "Outside-package protected access is not allowed through any superclass object.",
       "Access control supports encapsulation.",
     ],
-    trap:
-      "Do not say protected means subclasses only; Java also allows same-package access.",
+    trap: "Do not say protected means subclasses only; Java also allows same-package access.",
   },
 };
 
@@ -469,9 +500,18 @@ export const abstraction: SubjectTopic = {
         table: {
           headers: ["Abstraction", "Encapsulation"],
           rows: [
-            ["What should the caller see?", "How should internal state be protected?"],
-            ["Hides unnecessary complexity", "Controls access to data and behaviour"],
-            ["Focuses on a simple useful view", "Focuses on a safe object boundary"],
+            [
+              "What should the caller see?",
+              "How should internal state be protected?",
+            ],
+            [
+              "Hides unnecessary complexity",
+              "Controls access to data and behaviour",
+            ],
+            [
+              "Focuses on a simple useful view",
+              "Focuses on a safe object boundary",
+            ],
             ["Example: pay(amount)", "Example: private balance"],
           ],
         },
@@ -587,8 +627,7 @@ export const abstraction: SubjectTopic = {
       "Supports replaceable implementations.",
       "Methods and APIs can also provide abstraction.",
     ],
-    trap:
-      "Do not say abstraction is possible only through interfaces or abstract classes.",
+    trap: "Do not say abstraction is possible only through interfaces or abstract classes.",
   },
 };
 
@@ -679,8 +718,14 @@ export const abstractClassesAndInterfaces: SubjectTopic = {
             ["Represents a shared base", "Represents a capability or contract"],
             ["Can keep instance state", "Has no per-object instance state"],
             ["Can have constructors", "Has no constructors"],
-            ["Can have abstract and concrete methods", "Can have abstract, default, static, and private methods"],
-            ["A class extends one class", "A class can implement many interfaces"],
+            [
+              "Can have abstract and concrete methods",
+              "Can have abstract, default, static, and private methods",
+            ],
+            [
+              "A class extends one class",
+              "A class can implement many interfaces",
+            ],
           ],
         },
       },
@@ -802,7 +847,8 @@ export const abstractClassesAndInterfaces: SubjectTopic = {
       "Modern interfaces are not limited to abstract methods.",
       "A class must override conflicting interface default methods.",
     ],
-    followUp: "When would you choose an abstract class instead of an interface?",
+    followUp:
+      "When would you choose an abstract class instead of an interface?",
   },
   lastMinute: {
     definition:
@@ -810,21 +856,32 @@ export const abstractClassesAndInterfaces: SubjectTopic = {
     sections: [
       {
         title: "Abstract Class",
-        points: ["Instance state", "Constructor", "Abstract + concrete methods", "Extend one class"],
+        points: [
+          "Instance state",
+          "Constructor",
+          "Abstract + concrete methods",
+          "Extend one class",
+        ],
       },
       {
         title: "Interface",
-        points: ["Behaviour contract", "No per-object state", "Initialized constants", "Default methods possible", "Implement many"],
+        points: [
+          "Behaviour contract",
+          "No per-object state",
+          "Initialized constants",
+          "Default methods possible",
+          "Implement many",
+        ],
       },
     ],
-    memoryLine: "Need shared state? Consider an abstract class. Need a contract? Consider an interface.",
+    memoryLine:
+      "Need shared state? Consider an abstract class. Need a contract? Consider an interface.",
     cues: [
       "Both support abstraction.",
       "Neither can be instantiated directly.",
       "Java class: one superclass, many interfaces.",
       "Default-method conflict: implementing class overrides.",
     ],
-    trap:
-      "Do not say interfaces contain only abstract methods; modern Java also supports default, static, and private methods.",
+    trap: "Do not say interfaces contain only abstract methods; modern Java also supports default, static, and private methods.",
   },
 };

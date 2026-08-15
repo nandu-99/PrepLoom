@@ -820,19 +820,23 @@ export const stackFunctionCallsAndRecursion: SubjectTopic = {
       {
         title: "Complete Non-Leaf Prologue and Epilogue",
         paragraphs: [
-          "This pattern allocates an aligned frame, preserves $ra and $s0, makes another call, and restores every saved value before returning.",
+          "This o32 pattern allocates an aligned frame, reserves the required four-word outgoing argument area for the called function, preserves $ra and $s0, and restores every saved value before returning.",
         ],
         dataTable: {
           headers: ["Instruction", "Purpose"],
           rows: [
-            ["addiu $sp, $sp, -8", "Allocate an 8-byte frame"],
-            ["sw $ra, 4($sp)", "Save the return address"],
-            ["sw $s0, 0($sp)", "Save a callee-saved register"],
+            ["addiu $sp, $sp, -24", "Allocate an aligned 24-byte o32 frame"],
+            [
+              "0($sp) through 12($sp)",
+              "Outgoing argument area reserved for helper",
+            ],
+            ["sw $s0, 16($sp)", "Save a callee-saved register"],
+            ["sw $ra, 20($sp)", "Save the return address"],
             ["jal helper", "Call another function"],
             ["nop", "Classic call delay slot"],
-            ["lw $s0, 0($sp)", "Restore $s0"],
-            ["lw $ra, 4($sp)", "Restore the caller's return address"],
-            ["addiu $sp, $sp, 8", "Release the frame"],
+            ["lw $s0, 16($sp)", "Restore $s0"],
+            ["lw $ra, 20($sp)", "Restore the caller's return address"],
+            ["addiu $sp, $sp, 24", "Release the frame"],
             ["jr $ra", "Return"],
             ["nop", "Classic return delay slot"],
           ],
@@ -1556,7 +1560,7 @@ export const mipsArchitectureAndAssembly: SubjectTopic = {
           "j DONE",
           "nop",
           "SECOND: add $v0, $t1, $zero",
-          "DONE",
+          "DONE:",
         ],
       },
       {

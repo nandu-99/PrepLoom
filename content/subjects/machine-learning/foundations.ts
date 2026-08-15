@@ -86,8 +86,8 @@ export const introductionToMachineLearning: SubjectTopic = {
         formulas: [
           {
             label: "Model notation",
-            expression: "ŷ = f(X; θ)",
-            note: "X is the input, θ contains learned parameters, and ŷ is the prediction.",
+            expression: "ŷ = f(x)",
+            note: "In plain words: prediction = trained model(input). A lowercase x represents one example.",
           },
         ],
       },

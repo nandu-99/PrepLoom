@@ -33,7 +33,11 @@ export const clusteringAndKMeansRecap: SubjectTopic = {
           "K-Means tries to reduce the total squared distance from every example to the centroid of its assigned cluster. This is called within-cluster sum of squares or inertia.",
         ],
         formulas: [
-          { label: "K-Means objective", expression: "J = Σᵢ ||xᵢ−μcᵢ||²" },
+          {
+            label: "K-Means objective",
+            expression: "J = Σᵢ ||xᵢ − centroid assigned to xᵢ||²",
+            note: "The assigned centroid is also written μ_(cᵢ), where cᵢ is the cluster assigned to example i.",
+          },
         ],
       },
       {
@@ -128,7 +132,12 @@ export const clusteringAndKMeansRecap: SubjectTopic = {
       },
       {
         title: "Objective",
-        formulas: [{ label: "SSE", expression: "Σ||xᵢ−μcᵢ||²" }],
+        formulas: [
+          {
+            label: "SSE",
+            expression: "Σ||xᵢ − centroid assigned to xᵢ||²",
+          },
+        ],
       },
     ],
     essentialsStyle: "plain",
@@ -237,6 +246,7 @@ export const gaussianDistributionFoundations: SubjectTopic = {
         title: "Multivariate Gaussian",
         paragraphs: [
           "For d features, the mean becomes a vector μ and the variance becomes a covariance matrix Σ. The covariance matrix records the spread of every feature and how pairs of features vary together.",
+          "The equation below is the multidimensional version of the one-variable bell curve. Its quadratic term measures covariance-adjusted distance, while the denominator rescales the density for the number and spread of the features.",
         ],
         formulas: [
           {

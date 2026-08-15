@@ -36,10 +36,30 @@ const pageTableStructures: SubjectTopic = {
         dataTable: {
           headers: ["Structure", "Main idea", "Main benefit", "Main cost"],
           rows: [
-            ["Single-Level", "One direct table", "Simple lookup", "Large table for a large address space"],
-            ["Multilevel", "Split the table into levels", "Create lower levels only when needed", "More lookup steps on a TLB Miss"],
-            ["Hashed", "Hash the Virtual Page key", "Works well with large sparse spaces", "Collisions must be handled"],
-            ["Inverted", "One entry per physical Frame", "Entry count follows physical memory", "Lookup and sharing are more complex"],
+            [
+              "Single-Level",
+              "One direct table",
+              "Simple lookup",
+              "Large table for a large address space",
+            ],
+            [
+              "Multilevel",
+              "Split the table into levels",
+              "Create lower levels only when needed",
+              "More lookup steps on a TLB Miss",
+            ],
+            [
+              "Hashed",
+              "Hash the Virtual Page key",
+              "Works well with large sparse spaces",
+              "Collisions must be handled",
+            ],
+            [
+              "Inverted",
+              "One entry per physical Frame",
+              "Entry count follows physical memory",
+              "Lookup and sharing are more complex",
+            ],
           ],
         },
       },
@@ -97,8 +117,14 @@ const pageTableStructures: SubjectTopic = {
         table: {
           headers: ["Advantages", "Disadvantages"],
           rows: [
-            ["Saves table memory for unused regions", "A Page Table walk may need several memory accesses"],
-            ["Scales to large address spaces", "More complex than a Single-Level table"],
+            [
+              "Saves table memory for unused regions",
+              "A Page Table walk may need several memory accesses",
+            ],
+            [
+              "Scales to large address spaces",
+              "More complex than a Single-Level table",
+            ],
           ],
         },
       },
@@ -148,8 +174,14 @@ const pageTableStructures: SubjectTopic = {
         table: {
           headers: ["Advantages", "Disadvantages"],
           rows: [
-            ["Suitable for large sparse address spaces", "Collisions add extra comparisons"],
-            ["Does not need one direct slot for every possible Page", "Hashing and bucket management add complexity"],
+            [
+              "Suitable for large sparse address spaces",
+              "Collisions add extra comparisons",
+            ],
+            [
+              "Does not need one direct slot for every possible Page",
+              "Hashing and bucket management add complexity",
+            ],
           ],
         },
       },
@@ -179,7 +211,10 @@ const pageTableStructures: SubjectTopic = {
           headers: ["Advantages", "Disadvantages"],
           rows: [
             ["One main entry per physical Frame", "Lookup is more complex"],
-            ["Entry count does not grow with every virtual address space", "Shared and aliased mappings need extra support"],
+            [
+              "Entry count does not grow with every virtual address space",
+              "Shared and aliased mappings need extra support",
+            ],
           ],
         },
       },
@@ -199,10 +234,30 @@ const pageTableStructures: SubjectTopic = {
         dataTable: {
           headers: ["Structure", "Entry organization", "Lookup", "Good fit"],
           rows: [
-            ["Single-Level", "One entry for each indexed Virtual Page", "Direct index", "Small address spaces"],
-            ["Multilevel", "Tables created by used address regions", "Walk through levels", "Large sparse address spaces and modern hierarchical paging"],
-            ["Hashed", "Mappings stored in hash buckets", "Hash and compare keys", "Very large sparse address spaces"],
-            ["Inverted", "One main entry per physical Frame", "Hash or search", "Limiting table entry count across large virtual spaces"],
+            [
+              "Single-Level",
+              "One entry for each indexed Virtual Page",
+              "Direct index",
+              "Small address spaces",
+            ],
+            [
+              "Multilevel",
+              "Tables created by used address regions",
+              "Walk through levels",
+              "Large sparse address spaces and modern hierarchical paging",
+            ],
+            [
+              "Hashed",
+              "Mappings stored in hash buckets",
+              "Hash and compare keys",
+              "Very large sparse address spaces",
+            ],
+            [
+              "Inverted",
+              "One main entry per physical Frame",
+              "Hash or search",
+              "Limiting table entry count across large virtual spaces",
+            ],
           ],
         },
       },
@@ -236,10 +291,26 @@ const pageTableStructures: SubjectTopic = {
         dataTable: {
           headers: ["Structure", "Organization", "Main point"],
           rows: [
-            ["Single-Level", "One Page Table per process", "Simple and direct, but may use a lot of memory"],
-            ["Multilevel", "One large table split into levels", "Creates lower-level tables only when needed"],
-            ["Hashed", "Mappings stored in hash buckets", "Works well for large sparse address spaces; collisions are possible"],
-            ["Inverted", "One main table for the system", "One entry per physical Frame; lookup is more complex"],
+            [
+              "Single-Level",
+              "One Page Table per process",
+              "Simple and direct, but may use a lot of memory",
+            ],
+            [
+              "Multilevel",
+              "One large table split into levels",
+              "Creates lower-level tables only when needed",
+            ],
+            [
+              "Hashed",
+              "Mappings stored in hash buckets",
+              "Works well for large sparse address spaces; collisions are possible",
+            ],
+            [
+              "Inverted",
+              "One main table for the system",
+              "One entry per physical Frame; lookup is more complex",
+            ],
           ],
         },
       },
@@ -259,7 +330,8 @@ const pageTableStructures: SubjectTopic = {
       "Inverted: One main system table with one entry per physical Frame.",
       "The TLB reduces repeated Page Table lookups.",
     ],
-    followUp: "Why does a Multilevel Page Table save memory for a sparse address space?",
+    followUp:
+      "Why does a Multilevel Page Table save memory for a sparse address space?",
   },
   lastMinute: {
     definition:
@@ -297,8 +369,7 @@ const pageTableStructures: SubjectTopic = {
     memoryLine:
       "Single-Level is direct, Multilevel uses levels, Hashed uses buckets, and Inverted uses physical Frame entries.",
     memoryLineAtEnd: true,
-    trap:
-      "A Hashed Page Table is not always faster, and an Inverted Page Table is not directly indexed by Virtual Page Number.",
+    trap: "A Hashed Page Table is not always faster, and an Inverted Page Table is not directly indexed by Virtual Page Number.",
   },
 };
 

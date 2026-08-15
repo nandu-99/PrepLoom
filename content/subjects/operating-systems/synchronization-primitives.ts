@@ -63,8 +63,14 @@ const semaphoresMonitorsDetailed: SubjectTopic = {
         table: {
           headers: ["Operation", "Meaning"],
           rows: [
-            ["wait() / P / acquire", "Take one permit; block if none is available"],
-            ["signal() / V / release", "Return one permit or wake an eligible waiter"],
+            [
+              "wait() / P / acquire",
+              "Take one permit; block if none is available",
+            ],
+            [
+              "signal() / V / release",
+              "Return one permit or wake an eligible waiter",
+            ],
           ],
         },
       },
@@ -126,10 +132,19 @@ const semaphoresMonitorsDetailed: SubjectTopic = {
         table: {
           headers: ["Binary Semaphore", "Counting Semaphore"],
           rows: [
-            ["Represents 0 or 1 available permit", "Represents zero or more available permits"],
-            ["Can provide exclusion or signalling", "Controls a pool of N resources"],
+            [
+              "Represents 0 or 1 available permit",
+              "Represents zero or more available permits",
+            ],
+            [
+              "Can provide exclusion or signalling",
+              "Controls a pool of N resources",
+            ],
             ["Does not have Mutex ownership", "Does not have one strict owner"],
-            ["Example: event or one shared permit", "Example: database connection pool"],
+            [
+              "Example: event or one shared permit",
+              "Example: database connection pool",
+            ],
           ],
         },
         paragraphs: [
@@ -198,7 +213,10 @@ const semaphoresMonitorsDetailed: SubjectTopic = {
         table: {
           headers: ["Operation", "Meaning"],
           rows: [
-            ["wait()", "Atomically release the Monitor lock, sleep, then reacquire before returning"],
+            [
+              "wait()",
+              "Atomically release the Monitor lock, sleep, then reacquire before returning",
+            ],
             ["signal() / notify()", "Wake one eligible waiter, if one exists"],
           ],
         },
@@ -267,11 +285,27 @@ const semaphoresMonitorsDetailed: SubjectTopic = {
           headers: ["Feature", "Semaphore", "Monitor"],
           rows: [
             ["Level", "Lower-level primitive", "Higher-level construct"],
-            ["Main idea", "Counter or event signal", "Protected data and methods"],
-            ["Mutual Exclusion", "Programmer builds the protocol", "Built into Monitor entry"],
+            [
+              "Main idea",
+              "Counter or event signal",
+              "Protected data and methods",
+            ],
+            [
+              "Mutual Exclusion",
+              "Programmer builds the protocol",
+              "Built into Monitor entry",
+            ],
             ["Waiting", "wait on permits or events", "Condition Variables"],
-            ["Ownership", "No strict owner", "Underlying Monitor lock controls entry"],
-            ["Common use", "OS resources and coordination", "Language and application synchronization"],
+            [
+              "Ownership",
+              "No strict owner",
+              "Underlying Monitor lock controls entry",
+            ],
+            [
+              "Common use",
+              "OS resources and coordination",
+              "Language and application synchronization",
+            ],
           ],
         },
       },
@@ -280,9 +314,18 @@ const semaphoresMonitorsDetailed: SubjectTopic = {
         table: {
           headers: ["Semaphore", "Monitor"],
           rows: [
-            ["Parking lot with a fixed number of permits", "Service room with protected state and controlled entry"],
-            ["Entering takes one permit", "Only one active user changes the protected state"],
-            ["Leaving returns one permit", "Users may wait for a required condition"],
+            [
+              "Parking lot with a fixed number of permits",
+              "Service room with protected state and controlled entry",
+            ],
+            [
+              "Entering takes one permit",
+              "Only one active user changes the protected state",
+            ],
+            [
+              "Leaving returns one permit",
+              "Users may wait for a required condition",
+            ],
           ],
         },
         paragraphs: [
@@ -297,18 +340,28 @@ const semaphoresMonitorsDetailed: SubjectTopic = {
         table: {
           headers: ["Benefits", "Limitations"],
           rows: [
-            ["Semaphore controls several permits", "Incorrect counts can allow too much or too little access"],
-            ["Semaphore can signal between tasks", "Missing operations can cause Deadlock"],
-            ["Monitor organizes shared state and methods", "Requires language or library support"],
-            ["Condition Variables avoid Busy Waiting", "Predicates and signals must still be used correctly"],
+            [
+              "Semaphore controls several permits",
+              "Incorrect counts can allow too much or too little access",
+            ],
+            [
+              "Semaphore can signal between tasks",
+              "Missing operations can cause Deadlock",
+            ],
+            [
+              "Monitor organizes shared state and methods",
+              "Requires language or library support",
+            ],
+            [
+              "Condition Variables avoid Busy Waiting",
+              "Predicates and signals must still be used correctly",
+            ],
           ],
         },
       },
       {
         title: "Key Points",
-        paragraphs: [
-          "Use the tool that best expresses the coordination rule.",
-        ],
+        paragraphs: ["Use the tool that best expresses the coordination rule."],
         points: [
           "Semaphore = Atomic counter of permits or event signal.",
           "wait takes a permit or blocks; signal returns a permit or wakes an eligible waiter.",
@@ -418,10 +471,22 @@ const semaphoresMonitorsDetailed: SubjectTopic = {
         table: {
           headers: ["Benefits", "Limitations"],
           rows: [
-            ["Coordinates safe resource sharing", "Incorrect Semaphore usage can cause Deadlock"],
-            ["Counting Semaphore supports several permits", "Semaphore protocols can be difficult to debug"],
-            ["Monitor provides built-in Mutual Exclusion", "Requires language, runtime, or library support"],
-            ["Condition Variables avoid Busy Waiting", "Incorrect predicates or signals can still cause bugs"],
+            [
+              "Coordinates safe resource sharing",
+              "Incorrect Semaphore usage can cause Deadlock",
+            ],
+            [
+              "Counting Semaphore supports several permits",
+              "Semaphore protocols can be difficult to debug",
+            ],
+            [
+              "Monitor provides built-in Mutual Exclusion",
+              "Requires language, runtime, or library support",
+            ],
+            [
+              "Condition Variables avoid Busy Waiting",
+              "Incorrect predicates or signals can still cause bugs",
+            ],
           ],
         },
       },
@@ -430,9 +495,21 @@ const semaphoresMonitorsDetailed: SubjectTopic = {
         dataTable: {
           headers: ["Feature", "Semaphore", "Monitor"],
           rows: [
-            ["Main idea", "Counter or event signal", "Protected state and methods"],
-            ["Synchronization", "Manual wait and signal protocol", "Built-in Mutual Exclusion"],
-            ["Concurrent access", "Can provide N permits", "One active thread inside"],
+            [
+              "Main idea",
+              "Counter or event signal",
+              "Protected state and methods",
+            ],
+            [
+              "Synchronization",
+              "Manual wait and signal protocol",
+              "Built-in Mutual Exclusion",
+            ],
+            [
+              "Concurrent access",
+              "Can provide N permits",
+              "One active thread inside",
+            ],
             ["Waiting", "Wait for a permit or event", "Condition Variables"],
             ["Ease of use", "More error-prone", "More structured"],
           ],
@@ -501,11 +578,9 @@ const semaphoresMonitorsDetailed: SubjectTopic = {
       "Condition wait releases the Monitor lock and reacquires it before returning.",
     ],
     memoryLineLabel: "Remember This",
-    memoryLine:
-      "Semaphore counts. Monitor protects. Condition Variable waits.",
+    memoryLine: "Semaphore counts. Monitor protects. Condition Variable waits.",
     memoryLineAtEnd: true,
-    trap:
-      "Check a Condition Variable predicate in a while loop, not a single if statement.",
+    trap: "Check a Condition Variable predicate in a while loop, not a single if statement.",
   },
 };
 
@@ -528,11 +603,7 @@ const classicalSynchronizationProblemsDetailed: SubjectTopic = {
           "Operating Systems commonly use three standard problems: Producer-Consumer, Readers-Writers, and Dining Philosophers.",
           "Each problem highlights a different risk, including full or empty resources, shared reading with exclusive writing, Deadlock, and Starvation.",
         ],
-        points: [
-          "Producer-Consumer",
-          "Readers-Writers",
-          "Dining Philosophers",
-        ],
+        points: ["Producer-Consumer", "Readers-Writers", "Dining Philosophers"],
       },
       {
         title: "Why it Matters",
@@ -556,8 +627,16 @@ const classicalSynchronizationProblemsDetailed: SubjectTopic = {
           headers: ["Problem", "Shared Resource", "Main Risk"],
           rows: [
             ["Producer-Consumer", "Bounded Buffer", "Full or empty buffer"],
-            ["Readers-Writers", "Shared data", "Read concurrency vs exclusive write"],
-            ["Dining Philosophers", "Neighbouring forks", "Deadlock and Starvation"],
+            [
+              "Readers-Writers",
+              "Shared data",
+              "Read concurrency vs exclusive write",
+            ],
+            [
+              "Dining Philosophers",
+              "Neighbouring forks",
+              "Deadlock and Starvation",
+            ],
           ],
         },
       },
@@ -645,8 +724,7 @@ const classicalSynchronizationProblemsDetailed: SubjectTopic = {
           alt: "Shared database allowing several Readers together while a Writer receives exclusive access and all Readers wait.",
           width: 1536,
           height: 1024,
-          caption:
-            "Readers may share access, but a Writer must be alone.",
+          caption: "Readers may share access, but a Writer must be alone.",
         },
       },
       {
@@ -673,7 +751,10 @@ const classicalSynchronizationProblemsDetailed: SubjectTopic = {
           rows: [
             ["Lock the readCount Mutex", "Wait for the resource Semaphore"],
             ["Increase readCount", "Write alone"],
-            ["If first Reader, wait for the resource", "Signal the resource Semaphore"],
+            [
+              "If first Reader, wait for the resource",
+              "Signal the resource Semaphore",
+            ],
             ["Unlock the readCount Mutex", ""],
             ["Read", ""],
             ["Lock the readCount Mutex", ""],
@@ -697,17 +778,24 @@ const classicalSynchronizationProblemsDetailed: SubjectTopic = {
         table: {
           headers: ["Policy", "Trade-Off"],
           rows: [
-            ["Reader Preference", "Readers enter quickly, but Writers may starve"],
-            ["Writer Preference", "Writers enter sooner, but Readers may starve"],
-            ["Fair or FIFO", "Limits starvation but adds queueing and coordination"],
+            [
+              "Reader Preference",
+              "Readers enter quickly, but Writers may starve",
+            ],
+            [
+              "Writer Preference",
+              "Writers enter sooner, but Readers may starve",
+            ],
+            [
+              "Fair or FIFO",
+              "Limits starvation but adds queueing and coordination",
+            ],
           ],
         },
       },
       {
         title: "Readers-Writers Example",
-        paragraphs: [
-          "Think of a shared document or database record.",
-        ],
+        paragraphs: ["Think of a shared document or database record."],
         points: [
           "Many users may view the current value together.",
           "An update needs exclusive access so nobody reads a half-finished change.",
@@ -769,11 +857,31 @@ const classicalSynchronizationProblemsDetailed: SubjectTopic = {
           "Each problem tests a different part of synchronization design.",
         ],
         dataTable: {
-          headers: ["Problem", "Shared Resource", "Main Challenge", "Typical Tools"],
+          headers: [
+            "Problem",
+            "Shared Resource",
+            "Main Challenge",
+            "Typical Tools",
+          ],
           rows: [
-            ["Producer-Consumer", "Bounded Buffer", "Full and empty states", "Counting Semaphores + Mutex or Monitor"],
-            ["Readers-Writers", "File or database", "Concurrent reads, exclusive writes", "Read-Write Lock, Semaphore, or Mutex"],
-            ["Dining Philosophers", "Neighbouring Forks", "Deadlock and Starvation", "Semaphore, Mutex, or Monitor"],
+            [
+              "Producer-Consumer",
+              "Bounded Buffer",
+              "Full and empty states",
+              "Counting Semaphores + Mutex or Monitor",
+            ],
+            [
+              "Readers-Writers",
+              "File or database",
+              "Concurrent reads, exclusive writes",
+              "Read-Write Lock, Semaphore, or Mutex",
+            ],
+            [
+              "Dining Philosophers",
+              "Neighbouring Forks",
+              "Deadlock and Starvation",
+              "Semaphore, Mutex, or Monitor",
+            ],
           ],
         },
       },
@@ -785,10 +893,22 @@ const classicalSynchronizationProblemsDetailed: SubjectTopic = {
         table: {
           headers: ["Benefits", "Limitations"],
           rows: [
-            ["Shows practical use of synchronization tools", "Solutions can become complex"],
-            ["Explains Deadlock and Starvation clearly", "One policy may favour one task group"],
-            ["Common in Operating Systems interviews", "Incorrect operation order can still Deadlock"],
-            ["Builds reusable coordination patterns", "Real systems need additional error handling"],
+            [
+              "Shows practical use of synchronization tools",
+              "Solutions can become complex",
+            ],
+            [
+              "Explains Deadlock and Starvation clearly",
+              "One policy may favour one task group",
+            ],
+            [
+              "Common in Operating Systems interviews",
+              "Incorrect operation order can still Deadlock",
+            ],
+            [
+              "Builds reusable coordination patterns",
+              "Real systems need additional error handling",
+            ],
           ],
         },
       },
@@ -837,11 +957,7 @@ const classicalSynchronizationProblemsDetailed: SubjectTopic = {
         paragraphs: [
           "These standard problems demonstrate the practical use of Mutexes, Semaphores, Monitors, and Read-Write Locks.",
         ],
-        points: [
-          "Producer-Consumer",
-          "Readers-Writers",
-          "Dining Philosophers",
-        ],
+        points: ["Producer-Consumer", "Readers-Writers", "Dining Philosophers"],
       },
       {
         title: "Why it Matters",
@@ -858,8 +974,16 @@ const classicalSynchronizationProblemsDetailed: SubjectTopic = {
           headers: ["Problem", "Shared Resource", "Main Rule"],
           rows: [
             ["Producer-Consumer", "Bounded Buffer", "Wait when full or empty"],
-            ["Readers-Writers", "Shared data", "Readers share; Writer is exclusive"],
-            ["Dining Philosophers", "Neighbouring Forks", "Avoid circular wait"],
+            [
+              "Readers-Writers",
+              "Shared data",
+              "Readers share; Writer is exclusive",
+            ],
+            [
+              "Dining Philosophers",
+              "Neighbouring Forks",
+              "Avoid circular wait",
+            ],
           ],
         },
       },
@@ -917,10 +1041,22 @@ const classicalSynchronizationProblemsDetailed: SubjectTopic = {
         table: {
           headers: ["Benefits", "Limitations"],
           rows: [
-            ["Explains practical synchronization patterns", "Correct solutions can be complex"],
-            ["Shows Semaphore and Mutex usage", "Wrong operation order may Deadlock"],
-            ["Makes Deadlock and Starvation easier to understand", "Some policies may cause Starvation"],
-            ["Common Operating Systems interview topic", "Real systems need more error handling"],
+            [
+              "Explains practical synchronization patterns",
+              "Correct solutions can be complex",
+            ],
+            [
+              "Shows Semaphore and Mutex usage",
+              "Wrong operation order may Deadlock",
+            ],
+            [
+              "Makes Deadlock and Starvation easier to understand",
+              "Some policies may cause Starvation",
+            ],
+            [
+              "Common Operating Systems interview topic",
+              "Real systems need more error handling",
+            ],
           ],
         },
       },
@@ -942,11 +1078,7 @@ const classicalSynchronizationProblemsDetailed: SubjectTopic = {
     sections: [
       {
         title: "Three Main Problems",
-        points: [
-          "Producer-Consumer",
-          "Readers-Writers",
-          "Dining Philosophers",
-        ],
+        points: ["Producer-Consumer", "Readers-Writers", "Dining Philosophers"],
       },
       {
         title: "Remember This",
@@ -972,8 +1104,7 @@ const classicalSynchronizationProblemsDetailed: SubjectTopic = {
     memoryLine:
       "Buffer: full or empty. Data: Readers or Writer. Forks: circular wait.",
     memoryLineAtEnd: true,
-    trap:
-      "Never wait for a buffer slot while already holding the buffer Mutex.",
+    trap: "Never wait for a buffer slot while already holding the buffer Mutex.",
   },
 };
 
@@ -1009,11 +1140,36 @@ const semaphoresDetailed: SubjectTopic = {
         dataTable: {
           headers: ["Feature", "Mutex", "Semaphore", "Monitor"],
           rows: [
-            ["Main idea", "One-owner lock", "Permit counter or event signal", "Protected state and methods"],
-            ["Ownership", "Only the owner should unlock", "No strict owner", "Entry controlled by the Monitor lock"],
-            ["Concurrent access", "One owner", "Can allow up to N permit holders", "One active thread inside"],
-            ["Waiting", "Usually blocks when busy", "Blocks when no permit is available", "Entry queue or Condition Variable"],
-            ["Best use", "Protect one Critical Section", "Resource pools, signalling, and ordering", "Structured state-based synchronization"],
+            [
+              "Main idea",
+              "One-owner lock",
+              "Permit counter or event signal",
+              "Protected state and methods",
+            ],
+            [
+              "Ownership",
+              "Only the owner should unlock",
+              "No strict owner",
+              "Entry controlled by the Monitor lock",
+            ],
+            [
+              "Concurrent access",
+              "One owner",
+              "Can allow up to N permit holders",
+              "One active thread inside",
+            ],
+            [
+              "Waiting",
+              "Usually blocks when busy",
+              "Blocks when no permit is available",
+              "Entry queue or Condition Variable",
+            ],
+            [
+              "Best use",
+              "Protect one Critical Section",
+              "Resource pools, signalling, and ordering",
+              "Structured state-based synchronization",
+            ],
           ],
         },
       },
@@ -1052,9 +1208,17 @@ const semaphoresDetailed: SubjectTopic = {
         dataTable: {
           headers: ["Mutex", "Semaphore", "Monitor"],
           rows: [
-            ["One-owner lock", "Counter or signal", "Protected state and methods"],
+            [
+              "One-owner lock",
+              "Counter or signal",
+              "Protected state and methods",
+            ],
             ["One owner", "Can provide N permits", "One active thread inside"],
-            ["Protects a Critical Section", "Manages resources or ordering", "Supports condition-based waiting"],
+            [
+              "Protects a Critical Section",
+              "Manages resources or ordering",
+              "Supports condition-based waiting",
+            ],
           ],
         },
       },
@@ -1149,8 +1313,9 @@ const monitorsConditionVariablesDetailed: SubjectTopic = {
     ...semaphoresMonitorsDetailed.revise,
     definition:
       "A Monitor protects shared state and methods. Condition Variables let threads wait until that state may have changed.",
-    sections: (semaphoresMonitorsDetailed.revise.sections ?? []).filter((section) =>
-      ["Monitor Working", "Condition Variables"].includes(section.title),
+    sections: (semaphoresMonitorsDetailed.revise.sections ?? []).filter(
+      (section) =>
+        ["Monitor Working", "Condition Variables"].includes(section.title),
     ),
     essentials: [
       "Monitor = Protected state + methods + built-in Mutual Exclusion.",
@@ -1183,7 +1348,8 @@ const monitorsConditionVariablesDetailed: SubjectTopic = {
       "Use while, not if, when checking the condition.",
     ],
     memoryLineLabel: "Remember This",
-    memoryLine: "Monitor protects. Condition Variable waits. Always check again.",
+    memoryLine:
+      "Monitor protects. Condition Variable waits. Always check again.",
     memoryLineAtEnd: true,
     trap: "A signal is not saved forever and does not guarantee that the condition remains true.",
   },
@@ -1200,8 +1366,8 @@ const producerConsumerDetailed: SubjectTopic = {
     ...classicalSynchronizationProblemsDetailed.learn,
     opening:
       "The Producer-Consumer Problem coordinates tasks that add items to and remove items from a shared bounded buffer.",
-    sections: classicalSynchronizationProblemsDetailed.learn.sections.filter((section) =>
-      section.title.startsWith("Producer-Consumer"),
+    sections: classicalSynchronizationProblemsDetailed.learn.sections.filter(
+      (section) => section.title.startsWith("Producer-Consumer"),
     ),
     mechanism: {
       title: "Bounded buffer coordination",
@@ -1223,9 +1389,9 @@ const producerConsumerDetailed: SubjectTopic = {
     definition:
       "The Producer-Consumer Problem coordinates tasks that share a bounded buffer.",
     sections: [
-      ...(classicalSynchronizationProblemsDetailed.revise.sections ?? []).filter(
-        (section) => section.title === "Producer-Consumer",
-      ),
+      ...(
+        classicalSynchronizationProblemsDetailed.revise.sections ?? []
+      ).filter((section) => section.title === "Producer-Consumer"),
       {
         title: "Standard Semaphore Setup",
         dataTable: {
@@ -1272,7 +1438,8 @@ const producerConsumerDetailed: SubjectTopic = {
       "Counting wait must happen before locking the buffer Mutex.",
     ],
     memoryLineLabel: "Remember This",
-    memoryLine: "empty tracks space. full tracks items. Mutex protects the buffer.",
+    memoryLine:
+      "empty tracks space. full tracks items. Mutex protects the buffer.",
     memoryLineAtEnd: true,
     trap: "Never wait for a buffer slot while already holding the buffer Mutex.",
   },
@@ -1289,8 +1456,8 @@ const readersWritersDetailed: SubjectTopic = {
     ...classicalSynchronizationProblemsDetailed.learn,
     opening:
       "The Readers-Writers Problem allows multiple readers to share data while requiring exclusive access for a writer.",
-    sections: classicalSynchronizationProblemsDetailed.learn.sections.filter((section) =>
-      section.title.startsWith("Readers-Writers"),
+    sections: classicalSynchronizationProblemsDetailed.learn.sections.filter(
+      (section) => section.title.startsWith("Readers-Writers"),
     ),
     mechanism: {
       title: "Shared reads and exclusive writes",
@@ -1313,9 +1480,9 @@ const readersWritersDetailed: SubjectTopic = {
     ...classicalSynchronizationProblemsDetailed.revise,
     definition:
       "The Readers-Writers Problem allows several Readers together but gives a Writer exclusive access.",
-    sections: (classicalSynchronizationProblemsDetailed.revise.sections ?? []).filter(
-      (section) => section.title.startsWith("Readers-Writers"),
-    ),
+    sections: (
+      classicalSynchronizationProblemsDetailed.revise.sections ?? []
+    ).filter((section) => section.title.startsWith("Readers-Writers")),
     essentials: [
       "Multiple Readers may read together.",
       "Only one Writer may write at a time.",
@@ -1366,9 +1533,10 @@ const diningPhilosophersDetailed: SubjectTopic = {
     ...classicalSynchronizationProblemsDetailed.learn,
     opening:
       "The Dining Philosophers Problem shows how tasks can deadlock when each holds one resource while waiting for another.",
-    sections: classicalSynchronizationProblemsDetailed.learn.sections.filter((section) =>
-      section.title.startsWith("Dining Philosophers") ||
-      section.title === "Deadlock-Free Does Not Always Mean Fair",
+    sections: classicalSynchronizationProblemsDetailed.learn.sections.filter(
+      (section) =>
+        section.title.startsWith("Dining Philosophers") ||
+        section.title === "Deadlock-Free Does Not Always Mean Fair",
     ),
     mechanism: {
       title: "How circular waiting appears",
@@ -1391,9 +1559,9 @@ const diningPhilosophersDetailed: SubjectTopic = {
     ...classicalSynchronizationProblemsDetailed.revise,
     definition:
       "The Dining Philosophers Problem shows how competing for multiple resources can cause circular waiting and Deadlock.",
-    sections: (classicalSynchronizationProblemsDetailed.revise.sections ?? []).filter(
-      (section) => section.title === "Dining Philosophers",
-    ),
+    sections: (
+      classicalSynchronizationProblemsDetailed.revise.sections ?? []
+    ).filter((section) => section.title === "Dining Philosophers"),
     essentials: [
       "Each Philosopher needs both neighbouring Forks to eat.",
       "If everyone holds one Fork and waits for another, circular waiting causes Deadlock.",

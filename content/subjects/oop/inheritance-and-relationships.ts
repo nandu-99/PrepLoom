@@ -83,9 +83,18 @@ export const inheritance: SubjectTopic = {
           headers: ["Possible benefit", "Possible risk"],
           rows: [
             ["Shares common behaviour", "Creates tight parent-child coupling"],
-            ["Supports substitutable types", "A parent change can affect many children"],
-            ["Allows specialization", "Deep hierarchies become difficult to follow"],
-            ["Removes some duplication", "Wrong IS-A relationships create fragile designs"],
+            [
+              "Supports substitutable types",
+              "A parent change can affect many children",
+            ],
+            [
+              "Allows specialization",
+              "Deep hierarchies become difficult to follow",
+            ],
+            [
+              "Removes some duplication",
+              "Wrong IS-A relationships create fragile designs",
+            ],
           ],
         },
         paragraphs: [
@@ -139,7 +148,11 @@ export const inheritance: SubjectTopic = {
       },
       {
         title: "Design Check",
-        flow: ["Is the child truly a parent type?", "Can it respect the parent contract?", "Use inheritance only if both are true"],
+        flow: [
+          "Is the child truly a parent type?",
+          "Can it respect the parent contract?",
+          "Use inheritance only if both are true",
+        ],
       },
     ],
     essentialsStyle: "plain",
@@ -162,13 +175,21 @@ export const inheritance: SubjectTopic = {
       },
       {
         title: "Java Traps",
-        points: ["Private is not directly accessible", "Constructors are not inherited", "Static methods are hidden", "final blocks extension or overriding"],
+        points: [
+          "Private is not directly accessible",
+          "Constructors are not inherited",
+          "Static methods are hidden",
+          "final blocks extension or overriding",
+        ],
       },
     ],
     memoryLine: "Inheritance = a true IS-A relationship, not only reused code.",
-    cues: ["Parent is general", "Child is specialized", "Triangle points to parent in UML"],
-    trap:
-      "Do not say a child directly accesses every parent member; access modifiers still apply.",
+    cues: [
+      "Parent is general",
+      "Child is specialized",
+      "Triangle points to parent in UML",
+    ],
+    trap: "Do not say a child directly accesses every parent member; access modifiers still apply.",
   },
 };
 
@@ -286,8 +307,14 @@ export const typesOfInheritance: SubjectTopic = {
         table: {
           headers: ["Java", "C++"],
           rows: [
-            ["Except Object, one direct superclass, explicit or implicit", "Several direct base classes allowed"],
-            ["Several interfaces allowed", "Virtual inheritance prevents duplicate virtual-base subobjects"],
+            [
+              "Except Object, one direct superclass, explicit or implicit",
+              "Several direct base classes allowed",
+            ],
+            [
+              "Several interfaces allowed",
+              "Virtual inheritance prevents duplicate virtual-base subobjects",
+            ],
           ],
         },
       },
@@ -306,7 +333,8 @@ export const typesOfInheritance: SubjectTopic = {
       "C++ virtual inheritance can provide one shared virtual base, but multiple inheritance can still be complex.",
       "Java requires an override only when interface default-method conflicts remain unresolved.",
     ],
-    followUp: "How does Java's interface diamond differ from the C++ class diamond?",
+    followUp:
+      "How does Java's interface diamond differ from the C++ class diamond?",
   },
   lastMinute: {
     definition:
@@ -314,7 +342,13 @@ export const typesOfInheritance: SubjectTopic = {
     sections: [
       {
         title: "Types",
-        points: ["Single: one parent", "Multilevel: chain", "Hierarchical: siblings", "Multiple: many parents", "Hybrid: combined shapes"],
+        points: [
+          "Single: one parent",
+          "Multilevel: chain",
+          "Hierarchical: siblings",
+          "Multiple: many parents",
+          "Hybrid: combined shapes",
+        ],
       },
       {
         title: "Diamond",
@@ -322,10 +356,14 @@ export const typesOfInheritance: SubjectTopic = {
         wide: true,
       },
     ],
-    memoryLine: "Java: one parent class, many interfaces. C++: multiple parent classes allowed.",
-    cues: ["C++ solution: virtual inheritance", "Java conflict: override default method", "Hybrid is a combined shape"],
-    trap:
-      "Do not say Java supports multiple class inheritance because a class implements several interfaces.",
+    memoryLine:
+      "Java: one parent class, many interfaces. C++: multiple parent classes allowed.",
+    cues: [
+      "C++ solution: virtual inheritance",
+      "Java conflict: override default method",
+      "Hybrid is a combined shape",
+    ],
+    trap: "Do not say Java supports multiple class inheritance because a class implements several interfaces.",
   },
 };
 
@@ -355,7 +393,11 @@ export const isAAndHasA: SubjectTopic = {
           "IS-A supports substitutability: code expecting the parent should be able to use the child without surprising broken behaviour.",
           "If a child must reject a normal parent operation, for example by throwing UnsupportedOperationException, check whether the hierarchy is wrong.",
         ],
-        points: ["Car IS-A Vehicle", "Circle IS-A Shape", "Manager IS-A Employee"],
+        points: [
+          "Car IS-A Vehicle",
+          "Circle IS-A Shape",
+          "Manager IS-A Employee",
+        ],
       },
       {
         title: "HAS-A",
@@ -363,7 +405,11 @@ export const isAAndHasA: SubjectTopic = {
           "HAS-A broadly describes one object being linked to, grouping, or owning another object. A Car HAS-A Engine, and an Order HAS-A list of OrderItems.",
           "One object delegates work to the other instead of becoming that object's type. This is commonly represented with a field, but the exact relationship depends on ownership and lifecycle.",
         ],
-        points: ["Car HAS-A Engine", "Computer HAS-A Keyboard", "Order HAS-A PaymentMethod"],
+        points: [
+          "Car HAS-A Engine",
+          "Computer HAS-A Keyboard",
+          "Order HAS-A PaymentMethod",
+        ],
       },
       {
         title: "The Sentence Test",
@@ -374,9 +420,18 @@ export const isAAndHasA: SubjectTopic = {
           headers: ["Question", "Likely design"],
           rows: [
             ["Can I truthfully say Child IS-A Parent?", "Consider inheritance"],
-            ["Does one object contain or use another?", "Consider composition or association"],
-            ["Does the child obey every parent promise?", "Inheritance may be valid"],
-            ["Do I only want to reuse some code?", "Prefer delegation or composition"],
+            [
+              "Does one object contain or use another?",
+              "Consider composition or association",
+            ],
+            [
+              "Does the child obey every parent promise?",
+              "Inheritance may be valid",
+            ],
+            [
+              "Do I only want to reuse some code?",
+              "Prefer delegation or composition",
+            ],
           ],
         },
       },
@@ -430,15 +485,26 @@ export const isAAndHasA: SubjectTopic = {
         table: {
           headers: ["IS-A", "HAS-A"],
           rows: [
-            ["Inheritance or interface implementation", "Association, aggregation, or composition"],
+            [
+              "Inheritance or interface implementation",
+              "Association, aggregation, or composition",
+            ],
             ["Car IS-A Vehicle", "Car HAS-A Engine"],
-            ["Child must respect parent contract", "Container delegates to another object"],
+            [
+              "Child must respect parent contract",
+              "Container delegates to another object",
+            ],
           ],
         },
       },
       {
         title: "Decision",
-        flow: ["True specialization?", "Substitutable?", "Use inheritance", "Otherwise use composition or association"],
+        flow: [
+          "True specialization?",
+          "Substitutable?",
+          "Use inheritance",
+          "Otherwise use composition or association",
+        ],
       },
     ],
     essentialsStyle: "plain",
@@ -454,12 +520,23 @@ export const isAAndHasA: SubjectTopic = {
     definition:
       "IS-A = subtype. HAS-A = association, aggregation, or composition.",
     sections: [
-      { title: "Test", flow: ["Say the relationship", "Check substitutability", "Choose IS-A or HAS-A"], wide: true },
+      {
+        title: "Test",
+        flow: [
+          "Say the relationship",
+          "Check substitutability",
+          "Choose IS-A or HAS-A",
+        ],
+        wide: true,
+      },
     ],
     memoryLine: "Car IS-A Vehicle; Car HAS-A Engine.",
-    cues: ["Inheritance changes type", "Composition delegates", "Prefer flexibility when IS-A is weak"],
-    trap:
-      "Do not use inheritance only because two classes share some code.",
+    cues: [
+      "Inheritance changes type",
+      "Composition delegates",
+      "Prefer flexibility when IS-A is weak",
+    ],
+    trap: "Do not use inheritance only because two classes share some code.",
   },
 };
 
@@ -525,9 +602,24 @@ export const objectRelationships: SubjectTopic = {
         dataTable: {
           headers: ["Relationship", "Ownership", "Part independent?", "UML"],
           rows: [
-            ["Association", "No whole-part ownership required", "Yes", "Plain line"],
-            ["Aggregation", "Weak or shared whole-part", "Usually; model defines the rule", "Hollow diamond at whole"],
-            ["Composition", "Strong lifecycle responsibility", "At most one composite owner at a time", "Filled diamond at whole"],
+            [
+              "Association",
+              "No whole-part ownership required",
+              "Yes",
+              "Plain line",
+            ],
+            [
+              "Aggregation",
+              "Weak or shared whole-part",
+              "Usually; model defines the rule",
+              "Hollow diamond at whole",
+            ],
+            [
+              "Composition",
+              "Strong lifecycle responsibility",
+              "At most one composite owner at a time",
+              "Filled diamond at whole",
+            ],
           ],
         },
       },
@@ -544,7 +636,12 @@ export const objectRelationships: SubjectTopic = {
           "UML can also show how many objects participate, such as one Order containing many OrderLines. Navigability can show which object knows about the other.",
           "These details are separate from whether the relationship is association, aggregation, or composition.",
         ],
-        points: ["1 means exactly one", "0..1 means zero or one", "* or 0..* means zero or more", "1..* means one or more"],
+        points: [
+          "1 means exactly one",
+          "0..1 means zero or one",
+          "* or 0..* means zero or more",
+          "1..* means one or more",
+        ],
       },
       {
         title: "Simple Analogy",
@@ -582,15 +679,36 @@ export const objectRelationships: SubjectTopic = {
         dataTable: {
           headers: ["Type", "Meaning", "Lifecycle", "UML"],
           rows: [
-            ["Association", "Structural link", "No ownership required", "Plain line"],
-            ["Aggregation", "Weak whole-part", "Part usually independent", "Hollow diamond"],
-            ["Composition", "Strong whole-part", "Whole controls logical lifecycle", "Filled diamond"],
+            [
+              "Association",
+              "Structural link",
+              "No ownership required",
+              "Plain line",
+            ],
+            [
+              "Aggregation",
+              "Weak whole-part",
+              "Part usually independent",
+              "Hollow diamond",
+            ],
+            [
+              "Composition",
+              "Strong whole-part",
+              "Whole controls logical lifecycle",
+              "Filled diamond",
+            ],
           ],
         },
       },
       {
         title: "UML Rule",
-        points: ["The diamond touches the whole.", "Hollow means aggregation.", "Filled means composition.", "* means zero or more.", "Multiplicity is a separate detail."],
+        points: [
+          "The diamond touches the whole.",
+          "Hollow means aggregation.",
+          "Filled means composition.",
+          "* means zero or more.",
+          "Multiplicity is a separate detail.",
+        ],
       },
     ],
     essentialsStyle: "plain",
@@ -601,11 +719,11 @@ export const objectRelationships: SubjectTopic = {
       "Temporary use may be a dependency rather than an association.",
       "Composition describes model lifecycle, not exact memory-deallocation time.",
     ],
-    followUp: "Why is a playlist and song usually aggregation rather than composition?",
+    followUp:
+      "Why is a playlist and song usually aggregation rather than composition?",
   },
   lastMinute: {
-    definition:
-      "Association links; aggregation groups; composition owns.",
+    definition: "Association links; aggregation groups; composition owns.",
     sections: [
       {
         title: "Strength",
@@ -614,12 +732,16 @@ export const objectRelationships: SubjectTopic = {
       },
       {
         title: "Symbols",
-        points: ["Association: line", "Aggregation: hollow diamond", "Composition: filled diamond", "Diamond stays at whole"],
+        points: [
+          "Association: line",
+          "Aggregation: hollow diamond",
+          "Composition: filled diamond",
+          "Diamond stays at whole",
+        ],
       },
     ],
     memoryLine: "Know → group → own.",
     cues: ["Doctor-Patient", "Team-Player", "Order-OrderLine"],
-    trap:
-      "Do not define composition as immediate memory destruction; it describes ownership in the model.",
+    trap: "Do not define composition as immediate memory destruction; it describes ownership in the model.",
   },
 };

@@ -3,8 +3,7 @@ import type { SubjectTopic } from "@/lib/subject-content";
 const pageReplacementAlgorithms: SubjectTopic = {
   slug: "page-replacement-algorithms",
   title: "Page Replacement Algorithms",
-  description:
-    "Choose a Page to remove when RAM has no usable free Frame.",
+  description: "Choose a Page to remove when RAM has no usable free Frame.",
   readTime: "Detailed note",
   difficulty: "Advanced",
   tags: ["FIFO", "Optimal", "LRU", "Second Chance"],
@@ -23,7 +22,8 @@ const pageReplacementAlgorithms: SubjectTopic = {
           alt: "Page replacement flow from a Page Fault through victim selection, optional dirty Page write-back, loading the required Page, and restarting the instruction.",
           width: 1536,
           height: 1024,
-          caption: "A dirty victim may need a write-back before its Frame is reused.",
+          caption:
+            "A dirty victim may need a write-back before its Frame is reused.",
         },
       },
       {
@@ -34,10 +34,26 @@ const pageReplacementAlgorithms: SubjectTopic = {
         dataTable: {
           headers: ["Algorithm", "Victim rule", "Main point"],
           rows: [
-            ["FIFO", "Oldest resident Page", "Simple, but may remove a useful Page"],
-            ["Optimal (OPT)", "Next use is farthest in the future", "Minimum faults, but future use is unknown"],
-            ["LRU", "Least recently used Page", "Uses the past to predict the near future"],
-            ["Second Chance", "First FIFO Page found with R = 0", "Practical approximation using a Reference Bit"],
+            [
+              "FIFO",
+              "Oldest resident Page",
+              "Simple, but may remove a useful Page",
+            ],
+            [
+              "Optimal (OPT)",
+              "Next use is farthest in the future",
+              "Minimum faults, but future use is unknown",
+            ],
+            [
+              "LRU",
+              "Least recently used Page",
+              "Uses the past to predict the near future",
+            ],
+            [
+              "Second Chance",
+              "First FIFO Page found with R = 0",
+              "Practical approximation using a Reference Bit",
+            ],
           ],
         },
       },
@@ -73,7 +89,8 @@ const pageReplacementAlgorithms: SubjectTopic = {
           alt: "Second Chance Clock with a circular group of Frames, Reference Bits, and a Clock hand selecting a Page whose Reference Bit is zero.",
           width: 1536,
           height: 1024,
-          caption: "Recently used Pages receive one extra chance before replacement.",
+          caption:
+            "Recently used Pages receive one extra chance before replacement.",
         },
       },
       {

@@ -559,9 +559,6 @@ function SubjectDiagram({ type }: { type: DiagramType }) {
 
 export function SubjectsPage() {
   const [activeSubjectSlug, setActiveSubjectSlug] = useState(subjects[0].slug);
-  const availableSubjectCount = subjects.filter((subject) =>
-    isAvailable(subject.availability),
-  ).length;
 
   const activeSubject =
     subjects.find((subject) => subject.slug === activeSubjectSlug) ??
@@ -579,7 +576,7 @@ export function SubjectsPage() {
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_78%_28%,rgba(0,0,0,0.035),transparent_38%)] dark:bg-[radial-gradient(circle_at_78%_28%,rgba(255,255,255,0.035),transparent_38%)]"
         />
-        <div className="relative mx-auto grid max-w-[1240px] gap-10 lg:grid-cols-[1fr_280px] lg:items-end">
+        <div className="relative mx-auto max-w-[1240px]">
           <div className="max-w-3xl">
             <div className="flex items-center gap-3 font-[family-name:var(--font-geist-sans)] text-[10px] font-medium uppercase tracking-[0.18em] text-[#606060] sm:text-[11px]">
               <span className="h-px w-7 bg-black/25 dark:bg-white/25" />
@@ -594,22 +591,6 @@ export function SubjectsPage() {
               Build strong foundations, practise the questions that matter, and
               return whenever a concept needs revision.
             </p>
-          </div>
-
-          <div className="border-l border-black/[0.08] pl-6 dark:border-white/[0.09]">
-            <p className="font-[family-name:var(--font-geist-sans)] text-[9px] uppercase tracking-[0.16em] text-[#606060]">
-              Available now
-            </p>
-            <p className="mt-3 font-[family-name:var(--font-geist-sans)] text-4xl font-semibold tracking-[-0.055em]">
-              {availableSubjectCount}
-            </p>
-            <p className="mt-1 font-[family-name:var(--font-geist-sans)] text-xs text-[#606060]">
-              structured interview subjects
-            </p>
-            <div className="mt-4 flex items-center gap-2 font-[family-name:var(--font-geist-sans)] text-[10px] text-[#606060]">
-              <span className="size-1.5 rounded-full bg-foreground" />
-              Guest-first progress
-            </div>
           </div>
         </div>
       </section>
@@ -630,7 +611,7 @@ export function SubjectsPage() {
                   transition={{ duration: 0.2, ease: "easeOut" }}
                   className="flex h-full min-h-[430px] flex-col"
                 >
-                  <div className="flex items-start justify-between gap-6">
+                  <div className="flex items-start gap-6">
                     <div className="flex items-center gap-3">
                       <span className="grid size-11 place-items-center rounded-xl border border-black/[0.09] text-[#606060] dark:border-white/10">
                         <ActiveIcon
@@ -646,10 +627,6 @@ export function SubjectsPage() {
                         </p>
                       </div>
                     </div>
-
-                    <span className="font-[family-name:var(--font-geist-sans)] text-[9px] uppercase tracking-[0.15em] text-[#606060]">
-                      {activeSubjectAvailable ? "Available now" : "Coming soon"}
-                    </span>
                   </div>
 
                   <div className="mt-8 grid flex-1 items-center gap-10 sm:grid-cols-[1fr_190px]">
@@ -684,12 +661,16 @@ export function SubjectsPage() {
                     </div>
                   </div>
 
-                  <div className="flex items-center justify-between border-t border-black/[0.08] pt-6 dark:border-white/[0.09]">
-                    <p className="font-[family-name:var(--font-geist-sans)] text-[9px] text-[#606060]">
-                      {activeSubjectAvailable
-                        ? "Learn, revise, recall, practise"
-                        : "Notes are being prepared"}
-                    </p>
+                  <div
+                    className={`flex items-center border-t border-black/[0.08] pt-6 dark:border-white/[0.09] ${
+                      activeSubjectAvailable ? "justify-between" : "justify-end"
+                    }`}
+                  >
+                    {activeSubjectAvailable && (
+                      <p className="font-[family-name:var(--font-geist-sans)] text-[9px] text-[#606060]">
+                        Learn, revise, recall, practise
+                      </p>
+                    )}
                     <Link
                       href={activeSubjectHref}
                       onClick={() =>
@@ -702,9 +683,7 @@ export function SubjectsPage() {
                       }
                       className="group inline-flex items-center gap-2 text-sm font-medium underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                     >
-                      {activeSubjectAvailable
-                        ? `Explore ${activeSubject.name}`
-                        : "View coming soon"}
+                      Explore {activeSubject.name}
                       <ArrowRight
                         className="size-4 transition-transform group-hover:translate-x-0.5"
                         aria-hidden="true"
@@ -775,9 +754,6 @@ export function SubjectsPage() {
                     <span className="relative z-10 min-w-0 flex-1">
                       <span className="block truncate font-[family-name:var(--font-geist-sans)] text-sm font-medium">
                         {subject.name}
-                      </span>
-                      <span className="mt-0.5 hidden font-[family-name:var(--font-geist-sans)] text-[8px] text-[#606060] md:block">
-                        {available ? "Available now" : "Coming soon"}
                       </span>
                     </span>
                     <ArrowRight

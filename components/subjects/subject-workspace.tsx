@@ -1,5 +1,6 @@
 "use client";
 
+import { MathFormula } from "@/components/subjects/math-formula";
 import type {
   SubjectContent,
   SubjectDataTable,
@@ -108,26 +109,24 @@ function DataTable({ table }: { table: SubjectDataTable }) {
 
 function FormulaList({ formulas }: { formulas: SubjectFormula[] }) {
   return (
-    <div className="mt-7 grid gap-3">
+    <div className="mt-7 grid gap-4">
       {formulas.map((formula) => (
-        <div
+        <figure
           key={`${formula.label ?? "formula"}-${formula.expression}`}
-          className="rounded-[14px] border border-black/[0.1] bg-black/[0.025] px-5 py-4 dark:border-white/[0.11] dark:bg-white/[0.04] sm:px-6"
+          className="rounded-[14px] border border-black/[0.1] bg-black/[0.025] px-5 py-5 dark:border-white/[0.11] dark:bg-white/[0.04] sm:px-6"
         >
-          {formula.label ? (
-            <p className="text-[11px] font-medium uppercase tracking-[0.12em] text-[#707070] dark:text-[#929292]">
-              {clean(formula.label)}
-            </p>
-          ) : null}
-          <p className="mt-2 overflow-x-auto whitespace-nowrap font-[family-name:var(--font-geist-mono)] text-[15px] font-medium leading-8 tracking-[-0.02em] text-[#202020] dark:text-[#ececea] sm:text-[17px]">
-            {formula.expression}
-          </p>
+          <figcaption className="text-[12px] font-semibold leading-5 text-[#5f5f5f] dark:text-[#aaa]">
+            {clean(formula.label ?? "Key formula")}
+          </figcaption>
+          <div className="mt-3 overflow-x-auto overscroll-x-contain pb-1">
+            <MathFormula expression={formula.expression} />
+          </div>
           {formula.note ? (
-            <p className="mt-2 text-[12px] leading-5 text-[#686868] dark:text-[#999]">
+            <p className="mt-3 border-l-2 border-black/[0.16] pl-3 text-[12px] leading-5 text-[#686868] dark:border-white/[0.2] dark:text-[#999]">
               {clean(formula.note)}
             </p>
           ) : null}
-        </div>
+        </figure>
       ))}
     </div>
   );

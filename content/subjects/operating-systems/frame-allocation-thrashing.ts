@@ -20,9 +20,21 @@ const frameAllocationThrashing: SubjectTopic = {
         dataTable: {
           headers: ["Method", "Rule", "Main trade-off"],
           rows: [
-            ["Equal", "Give each process the same number of Frames", "Simple, but ignores process size"],
-            ["Proportional", "Give larger processes more Frames", "Uses size, but not current behavior"],
-            ["Priority", "Give more Frames to higher-priority processes", "Can hurt lower-priority work"],
+            [
+              "Equal",
+              "Give each process the same number of Frames",
+              "Simple, but ignores process size",
+            ],
+            [
+              "Proportional",
+              "Give larger processes more Frames",
+              "Uses size, but not current behavior",
+            ],
+            [
+              "Priority",
+              "Give more Frames to higher-priority processes",
+              "Can hurt lower-priority work",
+            ],
           ],
         },
       },
@@ -34,9 +46,18 @@ const frameAllocationThrashing: SubjectTopic = {
         table: {
           headers: ["Local Replacement", "Global Replacement"],
           rows: [
-            ["Replace only the process's own Pages", "May take a Frame from another eligible process"],
-            ["More predictable Page Fault behavior", "More flexible memory use"],
-            ["Less direct process interference", "Processes can affect one another"],
+            [
+              "Replace only the process's own Pages",
+              "May take a Frame from another eligible process",
+            ],
+            [
+              "More predictable Page Fault behavior",
+              "More flexible memory use",
+            ],
+            [
+              "Less direct process interference",
+              "Processes can affect one another",
+            ],
           ],
         },
       },
@@ -82,9 +103,21 @@ const frameAllocationThrashing: SubjectTopic = {
         dataTable: {
           headers: ["Observed PFF", "Meaning", "Action"],
           rows: [
-            ["Above high limit", "Too few Frames", "Give more Frames if available; otherwise suspend work"],
-            ["Between limits", "Allocation is acceptable", "Keep the current allocation"],
-            ["Below low limit", "More Frames than currently needed", "Reclaim some Frames"],
+            [
+              "Above high limit",
+              "Too few Frames",
+              "Give more Frames if available; otherwise suspend work",
+            ],
+            [
+              "Between limits",
+              "Allocation is acceptable",
+              "Keep the current allocation",
+            ],
+            [
+              "Below low limit",
+              "More Frames than currently needed",
+              "Reclaim some Frames",
+            ],
           ],
         },
       },
@@ -130,9 +163,17 @@ const frameAllocationThrashing: SubjectTopic = {
           headers: ["Concept", "Rule", "Main effect"],
           rows: [
             ["Equal", "Same Frames per process", "Simple"],
-            ["Proportional", "Frames based on process size", "Accounts for size"],
+            [
+              "Proportional",
+              "Frames based on process size",
+              "Accounts for size",
+            ],
             ["Local", "Replace own Pages only", "More predictable"],
-            ["Global", "May take another eligible process's Frame", "More flexible, more interference"],
+            [
+              "Global",
+              "May take another eligible process's Frame",
+              "More flexible, more interference",
+            ],
           ],
         },
       },
@@ -141,9 +182,18 @@ const frameAllocationThrashing: SubjectTopic = {
         table: {
           headers: ["Working Set", "Page Fault Frequency"],
           rows: [
-            ["Pages used in a recent time window", "How often a process faults"],
-            ["Estimates current memory demand", "High PFF → More Frames if possible"],
-            ["Keep it resident to reduce faults", "Low PFF → Reclaim extra Frames"],
+            [
+              "Pages used in a recent time window",
+              "How often a process faults",
+            ],
+            [
+              "Estimates current memory demand",
+              "High PFF → More Frames if possible",
+            ],
+            [
+              "Keep it resident to reduce faults",
+              "Low PFF → Reclaim extra Frames",
+            ],
           ],
         },
       },
@@ -155,7 +205,8 @@ const frameAllocationThrashing: SubjectTopic = {
       "If more Frames are unavailable, reduce active processes.",
       "Local is predictable; Global is flexible but creates interference.",
     ],
-    followUp: "Why can adding another active process make CPU utilization fall?",
+    followUp:
+      "Why can adding another active process make CPU utilization fall?",
   },
   lastMinute: {
     definition:
@@ -182,8 +233,7 @@ const frameAllocationThrashing: SubjectTopic = {
     memoryLineLabel: "Remember This",
     memoryLine: "High faults → More Frames. No Frames → Less active work.",
     memoryLineAtEnd: true,
-    trap:
-      "Global Replacement considers only eligible process Frames, not every Page in the system.",
+    trap: "Global Replacement considers only eligible process Frames, not every Page in the system.",
   },
 };
 
