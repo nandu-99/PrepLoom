@@ -24,6 +24,7 @@ See [Staging and Production Operations](docs/environments-and-releases.md) for t
 - Study roadmaps and web-development resources
 - Responsive light and dark themes
 - Contact and feedback flows
+- DSA sheets
 
 ## Technology
 
