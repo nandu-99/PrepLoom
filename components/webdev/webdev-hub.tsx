@@ -735,7 +735,7 @@ export function WebdevHub() {
   }
 
   return (
-    <div>
+    <div id="webdev-resources" className="scroll-mt-[68px]">
       <div className="sticky top-[68px] z-40 border-y border-black/[0.09] bg-[#f7f7f5]/95 backdrop-blur-xl dark:border-white/[0.1] dark:bg-[#0a0a0a]/95">
         <div className="mx-auto max-w-[1240px] overflow-x-auto px-5 sm:px-6 lg:px-8">
           <div
