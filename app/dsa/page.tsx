@@ -3,6 +3,7 @@ import { DsaSheetExplorer } from "@/components/dsa/dsa-sheet-explorer";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "DSA Sheets | PrepLoom",
@@ -73,6 +74,12 @@ export default function DsaPage() {
               >
                 Choose a sheet
               </a>
+              <Link
+                href="/dsa/visualizations"
+                className="mt-4 flex w-fit items-center gap-2 rounded-md py-2 text-sm font-medium text-neutral-800 underline underline-offset-4 hover:text-neutral-950 dark:text-neutral-400 dark:hover:text-neutral-300"
+              >
+                Explore algorithm visualizations →
+              </Link>
             </div>
 
             <DsaPatternIllustration />
