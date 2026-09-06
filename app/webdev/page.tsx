@@ -9,6 +9,7 @@ import {
   Layers3,
   TerminalSquare,
 } from "lucide-react";
+import Link from "next/link";
 import { Suspense } from "react";
 
 export const metadata: Metadata = {
@@ -18,15 +19,36 @@ export const metadata: Metadata = {
 };
 
 const sections = [
-  { label: "Useful websites", detail: "Docs and tools", icon: Globe2 },
-  { label: "Project ideas", detail: "Ideas with scope", icon: FolderKanban },
-  { label: "Component libraries", detail: "Trusted UI systems", icon: Layers3 },
   {
+    id: "websites",
+    label: "Useful websites",
+    detail: "Docs and tools",
+    icon: Globe2,
+  },
+  {
+    id: "projects",
+    label: "Project ideas",
+    detail: "Ideas with scope",
+    icon: FolderKanban,
+  },
+  {
+    id: "libraries",
+    label: "Component libraries",
+    detail: "Trusted UI systems",
+    icon: Layers3,
+  },
+  {
+    id: "guides",
     label: "Curated collections",
     detail: "Setup and deployment",
     icon: TerminalSquare,
   },
-  { label: "Skills.md", detail: "Claude and Codex", icon: FileCode2 },
+  {
+    id: "skills",
+    label: "Skills.md",
+    detail: "Claude and Codex",
+    icon: FileCode2,
+  },
 ];
 
 export default function WebdevPage() {
@@ -69,12 +91,13 @@ export default function WebdevPage() {
               {sections.map((section) => {
                 const Icon = section.icon;
                 return (
-                  <div
+                  <Link
                     key={section.label}
-                    className="grid grid-cols-[28px_1fr_auto] items-center gap-3 border-b border-black/[0.08] py-3.5 last:border-b-0 dark:border-white/[0.09]"
+                    href={`/webdev?tab=${section.id}#webdev-resources`}
+                    className="group grid grid-cols-[28px_1fr_auto] items-center gap-3 border-b border-black/[0.08] py-3.5 transition-colors last:border-b-0 hover:text-[#555] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-black/40 dark:border-white/[0.09] dark:hover:text-[#b3b3b3] dark:focus-visible:ring-white/50"
                   >
                     <Icon
-                      className="size-4 text-[#777] dark:text-[#858585]"
+                      className="size-4 text-[#777] transition-colors group-hover:text-[#555] dark:text-[#858585] dark:group-hover:text-[#b3b3b3]"
                       strokeWidth={1.55}
                       aria-hidden="true"
                     />
@@ -84,7 +107,7 @@ export default function WebdevPage() {
                     <span className="text-[10px] text-[#777] dark:text-[#858585]">
                       {section.detail}
                     </span>
-                  </div>
+                  </Link>
                 );
               })}
             </div>
