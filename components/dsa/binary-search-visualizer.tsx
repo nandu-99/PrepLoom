@@ -1,5 +1,7 @@
 "use client";
 
+import { narrationNumbers } from "@/lib/narration-numbers";
+
 import {
   useEffect,
   useMemo,
@@ -162,7 +164,9 @@ export function BinarySearchVisualizer() {
               return narrateInSequence(
                 narrationParts,
                 (text, partDone, partFailed) => {
-                  const utterance = new SpeechSynthesisUtterance(text);
+                  const utterance = new SpeechSynthesisUtterance(
+                    narrationNumbers(text),
+                  );
                   if (voice) utterance.voice = voice;
                   utterance.lang = voice?.lang ?? "hi-IN";
                   // Keep narration at a steady pace, independent of animation speed.

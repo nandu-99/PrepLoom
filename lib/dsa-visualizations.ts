@@ -14,6 +14,8 @@ export const dsaVisualizationGroups = [
     lessons: [
       { title: "Bubble sort", href: "/dsa/visualizations/bubble-sort" },
       { title: "Selection sort", href: "/dsa/visualizations/selection-sort" },
+      { title: "Insertion sort", href: "/dsa/visualizations/insertion-sort" },
+      { title: "Merge sort", href: "/dsa/visualizations/merge-sort" },
     ],
   },
 ];

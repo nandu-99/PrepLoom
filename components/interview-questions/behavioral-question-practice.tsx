@@ -41,7 +41,7 @@ export function BehavioralQuestionPractice({
 }: {
   questions: BehavioralQuestion[];
 }) {
-  const [mode, setMode] = useState<StudyMode>("learn");
+  const [mode, setMode] = useState<StudyMode>("practice");
   const [category, setCategory] = useState<CategoryFilter>("All questions");
   const [revealedAnswers, setRevealedAnswers] = useState<Set<string>>(
     () => new Set(),
