@@ -17,7 +17,7 @@ export function CategorizedQuestionPractice({
   categories: readonly string[];
   categoryLabel: string;
 }) {
-  const [mode, setMode] = useState<StudyMode>("learn");
+  const [mode, setMode] = useState<StudyMode>("practice");
   const [category, setCategory] = useState("All questions");
   const [revealedAnswers, setRevealedAnswers] = useState<Set<string>>(
     () => new Set(),

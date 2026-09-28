@@ -1,6 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  allowedDevOrigins: [
+    "64aa-115-244-141-202.ngrok-free.app",
+    "3e55-115-244-141-202.ngrok-free.app",
+  ],
   async redirects() {
     return [
       {
