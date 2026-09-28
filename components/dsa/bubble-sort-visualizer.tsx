@@ -1,5 +1,7 @@
 "use client";
 
+import { narrationNumbers } from "@/lib/narration-numbers";
+
 import {
   useEffect,
   useMemo,
@@ -38,7 +40,7 @@ const supported = () =>
 const serverSupported = () => false;
 const button =
   "inline-flex min-h-10 items-center justify-center gap-2 rounded-lg border border-black/15 px-3 text-sm font-medium hover:bg-black/5 focus-visible:outline-2 focus-visible:outline-offset-2 disabled:cursor-not-allowed disabled:opacity-35 dark:border-white/15 dark:hover:bg-white/10";
-const primary = `${button} bg-neutral-900 text-white hover:bg-neutral-700 dark:bg-neutral-100 dark:text-black dark:hover:bg-neutral-300`;
+const primary = `${button.replace("hover:bg-black/5", "").replace("dark:hover:bg-white/10", "")} bg-neutral-900 text-white enabled:hover:bg-neutral-700 dark:bg-neutral-100 dark:text-black dark:enabled:hover:bg-neutral-300 transition-colors`;
 const phases = {
   ready: "Start",
   pass: "Start pass",
@@ -112,7 +114,9 @@ export function BubbleSortVisualizer({
               return narrateInSequence(
                 narrationParts,
                 (text, partDone, partFailed) => {
-                  const utterance = new SpeechSynthesisUtterance(text);
+                  const utterance = new SpeechSynthesisUtterance(
+                    narrationNumbers(text),
+                  );
                   if (voice) utterance.voice = voice;
                   utterance.lang = voice?.lang ?? "hi-IN";
                   utterance.rate = 0.95;
@@ -543,6 +547,15 @@ export function BubbleSortVisualizer({
             }}
           >
             Try the same numbers in Selection sort →
+          </Link>
+          <Link
+            className="mt-2 ml-4 inline-block underline underline-offset-4"
+            href={{
+              pathname: "/dsa/visualizations/insertion-sort",
+              query: { input: values.join(",") },
+            }}
+          >
+            Try the same numbers in Insertion sort →
           </Link>
         </div>
       )}

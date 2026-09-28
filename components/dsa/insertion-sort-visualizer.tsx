@@ -22,14 +22,14 @@ import {
   VolumeX,
 } from "lucide-react";
 import {
-  selectionSortCode,
-  selectionSortSteps,
-  parseSelectionInput,
-} from "@/lib/selection-sort";
+  insertionSortCode,
+  insertionSortSteps,
+  parseInsertionInput,
+} from "@/lib/insertion-sort";
 import { narrateInSequence, startLessonPlayback } from "@/lib/lesson-playback";
 
-import { selectionSortNarration } from "@/lib/selection-sort-narration";
-import type { SelectionStep } from "@/lib/selection-sort";
+import { insertionSortNarration } from "@/lib/insertion-sort-narration";
+import type { InsertionStep } from "@/lib/insertion-sort";
 
 const initial = [6, 3, 8, 2, 5];
 const subscribe = () => () => {};
@@ -43,17 +43,16 @@ const button =
 const primary = `${button.replace("hover:bg-black/5", "").replace("dark:hover:bg-white/10", "")} bg-neutral-900 text-white enabled:hover:bg-neutral-700 dark:bg-neutral-100 dark:text-black dark:enabled:hover:bg-neutral-300 transition-colors`;
 const phases = {
   ready: "Start",
-  pass: "Start pass",
+  pick: "Pick number",
+  move: "Move checking position",
   compare: "Compare",
-  minimum: "Remember smaller",
-  decision: "Decide whether to swap",
-  swap: "Swap",
-  keep: "Keep minimum",
-  settled: "Finish position",
+  shift: "Shift right",
+  place: "Find insertion position",
+  insert: "Insert",
   done: "Complete",
 };
 
-export function SelectionSortVisualizer({
+export function InsertionSortVisualizer({
   initialValues = initial,
 }: {
   initialValues?: number[];
@@ -69,7 +68,7 @@ export function SelectionSortVisualizer({
   const [manualSpeech, setManualSpeech] = useState(false);
   const [speechError, setSpeechError] = useState("");
   const [spokenCue, setSpokenCue] = useState<{
-    step: SelectionStep;
+    step: InsertionStep;
     text: string;
     moved: boolean;
   } | null>(null);
@@ -77,20 +76,18 @@ export function SelectionSortVisualizer({
   const cancelPlayback = useRef<() => void>(() => {});
   const canSpeak = useSyncExternalStore(subscribe, supported, serverSupported);
   const reducedMotion = useReducedMotion();
-  const steps = useMemo(() => selectionSortSteps(values), [values]);
+  const steps = useMemo(() => insertionSortSteps(values), [values]);
   const step = steps[cursor];
   const finished = cursor === steps.length - 1;
-  const narrationParts = useMemo(() => selectionSortNarration(step), [step]);
-  const waitingForSwap =
+  const narrationParts = useMemo(() => insertionSortNarration(step), [step]);
+  const waitingForMove =
     narration &&
-    step.status === "swap" &&
+    ["pick", "shift", "insert"].includes(step.status) &&
     (playing || manualSpeech || spokenCue?.step === step) &&
     !(spokenCue?.step === step && spokenCue.moved);
-  const visibleItems = waitingForSwap ? steps[cursor - 1].items : step.items;
+  const visual = waitingForMove ? steps[cursor - 1] : step;
   const caption =
     narration && spokenCue?.step === step ? spokenCue.text : step.explanation;
-  const minimum = Math.min(...values),
-    maximum = Math.max(...values);
   const duration = reducedMotion ? 0 : 0.65 / speed;
 
   useEffect(() => {
@@ -218,7 +215,7 @@ export function SelectionSortVisualizer({
           onSubmit={(event) => {
             event.preventDefault();
             try {
-              load(parseSelectionInput(draft));
+              load(parseInsertionInput(draft));
             } catch (cause) {
               setError(
                 cause instanceof Error ? cause.message : "Check your numbers.",
@@ -228,15 +225,15 @@ export function SelectionSortVisualizer({
         >
           <div className="flex flex-wrap items-end gap-3">
             <label
-              htmlFor="selection-input"
+              htmlFor="insertion-input"
               className="min-w-0 flex-1 text-xs font-medium"
             >
               Numbers to sort · up to 12
               <input
-                id="selection-input"
+                id="insertion-input"
                 value={draft}
                 onChange={(event) => setDraft(event.target.value)}
-                aria-describedby={error ? "selection-input-error" : undefined}
+                aria-describedby={error ? "insertion-input-error" : undefined}
                 className="mt-2 h-11 w-full min-w-52 rounded-lg border border-black/20 bg-white px-3 font-mono text-sm focus:outline-2 dark:border-white/20 dark:bg-neutral-900"
               />
             </label>
@@ -246,7 +243,7 @@ export function SelectionSortVisualizer({
           </div>
           {error && (
             <p
-              id="selection-input-error"
+              id="insertion-input-error"
               role="alert"
               className="mt-2 text-sm text-red-700 dark:text-red-400"
             >
@@ -265,6 +262,7 @@ export function SelectionSortVisualizer({
             {[
               ["Mixed", initial],
               ["Already sorted", [2, 3, 5, 6, 8]],
+              ["Nearly sorted", [2, 3, 6, 5, 8]],
               ["Reverse order", [8, 6, 5, 3, 2]],
               ["Duplicates", [4, 2, 4, 1]],
             ].map(([label, input]) => (
@@ -281,13 +279,13 @@ export function SelectionSortVisualizer({
         </form>
       </details>
       <section
-        aria-label="Selection sort animation"
+        aria-label="Insertion sort animation"
         className="overflow-hidden rounded-xl border border-black/10 bg-white dark:border-white/10 dark:bg-[#111]"
       >
         <div className="flex flex-wrap items-center justify-between gap-2 border-b border-black/10 px-5 py-3 dark:border-white/10">
           <h2 className="text-sm font-semibold">Smallest → biggest</h2>
           <p className="text-xs text-neutral-600 dark:text-neutral-400">
-            {step.comparisons} comparisons · {step.swaps} swaps
+            {step.comparisons} comparisons · {step.shifts} shifts
           </p>
         </div>
         <div className="px-4 pt-3">
@@ -297,7 +295,9 @@ export function SelectionSortVisualizer({
             aria-atomic="true"
           >
             <p className="text-xs text-neutral-500 dark:text-neutral-400">
-              {step.pass ? `Pass ${step.pass} · ` : ""}
+              {step.pass
+                ? `Number ${step.pass + 1} of ${values.length} · `
+                : ""}
               {phases[step.status]}
             </p>
             <h3 className="mt-1 flex items-center gap-2 text-lg font-semibold">
@@ -311,165 +311,101 @@ export function SelectionSortVisualizer({
           <div
             className="overflow-x-auto rounded-lg bg-neutral-50 dark:bg-neutral-950"
             tabIndex={0}
-            aria-label="Selection sort array; the minimum marker tracks the smallest number seen so far"
+            aria-label="Insertion sort array: a held number, moving gap, and sorted section"
           >
             <div
               className="relative h-[300px]"
-              style={{ minWidth: Math.max(360, values.length * 76) }}
+              style={{ minWidth: Math.max(380, values.length * 76) }}
             >
-              <div className="absolute inset-x-2 top-2 h-8 overflow-y-auto text-center text-xs text-neutral-500 dark:text-neutral-400">
-                <span>
-                  {step.status === "compare" &&
-                  step.scan !== null &&
-                  step.minIndex !== null
-                    ? `${step.items[step.scan].value} ${step.items[step.scan].value < step.items[step.minIndex].value ? "<" : "≥"} ${step.items[step.minIndex].value} → ${step.items[step.scan].value < step.items[step.minIndex].value ? "remember new smallest" : "keep our choice"}`
-                    : step.status === "minimum"
-                      ? `New smallest: ${step.items[step.minIndex!].value}. Remember its position; don't swap yet.`
-                      : step.status === "decision"
-                        ? step.title
-                        : "Check the whole unfinished part before swapping"}
-                </span>
-              </div>
-              <motion.div
-                aria-hidden="true"
-                initial={false}
-                animate={{
-                  left: `${((((step.status === "swap" && !waitingForSwap ? step.start : step.minIndex) ?? 0) + 0.5) / values.length) * 100}%`,
-                  opacity:
-                    step.minIndex === null || step.status === "settled" ? 0 : 1,
-                }}
-                transition={{ duration, ease: "easeInOut" }}
-                className="absolute top-11 w-16 -translate-x-1/2 rounded-md border border-neutral-400 bg-white px-1 py-1 text-center text-[11px] leading-3 dark:bg-neutral-900"
-              >
-                Smallest so far ↓
-              </motion.div>
-              <div className="absolute inset-x-0 bottom-0 flex h-7 items-stretch text-center text-[10px] leading-6">
-                {step.sortedCount > 0 && (
-                  <span
-                    className="border-t-2 border-neutral-500"
-                    style={{
-                      width: `${(step.sortedCount / values.length) * 100}%`,
-                    }}
-                  >
-                    Finished ✓
-                  </span>
-                )}
-                {!finished && (
-                  <>
-                    <span
-                      className="border-t border-neutral-500 bg-neutral-200/50 dark:bg-neutral-800"
-                      style={{
-                        width: `${(Math.max(0, (step.scan ?? (step.status === "pass" ? step.start : step.status === "ready" ? -1 : values.length - 1)) + 1 - step.sortedCount) / values.length) * 100}%`,
-                      }}
-                    >
-                      {step.status === "ready" ? "" : "Checked"}
-                    </span>
-                    <span className="flex-1 border-t border-dashed border-neutral-400">
-                      {step.status === "ready" ||
-                      step.status === "pass" ||
-                      (step.scan !== null && step.scan < values.length - 1)
-                        ? "Still to check"
-                        : ""}
-                    </span>
-                  </>
-                )}
-              </div>
-              {!finished &&
-                step.status !== "ready" &&
-                step.status !== "settled" && (
-                  <div
-                    className="absolute top-[84px] w-16 -translate-x-1/2 text-center text-[10px] font-medium"
-                    style={{
-                      left: `${((step.start + 0.5) / values.length) * 100}%`,
-                    }}
-                  >
-                    Fill position {step.start}
-                  </div>
-                )}
-              <div
-                className="absolute inset-x-0 top-[84px] grid h-5 items-center"
-                style={{
-                  gridTemplateColumns: `repeat(${values.length}, minmax(0, 1fr))`,
-                }}
-              >
-                {step.items.map((item, index) => (
-                  <span
-                    key={item.id}
-                    className="flex justify-center text-[11px]"
-                  >
-                    {index < step.sortedCount ? (
-                      <Check size={15} aria-label="Final position" />
-                    ) : index === step.scan ? (
-                      "Checking"
-                    ) : (
-                      ""
-                    )}
-                  </span>
-                ))}
-              </div>
-              {visibleItems.map((item, index) => {
-                const markerIndex =
-                  step.status === "swap" && !waitingForSwap
-                    ? step.start
-                    : step.minIndex;
-                const active =
-                  index === markerIndex ||
-                  index === step.scan ||
-                  (step.status === "swap" &&
-                    (index === step.start || index === step.minIndex));
-                const sorted = index < step.sortedCount;
-                const height =
-                  55 +
-                  (maximum === minimum
-                    ? 0.5
-                    : (item.value - minimum) / (maximum - minimum)) *
-                    55;
+              <p className="absolute inset-x-2 top-2 h-10 overflow-y-auto text-center text-xs">
+                {step.status === "compare"
+                  ? step.title
+                  : visual.held
+                    ? `Holding ${visual.held.value} while we make room`
+                    : finished
+                      ? "All numbers are sorted"
+                      : "Take a number → move bigger numbers right → put it back"}
+              </p>
+              {visual.gap !== null && (
+                <motion.div
+                  initial={false}
+                  animate={{
+                    left: `${((visual.gap + 0.5) / values.length) * 100}%`,
+                  }}
+                  transition={{ duration }}
+                  className="absolute top-[166px] flex h-14 w-14 -translate-x-1/2 items-center justify-center rounded-lg border-2 border-dashed border-neutral-400 text-xs"
+                >
+                  Empty
+                </motion.div>
+              )}
+              {values.map((value, id) => {
+                const held = visual.held?.id === id;
+                const index = held
+                  ? visual.gap!
+                  : visual.items.findIndex((item) => item?.id === id);
+                const checking =
+                  !held &&
+                  index === visual.j &&
+                  ["compare", "move"].includes(step.status);
                 return (
                   <motion.div
-                    key={item.id}
+                    key={id}
                     initial={false}
                     animate={{
                       left: `${((index + 0.5) / values.length) * 100}%`,
-                      y:
-                        step.status === "swap" &&
-                        !waitingForSwap &&
-                        active &&
-                        !reducedMotion
-                          ? [0, index === step.start ? -15 : 15, 0]
-                          : 0,
+                      top: held ? 66 : 166,
                     }}
                     transition={{ duration, ease: "easeInOut" }}
-                    className="absolute bottom-[72px] flex w-14 -translate-x-1/2 flex-col items-center"
-                    aria-label={`Index ${index}, value ${item.value}${index === markerIndex ? ", smallest so far" : ""}${index === step.scan ? ", checking" : ""}${sorted ? ", final position" : ""}`}
+                    className="absolute flex h-14 w-14 -translate-x-1/2 items-center justify-center"
+                    aria-label={`Value ${value}${held ? ", held as key" : `, position ${index}`}`}
                   >
-                    <motion.div
-                      initial={false}
-                      animate={{ height }}
-                      transition={{ duration }}
-                      className={`flex w-14 items-end justify-center rounded-lg border pb-3 font-mono text-lg font-semibold ${index === step.scan && index !== markerIndex ? "border-neutral-900 border-2 border-dashed bg-white dark:bg-neutral-900 dark:border-neutral-100" : active ? "border-neutral-900 bg-neutral-900 text-white dark:border-neutral-100 dark:bg-neutral-100 dark:text-black" : sorted ? "border-neutral-500 bg-neutral-200 dark:bg-neutral-800" : "border-neutral-300 bg-white dark:border-neutral-700 dark:bg-neutral-900"}`}
+                    <span className="absolute -top-6 whitespace-nowrap text-[11px]">
+                      {held
+                        ? "Number to insert"
+                        : checking
+                          ? "Compare this"
+                          : ""}
+                    </span>
+                    <span
+                      className={`flex h-full w-full items-center justify-center rounded-lg border font-mono text-lg ${held ? "bg-neutral-900 text-white dark:bg-neutral-100 dark:text-black" : checking ? "border-2 border-neutral-600 bg-white dark:bg-neutral-900" : "border-neutral-300 bg-white dark:border-neutral-700 dark:bg-neutral-900"}`}
                     >
-                      {item.value}
+                      {value}
                       {showIdentity && (
-                        <span className="ml-1 text-[10px]">#{item.id}</span>
+                        <small className="ml-1 text-[10px]">#{id}</small>
                       )}
-                    </motion.div>
+                    </span>
                   </motion.div>
                 );
               })}
               <div
-                className="absolute inset-x-0 bottom-10 grid h-5 items-center"
+                className="absolute inset-x-0 top-[232px] grid text-center font-mono text-xs text-neutral-500"
                 style={{
                   gridTemplateColumns: `repeat(${values.length}, minmax(0, 1fr))`,
                 }}
               >
-                {step.items.map((_, index) => (
-                  <span
-                    key={index}
-                    className="text-center font-mono text-xs text-neutral-500 dark:text-neutral-400"
-                  >
-                    i: {index}
-                  </span>
+                {values.map((_, index) => (
+                  <span key={index}>{index}</span>
                 ))}
+              </div>
+              <div className="absolute inset-x-0 bottom-0 flex h-7 text-center text-[10px] leading-6">
+                <span
+                  className="border-t-2 border-neutral-500 bg-neutral-200/50 dark:bg-neutral-800"
+                  style={{
+                    width: `${((visual.held ? visual.i + 1 : visual.sortedCount) / values.length) * 100}%`,
+                  }}
+                >
+                  {finished
+                    ? "Sorted ✓"
+                    : visual.held
+                      ? "Making room here"
+                      : "In order so far"}
+                </span>
+                <span className="flex-1 border-t border-dashed border-neutral-400">
+                  {(visual.held ? visual.i + 1 : visual.sortedCount) <
+                  values.length
+                    ? "Not checked yet"
+                    : ""}
+                </span>
               </div>
             </div>
           </div>
@@ -480,13 +416,13 @@ export function SelectionSortVisualizer({
             preview silently.{narration ? " Voice stays at normal speed." : ""}
           </p>
           <label
-            htmlFor="selection-timeline"
+            htmlFor="insertion-timeline"
             className="mb-1 block text-xs text-neutral-500 dark:text-neutral-400"
           >
             Step {cursor + 1} of {steps.length} · {phases[step.status]}
           </label>
           <input
-            id="selection-timeline"
+            id="insertion-timeline"
             type="range"
             min={0}
             max={steps.length - 1}
@@ -586,9 +522,9 @@ export function SelectionSortVisualizer({
         <div className="rounded-lg border border-black/10 p-4 text-sm dark:border-white/10">
           <p>
             {values.length} items: {step.comparisons} comparisons and{" "}
-            {step.swaps} swaps.{" "}
+            {step.shifts} shifts.{" "}
             {
-              "Selection sort checks the whole unfinished part before placing its smallest number. Fewer swaps do not mean fewer comparisons."
+              "Insertion sort moves bigger numbers right, then puts the held number in the gap."
             }
           </p>
           <Link
@@ -603,28 +539,33 @@ export function SelectionSortVisualizer({
           <Link
             className="mt-2 ml-4 inline-block underline underline-offset-4"
             href={{
-              pathname: "/dsa/visualizations/insertion-sort",
+              pathname: "/dsa/visualizations/selection-sort",
               query: { input: values.join(",") },
             }}
           >
-            Try the same numbers in Insertion sort →
+            Try the same numbers in Selection sort →
           </Link>
         </div>
       )}
       <section
-        aria-label="Selection sort Python code"
+        aria-label="Insertion sort Python code"
         className="overflow-hidden rounded-xl border border-black/10 bg-white dark:border-white/10 dark:bg-[#111]"
       >
         <div className="flex justify-between border-b border-black/10 px-5 py-4 text-sm dark:border-white/10">
           <h2 className="font-medium">Follow the logic</h2>
           <span className="text-neutral-500 dark:text-neutral-400">Python</span>
         </div>
+        <p className="px-5 pt-3 text-xs leading-5 text-neutral-600 dark:text-neutral-400">
+          In Python, <code>key</code> is the number held above the list.{" "}
+          <code>j</code> is the position we compare with it. The small labels
+          below the boxes are positions, starting at 0.
+        </p>
         <pre
           className="overflow-x-auto py-4 text-[13px] leading-7"
           tabIndex={0}
         >
           <code>
-            {selectionSortCode.map((line, index) => (
+            {insertionSortCode.map((line, index) => (
               <span
                 key={index}
                 aria-current={step.line === index + 1 ? "step" : undefined}
