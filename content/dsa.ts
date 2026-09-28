@@ -1,6 +1,8 @@
 export type DsaGoal = "Foundations" | "Interview" | "Revision";
 export type DsaExperience =
-  "New to DSA" | "Know the basics" | "Comfortable with DSA";
+  | "New to DSA"
+  | "Know the basics"
+  | "Comfortable with DSA";
 export type DsaScope = "Focused" | "Balanced" | "Comprehensive";
 
 export type DsaSheet = {

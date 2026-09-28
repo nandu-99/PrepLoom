@@ -199,4 +199,3 @@ The left group is empty. Bring up 8 from the other group. They are already in or
 We split the list into smaller groups, then joined them in order. Return the sorted list. We used 5 comparisons.
 
 [Pause 550 ms.]
-

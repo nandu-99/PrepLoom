@@ -241,4 +241,3 @@ Return the list from smallest to biggest. We used 8 comparisons and 6 shifts.
 That's insertion sort: take the next number, move bigger numbers right, and put it in the gap.
 
 [Pause 500 ms.]
-
